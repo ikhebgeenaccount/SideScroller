@@ -1,0 +1,10 @@
+Plaatjes in jar: http://stackoverflow.com/questions/31127/java-swing-displaying-images-from-within-a-jar
+
+int[][] met typen grond/lucht etc. 
+int[x,y] met coordinaten van character.
+
+0 - grond
+1 - lucht
+
+plaatje: 50x50
+
