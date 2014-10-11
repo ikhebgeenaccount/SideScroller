@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Main extends JFrame{
-	
+	//Some text to check if pulling works.
 	private static final int FPS = 30;
 	private static boolean running = true;
 	private static Main frame = new Main();
