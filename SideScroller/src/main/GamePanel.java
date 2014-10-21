@@ -118,7 +118,7 @@ public class GamePanel extends JPanel implements KeyListener{
 		    	falldownframe = 0;
 		    }
 	    }else{
-	    	if(currentLevel[roundDownToClosestMultipleOfFifty(newchary + 99)/50 + plus][matrix_x] == 0 && currentLevel[roundDownToClosestMultipleOfFifty(newchary + 99)/50 + 1][matrix_x + 1] == 0){
+	    	if(currentLevel[roundDownToClosestMultipleOfFifty(newchary + 99)/50 + plus][matrix_x] == 0 && currentLevel[roundDownToClosestMultipleOfFifty(newchary + 99)/50 + 1 + plus][matrix_x + 1] == 0){
 		    	if(falldownframe == 0){
 		    		falldownframe = frame;	    		
 		    		newchary -= FALLDOWNPX_START;	
