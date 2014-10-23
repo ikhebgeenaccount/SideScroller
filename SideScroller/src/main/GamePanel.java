@@ -20,10 +20,7 @@ public class GamePanel extends JPanel implements KeyListener{
 	private int jump_start;
 	private int frame = 0;
 	private int jump_px[] = {50,30,15,5,0,-5,15,30,50};
-	private int falldownpx = 20;
-	private final int FALLDOWNPX_START = 5;
-	private int falldownframe = 0;
-	//private static Image char_idle;
+	private Gravity gravity = new Gravity();
 	
 	public GamePanel(){
 		loadPics();
@@ -150,7 +147,58 @@ public class GamePanel extends JPanel implements KeyListener{
 	     *  			}
 	     *  		}
 	     *  	}
+	     *  
 	     */
+	    
+	    //Here we check if the character is on an edge of a square
+	    boolean onEdgeX;
+	    boolean onEdgeY;
+	    
+	    //On the x-axis
+	    if(charx == roundDownToClosestMultipleOfFifty(charx)){
+	    	onEdgeX = true;
+	    }else{
+	    	onEdgeX = false;
+	    }
+	    
+	    //On the y-axis
+	    if(chary == roundDownToClosestMultipleOfFifty(chary)){
+	    	onEdgeY = true;
+	    }else{
+	    	onEdgeY = false;
+	    }
+	    
+	    int matrix_x_left = roundDownToClosestMultipleOfFifty(charx)/50;
+	    int matrix_y =  roundDownToClosestMultipleOfFifty(chary + 99)/50;
+	    
+	    //Here we check if the substance beneath the character is solid
+	    if(onEdgeX){
+	    	if(onEdgeY){
+	    		if(currentLevel[matrix_y + 1][matrix_x_left] == 0){
+	    			//fallDown();
+	    			System.out.println("falldown");
+	    		}
+	    	}else{
+	    		if(currentLevel[matrix_y][matrix_x_left] == 0){
+	    			//fallDown();
+	    			System.out.println("falldown");
+	    		}
+	    	}
+	    }else{
+	    	if(onEdgeY){
+	    		if(currentLevel[matrix_y + 1][matrix_x_left] == 0 && currentLevel[matrix_y + 1][matrix_x_left + 1] == 0){
+	    			//fallDown();
+	    			System.out.println("falldown");
+	    		}	    		
+	    	}else{
+	    		if(currentLevel[matrix_y][matrix_x_left] == 0 && currentLevel[matrix_y][matrix_x_left + 1] == 0){
+	    			//fallDown();
+	    			System.out.println("falldown");
+	    		}	    		
+	    	}
+	    }
+	    
+	    /*
 	    int plus = (chary)/50 == roundDownToClosestMultipleOfFifty(chary)/50 ? 1 : 0;
 	    int checkx = (charx)/50 == roundDownToClosestMultipleOfFifty(charx)/50 ? 1 : 2;
 	    int matrix_x = roundDownToClosestMultipleOfFifty(charx)/50;
@@ -179,7 +227,7 @@ public class GamePanel extends JPanel implements KeyListener{
 		    }else{
 		    	falldownframe = 0;
 		    }
-	    }
+	    }*/
 	    
 	    
 	    
@@ -209,9 +257,21 @@ public class GamePanel extends JPanel implements KeyListener{
 		    	charx = newcharx;
 		    }
 	    }
-	    System.out.println("x: " + charx);
-	    System.out.println("y: " + chary);
 	    
+	    //System.out.println("x: " + charx);
+	    //System.out.println("y: " + chary);
+	    
+	}
+	
+	private class Gravity{
+		
+		public int start_frame;
+		public final int FALLDOWN_PX_START = 5;
+		public int falldown_px;
+		
+		Gravity(){			
+			
+		}
 	}
 	
 	public int roundDownToClosestMultipleOfFifty(int num){
