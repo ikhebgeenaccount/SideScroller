@@ -14,13 +14,14 @@ public class GamePanel extends JPanel implements KeyListener{
 	//Levels are created at the bottom!
 	private boolean[] keys = new boolean[100];
 	private Image ground, air, grass_ground, grass_air;
-	private int charx = 0, chary = 350;
+	private int charx = 0, chary = 0;
 	private final int MOVEPX = 5;
 	private boolean jumping = false;
 	private int jump_start;
 	private int frame = 0;
 	private int jump_px[] = {50,30,15,5,0,-5,15,30,50};
 	private Gravity gravity = new Gravity();
+	private int newcharx, newchary;
 	
 	public GamePanel(){
 		loadPics();
@@ -83,9 +84,10 @@ public class GamePanel extends JPanel implements KeyListener{
 	}
 
 	public void update(){
-		int newcharx = charx;
-		int newchary = chary;
-
+		
+		newcharx = charx;
+		newchary = chary;
+		
 	    if(keys[KeyEvent.VK_LEFT]){
 	        newcharx -= MOVEPX;
 	    }
@@ -96,140 +98,9 @@ public class GamePanel extends JPanel implements KeyListener{
 	    
 	    if(keys[KeyEvent.VK_UP]){
 	    	newchary = chary - MOVEPX;
-	    }
+	    }	    
 	    
-	    /* We need to check whether the character is on the edge of a square, or in the middle of one.
-	     * Depending on the answer, we need to check:
-	     * 		When the character is on the edge in the x-axis:
-	     * 			1. If the character is also on the edge in the y-axis, we need to check the square right beneath the
-	     * 					character. Nothing more, since the character perfectly fits in one square.
-	     * 			2. If the character is not on the edge in the y-axis, we need to check the square he is in.
-	     * 		When the character is not on the edge in the x-axis:
-	     * 			1. If the character is on the edge in the y-axis, we need to check two squares beneath him, the square
-	     * 					beneath is right foot and the square beneath his left foot.
-	     *			2. If the character is not on the edge in the y-axis, we need to check the squares his feet are in.
-	     *
-	     * To determine whether he is on an edge or not:
-	     * 		
-	     * 		x-axis:
-	     * 			Since the character is exactly 50px broad, he fits perfectly in a square. He can only move 5px at the time.
-	     * 			This means that when the character is on an edge, he is at a multiple of 50px. 
-	     * 			So when we round the coordinate of the character in the x-axis to its closest multiple of 50, this should be
-	     * 			equal to the coordinate itself, if the character is on an edge. When these are not equal to eachother, the
-	     * 			character is not on an edge, and we need to check two squares.
-	     * 
-	     *  	y-axis:
-	     *  		Here we use the same algorithm as when checking the x-axis, but now in the y-axis. The character is 100px 
-	     *  		high.
-	     *  		So when the characters coordinate in the y-axis is equal to the same number rounded to its closest multiple of
-	     *  		fifty, the character is on an edge. If not true, he is in the middle of a square.
-	     *  
-	     *  In pseudo-code:
-	     *  
-	     *  	if(onEdgeX){
-	     *  		if(onEdgeY){
-	     *  			if(squareBeneathFeet == air){
-	     *  				fallDown();
-	     *  			}
-	     *  		}else{
-	     *  			if(squareContainingFeet == air){
-	     *  				fallDown();
-	     *  			}
-	     *  		}
-	     *  	}else{
-	     *  		if(onEdgeY){
-	     *  			if(squareBeneathLeftFoot == air && squareBeneathRightFoot == air){
-	     *  				fallDown();
-	     *  			}
-	     *  		}else{
-	     *  			if(squareContainingLeftFoot == air && squareContainingRightFoot == air){
-	     *  				fallDown();
-	     *  			}
-	     *  		}
-	     *  	}
-	     *  
-	     */
-	    
-	    //Here we check if the character is on an edge of a square
-	    boolean onEdgeX;
-	    boolean onEdgeY;
-	    
-	    //On the x-axis
-	    if(charx == roundDownToClosestMultipleOfFifty(charx)){
-	    	onEdgeX = true;
-	    }else{
-	    	onEdgeX = false;
-	    }
-	    
-	    //On the y-axis
-	    if(chary == roundDownToClosestMultipleOfFifty(chary)){
-	    	onEdgeY = true;
-	    }else{
-	    	onEdgeY = false;
-	    }
-	    
-	    int matrix_x_left = roundDownToClosestMultipleOfFifty(charx)/50;
-	    int matrix_y =  roundDownToClosestMultipleOfFifty(chary + 99)/50;
-	    
-	    //Here we check if the substance beneath the character is solid
-	    if(onEdgeX){
-	    	if(onEdgeY){
-	    		if(currentLevel[matrix_y + 1][matrix_x_left] == 0){
-	    			//fallDown();
-	    			System.out.println("falldown");
-	    		}
-	    	}else{
-	    		if(currentLevel[matrix_y][matrix_x_left] == 0){
-	    			//fallDown();
-	    			System.out.println("falldown");
-	    		}
-	    	}
-	    }else{
-	    	if(onEdgeY){
-	    		if(currentLevel[matrix_y + 1][matrix_x_left] == 0 && currentLevel[matrix_y + 1][matrix_x_left + 1] == 0){
-	    			//fallDown();
-	    			System.out.println("falldown");
-	    		}	    		
-	    	}else{
-	    		if(currentLevel[matrix_y][matrix_x_left] == 0 && currentLevel[matrix_y][matrix_x_left + 1] == 0){
-	    			//fallDown();
-	    			System.out.println("falldown");
-	    		}	    		
-	    	}
-	    }
-	    
-	    /*
-	    int plus = (chary)/50 == roundDownToClosestMultipleOfFifty(chary)/50 ? 1 : 0;
-	    int checkx = (charx)/50 == roundDownToClosestMultipleOfFifty(charx)/50 ? 1 : 2;
-	    int matrix_x = roundDownToClosestMultipleOfFifty(charx)/50;
-	    
-	    if(checkx == 1){
-	    	if(currentLevel[roundDownToClosestMultipleOfFifty(newchary + 99)/50 + plus][matrix_x] == 0){
-		    	if(falldownframe == 0){
-		    		falldownframe = frame;	    		
-		    		newchary -= FALLDOWNPX_START;	
-		    	}else{
-		    		newchary -= FALLDOWNPX_START * (falldownframe - frame);
-		    	}
-		    	
-		    }else{
-		    	falldownframe = 0;
-		    }
-	    }else{
-	    	if(currentLevel[roundDownToClosestMultipleOfFifty(newchary + 99)/50 + plus][matrix_x] == 0 && currentLevel[roundDownToClosestMultipleOfFifty(newchary + 99)/50 + 1 + plus][matrix_x + 1] == 0){
-		    	if(falldownframe == 0){
-		    		falldownframe = frame;	    		
-		    		newchary -= FALLDOWNPX_START;	
-		    	}else{
-		    		newchary -= FALLDOWNPX_START * (falldownframe - frame);
-		    	}
-		    	
-		    }else{
-		    	falldownframe = 0;
-		    }
-	    }*/
-	    
-	    
+	    checkGravity();
 	    
 	    int matrix_x_upper_left = roundDownToClosestMultipleOfFifty(newcharx)/50;
 	    int matrix_y_upper_left = roundDownToClosestMultipleOfFifty(newchary)/50;
@@ -260,18 +131,119 @@ public class GamePanel extends JPanel implements KeyListener{
 	    
 	    //System.out.println("x: " + charx);
 	    //System.out.println("y: " + chary);
-	    
+	    System.out.println("newframe");
 	}
 	
 	private class Gravity{
 		
 		public int start_frame;
 		public final int FALLDOWN_PX_START = 5;
-		public int falldown_px;
+		public int falldown_px = 10;
+		public boolean falling;
 		
-		Gravity(){			
-			
+		Gravity(){
+			falling = false;			
 		}
+		
+		//We start the fall by telling falling = true
+		public void startFall(){
+			start_frame = frame;
+			falling = true;
+		}
+		
+		//We add the acceleration
+		public void setNextFall(){
+			falldown_px = FALLDOWN_PX_START * (frame - start_frame);
+		}
+		
+		//The fall ends, falling = false
+		public void endFall(){
+			falldown_px = FALLDOWN_PX_START;
+			falling = false;
+		}
+	}
+	
+	public void checkGravity(){
+		//Here we check if the character is on an edge of a square
+	    boolean onEdgeX;
+	    boolean onEdgeY;
+	    
+	    //On the x-axis
+	    if(charx == roundDownToClosestMultipleOfFifty(charx)){
+	    	onEdgeX = true;
+	    }else{
+	    	onEdgeX = false;
+	    }
+	    
+	    //On the y-axis
+	    if(chary == roundDownToClosestMultipleOfFifty(chary)){
+	    	onEdgeY = true;
+	    }else{
+	    	onEdgeY = false;
+	    }
+	    
+	    int matrix_x_left = roundDownToClosestMultipleOfFifty(charx)/50;
+	    int matrix_y =  roundDownToClosestMultipleOfFifty(chary + 99)/50;
+	    
+	    //Here we check if the substance beneath the character is solid
+	    if(onEdgeX){
+	    	if(onEdgeY){
+	    		if(currentLevel[matrix_y + 1][matrix_x_left] == 0){
+	    			if(gravity.falling){
+	    				newchary = chary + gravity.falldown_px;
+	    				//gravity.setNextFall();
+	    			}else{
+	    				gravity.startFall();
+	    				newchary = chary + gravity.falldown_px;
+	    				//gravity.setNextFall();	    				
+	    			}
+	    		}else{
+	    			gravity.endFall();
+	    		}
+	    	}else{
+	    		if(currentLevel[matrix_y][matrix_x_left] == 0){
+	    			if(gravity.falling){
+	    				newchary = chary + gravity.falldown_px;
+	    				//gravity.setNextFall();
+	    			}else{
+	    				gravity.startFall();
+	    				newchary = chary + gravity.falldown_px;
+	    				//gravity.setNextFall();	    				
+	    			}
+	    		}else{
+	    			gravity.endFall();
+	    		}
+	    	}
+	    }else{
+	    	if(onEdgeY){
+	    		if(currentLevel[matrix_y + 1][matrix_x_left] == 0 && currentLevel[matrix_y + 1][matrix_x_left + 1] == 0){
+	    			if(gravity.falling){
+	    				newchary = chary + gravity.falldown_px;
+	    				//gravity.setNextFall();
+	    			}else{
+	    				gravity.startFall();
+	    				newchary = chary + gravity.falldown_px;
+	    				//gravity.setNextFall();	    				
+	    			}
+	    		}else{
+	    			gravity.endFall();
+	    		}	    		
+	    	}else{
+	    		if(currentLevel[matrix_y][matrix_x_left] == 0 && currentLevel[matrix_y][matrix_x_left + 1] == 0){
+	    			if(gravity.falling){
+	    				newchary = chary + gravity.falldown_px;
+	    				//gravity.setNextFall();
+	    			}else{
+	    				gravity.startFall();
+	    				newchary = chary + gravity.falldown_px;
+	    				//gravity.setNextFall();	    				
+	    			}
+	    		}else{
+	    			gravity.endFall();
+	    		}    		
+	    	}
+	    }
+		
 	}
 	
 	public int roundDownToClosestMultipleOfFifty(int num){

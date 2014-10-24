@@ -1,0 +1,60 @@
+		/* We need to check whether the character is on the edge of a square, or in the middle of one.
+	     * Depending on the answer, we need to check:
+	     * 		When the character is on the edge in the x-axis:
+	     * 			1. If the character is also on the edge in the y-axis, we need to check the square right beneath the
+	     * 					character. Nothing more, since the character perfectly fits in one square.
+	     * 			2. If the character is not on the edge in the y-axis, we need to check the square he is in.
+	     * 		When the character is not on the edge in the x-axis:
+	     * 			1. If the character is on the edge in the y-axis, we need to check two squares beneath him, the square
+	     * 					beneath is right foot and the square beneath his left foot.
+	     *			2. If the character is not on the edge in the y-axis, we need to check the squares his feet are in.
+	     *
+	     * To determine whether he is on an edge or not:
+	     * 		
+	     * 		x-axis:
+	     * 			Since the character is exactly 50px broad, he fits perfectly in a square. He can only move 5px at the time.
+	     * 			This means that when the character is on an edge, he is at a multiple of 50px. 
+	     * 			So when we round the coordinate of the character in the x-axis to its closest multiple of 50, this should be
+	     * 			equal to the coordinate itself, if the character is on an edge. When these are not equal to eachother, the
+	     * 			character is not on an edge, and we need to check two squares.
+	     * 
+	     *  	y-axis:
+	     *  		Here we use the same algorithm as when checking the x-axis, but now in the y-axis. The character is 100px 
+	     *  		high.
+	     *  		So when the characters coordinate in the y-axis is equal to the same number rounded to its closest multiple of
+	     *  		fifty, the character is on an edge. If not true, he is in the middle of a square.
+	     *  
+	     *  In pseudo-code:
+	     *  
+	     *  	if(onEdgeX){
+	     *  		if(onEdgeY){
+	     *  			if(squareBeneathFeet == air){
+	     *  				fallDown();
+	     *  			}
+	     *  		}else{
+	     *  			if(squareContainingFeet == air){
+	     *  				fallDown();
+	     *  			}
+	     *  		}
+	     *  	}else{
+	     *  		if(onEdgeY){
+	     *  			if(squareBeneathLeftFoot == air && squareBeneathRightFoot == air){
+	     *  				fallDown();
+	     *  			}
+	     *  		}else{
+	     *  			if(squareContainingLeftFoot == air && squareContainingRightFoot == air){
+	     *  				fallDown();
+	     *  			}
+	     *  		}
+	     *  	}
+	     *  
+	     *  	if(falling){
+	     *  		newchary = chary + falldown_px;
+	     *  		falldown_px = FALLDOWN_PX_START * (frame - start_frame);
+	     *  	}else{
+	     *  		startFall()
+	     *  		newchary = chary + falldown_px;
+	     *  		falldown_px = FALLDOWN_PX_START * (frame - start_frame);
+	     *  	}
+	     *  
+	     */
