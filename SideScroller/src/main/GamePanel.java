@@ -32,6 +32,8 @@ public class GamePanel extends JPanel implements KeyListener{
 	 * Panel : 1000x500 px
 	 * Width : 20 prts
 	 * Height : 10 prts
+	 * 
+	 * This method is called every frame
 	 */
 	@Override
 	public void paintComponent(Graphics g){
@@ -82,7 +84,13 @@ public class GamePanel extends JPanel implements KeyListener{
 	public void keyTyped(KeyEvent e){
 		
 	}
-
+	
+	/*	The update method contains:
+	 * 		- Movement left and right
+	 * 		- Gravity check
+	 * 		- Checking if the location where the character is travelling is valid
+	 * 	
+	 */
 	public void update(){
 		
 		newcharx = charx;
@@ -134,11 +142,16 @@ public class GamePanel extends JPanel implements KeyListener{
 	    System.out.println("newframe");
 	}
 	
+	//The Gravity class contains severable variables for gravity:
+	//		- The amount of pixels to fall down: falldown_px
+	// 		- A boolean falling which is true when falling, otherwise false
+	//		- FALLDOWN_PX_START, now unused, maybe used later when adding acceleration
+	//		- start_frame, now unused, maybe used later for acceleration
 	private class Gravity{
 		
 		public int start_frame;
 		public final int FALLDOWN_PX_START = 5;
-		public int falldown_px = 10;
+		public int falldown_px = 25;
 		public boolean falling;
 		
 		Gravity(){
@@ -163,6 +176,7 @@ public class GamePanel extends JPanel implements KeyListener{
 		}
 	}
 	
+	//In the checkGravity() method the squares beneath the characters feet are checked if they are air, see resources/gravity.txt
 	public void checkGravity(){
 		//Here we check if the character is on an edge of a square
 	    boolean onEdgeX;
