@@ -1,6 +1,6 @@
 ##SideScroller
 
-SideScroller aims to create a League of Legends themed 2D platformer. The project is far from finished. 
+SideScroller aims to create a League of Legends themed 2D platformer, including champions with abilities, minions and jungle monsters. 
 
 **Planned features:**
   - Levels with ending boss fights against Baron, Dragon, etc.
