@@ -10,5 +10,4 @@ Planned features:
   
 Would you like to help me with this project?  
 I am currently looking for artists, to create animations and environments.  
-PM reddit.com/u/ikhebgeenaccount   
-or if you have no reddit, add me ingame on EUW: ikhebgeenaccount.  
+PM reddit.com/u/ikhebgeenaccount or if you have no reddit, add me ingame on EUW: ikhebgeenaccount.  
