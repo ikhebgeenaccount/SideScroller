@@ -11,7 +11,7 @@ Would you like to help me with this project?
 I am currently looking for artists, to create animations and environments.  
 PM [/u/ikhebgeenaccount](reddit.com/u/ikhebgeenaccount) or if you have no reddit, add me ingame on EUW: ikhebgeenaccount.  
 
-Current version holds:  
+Current version holds:
   - Basic movement
   - Gravity
 
