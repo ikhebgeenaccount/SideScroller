@@ -12,19 +12,24 @@ import javax.swing.JPanel;
 public class GamePanel extends JPanel implements KeyListener{
 	
 	//Levels are created at the bottom!
-	private boolean[] keys = new boolean[100];
+	private boolean[] keys;
 	private Image ground, air, grass_ground, grass_air;
-	private int charx = 0, chary = 0;
-	private final int MOVEPX = 5;
-	private boolean jumping = false;
-	private int jump_start;
-	private int frame = 0;
-	private int jump_px[] = {50,30,15,5,0,-5,15,30,50};
-	private Gravity gravity = new Gravity();
+	private int charx, chary;
+	private final int MOVEPX;
+	private int frame;
+	private Gravity gravity;
+	private Jump jump;
 	private int newcharx, newchary;
 	
 	public GamePanel(){
 		loadPics();
+		keys = new boolean[1000];
+		charx = 0;
+		chary = 0;
+		MOVEPX = 10;
+		frame = 0;
+		gravity = new Gravity();
+		jump = new Jump();
 	}
 	
 	/* Fill the panel with landscape
@@ -60,6 +65,7 @@ public class GamePanel extends JPanel implements KeyListener{
 		frame++;
 	}
 	
+	//Images are loaded
 	public void loadPics(){
 		//air = new ImageIcon(GamePanel.class.getResource("/resources/landscape-img/air.png")).getImage();
 		air = new ImageIcon("resources\\landscape-img\\air.png").getImage();
@@ -70,19 +76,18 @@ public class GamePanel extends JPanel implements KeyListener{
 
 	public void keyPressed(KeyEvent e){
 	    keys[e.getKeyCode()] = true;
-	    
-	    if(keys[KeyEvent.VK_UP]){
-	        jumping = true;
-	        jump_start = frame;
-	    }
 	}
 
 	public void keyReleased(KeyEvent e){
 	    keys[e.getKeyCode()] = false;
+	    
+	    if(e.getKeyCode() == KeyEvent.VK_UP){
+	    	jump.jumping = true;
+	    	jump.start_frame = frame;
+	    }
 	}
 
-	public void keyTyped(KeyEvent e){
-		
+	public void keyTyped(KeyEvent e){		
 	}
 	
 	/*	The update method contains:
@@ -92,6 +97,7 @@ public class GamePanel extends JPanel implements KeyListener{
 	 * 	
 	 */
 	public void update(){
+		keys[KeyEvent.VK_UP]= false; 
 		
 		newcharx = charx;
 		newchary = chary;
@@ -102,11 +108,7 @@ public class GamePanel extends JPanel implements KeyListener{
 
 	    if(keys[KeyEvent.VK_RIGHT]){
 	        newcharx += MOVEPX;
-	    }
-	    
-	    if(keys[KeyEvent.VK_UP]){
-	    	newchary = chary - MOVEPX;
-	    }	    
+	    }    
 	    
 	    checkGravity();
 	    
@@ -139,7 +141,22 @@ public class GamePanel extends JPanel implements KeyListener{
 	    
 	    //System.out.println("x: " + charx);
 	    //System.out.println("y: " + chary);
-	    System.out.println("newframe");
+	    //System.out.println(frame);
+	}
+	
+	//In this class the jumpvariables are stored
+	private class Jump{
+		
+		public boolean jumping;
+		public int start_frame;
+		public int jump_px;
+		public int jump_frames;
+		
+		Jump(){
+			jumping = false;
+			jump_px = MOVEPX;
+			jump_frames = 15;
+		}
 	}
 	
 	//The Gravity class contains severable variables for gravity:
@@ -150,12 +167,14 @@ public class GamePanel extends JPanel implements KeyListener{
 	private class Gravity{
 		
 		public int start_frame;
-		public final int FALLDOWN_PX_START = 5;
-		public int falldown_px = 25;
+		public final int FALLDOWN_PX_START;
+		public int falldown_px;
 		public boolean falling;
 		
 		Gravity(){
-			falling = false;			
+			falling = false;
+			falldown_px = MOVEPX;
+			FALLDOWN_PX_START = MOVEPX;
 		}
 		
 		//We start the fall by telling falling = true
@@ -171,7 +190,7 @@ public class GamePanel extends JPanel implements KeyListener{
 		
 		//The fall ends, falling = false
 		public void endFall(){
-			falldown_px = FALLDOWN_PX_START;
+			//falldown_px = FALLDOWN_PX_START;
 			falling = false;
 		}
 	}
@@ -199,65 +218,124 @@ public class GamePanel extends JPanel implements KeyListener{
 	    int matrix_x_left = roundDownToClosestMultipleOfFifty(charx)/50;
 	    int matrix_y =  roundDownToClosestMultipleOfFifty(chary + 99)/50;
 	    
-	    //Here we check if the substance beneath the character is solid
-	    if(onEdgeX){
-	    	if(onEdgeY){
-	    		if(currentLevel[matrix_y + 1][matrix_x_left] == 0){
-	    			if(gravity.falling){
-	    				newchary = chary + gravity.falldown_px;
-	    				//gravity.setNextFall();
-	    			}else{
-	    				gravity.startFall();
-	    				newchary = chary + gravity.falldown_px;
-	    				//gravity.setNextFall();	    				
-	    			}
-	    		}else{
-	    			gravity.endFall();
-	    		}
-	    	}else{
-	    		if(currentLevel[matrix_y][matrix_x_left] == 0){
-	    			if(gravity.falling){
-	    				newchary = chary + gravity.falldown_px;
-	    				//gravity.setNextFall();
-	    			}else{
-	    				gravity.startFall();
-	    				newchary = chary + gravity.falldown_px;
-	    				//gravity.setNextFall();	    				
-	    			}
-	    		}else{
-	    			gravity.endFall();
-	    		}
-	    	}
-	    }else{
-	    	if(onEdgeY){
-	    		if(currentLevel[matrix_y + 1][matrix_x_left] == 0 && currentLevel[matrix_y + 1][matrix_x_left + 1] == 0){
-	    			if(gravity.falling){
-	    				newchary = chary + gravity.falldown_px;
-	    				//gravity.setNextFall();
-	    			}else{
-	    				gravity.startFall();
-	    				newchary = chary + gravity.falldown_px;
-	    				//gravity.setNextFall();	    				
-	    			}
-	    		}else{
-	    			gravity.endFall();
-	    		}	    		
-	    	}else{
-	    		if(currentLevel[matrix_y][matrix_x_left] == 0 && currentLevel[matrix_y][matrix_x_left + 1] == 0){
-	    			if(gravity.falling){
-	    				newchary = chary + gravity.falldown_px;
-	    				//gravity.setNextFall();
-	    			}else{
-	    				gravity.startFall();
-	    				newchary = chary + gravity.falldown_px;
-	    				//gravity.setNextFall();	    				
-	    			}
-	    		}else{
-	    			gravity.endFall();
-	    		}    		
-	    	}
-	    }
-		
+		if(!jump.jumping){
+			//Here we check if the substance beneath the character is solid
+		    if(onEdgeX){
+		    	if(onEdgeY){
+		    		if(currentLevel[matrix_y + 1][matrix_x_left] == 0){
+		    			if(gravity.falling){
+		    				newchary = chary + gravity.falldown_px;
+		    				//gravity.setNextFall();
+		    			}else{
+		    				gravity.startFall();
+		    				newchary = chary + gravity.falldown_px;
+		    				//gravity.setNextFall();	    				
+		    			}
+		    		}else{
+		    			gravity.endFall();
+		    		}
+		    	}else{
+		    		if(currentLevel[matrix_y][matrix_x_left] == 0){
+		    			if(gravity.falling){
+		    				newchary = chary + gravity.falldown_px;
+		    				//gravity.setNextFall();
+		    			}else{
+		    				gravity.startFall();
+		    				newchary = chary + gravity.falldown_px;
+		    				//gravity.setNextFall();	    				
+		    			}
+		    		}else{
+		    			gravity.endFall();
+		    		}
+		    	}
+		    }else{
+		    	if(onEdgeY){
+		    		if(currentLevel[matrix_y + 1][matrix_x_left] == 0 && currentLevel[matrix_y + 1][matrix_x_left + 1] == 0){
+		    			if(gravity.falling){
+		    				newchary = chary + gravity.falldown_px;
+		    				//gravity.setNextFall();
+		    			}else{
+		    				gravity.startFall();
+		    				newchary = chary + gravity.falldown_px;
+		    				//gravity.setNextFall();	    				
+		    			}
+		    		}else{
+		    			gravity.endFall();
+		    		}	    		
+		    	}else{
+		    		if(currentLevel[matrix_y][matrix_x_left] == 0 && currentLevel[matrix_y][matrix_x_left + 1] == 0){
+		    			if(gravity.falling){
+		    				newchary = chary + gravity.falldown_px;
+		    				//gravity.setNextFall();
+		    			}else{
+		    				gravity.startFall();
+		    				newchary = chary + gravity.falldown_px;
+		    				//gravity.setNextFall();	    				
+		    			}
+		    		}else{
+		    			gravity.endFall();
+		    		}    		
+		    	}
+		    }
+		}else{
+			if(onEdgeY){
+				if(onEdgeX){
+					if(currentLevel[matrix_y + 1][matrix_x_left] != 0){
+						jump();
+					}else{
+						if(frame - jump.start_frame > jump.jump_frames){
+							jump.jumping = false;
+						}else{
+							jump();
+						}
+					}
+				}else{
+					if(currentLevel[matrix_y + 1][matrix_x_left] != 0 || currentLevel[matrix_y + 1][matrix_x_left + 1] != 0){
+						jump();
+					}else{
+						if(frame - jump.start_frame > jump.jump_frames){
+							jump.jumping = false;
+						}else{
+							jump();
+						}
+					}
+				}
+			}else{
+				if(onEdgeX){
+					if(currentLevel[matrix_y][matrix_x_left] != 0){
+						jump();
+					}else{
+						if(frame - jump.start_frame > jump.jump_frames){
+							jump.jumping = false;
+						}else{
+							jump();
+						}
+					}
+				}else{
+					if(currentLevel[matrix_y][matrix_x_left] != 0 || currentLevel[matrix_y][matrix_x_left] != 0){
+						jump();
+					}else{
+						if(frame - jump.start_frame > jump.jump_frames){
+							jump.jumping = false;
+						}else{
+							jump();
+						}
+					}
+				}
+			}
+			
+		}		
+	}
+	
+	//Coordinates are changed: character jumps
+	public void jump(){
+		System.out.println("jumping");
+		if(frame - jump.start_frame <= jump.jump_frames){
+			newchary -= jump.jump_px;
+		}else{
+			jump.jumping = false;
+			newchary -= jump.jump_px;
+		}
 	}
 	
 	public int roundDownToClosestMultipleOfFifty(int num){
