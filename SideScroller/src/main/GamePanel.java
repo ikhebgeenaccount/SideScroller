@@ -31,6 +31,10 @@ public class GamePanel extends JPanel implements KeyListener{
 		frame = 0;
 		gravity = new Gravity();
 		jump = new Jump();
+		/*The MOVEPX can be changed in two ways:
+			1. Changing the MOVEPX value itself.
+			2. Changing the FPS, the MOVEPX doesn't change, but the visualising of the movement itself goes faster. For example: we have MOVEPX = 10 and FPS = 30. If we change FPS to 45, the MOVEPX 'changes' indirectly to 15.
+		*/
 	}
 	
 	/* Fill the panel with landscape
