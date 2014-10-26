@@ -20,6 +20,7 @@ public class GamePanel extends JPanel implements KeyListener{
 	private Gravity gravity;
 	private Jump jump;
 	private int newcharx, newchary;
+	private boolean onEdgeY, onEdgeX;
 	
 	public GamePanel(){
 		loadPics();
@@ -81,9 +82,46 @@ public class GamePanel extends JPanel implements KeyListener{
 	public void keyReleased(KeyEvent e){
 	    keys[e.getKeyCode()] = false;
 	    
+	    onEdge();
+	    
+	    int matrix_x_left = roundDownToClosestMultipleOfFifty(charx)/50;
+	    int matrix_y =  roundDownToClosestMultipleOfFifty(chary + 99)/50;
+	      
 	    if(e.getKeyCode() == KeyEvent.VK_UP){
-	    	jump.jumping = true;
-	    	jump.start_frame = frame;
+	    	if(onEdgeY){
+				if(onEdgeX){
+					if(currentLevel[matrix_y + 1][matrix_x_left] != 0){
+						jump.jumping = true;
+				    	jump.start_frame = frame;
+					}else{
+						
+					}
+				}else{
+					if(currentLevel[matrix_y + 1][matrix_x_left] != 0 || currentLevel[matrix_y + 1][matrix_x_left + 1] != 0){
+						jump.jumping = true;
+				    	jump.start_frame = frame;
+					}else{
+						
+					}
+				}
+			}else{
+				if(onEdgeX){
+					if(currentLevel[matrix_y][matrix_x_left] != 0){
+						jump.jumping = true;
+				    	jump.start_frame = frame;
+					}else{
+						
+					}
+				}else{
+					if(currentLevel[matrix_y][matrix_x_left] != 0 || currentLevel[matrix_y][matrix_x_left] != 0){
+						jump.jumping = true;
+				    	jump.start_frame = frame;
+					}else{
+						
+					}
+				}
+			}
+	    	
 	    }
 	}
 
@@ -196,25 +234,9 @@ public class GamePanel extends JPanel implements KeyListener{
 	}
 	
 	//In the checkGravity() method the squares beneath the characters feet are checked if they are air, see resources/gravity.txt
-	public void checkGravity(){
-		//Here we check if the character is on an edge of a square
-	    boolean onEdgeX;
-	    boolean onEdgeY;
-	    
-	    //On the x-axis
-	    if(charx == roundDownToClosestMultipleOfFifty(charx)){
-	    	onEdgeX = true;
-	    }else{
-	    	onEdgeX = false;
-	    }
-	    
-	    //On the y-axis
-	    if(chary == roundDownToClosestMultipleOfFifty(chary)){
-	    	onEdgeY = true;
-	    }else{
-	    	onEdgeY = false;
-	    }
-	    
+	public void checkGravity(){	    
+	    onEdge();
+		
 	    int matrix_x_left = roundDownToClosestMultipleOfFifty(charx)/50;
 	    int matrix_y =  roundDownToClosestMultipleOfFifty(chary + 99)/50;
 	    
@@ -278,58 +300,13 @@ public class GamePanel extends JPanel implements KeyListener{
 		    	}
 		    }
 		}else{
-			if(onEdgeY){
-				if(onEdgeX){
-					if(currentLevel[matrix_y + 1][matrix_x_left] != 0){
-						jump();
-					}else{
-						if(frame - jump.start_frame > jump.jump_frames){
-							jump.jumping = false;
-						}else{
-							jump();
-						}
-					}
-				}else{
-					if(currentLevel[matrix_y + 1][matrix_x_left] != 0 || currentLevel[matrix_y + 1][matrix_x_left + 1] != 0){
-						jump();
-					}else{
-						if(frame - jump.start_frame > jump.jump_frames){
-							jump.jumping = false;
-						}else{
-							jump();
-						}
-					}
-				}
-			}else{
-				if(onEdgeX){
-					if(currentLevel[matrix_y][matrix_x_left] != 0){
-						jump();
-					}else{
-						if(frame - jump.start_frame > jump.jump_frames){
-							jump.jumping = false;
-						}else{
-							jump();
-						}
-					}
-				}else{
-					if(currentLevel[matrix_y][matrix_x_left] != 0 || currentLevel[matrix_y][matrix_x_left] != 0){
-						jump();
-					}else{
-						if(frame - jump.start_frame > jump.jump_frames){
-							jump.jumping = false;
-						}else{
-							jump();
-						}
-					}
-				}
-			}
+			jump();
 			
 		}		
 	}
 	
 	//Coordinates are changed: character jumps
 	public void jump(){
-		System.out.println("jumping");
 		if(frame - jump.start_frame <= jump.jump_frames){
 			newchary -= jump.jump_px;
 		}else{
@@ -341,6 +318,23 @@ public class GamePanel extends JPanel implements KeyListener{
 	public int roundDownToClosestMultipleOfFifty(int num){
 		int mod = num % 50;
 		return num-mod;    
+	}
+	
+	public void onEdge(){
+		//On the x-axis
+	    if(charx == roundDownToClosestMultipleOfFifty(charx)){
+	    	onEdgeX = true;
+	    }else{
+	    	onEdgeX = false;
+	    }
+	    
+	    //On the y-axis
+	    if(chary == roundDownToClosestMultipleOfFifty(chary)){
+	    	onEdgeY = true;
+	    }else{
+	    	onEdgeY = false;
+	    }
+		
 	}
 	
 	/*Levels:
