@@ -33,7 +33,8 @@ public class GamePanel extends JPanel implements KeyListener{
 		jump = new Jump();
 		/*The MOVEPX can be changed in two ways:
 			1. Changing the MOVEPX value itself.
-			2. Changing the FPS, the MOVEPX doesn't change, but the visualising of the movement itself goes faster. For example: we have MOVEPX = 10 and FPS = 30. If we change FPS to 45, the MOVEPX 'changes' indirectly to 15.
+			2. Changing the FPS, the MOVEPX doesn't change, but the visualising of the movement itself goes faster. 
+					For example: we have MOVEPX = 10 and FPS = 30. If we change FPS to 45, the MOVEPX 'changes' indirectly to 15.
 		*/
 	}
 	
@@ -78,11 +79,14 @@ public class GamePanel extends JPanel implements KeyListener{
 		grass_ground = new ImageIcon("resources\\landscape-img\\grass-ground.png").getImage();
 		grass_air = new ImageIcon("resources\\landscape-img\\grass-air.png").getImage();
 	}
-
+	
+	//Called when a key is pressed
 	public void keyPressed(KeyEvent e){
 	    keys[e.getKeyCode()] = true;
 	}
-
+	
+	//Called when a key is released (for jumping this is not the most optimal way to initiate the jump, it only starts when
+	//the up-key is released, feels a bit sloppy)
 	public void keyReleased(KeyEvent e){
 	    keys[e.getKeyCode()] = false;
 	    
@@ -129,7 +133,8 @@ public class GamePanel extends JPanel implements KeyListener{
 	    	
 	    }
 	}
-
+	
+	//Is called when the ASCII-character for that particular button is send to the computer
 	public void keyTyped(KeyEvent e){		
 	}
 	
