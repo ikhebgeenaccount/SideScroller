@@ -86,7 +86,8 @@ public class GamePanel extends JPanel implements KeyListener{
 	    
 	    int matrix_x_left = roundDownToClosestMultipleOfFifty(charx)/50;
 	    int matrix_y =  roundDownToClosestMultipleOfFifty(chary + 99)/50;
-	      
+	    
+	    //If the up-key is pressed, check if the square beneath the character is solid, so he can really jump
 	    if(e.getKeyCode() == KeyEvent.VK_UP){
 	    	if(onEdgeY){
 				if(onEdgeX){
@@ -240,6 +241,7 @@ public class GamePanel extends JPanel implements KeyListener{
 	    int matrix_x_left = roundDownToClosestMultipleOfFifty(charx)/50;
 	    int matrix_y =  roundDownToClosestMultipleOfFifty(chary + 99)/50;
 	    
+	    //If the character is not jumping, we check for gravity, otherwise we jump()
 		if(!jump.jumping){
 			//Here we check if the substance beneath the character is solid
 		    if(onEdgeX){
@@ -306,6 +308,7 @@ public class GamePanel extends JPanel implements KeyListener{
 	}
 	
 	//Coordinates are changed: character jumps
+	//Also checks if the jump shouldn't end yet
 	public void jump(){
 		if(frame - jump.start_frame <= jump.jump_frames){
 			newchary -= jump.jump_px;
@@ -320,6 +323,7 @@ public class GamePanel extends JPanel implements KeyListener{
 		return num-mod;    
 	}
 	
+	//Checks if the character is on the edge of a square on the y- and x-axis, if so, onEdgeY = true, or onEdgeX = true.
 	public void onEdge(){
 		//On the x-axis
 	    if(charx == roundDownToClosestMultipleOfFifty(charx)){
