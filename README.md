@@ -16,3 +16,9 @@ Current version holds:
   - Gravity
 
 As you can see this project is far from finished. I am expecting (hoping) to be able to release a first beta early 2015.
+
+**Changelog**
+  - *v0.1.0*
+    - Added graphics
+    - Added gravity
+    - Added movement
