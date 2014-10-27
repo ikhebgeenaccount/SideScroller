@@ -11,8 +11,10 @@ Would you like to help me with this project?
 I am currently looking for artists, to create animations and environments.  
 PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you have no reddit, add me ingame on EUW: ikhebgeenaccount.  
 
-Current version holds:
-  - Basic movement
-  - Gravity
-
-As you can see this project is far from finished. I am expecting (hoping) to be able to release a first beta early 2015.
+**Changelog**
+  - *v0.1.1*
+    - Fixed images not working
+  - *v0.1.0*
+    - Added graphics
+    - Added gravity
+    - Added movement
