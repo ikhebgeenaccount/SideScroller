@@ -21,8 +21,9 @@ public class Main extends JFrame{
 	private static Champion character;
 	
 	public static void main(String[] args){
+		ClassLoader cldr = Class.class.getClassLoader();
 		character = new Champion();
-		character.setAnimationFrame(new ImageIcon("resources\\char\\char-idle.png").getImage());
+		character.setAnimationFrame(new ImageIcon(cldr.getResource("char/img/default/idle.png")).getImage());
 		createFrame();
 		//Thread for frames
 		new Thread("Game loop"){

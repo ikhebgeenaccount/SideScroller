@@ -1,0 +1,17 @@
+Loading images:
+
+main.Main.main():
+
+character.setAnimationFrame(new ImageIcon(cldr.getResource("char/img/default/idle.png")).getImage());
+
+
+main.GamePanel.loadPics():
+
+public void loadPics(){
+		//air = new ImageIcon(GamePanel.class.getResource("/resources/landscape-img/air.png")).getImage();
+		ClassLoader cldr = this.getClass().getClassLoader();
+		air = new ImageIcon(cldr.getResource("landscape/img/default/air.png")).getImage();
+		ground = new ImageIcon(cldr.getResource("landscape/img/default/ground.png")).getImage();
+		grass_ground = new ImageIcon(cldr.getResource("landscape/img/default/grass-ground.png")).getImage();
+		grass_air = new ImageIcon(cldr.getResource("landscape/img/default/grass-air.png")).getImage();
+	}

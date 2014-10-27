@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.net.URL;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -74,10 +75,11 @@ public class GamePanel extends JPanel implements KeyListener{
 	//Images are loaded
 	public void loadPics(){
 		//air = new ImageIcon(GamePanel.class.getResource("/resources/landscape-img/air.png")).getImage();
-		air = new ImageIcon("resources\\landscape-img\\air.png").getImage();
-		ground = new ImageIcon("resources\\landscape-img\\ground.png").getImage();
-		grass_ground = new ImageIcon("resources\\landscape-img\\grass-ground.png").getImage();
-		grass_air = new ImageIcon("resources\\landscape-img\\grass-air.png").getImage();
+		ClassLoader cldr = this.getClass().getClassLoader();
+		air = new ImageIcon(cldr.getResource("landscape/img/default/air.png")).getImage();
+		ground = new ImageIcon(cldr.getResource("landscape/img/default/ground.png")).getImage();
+		grass_ground = new ImageIcon(cldr.getResource("landscape/img/default/grass-ground.png")).getImage();
+		grass_air = new ImageIcon(cldr.getResource("landscape/img/default/grass-air.png")).getImage();
 	}
 	
 	//Called when a key is pressed
