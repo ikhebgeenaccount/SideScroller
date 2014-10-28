@@ -222,7 +222,8 @@ public class GamePanel extends JPanel implements KeyListener{
 	    			charx = newcharx;
 	    		}
 	    	}
-	    	
+	    	//Feet get stuck when jumping or falling
+	    	//Rest of the body does not get stuck, only feet detection points. No idea...
 	    	if(newchary > chary){
 	    		//Is falling down
 	    		if(currentLevel[matrix_y_bottom_left][matrix_x_bottom_left_old] != 0 || currentLevel[matrix_y_bottom_right][matrix_x_bottom_right_old] != 0){
@@ -242,9 +243,8 @@ public class GamePanel extends JPanel implements KeyListener{
 	    	}
 	    }
 	    
-	    //System.out.println("x: " + charx);
-	    //System.out.println("y: " + chary);
-	    //System.out.println(frame);
+	    System.out.println("x: " + charx);
+	    System.out.println("y: " + chary);
 	}
 	
 	//In this class the jumpvariables are stored
