@@ -129,6 +129,16 @@ public class GamePanel extends JPanel implements KeyListener{
 			}
 	    	
 	    }
+	    
+	    if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
+	    	chary = 0;
+	    	charx = 0;
+	    }
+	    
+	    if(e.getKeyCode() == KeyEvent.VK_SPACE){
+	    	chary = 350;
+	    	charx = 0;
+	    }
 	}
 	
 	//Called when a key is released (for jumping this is not the most optimal way to initiate the jump, it only starts when
@@ -177,18 +187,61 @@ public class GamePanel extends JPanel implements KeyListener{
 	    int matrix_x_bottom_right = matrix_x_upper_right;
 	    int matrix_y_bottom_right = matrix_y_bottom_left;
 	    
+	    int matrix_x_upper_left_old = roundDownToClosestMultipleOfFifty(charx)/50;
+	    int matrix_y_upper_left_old = roundDownToClosestMultipleOfFifty(chary)/50;
+	    int matrix_x_upper_right_old = roundDownToClosestMultipleOfFifty(charx + 49)/50;
+	    int matrix_y_upper_right_old = matrix_y_upper_left;
+	    int matrix_x_middle_left_old = matrix_x_upper_left;
+	    int matrix_y_middle_left_old = roundDownToClosestMultipleOfFifty(chary + 49)/50;
+	    int matrix_x_middle_right_old = matrix_x_upper_right;
+	    int matrix_y_middle_right_old = matrix_y_middle_left;
+	    int matrix_x_bottom_left_old = matrix_x_upper_left;
+	    int matrix_y_bottom_left_old = roundDownToClosestMultipleOfFifty(chary + 99)/50;
+	    int matrix_x_bottom_right_old = matrix_x_upper_right;
+	    int matrix_y_bottom_right_old = matrix_y_bottom_left;
+	    
 	    //Check if array is not out of bounds
 	    if(matrix_x_upper_left < 0 || matrix_y_upper_left < 0 || matrix_x_upper_right < 0 || matrix_y_upper_right < 0 || matrix_x_bottom_left < 0 || matrix_y_bottom_left < 0 || matrix_x_bottom_right < 0 || matrix_y_bottom_right < 0){
 	    	
 	    }else{
 	    	//Check if the coordinates where the character is moving are valid
-	    	if(currentLevel[matrix_y_upper_left][matrix_x_upper_left] != 0 || currentLevel[matrix_y_upper_right][matrix_x_upper_right] != 0 || currentLevel[matrix_y_bottom_right][matrix_x_bottom_right] != 0 || currentLevel[matrix_y_bottom_left][matrix_x_bottom_left] != 0 || currentLevel[matrix_y_middle_left][matrix_x_middle_left] != 0 || currentLevel[matrix_y_middle_right][matrix_x_middle_right] != 0){
-	    		//Can't move there!
-		    }else{
-		    	//Can move there.
-		    	chary = newchary;
-		    	charx = newcharx;
-		    }
+	    	if(newcharx > charx){
+	    		//Moving right
+	    		if(currentLevel[matrix_y_upper_right_old][matrix_x_upper_right] != 0 || currentLevel[matrix_y_middle_right_old][matrix_x_middle_right] != 0 || currentLevel[matrix_y_bottom_right_old][matrix_x_bottom_right] != 0){
+	    			//Can't move there!
+	    		}else{
+	    			//Can move there
+	    			charx = newcharx;
+	    		}
+	    	}else if(newcharx < charx){
+	    		//Moving left
+	    		if(currentLevel[matrix_y_upper_left_old][matrix_x_upper_left] != 0 || currentLevel[matrix_y_middle_left_old][matrix_x_middle_left] != 0 || currentLevel[matrix_y_bottom_left_old][matrix_x_bottom_left] != 0){
+	    			//Can't move there!
+	    		}else{
+	    			//Can move there
+	    			charx = newcharx;
+	    		}
+	    	}else{
+	    		//Isn't moving in the x-axis
+	    	}
+	    	
+	    	if(newchary > chary){
+	    		//Is falling down
+	    		if(currentLevel[matrix_y_bottom_left][matrix_x_bottom_left_old] != 0 || currentLevel[matrix_y_bottom_right][matrix_x_bottom_right_old] != 0){
+	    			//Can't move there
+	    		}else{
+	    			chary = newchary;
+	    		}	    			    		
+	    	}else if(newchary < chary){
+	    		//Is jumping
+	    		if(currentLevel[matrix_y_upper_left][matrix_x_upper_left_old] != 0 || currentLevel[matrix_y_upper_right][matrix_x_upper_right_old] != 0){
+	    			//Can't move there
+	    		}else{
+	    			chary = newchary;
+	    		}
+	    	}else{
+	    		//Isn't moving in the y-axis
+	    	}
 	    }
 	    
 	    //System.out.println("x: " + charx);
