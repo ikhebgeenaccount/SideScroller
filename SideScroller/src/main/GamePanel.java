@@ -28,7 +28,7 @@ public class GamePanel extends JPanel implements KeyListener{
 		keys = new boolean[1000];
 		charx = 0;
 		chary = 0;
-		MOVEPX = 10;
+		MOVEPX = 5;
 		frame = 0;
 		gravity = new Gravity();
 		jump = new Jump();
