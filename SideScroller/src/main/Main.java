@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 
 public class Main extends JFrame{
 	//Some text to check if pulling works.
-	private static final int FPS = 45;
+	private static final int FPS = 90;
 	private static boolean running = true;
 	private static Main frame = new Main();
 	private static GamePanel gamePanel = new GamePanel();
