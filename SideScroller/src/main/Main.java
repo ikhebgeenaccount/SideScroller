@@ -14,14 +14,14 @@ import javax.swing.JPanel;
 
 public class Main extends JFrame{
 	//Some text to check if pulling works.
-	private static final int FPS = 90;
+	private static final int FPS = 45;
 	private static boolean running = true;
 	private static Main frame = new Main();
 	private static GamePanel gamePanel = new GamePanel();
 	private static Champion character;
 	
 	public static void main(String[] args){
-		ClassLoader cldr = Class.class.getClassLoader();
+		ClassLoader cldr = Main.class.getClassLoader();
 		character = new Champion();
 		character.setAnimationFrame(new ImageIcon(cldr.getResource("char/img/default/idle.png")).getImage());
 		createFrame();
