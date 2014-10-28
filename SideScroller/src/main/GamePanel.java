@@ -221,8 +221,6 @@ public class GamePanel extends JPanel implements KeyListener{
 	    			//Can move there
 	    			charx = newcharx;
 	    		}
-	    	}else{
-	    		//Isn't moving in the x-axis
 	    	}
 	    	
 	    	if(newchary > chary){
@@ -230,6 +228,7 @@ public class GamePanel extends JPanel implements KeyListener{
 	    		if(currentLevel[matrix_y_bottom_left][matrix_x_bottom_left_old] != 0 || currentLevel[matrix_y_bottom_right][matrix_x_bottom_right_old] != 0){
 	    			//Can't move there
 	    		}else{
+	    			//Can move there
 	    			chary = newchary;
 	    		}	    			    		
 	    	}else if(newchary < chary){
@@ -237,10 +236,9 @@ public class GamePanel extends JPanel implements KeyListener{
 	    		if(currentLevel[matrix_y_upper_left][matrix_x_upper_left_old] != 0 || currentLevel[matrix_y_upper_right][matrix_x_upper_right_old] != 0){
 	    			//Can't move there
 	    		}else{
+	    			//Can move there
 	    			chary = newchary;
 	    		}
-	    	}else{
-	    		//Isn't moving in the y-axis
 	    	}
 	    }
 	    
