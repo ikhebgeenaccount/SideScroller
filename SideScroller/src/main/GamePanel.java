@@ -85,12 +85,7 @@ public class GamePanel extends JPanel implements KeyListener{
 	//Called when a key is pressed
 	public void keyPressed(KeyEvent e){
 	    keys[e.getKeyCode()] = true;
-	}
-	
-	//Called when a key is released (for jumping this is not the most optimal way to initiate the jump, it only starts when
-	//the up-key is released, feels a bit sloppy)
-	public void keyReleased(KeyEvent e){
-	    keys[e.getKeyCode()] = false;
+	    
 	    
 	    onEdge();
 	    
@@ -134,6 +129,13 @@ public class GamePanel extends JPanel implements KeyListener{
 			}
 	    	
 	    }
+	}
+	
+	//Called when a key is released (for jumping this is not the most optimal way to initiate the jump, it only starts when
+	//the up-key is released, feels a bit sloppy)
+	public void keyReleased(KeyEvent e){
+	    keys[e.getKeyCode()] = false;
+	    
 	}
 	
 	//Is called when the ASCII-character for that particular button is send to the computer
