@@ -14,6 +14,7 @@ PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you hav
 **Changelog**
   - *v0.2.0*
     - Fixed sloppy jumping mechanism
+    - Fixed non-fluid movement, now fluid
   - *v0.1.1* - **current release**
     - Fixed images not working
   - *v0.1.0*
