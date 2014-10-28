@@ -12,7 +12,10 @@ I am currently looking for artists, to create animations and environments.
 PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you have no reddit, add me ingame on EUW: ikhebgeenaccount.  
 
 **Changelog**
-  - *v0.1.1*
+  - *v0.2.0*
+    - Fixed sloppy jumping mechanism
+    - ~~Fixed non-fluid movement, now fluid~~
+  - *v0.1.1* - **current release**
     - Fixed images not working
   - *v0.1.0*
     - Added graphics
