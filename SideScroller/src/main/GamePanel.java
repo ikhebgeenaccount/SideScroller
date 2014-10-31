@@ -8,6 +8,7 @@ import java.awt.event.KeyListener;
 import java.net.URL;
 
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class GamePanel extends JPanel implements KeyListener{
@@ -32,7 +33,7 @@ public class GamePanel extends JPanel implements KeyListener{
 		frame = 0;
 		gravity = new Gravity();
 		jump = new Jump();
-		/*The MOVEPX can be changed in two ways:
+		/*
 			1. Changing the MOVEPX value itself.
 			2. Changing the FPS, the MOVEPX doesn't change, but the visualising of the movement itself goes faster. 
 					For example: we have MOVEPX = 10 and FPS = 30. If we change FPS to 45, the MOVEPX 'changes' indirectly to 15.
@@ -231,7 +232,7 @@ public class GamePanel extends JPanel implements KeyListener{
 	    	 *because we can move in two directions: if the character is falling down, but the right-arrow-key is also pressed, but 
 	    	 *he can't move to the right because of a solid block, he still needs to fall down. If we check x and y at the same time
 	    	 *the character will get stuck and won't fall down even though that should happen.
-	    	 *This is also the reasen why we use old coordinates, from before this update(). When we check the y-axis, we check the
+	    	 *This is also the reason why we use old coordinates, from before this update(). When we check the y-axis, we check the
 	    	 *newchary but the charx (old), because the old coordinate is always valid, but we need to check the newchary. Vice versa
 	    	 *for the x-axis.
 	    	*/
@@ -424,8 +425,8 @@ public class GamePanel extends JPanel implements KeyListener{
 								{0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0},
 								{1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 								{1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0},
-								{0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+								{0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+								{0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0},
 								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 								{0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0},
