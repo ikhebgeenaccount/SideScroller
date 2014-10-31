@@ -174,6 +174,7 @@ public class GamePanel extends JPanel implements KeyListener{
 	    
 	    checkGravity();
 	    
+	    //Here we calculate the coordinates of the character in the matrix for the new coordinates that are set by movement/gravity.
 	    int matrix_x_upper_left = roundDownToClosestMultipleOfFifty(newcharx)/50;
 	    int matrix_y_upper_left = roundDownToClosestMultipleOfFifty(newchary)/50;
 	    int matrix_x_upper_right = roundDownToClosestMultipleOfFifty(newcharx + 49)/50;
@@ -187,6 +188,7 @@ public class GamePanel extends JPanel implements KeyListener{
 	    int matrix_x_bottom_right = matrix_x_upper_right;
 	    int matrix_y_bottom_right = matrix_y_bottom_left;
 	    
+	    //Here we calculate the coordinates of the character in the matrix for the old coordinates, from before this update().
 	    int matrix_x_upper_left_old = roundDownToClosestMultipleOfFifty(charx)/50;
 	    int matrix_y_upper_left_old = roundDownToClosestMultipleOfFifty(chary)/50;
 	    int matrix_x_upper_right_old = roundDownToClosestMultipleOfFifty(charx + 49)/50;
@@ -224,6 +226,15 @@ public class GamePanel extends JPanel implements KeyListener{
 	    	}
 	    	//Feet get stuck when jumping or falling
 	    	//Rest of the body does not get stuck, only feet detection points. No idea...
+	    	//So: only bottom_left and bottom_right is a problem.
+	    	/*Here we check if the character is allowed to move to the newcharx, newchary. We check the x- and y-axis independently
+	    	 *because we can move in two directions: if the character is falling down, but the right-arrow-key is also pressed, but 
+	    	 *he can't move to the right because of a solid block, he still needs to fall down. If we check x and y at the same time
+	    	 *the character will get stuck and won't fall down even though that should happen.
+	    	 *This is also the reasen why we use old coordinates, from before this update(). When we check the y-axis, we check the
+	    	 *newchary but the charx (old), because the old coordinate is always valid, but we need to check the newchary. Vice versa
+	    	 *for the x-axis.
+	    	*/
 	    	if(newchary > chary){
 	    		//Is falling down
 	    		if(currentLevel[matrix_y_bottom_left][matrix_x_bottom_left_old] != 0 || currentLevel[matrix_y_bottom_right][matrix_x_bottom_right_old] != 0){
