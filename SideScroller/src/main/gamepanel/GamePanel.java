@@ -257,8 +257,8 @@ public class GamePanel extends JPanel implements KeyListener{
 	    	}
 	    }
 	    
-	    System.out.println("x: " + charx);
-	    System.out.println("y: " + chary);
+	    //System.out.println("x: " + charx);
+	    //System.out.println("y: " + chary);
 	}
 	
 	//In this class the jumpvariables are stored
