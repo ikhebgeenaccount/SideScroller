@@ -12,6 +12,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import main.champion.Champion;
+import main.gamepanel.GamePanel;
+
 public class Main extends JFrame{
 	//Some text to check if pulling works.
 	private static final int FPS = 45;
