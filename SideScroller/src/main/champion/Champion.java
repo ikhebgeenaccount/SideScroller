@@ -1,4 +1,4 @@
-package main;
+package main.champion;
 
 import java.awt.Image;
 
