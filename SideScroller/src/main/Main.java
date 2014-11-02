@@ -13,24 +13,27 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import main.champion.Champion;
-import main.champion.champions.AlphaMan;
+import main.champion.champions.AlphaGuy;
 import main.gamepanel.GamePanel;
 
 public class Main extends JFrame{
 	//Some text to check if pulling works.
 	private static final int FPS = 45;
-	private static boolean running = true;
-	private static Main frame = new Main();
-	private static GamePanel gamePanel = new GamePanel();
+	private static boolean running;
+	private static JFrame frame;
+	private static GamePanel gamePanel;
 	private static Champion character;
 	
 	public static void main(String[] args){
 		System.out.println("Initializing game...");
-		System.out.println("Setting up frame...");
-		createFrame();
+		System.out.println("Updating settings...");
 		System.out.println("Creating character...");
-		character = new AlphaMan();
+		character = new AlphaGuy();
+		System.out.println("Setting up frame...");
+		createFrame();		
 		//Thread for frames
+		System.out.println("Starting game...");
+		running = true;
 		new Thread("Game loop"){
 			public void run(){
 				while(running){
@@ -52,6 +55,8 @@ public class Main extends JFrame{
 	//Frame is created and set in the middle of the screen
 	//<---! NOT YET VISIBLE !--->
 	private static void createFrame(){
+		frame = new JFrame();
+		gamePanel = new GamePanel(character);
 		frame.setTitle("SideScroller");
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -63,10 +68,5 @@ public class Main extends JFrame{
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 
-	}	
-	
-	//Get to-display image from character
-	public static Image getAnimationFrame(){
-		return character.getAnimationFrame();
 	}
 }
