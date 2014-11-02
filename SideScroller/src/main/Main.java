@@ -52,7 +52,7 @@ public class Main extends JFrame{
 		
 	}
 	
-	public void quitGame(){
+	public static void quitGame(){
 		running = false;
 	}
 	
