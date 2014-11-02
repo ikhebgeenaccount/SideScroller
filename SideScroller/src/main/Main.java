@@ -52,6 +52,10 @@ public class Main extends JFrame{
 		
 	}
 	
+	public void quitGame(){
+		running = false;
+	}
+	
 	//Frame is created and set in the middle of the screen
 	//<---! NOT YET VISIBLE !--->
 	private static void createFrame(){
