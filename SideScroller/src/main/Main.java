@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import main.champion.Champion;
+import main.champion.champions.AlphaMan;
 import main.gamepanel.GamePanel;
 
 public class Main extends JFrame{
@@ -24,9 +25,7 @@ public class Main extends JFrame{
 	private static Champion character;
 	
 	public static void main(String[] args){
-		ClassLoader cldr = Main.class.getClassLoader();
-		character = new Champion();
-		character.setAnimationFrame(new ImageIcon(cldr.getResource("char/img/default/idle.png")).getImage());
+		character = new AlphaMan();
 		createFrame();
 		//Thread for frames
 		new Thread("Game loop"){
