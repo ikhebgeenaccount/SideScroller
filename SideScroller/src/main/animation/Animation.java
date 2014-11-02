@@ -25,6 +25,10 @@ public class Animation {
 	
 	public void nextScene(){
 		frameOfScene++;
+		
+		if(scenes[frameOfScene].getImage() == null){
+			reset();
+		}
 	}
 	
 	public Image getCurrentSceneImage(){
