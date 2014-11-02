@@ -73,7 +73,8 @@ public class GamePanel extends JPanel implements KeyListener{
 				}
 			}
 		}
-		//g.drawImage(Main.getAnimationFrame(), charx, chary, null);
+		g.drawImage(character.getCurrentAnimationImage(frame), charx, chary, null);
+		character.checkNextScene(frame);
 		g.dispose();
 		frame++;
 	}
@@ -171,12 +172,18 @@ public class GamePanel extends JPanel implements KeyListener{
 		newchary = chary;
 		
 	    if(keys[KeyEvent.VK_LEFT]){
+	    	character.setAnimationType(Champion.WALK, frame);
 	        newcharx -= MOVEPX;
+	    }else{
+	    	character.setAnimationType(Champion.IDLE, frame);
 	    }
 
 	    if(keys[KeyEvent.VK_RIGHT]){
+	    	character.setAnimationType(Champion.WALK, frame);
 	        newcharx += MOVEPX;
-	    }    
+	    }else{
+	    	character.setAnimationType(Champion.IDLE, frame);
+	    }  
 	    
 	    checkGravity();
 	    
