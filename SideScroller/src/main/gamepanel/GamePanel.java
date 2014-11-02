@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import main.Main;
+import main.champion.Champion;
 
 public class GamePanel extends JPanel implements KeyListener{
 	
@@ -25,8 +26,10 @@ public class GamePanel extends JPanel implements KeyListener{
 	private Jump jump;
 	private int newcharx, newchary;
 	private boolean onEdgeY, onEdgeX;
+	private Champion character;
 	
-	public GamePanel(){
+	public GamePanel(Champion character){
+		this.character = character;
 		loadPics();
 		keys = new boolean[1000];
 		charx = 0;
