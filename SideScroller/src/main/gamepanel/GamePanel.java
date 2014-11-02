@@ -27,6 +27,7 @@ public class GamePanel extends JPanel implements KeyListener{
 	private int newcharx, newchary;
 	private boolean onEdgeY, onEdgeX;
 	private Champion character;
+	private Image charIdle;
 	
 	public GamePanel(Champion character){
 		this.character = character;
@@ -38,6 +39,8 @@ public class GamePanel extends JPanel implements KeyListener{
 		frame = 0;
 		gravity = new Gravity();
 		jump = new Jump();
+		ClassLoader cldr = this.getClass().getClassLoader();
+		charIdle = new ImageIcon(cldr.getResource("char/img/alphaguy/idle.png")).getImage();
 		/*
 			1. Changing the MOVEPX value itself.
 			2. Changing the FPS, the MOVEPX doesn't change, but the visualising of the movement itself goes faster. 
@@ -72,9 +75,10 @@ public class GamePanel extends JPanel implements KeyListener{
 						break;
 				}
 			}
-		}
+		}/*
 		g.drawImage(character.getCurrentAnimationImage(frame), charx, chary, null);
-		character.checkNextScene(frame);
+		character.checkNextScene(frame);*/
+		g.drawImage(charIdle, charx, chary, null);
 		g.dispose();
 		frame++;
 	}
@@ -172,18 +176,18 @@ public class GamePanel extends JPanel implements KeyListener{
 		newchary = chary;
 		
 	    if(keys[KeyEvent.VK_LEFT]){
-	    	character.setAnimationType(Champion.WALK, frame);
+	    	//character.setAnimationType(Champion.WALK, frame);
 	        newcharx -= MOVEPX;
-	    }else{
+	    }/*else{
 	    	character.setAnimationType(Champion.IDLE, frame);
-	    }
+	    }*/
 
 	    if(keys[KeyEvent.VK_RIGHT]){
 	    	character.setAnimationType(Champion.WALK, frame);
 	        newcharx += MOVEPX;
-	    }else{
+	    }/*else{
 	    	character.setAnimationType(Champion.IDLE, frame);
-	    }  
+	    }*/
 	    
 	    checkGravity();
 	    
