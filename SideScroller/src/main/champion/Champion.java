@@ -12,4 +12,16 @@ public class Champion {
 			
 	}
 
+	public void setAnimationType(int type, int frame) {
+		
+	}
+
+	public Image getCurrentAnimationImage(int frame) {
+		return null;
+	}
+	
+	public void checkNextScene(int frame){
+		
+	}
+
 }
