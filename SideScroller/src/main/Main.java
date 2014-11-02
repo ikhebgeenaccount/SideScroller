@@ -25,8 +25,11 @@ public class Main extends JFrame{
 	private static Champion character;
 	
 	public static void main(String[] args){
-		character = new AlphaMan();
+		System.out.println("Initializing game...");
+		System.out.println("Setting up frame...");
 		createFrame();
+		System.out.println("Creating character...");
+		character = new AlphaMan();
 		//Thread for frames
 		new Thread("Game loop"){
 			public void run(){
