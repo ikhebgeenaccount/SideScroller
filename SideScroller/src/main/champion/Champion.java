@@ -2,28 +2,30 @@ package main.champion;
 
 import java.awt.Image;
 
+import main.animation.Animation;
+
 public class Champion {
 	
 	private Image currentAnimationFrame;
-	private static final int WALK = 0, JUMP_START = 1, JUMP_TOP = 2, IDLE = 3, CAST_Q = 4, CAST_W = 5, CAST_E = 6, CAST_R = 7;
-	
+	public static final int WALK = 0, JUMP_START = 1, JUMP_TOP = 2, IDLE = 3, CAST_Q = 4, CAST_W = 5, CAST_E = 6, CAST_R = 7;
+		
 	public Champion(){
 			
 	}
 	
-	public void fireQ(){
+	private class Q{
 		
 	}
 	
-	public void fireW(){
+	private class W{
 		
 	}
 	
-	public void fireE(){
+	private class E{
 		
 	}
 	
-	public void fireR(){
+	private class R{
 		
 	}
 	
