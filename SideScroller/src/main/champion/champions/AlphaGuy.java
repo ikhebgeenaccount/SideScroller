@@ -33,6 +33,8 @@ public class AlphaGuy extends Champion{
 			animations[Champion.WALK].addScene(walkSprite.getSubimage(0, 0, 50, 100), 10);
 			animations[Champion.WALK].addScene(walkSprite.getSubimage(50, 0, 50, 100), 10);
 			animations[Champion.WALK].addScene(walkSprite.getSubimage(100, 0, 50, 100), 10);
+			
+			//Start idle animation
 			currentAnimation = animations[Champion.IDLE];
 			currentAnimation.start(0);
 		} catch (IOException e) {
