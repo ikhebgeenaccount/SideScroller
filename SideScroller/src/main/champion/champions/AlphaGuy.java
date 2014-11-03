@@ -32,7 +32,6 @@ public class AlphaGuy extends Champion{
 			BufferedImage walkSprite = ImageIO.read(cldr.getResourceAsStream("char/img/alphaguy/walk.png"));
 			animations[Champion.WALK].addScene(walkSprite.getSubimage(0, 0, 50, 100), 10);
 			animations[Champion.WALK].addScene(walkSprite.getSubimage(50, 0, 50, 100), 10);
-			animations[Champion.WALK].addScene(walkSprite.getSubimage(100, 0, 50, 100), 10);
 			
 			//Start idle animation
 			currentAnimation = animations[Champion.IDLE];
