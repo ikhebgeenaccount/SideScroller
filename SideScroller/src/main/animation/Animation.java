@@ -33,6 +33,7 @@ public class Animation {
 	//Method to add scenes to the Animation.
 	public void addScene(Image sceneImage, int sceneLength){
 		scenes[numberOfScenes] = new OneScene(sceneImage, sceneLength);
+		System.out.println(sceneImage.hashCode());
 		numberOfScenes++;
 	}
 	
@@ -64,6 +65,7 @@ public class Animation {
 		
 		private OneScene(Image sceneImage, int sceneLength){
 			this.sceneImage = sceneImage;
+			System.out.println(sceneImage.hashCode());
 			this.sceneLength = sceneLength;
 		}
 		
