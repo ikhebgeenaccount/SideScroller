@@ -46,7 +46,7 @@ public class Animation {
 			}else if(scenes[frameOfScene].getImage() == null){
 				reset();
 			}
-			scenes[frameOfScene].startScene(currentFrame++);
+			scenes[frameOfScene].startScene(currentFrame);
 		}
 	}
 	
