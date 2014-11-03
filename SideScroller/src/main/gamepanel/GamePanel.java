@@ -58,6 +58,7 @@ public class GamePanel extends JPanel implements KeyListener{
 	 */
 	@Override
 	public void paintComponent(Graphics g){
+		frame++;
 		super.paintComponent(g);
 		//i is x
 		//j is y
@@ -80,7 +81,6 @@ public class GamePanel extends JPanel implements KeyListener{
 		character.checkNextScene(frame);*/
 		g.drawImage(charIdle, charx, chary, null);
 		g.dispose();
-		frame++;
 	}
 	
 	//Images are loaded
@@ -104,7 +104,7 @@ public class GamePanel extends JPanel implements KeyListener{
 	    int matrix_y =  roundDownToClosestMultipleOfFifty(chary + 99)/50;
 	    
 	    //If the up-key is pressed, check if the square beneath the character is solid, so he can really jump
-	    if(e.getKeyCode() == KeyEvent.VK_UP){
+	    if(keys[KeyEvent.VK_UP]){
 	    	if(onEdgeY){
 				if(onEdgeX){
 					if(currentLevel[matrix_y + 1][matrix_x_left] != 0){
@@ -160,7 +160,8 @@ public class GamePanel extends JPanel implements KeyListener{
 	}
 	
 	//Is called when the ASCII-character for that particular button is send to the computer
-	public void keyTyped(KeyEvent e){		
+	public void keyTyped(KeyEvent e){
+		
 	}
 	
 	/*	The update method contains:
