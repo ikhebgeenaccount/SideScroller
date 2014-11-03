@@ -29,6 +29,9 @@ public class GamePanel extends JPanel implements KeyListener{
 	private Champion character;
 	private Image charIdle;
 	
+	//Set this to true to test animations, false to play without.
+	private boolean testAnimation = true;
+	
 	public GamePanel(Champion character){
 		this.character = character;
 		loadPics();
@@ -76,10 +79,13 @@ public class GamePanel extends JPanel implements KeyListener{
 						break;
 				}
 			}
-		}/*
-		g.drawImage(character.getCurrentAnimationImage(frame), charx, chary, null);
-		character.checkNextScene(frame);*/
-		g.drawImage(charIdle, charx, chary, null);
+		}
+		if(testAnimation){
+			g.drawImage(character.getCurrentAnimationImage(frame), charx, chary, null);
+			character.checkNextScene(frame);			
+		}else{
+			g.drawImage(charIdle, charx, chary, null);			
+		}
 		g.dispose();
 	}
 	
@@ -179,16 +185,16 @@ public class GamePanel extends JPanel implements KeyListener{
 	    if(keys[KeyEvent.VK_LEFT]){
 	    	//character.setAnimationType(Champion.WALK, frame);
 	        newcharx -= MOVEPX;
-	    }/*else{
+	    }else if(testAnimation){
 	    	character.setAnimationType(Champion.IDLE, frame);
-	    }*/
+	    }
 
 	    if(keys[KeyEvent.VK_RIGHT]){
 	    	character.setAnimationType(Champion.WALK, frame);
 	        newcharx += MOVEPX;
-	    }/*else{
+	    }else if(testAnimation){
 	    	character.setAnimationType(Champion.IDLE, frame);
-	    }*/
+	    }
 	    
 	    checkGravity();
 	    
