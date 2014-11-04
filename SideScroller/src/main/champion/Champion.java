@@ -6,7 +6,7 @@ import main.animation.Animation;
 
 public class Champion {
 	
-	public static final int IDLE = 0, WALK = 1, JUMP = 2, FALL = 3, CAST_Q = 4, CAST_W = 5, CAST_E = 6, CAST_R = 7;
+	public static final int IDLE = 0, WALK_LEFT = 1, WALK_RIGHT = 2, JUMP = 3, FALL = 4, CAST_Q = 5, CAST_W = 6, CAST_E = 7, CAST_R = 8;
 		
 	public Champion(){
 			
