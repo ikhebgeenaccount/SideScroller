@@ -1,47 +1,63 @@
 package main;
 
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Image;
-import java.awt.Insets;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 import main.champion.Champion;
 import main.champion.champions.AlphaGuy;
-import main.gamepanel.GamePanel;
+import main.panel.GamePanel;
+import main.panel.MenuPanel;
+import main.panel.OptionPanel;
+import main.panel.SelectPanel;
 
 public class Main extends JFrame{
-	//Some text to check if pulling works.
+	
+	//Game properties
 	private static final int FPS = 45;
 	private static boolean running;
+	
+	//Frame
 	private static JFrame frame;
-	private static GamePanel gamePanel;
+	
+	//Character
 	private static Champion character;
 	
+	//Panels	
+	private static MenuPanel menuPanel;
+	private static GamePanel gamePanel;
+	private static OptionPanel optionPanel;
+	private static SelectPanel selectPanel;
+	
+	//Main method
 	public static void main(String[] args){
 		System.out.println("Initializing game...");
-		System.out.println("Reading config...");
-		System.out.println("Updating settings...");
-		System.out.println("Creating character...");
-		character = new AlphaGuy();
+		
+		//System.out.println("Reading config...");
+		//System.out.println("Updating settings...");
+		
 		System.out.println("Setting up frame...");
 		createFrame();		
 		//Thread for frames
-		System.out.println("Starting game...");
-		running = true;
 		frame.setVisible(true);
 		
 	}
 	
+	//Method to start game, creates character and game loop thread
 	public static void startGame(){
+		System.out.println("Creating character...");
+		character = new AlphaGuy();
+		
+		System.out.println("Setting up panel...");
+		gamePanel = new GamePanel(character);
+		frame.getContentPane().removeAll();
+		frame.getContentPane().add(gamePanel);
+		gamePanel.requestFocusInWindow();
+		frame.revalidate();
+		frame.repaint();
+		
+		System.out.println("Starting game...");
+		running = true;
+		
 		new Thread("Game loop"){
 			public void run(){
 				while(running){
@@ -57,6 +73,7 @@ public class Main extends JFrame{
 		}.start();
 	}
 	
+	//Method to pause game
 	public static void quitGame(){
 		running = false;
 	}
@@ -64,31 +81,24 @@ public class Main extends JFrame{
 	//Frame is created and set in the middle of the screen
 	//<---! NOT YET VISIBLE !--->
 	private static void createFrame(){
-		frame = new JFrame();
-		gamePanel = new GamePanel(character);
-		frame.setTitle("SideScroller");
+		
+		//Create frame with menuPanel
+		frame = new JFrame("SideScroller");
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		Dimension dim = new Dimension(1000, 500);
-		frame.getContentPane().add(gamePanel);
-		gamePanel.setPreferredSize(dim);
-		gamePanel.setFocusable(true);
-		gamePanel.addKeyListener(gamePanel);
+		
+		menuPanel = new MenuPanel();
+		frame.getContentPane().add(menuPanel);
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 
 	}
 	
-	private class MenuPanel extends JPanel{
+	//Label to fill up space
+	private static class FillerLabel extends JLabel{
 		
-		private GridBagConstraints c;
-		
-		private MenuPanel(){
-			setLayout(new GridBagLayout());
-			c = new GridBagConstraints();
-			
-			//Set c properties
-			c.anchor = GridBagConstraints.WEST;
+		private FillerLabel(){
+			setText("         ");
 		}
 	}
 }
