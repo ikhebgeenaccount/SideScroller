@@ -44,6 +44,12 @@ public class GamePanel extends JPanel implements KeyListener{
 		jump = new Jump();
 		ClassLoader cldr = this.getClass().getClassLoader();
 		charIdle = new ImageIcon(cldr.getResource("char/img/alphaguy/idle.png")).getImage();
+		
+		Dimension dim = new Dimension(1000, 500);
+		setPreferredSize(dim);
+		
+		addKeyListener(this);
+		setFocusable(true);
 		/*
 			1. Changing the MOVEPX value itself.
 			2. Changing the FPS, the MOVEPX doesn't change, but the visualising of the movement itself goes faster. 
