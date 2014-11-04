@@ -2,6 +2,7 @@ package main;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 import main.champion.Champion;
 import main.champion.champions.AlphaGuy;
@@ -49,11 +50,7 @@ public class Main extends JFrame{
 		
 		System.out.println("Setting up panel...");
 		gamePanel = new GamePanel(character);
-		frame.getContentPane().removeAll();
-		frame.getContentPane().add(gamePanel);
-		gamePanel.requestFocusInWindow();
-		frame.revalidate();
-		frame.repaint();
+		setPanel(gamePanel);
 		
 		System.out.println("Starting game...");
 		running = true;
@@ -100,5 +97,13 @@ public class Main extends JFrame{
 		private FillerLabel(){
 			setText("         ");
 		}
+	}
+	
+	public static void setPanel(JPanel panel){
+		frame.getContentPane().removeAll();
+		frame.getContentPane().add(panel);
+		panel.requestFocusInWindow();
+		frame.revalidate();
+		frame.repaint();
 	}
 }
