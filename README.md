@@ -16,6 +16,7 @@ PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you hav
     - Fixed sloppy jumping mechanism
     - ~~Fixed non-fluid movement, now fluid~~
     - Added animations - *work in progress*
+    - Added menu
   - *v0.1.1* - **current release**
     - Fixed images not working
   - *v0.1.0*
