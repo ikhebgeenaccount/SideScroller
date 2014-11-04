@@ -30,7 +30,7 @@ public class GamePanel extends JPanel implements KeyListener{
 	private Image charIdle;
 	
 	//Set this to true to test animations, false to play without.
-	private boolean testAnimation = true;
+	private boolean testAnimation = false;
 	
 	public GamePanel(Champion character){
 		this.character = character;

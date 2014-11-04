@@ -2,6 +2,8 @@ package main;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.KeyEvent;
@@ -26,6 +28,7 @@ public class Main extends JFrame{
 	
 	public static void main(String[] args){
 		System.out.println("Initializing game...");
+		System.out.println("Reading config...");
 		System.out.println("Updating settings...");
 		System.out.println("Creating character...");
 		character = new AlphaGuy();
@@ -34,6 +37,11 @@ public class Main extends JFrame{
 		//Thread for frames
 		System.out.println("Starting game...");
 		running = true;
+		frame.setVisible(true);
+		
+	}
+	
+	public static void startGame(){
 		new Thread("Game loop"){
 			public void run(){
 				while(running){
@@ -47,9 +55,6 @@ public class Main extends JFrame{
 				}
 			}
 		}.start();
-		frame.setVisible(true);
-		
-		
 	}
 	
 	public static void quitGame(){
@@ -72,5 +77,18 @@ public class Main extends JFrame{
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 
+	}
+	
+	private class MenuPanel extends JPanel{
+		
+		private GridBagConstraints c;
+		
+		private MenuPanel(){
+			setLayout(new GridBagLayout());
+			c = new GridBagConstraints();
+			
+			//Set c properties
+			c.anchor = GridBagConstraints.WEST;
+		}
 	}
 }
