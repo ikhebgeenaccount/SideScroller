@@ -22,14 +22,17 @@ public class AlphaGuy extends Champion{
 		ClassLoader cldr = this.getClass().getClassLoader();
 		animations = new Animation[8];		
 		try {
-			//Hashcode changes after adding scene. Hashcode in this class is different than the hashcodes in Animation.
+			/* All the animations are in one big image, that is why we use the getSubimage() function to get al the
+			 * picture for the animations.
+			 * I have decided to put the animations in one image because the resource folder will be less messy this way. 
+			 */
 			
 			//Add the idle animation to animations[]
 			animations[Champion.IDLE]= new Animation(); 
 			BufferedImage idleSprite = ImageIO.read(cldr.getResourceAsStream("char/img/alphaguy/idle.png"));
 			animations[Champion.IDLE].addScene(idleSprite.getSubimage(0, 0, 50, 100), 1);
 			
-			//Add the walking animation to animations[]
+			//Add the walk right animation to animations[]
 			animations[Champion.WALK_RIGHT]= new Animation();
 			BufferedImage walkSprite = ImageIO.read(cldr.getResourceAsStream("char/img/alphaguy/walk.png"));
 			animations[Champion.WALK_RIGHT].addScene(walkSprite.getSubimage(0, 0, 50, 100), 10);
