@@ -30,10 +30,10 @@ public class AlphaGuy extends Champion{
 			animations[Champion.IDLE].addScene(idleSprite.getSubimage(0, 0, 50, 100), 1);
 			
 			//Add the walking animation to animations[]
-			animations[Champion.WALK]= new Animation();
+			animations[Champion.WALK_RIGHT]= new Animation();
 			BufferedImage walkSprite = ImageIO.read(cldr.getResourceAsStream("char/img/alphaguy/walk.png"));
-			animations[Champion.WALK].addScene(walkSprite.getSubimage(0, 0, 50, 100), 10);
-			animations[Champion.WALK].addScene(walkSprite.getSubimage(50, 0, 50, 100), 10);
+			animations[Champion.WALK_RIGHT].addScene(walkSprite.getSubimage(0, 0, 50, 100), 10);
+			animations[Champion.WALK_RIGHT].addScene(walkSprite.getSubimage(50, 0, 50, 100), 10);
 			
 			//Start idle animation
 			currentAnimation = animations[Champion.IDLE];

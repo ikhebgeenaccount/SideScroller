@@ -189,14 +189,14 @@ public class GamePanel extends JPanel implements KeyListener{
 		newchary = chary;
 		
 	    if(keys[KeyEvent.VK_LEFT]){
-	    	//character.setAnimationType(Champion.WALK, frame);
+	    	character.setAnimationType(Champion.WALK_LEFT, frame);
 	        newcharx -= MOVEPX;
 	    }else if(testAnimation){
 	    	character.setAnimationType(Champion.IDLE, frame);
 	    }
 
 	    if(keys[KeyEvent.VK_RIGHT]){
-	    	character.setAnimationType(Champion.WALK, frame);
+	    	character.setAnimationType(Champion.WALK_RIGHT, frame);
 	        newcharx += MOVEPX;
 	    }else if(testAnimation){
 	    	character.setAnimationType(Champion.IDLE, frame);
