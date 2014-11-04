@@ -5,7 +5,7 @@ import java.awt.Image;
 public class Animation {
 	
 	private OneScene[] scenes;
-	private int frameOfAnimation;
+	private int sceneOfAnimation;
 	private int numberOfScenes;
 	
 	/* In the constructor we create an array for all the scenes that the animation will contain. Maximum of 30 scenes.
@@ -22,12 +22,12 @@ public class Animation {
 	//scene is started.
 	public void start(int startFrame){
 		reset();
-		scenes[frameOfAnimation].startScene(startFrame);
+		scenes[sceneOfAnimation].startScene(startFrame);
 	}
 	
 	//This resets the animation.
 	public void reset(){
-		frameOfAnimation = 0;
+		sceneOfAnimation = 0;
 	}
 	
 	//Method to add scenes to the Animation.
@@ -40,20 +40,20 @@ public class Animation {
 	//This checks if the next scene has to be started, and if so, starts next scene.
 	//If the next scene does not exist it resets the animation
 	public void nextScene(int currentFrame){
-		if(currentFrame - scenes[frameOfAnimation].getStartFrame() > scenes[frameOfAnimation].getLength()){
-			frameOfAnimation++;			
-			if(frameOfAnimation > 29){
+		if(currentFrame - scenes[sceneOfAnimation].getStartFrame() > scenes[sceneOfAnimation].getLength()){
+			sceneOfAnimation++;			
+			if(sceneOfAnimation > 29){
 				reset();
-			}else if(scenes[frameOfAnimation].getImage() == null){
+			}else if(scenes[sceneOfAnimation].getImage() == null){
 				reset();
 			}
-			scenes[frameOfAnimation].startScene(currentFrame);
+			scenes[sceneOfAnimation].startScene(currentFrame);
 		}
 	}
 	
 	//This is the method used to get the image that has to be displayed
 	public Image getCurrentSceneImage(){
-		return scenes[frameOfAnimation].getImage();
+		return scenes[sceneOfAnimation].getImage();
 	}
 	
 	//This class holds information about one scene of the animation. That information is: the image, the length in frames and the
