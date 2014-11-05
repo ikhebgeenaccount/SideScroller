@@ -1,6 +1,13 @@
-package main.panel
+package main.panel;
 
-public LoadPanel extends JPanel{
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.image.BufferedImage;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class LoadPanel extends JPanel{
     
     //Numbers of total parts and parts loaded
     private int parts;
@@ -20,7 +27,7 @@ public LoadPanel extends JPanel{
     
     public LoadPanel(int parts){
         this.parts = parts;
-        partsToLoad = parts;
+        loadedParts = 0;
         
         //Setting bar properties
         barWidth = ;
@@ -46,19 +53,14 @@ public LoadPanel extends JPanel{
         bar = 
         
         //The to-display part of the loading screen, starts at zero
-        barPart = bar.getSubimage(0, 0, 1, barHeight); 
+        barPart = bar.getSubimage(0, 0, barWidth * loadedParts, barHeight); 
     }
     
     public void setNextLoadPart(String description){
         //Set new description for this loadpart
         loadingLabel.setText(description);
         
-        //Remove old description and bar
-        this.remove(loadingLabel);
-        this.remove(barPart);
-        this.revalidate;
-        
-        //One less part to load since we do 'setNextLoadPart()'
+        //One more part loaded
         loadedParts++;
         barPart = bar.getSubimage(0, 0, barPartWidth * loadedParts, barHeight);
     }
