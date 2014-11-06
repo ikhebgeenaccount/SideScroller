@@ -15,6 +15,7 @@ public class Main extends JFrame{
 	
 	//Game properties
 	private static int maxFPS;
+	private static boolean fpsCap;
 	private static int ticksPS;
 	private static boolean running;
 	
@@ -48,6 +49,7 @@ public class Main extends JFrame{
 	public static void startGame(){
 		System.out.println("Initializing settings...");
 		maxFPS = 45;
+		fpsCap = false;
 		ticksPS = 90;
 		
 		System.out.println("Creating character...");
@@ -87,14 +89,20 @@ public class Main extends JFrame{
 				long startTime;
 				long frameTime = 1000/maxFPS;
 				while(running){
+					//The startTime of this loop
 					startTime = System.currentTimeMillis();
 					gamePanel.repaint();
 					try{
+						//If the time it took to paint this frame is bigger than the time set for one frame, it needs to instantly
+						//repaint(), since it is behind on schedule
 						if(System.currentTimeMillis() - startTime > frameTime){
 							
+						 //If the time it took to paint this frame is equal to the time set to paint one frame, it needs to 
+						 //instantly repaint(), since it is perfect on schedule
 						}else if(System.currentTimeMillis() - startTime == frameTime){
 							
-						}else{
+						 //If it took less time, we need to sleep the remaining millis of the loop time	
+						}else if(fpsCap){
 							Thread.sleep(frameTime - (System.currentTimeMillis() - startTime));
 						}
 					}catch(InterruptedException e){
