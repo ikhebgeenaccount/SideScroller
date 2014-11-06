@@ -62,7 +62,10 @@ public class Main extends JFrame{
 		System.out.println("Starting game...");
 		running = true;
 		
-		new Thread("Game loop"){
+		Thread gameLoop = new GameLoop();
+		gameLoop.start();
+		/*
+		Thread gameLoop = new Thread("Game loop"){
 			public void run(){
 				long startTime;
 				long tickTime = 1000/ticksPS;
@@ -83,34 +86,19 @@ public class Main extends JFrame{
 				}
 			}
 		}.start();
-		
+		*/
 		new Thread("Graphics loop"){
-			public void run(){
-				long startTime;
-				long frameTime = 1000/maxFPS;
-				while(running){
-					//The startTime of this loop
-					startTime = System.currentTimeMillis();
-					gamePanel.repaint();
-					try{
-						//If the time it took to paint this frame is bigger than the time set for one frame, it needs to instantly
-						//repaint(), since it is behind on schedule
-						if(System.currentTimeMillis() - startTime > frameTime){
-							
-						 //If the time it took to paint this frame is equal to the time set to paint one frame, it needs to 
-						 //instantly repaint(), since it is perfect on schedule
-						}else if(System.currentTimeMillis() - startTime == frameTime){
-							
-						 //If it took less time, we need to sleep the remaining millis of the loop time	
-						}else if(fpsCap){
-							Thread.sleep(frameTime - (System.currentTimeMillis() - startTime));
-						}
-					}catch(InterruptedException e){
-						
-					}
-				}
-			}
+			
 		}.start();
+	}
+	
+	public static void unpauseGame(){
+		running = true;
+	}
+	
+	public static void pauseGame(){
+		running = false;
+		setPanel(menuPanel);
 	}
 	
 	//Method to pause game
@@ -142,11 +130,46 @@ public class Main extends JFrame{
 		}
 	}
 	
+	//Method to change panel
 	public static void setPanel(JPanel panel){
 		frame.getContentPane().removeAll();
 		frame.getContentPane().add(panel);
 		panel.requestFocusInWindow();
 		frame.revalidate();
 		frame.repaint();
+	}
+	
+	//Thread gameloop
+	private static class GameLoop extends Thread{
+		
+		private GameLoop(){
+			
+		}
+		
+		public void run(){
+			long startTime;
+			long frameTime = 1000/maxFPS;
+			while(running){
+				//The startTime of this loop
+				startTime = System.currentTimeMillis();
+				gamePanel.repaint();
+				try{
+					//If the time it took to paint this frame is bigger than the time set for one frame, it needs to instantly
+					//repaint(), since it is behind on schedule
+					if(System.currentTimeMillis() - startTime > frameTime){
+						
+					 //If the time it took to paint this frame is equal to the time set to paint one frame, it needs to 
+					 //instantly repaint(), since it is perfect on schedule
+					}else if(System.currentTimeMillis() - startTime == frameTime){
+						
+					 //If it took less time, we need to sleep the remaining millis of the loop time	
+					}else if(fpsCap){
+						Thread.sleep(frameTime - (System.currentTimeMillis() - startTime));
+					}
+				}catch(InterruptedException e){
+					
+				}
+			}
+		}
 	}
 }
