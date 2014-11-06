@@ -17,17 +17,34 @@ import main.champion.Champion;
 public class GamePanel extends JPanel implements KeyListener{
 	
 	//Levels are created at the bottom!
+	
+	//Array for keys
 	private boolean[] keys;
+	
+	//Images
 	private Image ground, air, grass_ground, grass_air;
+	private Image charIdle;
+	
+	//Coordinates of the character
 	private int charx, chary;
+	private int newcharx, newchary;
+	
+	//The pixels that the character moves
 	private final int MOVEPX;
+	
+	//Time
 	private long time;
+	
+	//Gravity and jump instances
 	private Gravity gravity;
 	private Jump jump;
-	private int newcharx, newchary;
+
+	//When the character is on an edge of a square, these are true
 	private boolean onEdgeY, onEdgeX;
+	
+	//The character instance of Champion
 	private Champion character;
-	private Image charIdle;
+
 	
 	//Set this to true to test animations, false to play without.
 	private boolean testAnimation = false;
