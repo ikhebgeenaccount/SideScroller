@@ -20,9 +20,9 @@ public class Animation {
 	
 	//This method is called when the Animation should start. First, it's resetted, so it begins at the start. Then the first
 	//scene is started.
-	public void start(int startFrame){
+	public void start(long startTime){
 		reset();
-		scenes[sceneOfAnimation].startScene(startFrame);
+		scenes[sceneOfAnimation].startScene(startTime);
 	}
 	
 	//This resets the animation.
@@ -31,7 +31,7 @@ public class Animation {
 	}
 	
 	//Method to add scenes to the Animation.
-	public void addScene(Image sceneImage, int sceneLength){
+	public void addScene(Image sceneImage, long sceneLength){
 		scenes[numberOfScenes] = new OneScene(sceneImage, sceneLength);
 		
 		//Set numberOfScenes one higher to add the next scene one further in the scenes[] array
@@ -40,15 +40,15 @@ public class Animation {
 	
 	//This checks if the next scene has to be started, and if so, starts next scene.
 	//If the next scene does not exist it resets the animation
-	public void nextScene(int currentFrame){
-		if(currentFrame - scenes[sceneOfAnimation].getStartFrame() > scenes[sceneOfAnimation].getLength()){
+	public void nextScene(long currentTime){
+		if(currentTime - scenes[sceneOfAnimation].getStartFrame() >= scenes[sceneOfAnimation].getLength()){
 			sceneOfAnimation++;			
 			if(sceneOfAnimation > 29){
 				reset();
 			}else if(scenes[sceneOfAnimation].getImage() == null){
 				reset();
 			}
-			scenes[sceneOfAnimation].startScene(currentFrame);
+			scenes[sceneOfAnimation].startScene(currentTime);
 		}
 	}
 	
@@ -61,15 +61,15 @@ public class Animation {
 	//start of the animation in frames
 	private class OneScene{
 		private Image sceneImage;
-		private int sceneLength;
-		private int startFrame;
+		private long sceneLength;
+		private long startFrame;
 		
-		private OneScene(Image sceneImage, int sceneLength){
+		private OneScene(Image sceneImage, long sceneLength){
 			this.sceneImage = sceneImage;
 			this.sceneLength = sceneLength;
 		}
 		
-		public int getLength(){
+		public long getLength(){
 			return sceneLength;
 		}
 
@@ -78,11 +78,11 @@ public class Animation {
 		}
 		
 		//Used to start the scene
-		public void startScene(int startFrame){
+		public void startScene(long startFrame){
 			this.startFrame = startFrame;
 		}
 		
-		public int getStartFrame(){
+		public long getStartFrame(){
 			return startFrame;
 		}
 	}

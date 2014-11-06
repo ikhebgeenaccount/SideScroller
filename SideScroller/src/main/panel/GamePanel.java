@@ -21,7 +21,7 @@ public class GamePanel extends JPanel implements KeyListener{
 	private Image ground, air, grass_ground, grass_air;
 	private int charx, chary;
 	private final int MOVEPX;
-	private int frame;
+	private long time;
 	private Gravity gravity;
 	private Jump jump;
 	private int newcharx, newchary;
@@ -39,7 +39,6 @@ public class GamePanel extends JPanel implements KeyListener{
 		charx = 0;
 		chary = 0;
 		MOVEPX = 5;
-		frame = 0;
 		gravity = new Gravity();
 		jump = new Jump();
 		ClassLoader cldr = this.getClass().getClassLoader();
@@ -67,7 +66,6 @@ public class GamePanel extends JPanel implements KeyListener{
 	 */
 	@Override
 	public void paintComponent(Graphics g){
-		frame++;
 		super.paintComponent(g);
 		//i is x
 		//j is y
@@ -87,8 +85,8 @@ public class GamePanel extends JPanel implements KeyListener{
 			}
 		}
 		if(testAnimation){
-			g.drawImage(character.getCurrentAnimationImage(frame), charx, chary, null);
-			character.checkNextScene(frame);			
+			g.drawImage(character.getCurrentAnimationImage(), charx, chary, null);
+			character.checkNextScene(time);
 		}else{
 			g.drawImage(charIdle, charx, chary, null);			
 		}
@@ -121,14 +119,14 @@ public class GamePanel extends JPanel implements KeyListener{
 				if(onEdgeX){
 					if(currentLevel[matrix_y + 1][matrix_x_left] != 0){
 						jump.jumping = true;
-				    	jump.start_frame = frame;
+				    	jump.start_time = time;
 					}else{
 						
 					}
 				}else{
 					if(currentLevel[matrix_y + 1][matrix_x_left] != 0 || currentLevel[matrix_y + 1][matrix_x_left + 1] != 0){
 						jump.jumping = true;
-				    	jump.start_frame = frame;
+				    	jump.start_time = time;
 					}else{
 						
 					}
@@ -137,14 +135,14 @@ public class GamePanel extends JPanel implements KeyListener{
 				if(onEdgeX){
 					if(currentLevel[matrix_y][matrix_x_left] != 0){
 						jump.jumping = true;
-				    	jump.start_frame = frame;
+				    	jump.start_time = time;
 					}else{
 						
 					}
 				}else{
 					if(currentLevel[matrix_y][matrix_x_left] != 0 || currentLevel[matrix_y][matrix_x_left] != 0){
 						jump.jumping = true;
-				    	jump.start_frame = frame;
+				    	jump.start_time = time;
 					}else{
 						
 					}
@@ -182,7 +180,9 @@ public class GamePanel extends JPanel implements KeyListener{
 	 * 		- Checking if the location where the character is travelling is valid
 	 * 	
 	 */
-	public void update(){
+	public void update(long startTime){	
+		time = startTime;
+		
 		keys[KeyEvent.VK_UP]= false; 
 		
 		newcharx = charx;
@@ -190,20 +190,20 @@ public class GamePanel extends JPanel implements KeyListener{
 		
 	    if(keys[KeyEvent.VK_LEFT]){
 	    	if(testAnimation){
-	    		character.setAnimationType(Champion.WALK_LEFT, frame);
+	    		character.setAnimationType(Champion.WALK_LEFT, startTime);
 	    	}	    	
 	        newcharx -= MOVEPX;
 	    }else if(testAnimation){
-	    	character.setAnimationType(Champion.IDLE, frame);
+	    	character.setAnimationType(Champion.IDLE, startTime);
 	    }
 
 	    if(keys[KeyEvent.VK_RIGHT]){
 	    	if(testAnimation){
-	    		character.setAnimationType(Champion.WALK_RIGHT, frame);
+	    		character.setAnimationType(Champion.WALK_RIGHT, startTime);
 	    	}	    	
 	        newcharx += MOVEPX;
 	    }else if(testAnimation){
-	    	character.setAnimationType(Champion.IDLE, frame);
+	    	character.setAnimationType(Champion.IDLE, startTime);
 	    }
 	    
 	    checkGravity();
@@ -296,14 +296,14 @@ public class GamePanel extends JPanel implements KeyListener{
 	private class Jump{
 		
 		public boolean jumping;
-		public int start_frame;
+		public long start_time;
 		public int jump_px;
-		public int jump_frames;
+		public long jump_time;
 		
 		Jump(){
 			jumping = false;
 			jump_px = MOVEPX;
-			jump_frames = 16;
+			jump_time = 1000/45;
 		}
 	}
 	
@@ -314,7 +314,7 @@ public class GamePanel extends JPanel implements KeyListener{
 	//		- start_frame, now unused, maybe used later for acceleration
 	private class Gravity{
 		
-		public int start_frame;
+		public long start_time;
 		public final int FALLDOWN_PX_START;
 		public int falldown_px;
 		public boolean falling;
@@ -326,14 +326,9 @@ public class GamePanel extends JPanel implements KeyListener{
 		}
 		
 		//We start the fall by telling falling = true
-		public void startFall(){
-			start_frame = frame;
+		public void startFall(long startTime){
+			start_time = startTime;
 			falling = true;
-		}
-		
-		//We add the acceleration
-		public void setNextFall(){
-			falldown_px = FALLDOWN_PX_START * (frame - start_frame);
 		}
 		
 		//The fall ends, falling = false
@@ -360,7 +355,7 @@ public class GamePanel extends JPanel implements KeyListener{
 		    				newchary = chary + gravity.falldown_px;
 		    				//gravity.setNextFall();
 		    			}else{
-		    				gravity.startFall();
+		    				gravity.startFall(time);
 		    				newchary = chary + gravity.falldown_px;
 		    				//gravity.setNextFall();	    				
 		    			}
@@ -373,7 +368,7 @@ public class GamePanel extends JPanel implements KeyListener{
 		    				newchary = chary + gravity.falldown_px;
 		    				//gravity.setNextFall();
 		    			}else{
-		    				gravity.startFall();
+		    				gravity.startFall(time);
 		    				newchary = chary + gravity.falldown_px;
 		    				//gravity.setNextFall();	    				
 		    			}
@@ -388,7 +383,7 @@ public class GamePanel extends JPanel implements KeyListener{
 		    				newchary = chary + gravity.falldown_px;
 		    				//gravity.setNextFall();
 		    			}else{
-		    				gravity.startFall();
+		    				gravity.startFall(time);
 		    				newchary = chary + gravity.falldown_px;
 		    				//gravity.setNextFall();	    				
 		    			}
@@ -401,7 +396,7 @@ public class GamePanel extends JPanel implements KeyListener{
 		    				newchary = chary + gravity.falldown_px;
 		    				//gravity.setNextFall();
 		    			}else{
-		    				gravity.startFall();
+		    				gravity.startFall(time);
 		    				newchary = chary + gravity.falldown_px;
 		    				//gravity.setNextFall();	    				
 		    			}
@@ -411,20 +406,15 @@ public class GamePanel extends JPanel implements KeyListener{
 		    	}
 		    }
 		}else{
-			jump();
-			
+			//Coordinates are changed: character jumps
+			//Also checks if the jump shouldn't end yet
+			if(time - jump.start_time <= jump.jump_time){
+				newchary -= jump.jump_px;
+			}else{
+				jump.jumping = false;
+				newchary -= jump.jump_px;
+			}			
 		}		
-	}
-	
-	//Coordinates are changed: character jumps
-	//Also checks if the jump shouldn't end yet
-	public void jump(){
-		if(frame - jump.start_frame <= jump.jump_frames){
-			newchary -= jump.jump_px;
-		}else{
-			jump.jumping = false;
-			newchary -= jump.jump_px;
-		}
 	}
 	
 	public int roundDownToClosestMultipleOfFifty(int num){

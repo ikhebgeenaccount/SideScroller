@@ -48,25 +48,25 @@ public class AlphaGuy extends Champion{
 	}
 	
 	@Override
-	public void setAnimationType(int type, int frame){
+	public void setAnimationType(int type, long currentTime){
 		//We only have to change the animationtype when it is now running another type, otherwise the animation will continuously
 		//reset itself
 		if(currentAnimation == animations[type]){
 			
 		}else{
 			currentAnimation = animations[type];
-			currentAnimation.start(frame);			
+			currentAnimation.start(currentTime);			
 		}
 	}
 	
 	@Override
-	public Image getCurrentAnimationImage(int frame){
+	public Image getCurrentAnimationImage(){
 		return currentAnimation.getCurrentSceneImage();
 	}
 	
 	@Override
-	public void checkNextScene(int frame){
-		currentAnimation.nextScene(frame);
+	public void checkNextScene(long currentTime){
+		currentAnimation.nextScene(currentTime);
 	}
 
 }

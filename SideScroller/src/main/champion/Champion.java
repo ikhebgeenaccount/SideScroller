@@ -12,15 +12,15 @@ public class Champion {
 			
 	}
 
-	public void setAnimationType(int type, int frame) {
+	public void setAnimationType(int type, long currentTime) {
 		
 	}
 
-	public Image getCurrentAnimationImage(int frame) {
+	public Image getCurrentAnimationImage() {
 		return null;
 	}
 	
-	public void checkNextScene(int frame){
+	public void checkNextScene(long currentTime){
 		
 	}
 
