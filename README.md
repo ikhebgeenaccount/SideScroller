@@ -17,7 +17,7 @@ PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you hav
     - Added menu
     - Added loading screen
     - Added character selection screen
-    - Added max FPS option
+    - Added max FPS option, can also be set on uncapped
     - Fixed sloppy jumping mechanism
     - Fixed non-fluid movement, now fluid
   - *v0.1.1* - **current release**
