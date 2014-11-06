@@ -14,7 +14,8 @@ import main.panel.SelectPanel;
 public class Main extends JFrame{
 	
 	//Game properties
-	private static final int FPS = 45;
+	private static int maxFPS;
+	private static int ticksPS;
 	private static boolean running;
 	
 	//Frame
@@ -45,6 +46,10 @@ public class Main extends JFrame{
 	
 	//Method to start game, creates character and game loop thread
 	public static void startGame(){
+		System.out.println("Initializing settings...");
+		maxFPS = 45;
+		ticksPS = 90;
+		
 		System.out.println("Creating character...");
 		character = new AlphaGuy();
 		
@@ -57,12 +62,42 @@ public class Main extends JFrame{
 		
 		new Thread("Game loop"){
 			public void run(){
+				long startTime;
+				long tickTime = 1000/ticksPS;
 				while(running){
+					startTime = System.currentTimeMillis();
 					gamePanel.update();
-					gamePanel.repaint();
 					try {
-						Thread.sleep(1000/FPS);
+						if(System.currentTimeMillis() - startTime > tickTime){
+							
+						}else if(System.currentTimeMillis() - startTime == tickTime){
+							
+						}else{
+							Thread.sleep(tickTime - (System.currentTimeMillis() - startTime));
+						}
 					} catch (InterruptedException e) {
+						
+					}
+				}
+			}
+		}.start();
+		
+		new Thread("Graphics loop"){
+			public void run(){
+				long startTime;
+				long frameTime = 1000/maxFPS;
+				while(running){
+					startTime = System.currentTimeMillis();
+					gamePanel.repaint();
+					try{
+						if(System.currentTimeMillis() - startTime > frameTime){
+							
+						}else if(System.currentTimeMillis() - startTime == frameTime){
+							
+						}else{
+							Thread.sleep(frameTime - (System.currentTimeMillis() - startTime));
+						}
+					}catch(InterruptedException e){
 						
 					}
 				}

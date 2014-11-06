@@ -38,7 +38,7 @@ public class GamePanel extends JPanel implements KeyListener{
 		keys = new boolean[1000];
 		charx = 0;
 		chary = 0;
-		MOVEPX = 10;
+		MOVEPX = 5;
 		frame = 0;
 		gravity = new Gravity();
 		jump = new Jump();
@@ -189,14 +189,18 @@ public class GamePanel extends JPanel implements KeyListener{
 		newchary = chary;
 		
 	    if(keys[KeyEvent.VK_LEFT]){
-	    	character.setAnimationType(Champion.WALK_LEFT, frame);
+	    	if(testAnimation){
+	    		character.setAnimationType(Champion.WALK_LEFT, frame);
+	    	}	    	
 	        newcharx -= MOVEPX;
 	    }else if(testAnimation){
 	    	character.setAnimationType(Champion.IDLE, frame);
 	    }
 
 	    if(keys[KeyEvent.VK_RIGHT]){
-	    	character.setAnimationType(Champion.WALK_RIGHT, frame);
+	    	if(testAnimation){
+	    		character.setAnimationType(Champion.WALK_RIGHT, frame);
+	    	}	    	
 	        newcharx += MOVEPX;
 	    }else if(testAnimation){
 	    	character.setAnimationType(Champion.IDLE, frame);
@@ -299,7 +303,7 @@ public class GamePanel extends JPanel implements KeyListener{
 		Jump(){
 			jumping = false;
 			jump_px = MOVEPX;
-			jump_frames = 15;
+			jump_frames = 16;
 		}
 	}
 	

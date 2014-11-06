@@ -30,8 +30,8 @@ public class LoadPanel extends JPanel{
         loadedParts = 0;
         
         //Setting bar properties
-        barWidth = ;
-        barHeight = ;
+        //barWidth = ;
+        //barHeight = ;
         barPartWidth = barWidth/parts;
         
         //Set layout
