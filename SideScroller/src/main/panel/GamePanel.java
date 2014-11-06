@@ -320,7 +320,7 @@ public class GamePanel extends JPanel implements KeyListener{
 		Jump(){
 			jumping = false;
 			jump_px = MOVEPX;
-			jump_time = 1000/(45 * 16);
+			jump_time = (1000/45) * 17;
 		}
 	}
 	
