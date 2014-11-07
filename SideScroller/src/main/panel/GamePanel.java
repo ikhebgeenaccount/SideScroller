@@ -44,33 +44,45 @@ public class GamePanel extends JPanel implements KeyListener{
 	
 	//The character instance of Champion
 	private Champion character;
-
 	
 	//Set this to true to test animations, false to play without.
 	private boolean testAnimation = false;
 	
+	//Layout variables
+	private GridBagConstraints c;
+	
 	public GamePanel(Champion character){
+		//Get character
 		this.character = character;
+		
+		//Load environment images
 		loadPics();
+		
+		//Create array for keys
 		keys = new boolean[1000];
+		
+		//Set character coordinates to 0
 		charx = 0;
 		chary = 0;
+		
+		//Pixels that the character moves every update()
 		MOVEPX = 5;
+		
+		//Gravity and Jump instances
 		gravity = new Gravity();
 		jump = new Jump();
+		
+		//Load idle animation, only used when not testing animations
 		ClassLoader cldr = this.getClass().getClassLoader();
 		charIdle = new ImageIcon(cldr.getResource("char/img/alphaguy/idle.png")).getImage();
 		
+		//This has to be moved to Panel.java
 		Dimension dim = new Dimension(1000, 500);
 		setPreferredSize(dim);
 		
+		//Set this as keyslistener and make it focusable so the keylistener works
 		addKeyListener(this);
 		setFocusable(true);
-		/*
-			1. Changing the MOVEPX value itself.
-			2. Changing the FPS, the MOVEPX doesn't change, but the visualising of the movement itself goes faster. 
-					For example: we have MOVEPX = 10 and FPS = 30. If we change FPS to 45, the MOVEPX 'changes' indirectly to 15.
-		*/
 	}
 	
 	/* Fill the panel with landscape
