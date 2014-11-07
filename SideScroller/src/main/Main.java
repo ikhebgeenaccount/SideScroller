@@ -176,7 +176,7 @@ public class Main extends JFrame{
 					}else if(fpsCap){
 						Thread.sleep(frameTime - (System.currentTimeMillis() - startTime));
 					}
-					currentFPS = 1000 / (System.currentTimeMillis() - startTime)
+					currentFPS = 1000 / (System.currentTimeMillis() - startTime);
 				}catch(InterruptedException e){
 					
 				}
