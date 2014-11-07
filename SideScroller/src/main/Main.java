@@ -59,25 +59,28 @@ public class Main extends JFrame{
 		//Set game properties
 		System.out.println("Initializing settings...");
 		
-		//Read config.properties
-		Properties properties = new Properties();
-		InputStream propertiesFile = Main.class.getClass().getClassLoader().getResourceAsStream("config/config.properties");
-		try {
+		try {			
+			//Read config.properties
+			Properties properties = new Properties();
+			InputStream propertiesFile = Main.class.getClass().getClassLoader().getResourceAsStream("config/config.properties");
+			
 			properties.load(propertiesFile);
-		} catch (IOException e) {
+			
+			//Get properties from config.properties file
+			int maxFPS = Integer.getInteger(properties.getProperty("FPS"));
+			System.out.println(maxFPS);
+			boolean fpsCap = Boolean.getBoolean(properties.getProperty("fpsCap"));
+		}catch(IOException e){
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
-		//Get properties from config.properties file
-		int maxFPS = Integer.getInteger(properties.getProperty("FPS"));
-		System.out.println(maxFPS);
-		boolean fpsCap = Boolean.getBoolean(properties.getProperty("fpsCap"));
-		
-		//Manual
-		maxFPS = 45;
-		fpsCap = true;
-		ticksPS = 90;
+		}catch(NullPointerException e){
+			System.out.println("Can't find config.properties! Using default properties.");
+			
+			//Manual
+			maxFPS = 45;
+			fpsCap = true;
+			ticksPS = 90;
+		}		
 		
 		//Create character
 		System.out.println("Creating character...");
