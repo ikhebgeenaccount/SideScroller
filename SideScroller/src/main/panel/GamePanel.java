@@ -269,15 +269,15 @@ public class GamePanel extends JPanel implements KeyListener{
 	    int matrix_x_upper_left_old = roundDownToClosestMultipleOfFifty(charx)/50;
 	    int matrix_y_upper_left_old = roundDownToClosestMultipleOfFifty(chary)/50;
 	    int matrix_x_upper_right_old = roundDownToClosestMultipleOfFifty(charx + 49)/50;
-	    int matrix_y_upper_right_old = matrix_y_upper_left;
-	    int matrix_x_middle_left_old = matrix_x_upper_left;
+	    int matrix_y_upper_right_old = matrix_y_upper_left_old;
+	    int matrix_x_middle_left_old = matrix_x_upper_left_old;
 	    int matrix_y_middle_left_old = roundDownToClosestMultipleOfFifty(chary + 49)/50;
-	    int matrix_x_middle_right_old = matrix_x_upper_right;
-	    int matrix_y_middle_right_old = matrix_y_middle_left;
-	    int matrix_x_bottom_left_old = matrix_x_upper_left;
+	    int matrix_x_middle_right_old = matrix_x_upper_right_old;
+	    int matrix_y_middle_right_old = matrix_y_middle_left_old;
+	    int matrix_x_bottom_left_old = matrix_x_upper_left_old;
 	    int matrix_y_bottom_left_old = roundDownToClosestMultipleOfFifty(chary + 99)/50;
-	    int matrix_x_bottom_right_old = matrix_x_upper_right;
-	    int matrix_y_bottom_right_old = matrix_y_bottom_left;
+	    int matrix_x_bottom_right_old = matrix_x_upper_right_old;
+	    int matrix_y_bottom_right_old = matrix_y_bottom_left_old;
 	    
 	    //Check if array is not out of bounds
 	    if(matrix_x_upper_left < 0 || matrix_y_upper_left < 0 || matrix_x_upper_right < 0 || matrix_y_upper_right < 0 || matrix_x_bottom_left < 0 || matrix_y_bottom_left < 0 || matrix_x_bottom_right < 0 || matrix_y_bottom_right < 0){
