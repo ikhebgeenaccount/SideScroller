@@ -31,6 +31,10 @@ public class Main extends JFrame{
 	private static OptionPanel optionPanel;
 	private static SelectPanel selectPanel;
 	
+	//Threads
+	private static GameLoop gameLoop;
+	private static PaintLoop paintLoop;
+	
 	//Main method
 	public static void main(String[] args){
 		System.out.println("Initializing game...");
@@ -47,61 +51,54 @@ public class Main extends JFrame{
 	
 	//Method to start game, creates character and game loop thread
 	public static void startGame(){
+		//Set game properties
 		System.out.println("Initializing settings...");
 		maxFPS = 45;
 		fpsCap = false;
 		ticksPS = 90;
 		
+		//Create character
 		System.out.println("Creating character...");
 		character = new AlphaGuy();
 		
+		//Create gamepanel
 		System.out.println("Setting up panel...");
 		gamePanel = new GamePanel(character);
 		setPanel(gamePanel);
 		
+		//Start game
 		System.out.println("Starting game...");
 		running = true;
 		
-		Thread gameLoop = new GameLoop();
+		//Paintloop
+		paintLoop = new PaintLoop();
+		paintLoop.start();
+		
+		//Gameloop
+		gameLoop = new GameLoop();
 		gameLoop.start();
-		/*
-		Thread gameLoop = new Thread("Game loop"){
-			public void run(){
-				long startTime;
-				long tickTime = 1000/ticksPS;
-				while(running){
-					startTime = System.currentTimeMillis();
-					gamePanel.update(startTime);
-					try {
-						if(System.currentTimeMillis() - startTime > tickTime){
-							
-						}else if(System.currentTimeMillis() - startTime == tickTime){
-							
-						}else{
-							Thread.sleep(tickTime - (System.currentTimeMillis() - startTime));
-						}
-					} catch (InterruptedException e) {
-						
-					}
-				}
-			}
-		}.start();
-		*/
-		new Thread("Graphics loop"){
-			
-		}.start();
 	}
 	
+	//Method to unpause game
 	public static void unpauseGame(){
+		//Set running to true
 		running = true;
+		
+		//Set panel gamepanel in frame
+		setPanel(gamePanel);
+		
+		//Start both threads for update() and repaint()
+		paintLoop.start();
+		gameLoop.start();
 	}
 	
+	//Method to pause game
 	public static void pauseGame(){
 		running = false;
 		setPanel(menuPanel);
 	}
 	
-	//Method to pause game
+	//Method to quit game
 	public static void quitGame(){
 		running = false;
 	}
@@ -115,6 +112,7 @@ public class Main extends JFrame{
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
+		//Create menuPanel and set that in frame
 		menuPanel = new MenuPanel();
 		frame.getContentPane().add(menuPanel);
 		frame.pack();
@@ -139,10 +137,10 @@ public class Main extends JFrame{
 		frame.repaint();
 	}
 	
-	//Thread gameloop
-	private static class GameLoop extends Thread{
+	//Thread for repaint(), graphics
+	private static class PaintLoop extends Thread{
 		
-		private GameLoop(){
+		private PaintLoop(){
 			
 		}
 		
@@ -167,6 +165,34 @@ public class Main extends JFrame{
 						Thread.sleep(frameTime - (System.currentTimeMillis() - startTime));
 					}
 				}catch(InterruptedException e){
+					
+				}
+			}
+		}
+	}
+	
+	//Thread for update(), gameloop
+	private static GameLoop extends Thread{
+		
+		public GameLoop(){
+			
+		}
+		
+		public void run(){
+			long startTime;
+			long tickTime = 1000/ticksPS;
+			while(running){
+				startTime = System.currentTimeMillis();
+				gamePanel.update(startTime);
+				try {
+					if(System.currentTimeMillis() - startTime > tickTime){
+						
+					}else if(System.currentTimeMillis() - startTime == tickTime){
+						
+					}else{
+						Thread.sleep(tickTime - (System.currentTimeMillis() - startTime));
+					}
+				} catch (InterruptedException e) {
 					
 				}
 			}
