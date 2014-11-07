@@ -53,6 +53,17 @@ public class Main extends JFrame{
 	public static void startGame(){
 		//Set game properties
 		System.out.println("Initializing settings...");
+		
+		//Read config.properties
+		Properties properties = new Properties();
+		InputStream propertiesFile = Main.getClass().getClassLoader().getResourceAsStream("config.properties");
+		properties.load(propertiesFile);
+		
+		//Get properties from config.properties file
+		int maxFPS = (int)properties.getProperty("FPS");
+		boolean fpsCap = (boolean)properties.getProperty("fpsCap");
+		
+		//Manual
 		maxFPS = 45;
 		fpsCap = false;
 		ticksPS = 90;
