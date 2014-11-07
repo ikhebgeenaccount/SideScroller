@@ -1,5 +1,8 @@
 package main;
 
+import java.io.InputStream;
+import java.util.Properties;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -15,7 +18,7 @@ public class Main extends JFrame{
 	
 	//Game properties
 	private static int maxFPS;
-	private static int currentFPS;
+	private static long currentFPS;
 	private static boolean fpsCap;
 	private static int ticksPS;
 	private static boolean running;
@@ -57,12 +60,12 @@ public class Main extends JFrame{
 		
 		//Read config.properties
 		Properties properties = new Properties();
-		InputStream propertiesFile = Main.getClass().getClassLoader().getResourceAsStream("config.properties");
+		InputStream propertiesFile = Main.class.getClass().getClassLoader().getResourceAsStream("config.properties");
 		properties.load(propertiesFile);
 		
 		//Get properties from config.properties file
-		int maxFPS = (int)properties.getProperty("FPS");
-		boolean fpsCap = (boolean)properties.getProperty("fpsCap");
+		int maxFPS = Integer.getInteger(properties.getProperty("FPS"));
+		boolean fpsCap = Boolean.getBoolean(properties.getProperty("fpsCap"));
 		
 		//Manual
 		maxFPS = 45;
@@ -150,7 +153,7 @@ public class Main extends JFrame{
 	}
 	
 	//Method to return currentFPS
-	public int getCurrentFPS(){
+	public long getCurrentFPS(){
 		return currentFPS;
 	}
 	
@@ -190,7 +193,7 @@ public class Main extends JFrame{
 	}
 	
 	//Thread for update(), gameloop
-	private static GameLoop extends Thread{
+	private static class GameLoop extends Thread{
 		
 		public GameLoop(){
 			
