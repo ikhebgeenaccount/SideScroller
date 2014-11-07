@@ -76,7 +76,7 @@ public class Main extends JFrame{
 		
 		//Manual
 		maxFPS = 45;
-		fpsCap = false;
+		fpsCap = true;
 		ticksPS = 90;
 		
 		//Create character
@@ -191,7 +191,11 @@ public class Main extends JFrame{
 					}else if(fpsCap){
 						Thread.sleep(frameTime - (System.currentTimeMillis() - startTime));
 					}
-					currentFPS = 1000 / (System.currentTimeMillis() - startTime);
+					if(System.currentTimeMillis() - startTime == 0){
+						currentFPS = maxFPS;
+					}else{
+						currentFPS = 1000 / (System.currentTimeMillis() - startTime);
+					}					
 				}catch(InterruptedException e){
 					
 				}
