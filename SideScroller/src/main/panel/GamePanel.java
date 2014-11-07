@@ -16,7 +16,10 @@ import main.champion.Champion;
 
 public class GamePanel extends JPanel implements KeyListener{
 	
-	//Levels are created at the bottom!
+	//Levels
+	private int levelID;
+	private int[][] currentLevel;
+	private int[][] levelOne;
 	
 	//Array for keys
 	private boolean[] keys;
@@ -67,6 +70,11 @@ public class GamePanel extends JPanel implements KeyListener{
 		//Set character coordinates to 0
 		charx = 0;
 		chary = 0;
+		
+		//Set first level and create levels
+		createLevels();
+		currentLevel = levelOne;
+		levelID = 1;
 		
 		//Pixels that the character moves every update()
 		MOVEPX = 5;
@@ -153,8 +161,8 @@ public class GamePanel extends JPanel implements KeyListener{
 	    
 	    onEdge();
 	    
-	    int matrix_x_left = roundDownToClosestMultipleOfFifty(charx)/50;
-	    int matrix_y =  roundDownToClosestMultipleOfFifty(chary + 99)/50;
+	    int matrix_x_left = roundDownToClosestMultipleOfFifty(charx)/50 * levelID;
+	    int matrix_y =  roundDownToClosestMultipleOfFifty(chary + 99)/50 * levelID;
 	    
 	    //If the up-key is pressed, check if the square beneath the character is solid, so he can really jump
 	    if(keys[KeyEvent.VK_UP]){
@@ -252,32 +260,32 @@ public class GamePanel extends JPanel implements KeyListener{
 	    checkGravity();
 	    
 	    //Here we calculate the coordinates of the character in the matrix for the new coordinates that are set by movement/gravity.
-	    int matrix_x_upper_left = roundDownToClosestMultipleOfFifty(newcharx)/50;
-	    int matrix_y_upper_left = roundDownToClosestMultipleOfFifty(newchary)/50;
-	    int matrix_x_upper_right = roundDownToClosestMultipleOfFifty(newcharx + 49)/50;
-	    int matrix_y_upper_right = matrix_y_upper_left;
-	    int matrix_x_middle_left = matrix_x_upper_left;
-	    int matrix_y_middle_left = roundDownToClosestMultipleOfFifty(newchary + 49)/50;
-	    int matrix_x_middle_right = matrix_x_upper_right;
-	    int matrix_y_middle_right = matrix_y_middle_left;
-	    int matrix_x_bottom_left = matrix_x_upper_left;
-	    int matrix_y_bottom_left = roundDownToClosestMultipleOfFifty(newchary + 99)/50;
-	    int matrix_x_bottom_right = matrix_x_upper_right;
-	    int matrix_y_bottom_right = matrix_y_bottom_left;
+	    int matrix_x_upper_left = roundDownToClosestMultipleOfFifty(newcharx)/50 * levelID;
+	    int matrix_y_upper_left = roundDownToClosestMultipleOfFifty(newchary)/50 * levelID;
+	    int matrix_x_upper_right = roundDownToClosestMultipleOfFifty(newcharx + 49)/50 * levelID;
+	    int matrix_y_upper_right = matrix_y_upper_left * levelID;
+	    int matrix_x_middle_left = matrix_x_upper_left * levelID;
+	    int matrix_y_middle_left = roundDownToClosestMultipleOfFifty(newchary + 49)/50 * levelID;
+	    int matrix_x_middle_right = matrix_x_upper_right * levelID;
+	    int matrix_y_middle_right = matrix_y_middle_left * levelID;
+	    int matrix_x_bottom_left = matrix_x_upper_left * levelID;
+	    int matrix_y_bottom_left = roundDownToClosestMultipleOfFifty(newchary + 99)/50 * levelID;
+	    int matrix_x_bottom_right = matrix_x_upper_right * levelID;
+	    int matrix_y_bottom_right = matrix_y_bottom_left * levelID;
 	    
 	    //Here we calculate the coordinates of the character in the matrix for the old coordinates, from before this update().
-	    int matrix_x_upper_left_old = roundDownToClosestMultipleOfFifty(charx)/50;
+	    int matrix_x_upper_left_old = roundDownToClosestMultipleOfFifty(charx)/50 * levelID;
 	    int matrix_y_upper_left_old = roundDownToClosestMultipleOfFifty(chary)/50;
-	    int matrix_x_upper_right_old = roundDownToClosestMultipleOfFifty(charx + 49)/50;
-	    int matrix_y_upper_right_old = matrix_y_upper_left_old;
-	    int matrix_x_middle_left_old = matrix_x_upper_left_old;
-	    int matrix_y_middle_left_old = roundDownToClosestMultipleOfFifty(chary + 49)/50;
-	    int matrix_x_middle_right_old = matrix_x_upper_right_old;
-	    int matrix_y_middle_right_old = matrix_y_middle_left_old;
-	    int matrix_x_bottom_left_old = matrix_x_upper_left_old;
-	    int matrix_y_bottom_left_old = roundDownToClosestMultipleOfFifty(chary + 99)/50;
-	    int matrix_x_bottom_right_old = matrix_x_upper_right_old;
-	    int matrix_y_bottom_right_old = matrix_y_bottom_left_old;
+	    int matrix_x_upper_right_old = roundDownToClosestMultipleOfFifty(charx + 49)/50 * levelID;
+	    int matrix_y_upper_right_old = matrix_y_upper_left_old * levelID;
+	    int matrix_x_middle_left_old = matrix_x_upper_left_old * levelID;
+	    int matrix_y_middle_left_old = roundDownToClosestMultipleOfFifty(chary + 49)/50 * levelID;
+	    int matrix_x_middle_right_old = matrix_x_upper_right_old * levelID;
+	    int matrix_y_middle_right_old = matrix_y_middle_left_old * levelID;
+	    int matrix_x_bottom_left_old = matrix_x_upper_left_old * levelID;
+	    int matrix_y_bottom_left_old = roundDownToClosestMultipleOfFifty(chary + 99)/50 * levelID;
+	    int matrix_x_bottom_right_old = matrix_x_upper_right_old * levelID;
+	    int matrix_y_bottom_right_old = matrix_y_bottom_left_old * levelID;
 	    
 	    //Check if array is not out of bounds
 	    if(matrix_x_upper_left < 0 || matrix_y_upper_left < 0 || matrix_x_upper_right < 0 || matrix_y_upper_right < 0 || matrix_x_bottom_left < 0 || matrix_y_bottom_left < 0 || matrix_x_bottom_right < 0 || matrix_y_bottom_right < 0){
@@ -487,7 +495,9 @@ public class GamePanel extends JPanel implements KeyListener{
 	 * 0. Air
 	 * 1. Ground
 	 */
-	private int[][] levelOne = {{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+	//Create levels
+	public void createLevels(){
+		levelOne = {{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 								{0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0},
 								{1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 								{1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -497,5 +507,6 @@ public class GamePanel extends JPanel implements KeyListener{
 								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 								{0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0},
 								{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}};
-	private int[][] currentLevel = levelOne;
+		
+	}
 }
