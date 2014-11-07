@@ -1,15 +1,13 @@
 package main.gui.panel;
 
-import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
 import main.Main;
-import main.gui.FillerLabel;
 import main.gui.Panel;
 
 public class MenuPanel extends Panel{
@@ -38,7 +36,7 @@ public class MenuPanel extends Panel{
 		
 		c.gridy++;
 		
-		add(new FillerLabel(), c);
+		c.gridy = addFillerLabelsY(3, c.gridy);
 		
 		c.gridy++;
 		
@@ -48,7 +46,7 @@ public class MenuPanel extends Panel{
 		
 		c.gridy++;
 		
-		add(new FillerLabel(), c);
+		c.gridy = addFillerLabelsY(3, c.gridy);
 		
 		c.gridy++;
 		
@@ -57,11 +55,14 @@ public class MenuPanel extends Panel{
 		add(quit, c);
 		
 		//Puts int labels FillerLabels in x-axis
-		int labels = 5;
 		c.gridy = 0;
-		for(c.gridx = 1; c.gridx <= labels; c.gridx++){
-			add(new FillerLabel(), c);
-		}
+		c.gridx = addFillerLabelsX(27, c.gridx);
 	}
-
+	
+	@Override
+	public void paintComponent(Graphics g){
+		super.paintComponent(g);
+		//Draw background image
+	}
+	
 }
