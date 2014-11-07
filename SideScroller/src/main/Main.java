@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -62,8 +63,8 @@ public class Main extends JFrame{
 		try {			
 			//Read config.properties
 			Properties properties = new Properties();
-			InputStream propertiesFile = Main.class.getClass().getClassLoader().getResourceAsStream("config/config.properties");
 			
+			InputStream propertiesFile = Main.class.getClassLoader().getResourceAsStream("config/config.properties");
 			properties.load(propertiesFile);
 			
 			//Get properties from config.properties file

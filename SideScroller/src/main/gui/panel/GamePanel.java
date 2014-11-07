@@ -142,7 +142,6 @@ public class GamePanel extends Panel implements KeyListener{
 	
 	//Images are loaded
 	public void loadPics(){
-		//air = new ImageIcon(GamePanel.class.getResource("/resources/landscape-img/air.png")).getImage();
 		ClassLoader cldr = this.getClass().getClassLoader();
 		air = new ImageIcon(cldr.getResource("landscape/img/default/air.png")).getImage();
 		ground = new ImageIcon(cldr.getResource("landscape/img/default/ground.png")).getImage();
@@ -494,8 +493,8 @@ public class GamePanel extends Panel implements KeyListener{
 	//Create levels
 	public void createLevels(){
 		levelOne = new int[][]{{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0},
-								{1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+								{1,1,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0},
 								{1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 								{0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 								{0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0},
