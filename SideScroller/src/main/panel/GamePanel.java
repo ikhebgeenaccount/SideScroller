@@ -51,6 +51,9 @@ public class GamePanel extends JPanel implements KeyListener{
 	//Layout variables
 	private GridBagConstraints c;
 	
+	//Current FPS
+	private JLabel currentFPSLabel;
+	
 	public GamePanel(Champion character){
 		//Get character
 		this.character = character;
@@ -75,6 +78,15 @@ public class GamePanel extends JPanel implements KeyListener{
 		//Load idle animation, only used when not testing animations
 		ClassLoader cldr = this.getClass().getClassLoader();
 		charIdle = new ImageIcon(cldr.getResource("char/img/alphaguy/idle.png")).getImage();
+		
+		//Layout properties
+		c = new GridBagConstraints();
+		c.anchor = GridBagConstraints.NORTH_EAST;
+		c.gridy = 0;
+		c.gridx = 0;
+		
+		//Label with currentFPS
+		currentFPS = new JLabel();
 		
 		//This has to be moved to Panel.java
 		Dimension dim = new Dimension(1000, 500);
@@ -119,6 +131,8 @@ public class GamePanel extends JPanel implements KeyListener{
 		}else{
 			g.drawImage(charIdle, charx, chary, null);			
 		}
+		currentFPSLabel.setText(Main.getCurrentFPS());
+		add(currentFPSLabel, c);
 		g.dispose();
 	}
 	
