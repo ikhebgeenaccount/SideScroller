@@ -15,6 +15,7 @@ public class Main extends JFrame{
 	
 	//Game properties
 	private static int maxFPS;
+	private static int currentFPS;
 	private static boolean fpsCap;
 	private static int ticksPS;
 	private static boolean running;
@@ -175,6 +176,7 @@ public class Main extends JFrame{
 					}else if(fpsCap){
 						Thread.sleep(frameTime - (System.currentTimeMillis() - startTime));
 					}
+					currentFPS = 1000 / (System.currentTimeMillis() - startTime)
 				}catch(InterruptedException e){
 					
 				}
