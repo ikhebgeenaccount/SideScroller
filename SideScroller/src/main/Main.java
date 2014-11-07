@@ -149,6 +149,11 @@ public class Main extends JFrame{
 		frame.repaint();
 	}
 	
+	//Method to return currentFPS
+	public int getCurrentFPS(){
+		return currentFPS;
+	}
+	
 	//Thread for repaint(), graphics
 	private static class PaintLoop extends Thread{
 		
