@@ -1,7 +1,7 @@
 package main.gui.panel;
 
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JLabel;
@@ -25,6 +25,8 @@ public class LoadPanel extends Panel{
     private int barPartWidth;
     private int barWidth;
     private int barHeight;
+    private int barX;
+    private int barY;
     
     public LoadPanel(int parts){
         this.parts = parts;
@@ -41,6 +43,8 @@ public class LoadPanel extends Panel{
         barWidth = bar.getWidth();
         barHeight = bar.getHeight();
         barPartWidth = barWidth/parts;
+        barX = 500 - (barHeight / 2);
+        barY = 250 - (barWidth /2);
         
         //Set layout
         c = new GridBagConstraints();
@@ -65,6 +69,12 @@ public class LoadPanel extends Panel{
         //One more part loaded
         loadedParts++;
         barPart = bar.getSubimage(0, 0, barPartWidth * loadedParts, barHeight);
+    }
+    
+    @Override
+    public void paintComponent(Graphics g){
+    	super.paintComponent(g);
+    	g.drawImage(barPart, barX, barY, null);
     }
 
 }
