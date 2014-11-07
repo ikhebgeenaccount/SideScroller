@@ -22,6 +22,7 @@ PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you hav
     - Added config file
     - Fixed sloppy jumping mechanism
     - Fixed non-fluid movement, now fluid
+    - Fixed bug where the character wouldn't fall when jumping against a platform
   - *v0.1.1* - **current release**
     - Fixed images not working
   - *v0.1.0*
