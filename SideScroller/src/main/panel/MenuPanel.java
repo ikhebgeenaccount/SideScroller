@@ -38,15 +38,30 @@ public class MenuPanel extends JPanel{
 		
 		c.gridy++;
 		
+		add(new FillerLabel(), c);
+		
+		c.gridy++;
+		
 		//Create button for options
 		options = new JButton("Options");
 		add(options, c);
 		
 		c.gridy++;
 		
+		add(new FillerLabel(), c);
+		
+		c.gridy++;
+		
 		//Create button to quit
 		quit = new JButton("Quit");
 		add(quit, c);
+		
+		//Puts int labels FillerLabels in x-axis
+		int labels = 5;
+		c.gridy = 0;
+		for(c.gridx = 1; c.gridx <= labels; c.gridx++){
+			add(new FillerLabel(), c);
+		}
 		
 		//Set preferred size
 		Dimension dim = new Dimension(1000, 500);
