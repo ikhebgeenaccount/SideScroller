@@ -1,4 +1,4 @@
-package main.panel;
+package main.gui.panel;
 
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -7,21 +7,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JPanel;
 
 import main.Main;
+import main.gui.FillerLabel;
+import main.gui.Panel;
 
-public class MenuPanel extends JPanel{
+public class MenuPanel extends Panel{
 	
 	private GridBagConstraints c;
 	private JButton startGame, options, quit;
 	
 	public MenuPanel(){
-		setLayout(new GridBagLayout());
 		c = new GridBagConstraints();
 		
 		//Set c properties
-		c.anchor = GridBagConstraints.WEST;
+		c.anchor = GridBagConstraints.NORTHWEST;
 		
 		//Start grid
 		c.gridx = 0;
@@ -62,10 +62,6 @@ public class MenuPanel extends JPanel{
 		for(c.gridx = 1; c.gridx <= labels; c.gridx++){
 			add(new FillerLabel(), c);
 		}
-		
-		//Set preferred size
-		Dimension dim = new Dimension(1000, 500);
-		setPreferredSize(dim);
 	}
 
 }

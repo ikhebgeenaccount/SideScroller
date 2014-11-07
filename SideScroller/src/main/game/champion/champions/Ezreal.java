@@ -1,8 +1,8 @@
-package main.champion.champions;
+package main.game.champion.champions;
 
 import java.awt.Image;
 
-import main.champion.Champion;
+import main.game.champion.Champion;
 
 public class Ezreal extends Champion{
 	

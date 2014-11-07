@@ -1,8 +1,8 @@
-package main.champion;
+package main.game.champion;
 
 import java.awt.Image;
 
-import main.animation.Animation;
+import main.game.animation.Animation;
 
 public class Champion {
 	

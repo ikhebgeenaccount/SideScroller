@@ -1,4 +1,4 @@
-package main.animation;
+package main.game.animation;
 
 import java.awt.Image;
 

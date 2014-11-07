@@ -1,13 +1,14 @@
-package main.panel;
+package main.gui.panel;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
-public class LoadPanel extends JPanel{
+import main.gui.Panel;
+
+public class LoadPanel extends Panel{
     
     //Numbers of total parts and parts loaded
     private int parts;
@@ -35,7 +36,6 @@ public class LoadPanel extends JPanel{
         barPartWidth = barWidth/parts;
         
         //Set layout
-        setLayout(new GridBagLayout());
         c = new GridBagConstraints();
         c.anchor = GridBagConstraints.CENTER;
         c.gridx = 0;

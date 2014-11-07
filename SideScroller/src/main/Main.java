@@ -8,12 +8,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import main.champion.Champion;
-import main.champion.champions.AlphaGuy;
-import main.panel.GamePanel;
-import main.panel.MenuPanel;
-import main.panel.OptionPanel;
-import main.panel.SelectPanel;
+import main.game.champion.Champion;
+import main.game.champion.champions.AlphaGuy;
+import main.gui.panel.GamePanel;
+import main.gui.panel.MenuPanel;
+import main.gui.panel.OptionPanel;
+import main.gui.panel.SelectPanel;
 
 public class Main extends JFrame{
 	

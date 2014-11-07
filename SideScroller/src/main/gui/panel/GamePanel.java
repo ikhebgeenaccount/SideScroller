@@ -1,4 +1,4 @@
-package main.panel;
+package main.gui.panel;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -9,12 +9,12 @@ import java.awt.event.KeyListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 import main.Main;
-import main.champion.Champion;
+import main.game.champion.Champion;
+import main.gui.Panel;
 
-public class GamePanel extends JPanel implements KeyListener{
+public class GamePanel extends Panel implements KeyListener{
 	
 	//Levels
 	private int levelID;
@@ -95,10 +95,6 @@ public class GamePanel extends JPanel implements KeyListener{
 		
 		//Label with currentFPS
 		currentFPSLabel = new JLabel();
-		
-		//This has to be moved to Panel.java
-		Dimension dim = new Dimension(1000, 500);
-		setPreferredSize(dim);
 		
 		//Set this as keylistener and make it focusable so the keylistener works
 		addKeyListener(this);

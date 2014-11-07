@@ -1,16 +1,14 @@
-package main.panel;
+package main.gui.panel;
 
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 
-import javax.swing.JPanel;
+import main.gui.Panel;
 
-public class OptionPanel extends JPanel{
+public class OptionPanel extends Panel{
 	
 	private GridBagConstraints c;
 	
 	public OptionPanel(){
-		setLayout(new GridBagLayout());
 		
 		//Set layout properties
 		c = new GridBagConstraints();
