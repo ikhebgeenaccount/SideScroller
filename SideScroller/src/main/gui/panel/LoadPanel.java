@@ -30,9 +30,16 @@ public class LoadPanel extends Panel{
         this.parts = parts;
         loadedParts = 0;
         
+        //Here we load the loading bar images and add them beneath the label
+        //The outline of the loading bar
+        //barOutline = 
+        		
+        //The full bar
+        //bar = 
+        		
         //Setting bar properties
-        //barWidth = ;
-        //barHeight = ;
+        barWidth = bar.getWidth();
+        barHeight = bar.getHeight();
         barPartWidth = barWidth/parts;
         
         //Set layout
@@ -45,12 +52,7 @@ public class LoadPanel extends Panel{
         loadingLabel = new JLabel();
         add(loadingLabel, c);
         
-        //Here we load the loading bar images and add them beneath the label
-        //The outline of the loading bar
-        barOutline = 
         
-        //The full bar
-        bar = 
         
         //The to-display part of the loading screen, starts at zero
         barPart = bar.getSubimage(0, 0, barWidth * loadedParts, barHeight); 
