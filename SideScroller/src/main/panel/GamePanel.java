@@ -2,10 +2,10 @@ package main.panel;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.GridBagConstraints;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.net.URL;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -89,18 +89,18 @@ public class GamePanel extends JPanel implements KeyListener{
 		
 		//Layout properties
 		c = new GridBagConstraints();
-		c.anchor = GridBagConstraints.NORTH_EAST;
+		c.anchor = GridBagConstraints.NORTHEAST;
 		c.gridy = 0;
 		c.gridx = 0;
 		
 		//Label with currentFPS
-		currentFPS = new JLabel();
+		currentFPSLabel = new JLabel();
 		
 		//This has to be moved to Panel.java
 		Dimension dim = new Dimension(1000, 500);
 		setPreferredSize(dim);
 		
-		//Set this as keyslistener and make it focusable so the keylistener works
+		//Set this as keylistener and make it focusable so the keylistener works
 		addKeyListener(this);
 		setFocusable(true);
 	}
@@ -497,7 +497,7 @@ public class GamePanel extends JPanel implements KeyListener{
 	 */
 	//Create levels
 	public void createLevels(){
-		levelOne = {{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+		levelOne = new int[][]{{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 								{0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0},
 								{1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 								{1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},

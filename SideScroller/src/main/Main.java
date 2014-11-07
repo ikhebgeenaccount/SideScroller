@@ -1,5 +1,6 @@
 package main;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
@@ -60,11 +61,17 @@ public class Main extends JFrame{
 		
 		//Read config.properties
 		Properties properties = new Properties();
-		InputStream propertiesFile = Main.class.getClass().getClassLoader().getResourceAsStream("config.properties");
-		properties.load(propertiesFile);
+		InputStream propertiesFile = Main.class.getClass().getClassLoader().getResourceAsStream("config/config.properties");
+		try {
+			properties.load(propertiesFile);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		//Get properties from config.properties file
 		int maxFPS = Integer.getInteger(properties.getProperty("FPS"));
+		System.out.println(maxFPS);
 		boolean fpsCap = Boolean.getBoolean(properties.getProperty("fpsCap"));
 		
 		//Manual
@@ -153,8 +160,8 @@ public class Main extends JFrame{
 	}
 	
 	//Method to return currentFPS
-	public long getCurrentFPS(){
-		return currentFPS;
+	public static String getCurrentFPS(){
+		return String.valueOf(currentFPS);
 	}
 	
 	//Thread for repaint(), graphics
