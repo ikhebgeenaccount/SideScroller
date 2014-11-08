@@ -282,8 +282,17 @@ public class GamePanel extends Panel implements KeyListener{
 	    int matrix_x_bottom_right_old = matrix_x_upper_right_old * levelID;
 	    int matrix_y_bottom_right_old = matrix_y_bottom_left_old * levelID;
 	    
+	    /*Here we check if the character is allowed to move to the newcharx, newchary. We check the x- and y-axis independently
+    	 *because we can move in two directions: if the character is falling down, but the right-arrow-key is also pressed, but 
+    	 *he can't move to the right because of a solid block, he still needs to fall down. If we check x and y at the same time
+    	 *the character will get stuck and won't fall down even though that should happen.
+    	 *This is also the reason why we use old coordinates, from before this update(). When we check the y-axis, we check the
+    	 *newchary but the charx (old), because the old coordinate is always valid, but we need to check the newchary. Vice versa
+    	 *for the x-axis.
+    	*/
+	    //Check x-axis
 	    //Check if array is not out of bounds
-	    if(matrix_x_upper_left < 0 || matrix_y_upper_left < 0 || matrix_x_upper_right < 0 || matrix_y_upper_right < 0 || matrix_x_bottom_left < 0 || matrix_y_bottom_left < 0 || matrix_x_bottom_right < 0 || matrix_y_bottom_right < 0){
+	    if(matrix_x_upper_left < 0 || matrix_x_upper_right < 0 || matrix_x_bottom_left < 0 || matrix_x_bottom_right < 0){
 	    	
 	    }else{
 	    	//Check if the coordinates where the character is moving are valid
@@ -303,18 +312,13 @@ public class GamePanel extends Panel implements KeyListener{
 	    			//Can move there
 	    			charx = newcharx;
 	    		}
-	    	}
-	    	//Feet get stuck when jumping or falling
-	    	//Rest of the body does not get stuck, only feet detection points. No idea...
-	    	//So: only bottom_left and bottom_right is a problem.
-	    	/*Here we check if the character is allowed to move to the newcharx, newchary. We check the x- and y-axis independently
-	    	 *because we can move in two directions: if the character is falling down, but the right-arrow-key is also pressed, but 
-	    	 *he can't move to the right because of a solid block, he still needs to fall down. If we check x and y at the same time
-	    	 *the character will get stuck and won't fall down even though that should happen.
-	    	 *This is also the reason why we use old coordinates, from before this update(). When we check the y-axis, we check the
-	    	 *newchary but the charx (old), because the old coordinate is always valid, but we need to check the newchary. Vice versa
-	    	 *for the x-axis.
-	    	*/
+	    	}	    	
+	    }
+
+	    //Check y-axis
+	    if(matrix_y_upper_left < 0  || matrix_y_upper_right < 0 || matrix_y_bottom_left < 0 || matrix_y_bottom_right < 0){
+	    	
+	    }else{
 	    	if(newchary > chary){
 	    		//Is falling down
 	    		if(currentLevel[matrix_y_bottom_left][matrix_x_bottom_left_old] != 0 || currentLevel[matrix_y_bottom_right][matrix_x_bottom_right_old] != 0){
@@ -331,11 +335,8 @@ public class GamePanel extends Panel implements KeyListener{
 	    			//Can move there
 	    			chary = newchary;
 	    		}
-	    	}
+	    	}	    	
 	    }
-	    
-	    //System.out.println("x: " + charx);
-	    //System.out.println("y: " + chary);
 	}
 	
 	//In this class the jumpvariables are stored
