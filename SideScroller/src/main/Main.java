@@ -216,7 +216,7 @@ public class Main extends JFrame{
 			long tickTime = 1000/ticksPS;
 			while(running){
 				startTime = System.currentTimeMillis();
-				gamePanel.update(startTime);
+				gamePanel.update();
 				try {
 					if(System.currentTimeMillis() - startTime > tickTime){
 						
