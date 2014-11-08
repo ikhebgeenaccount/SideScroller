@@ -14,9 +14,6 @@ import main.game.champion.Champion;
 
 public class AlphaGuy extends Champion{
 	
-	private Animation[] animations;
-	private Animation currentAnimation;
-	
 	public AlphaGuy(){
 		String load = "Loading animations";
 		Main.getLoadPanel().setNextLoadPart(load);
@@ -35,7 +32,6 @@ public class AlphaGuy extends Champion{
 			int parts = width/50;
 			for(int i =  0; i < parts; i++){
 				animations[Champion.IDLE].addScene(idleSprite.getSubimage(50 * i, 0, 50, 100), 1);
-				System.out.println("Added: " + i);
 			}
 			Main.getLoadPanel().setNextLoadPart(load);
 			
@@ -48,8 +44,7 @@ public class AlphaGuy extends Champion{
 			width = walkSprite.getWidth();
 			parts = width/50;
 			for(int i = 0;i < parts; i++){
-				animations[Champion.WALK_RIGHT].addScene(walkSprite.getSubimage(50 * i, 0, 50, 100), 10);
-				System.out.println("Added: " + i);
+				animations[Champion.WALK_RIGHT].addScene(walkSprite.getSubimage(50 * i, 0, 50, 100), 1000);
 			}
 			Main.getLoadPanel().setNextLoadPart(load);
 			

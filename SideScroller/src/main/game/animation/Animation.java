@@ -33,7 +33,6 @@ public class Animation {
 	//Method to add scenes to the Animation.
 	public void addScene(Image sceneImage, long sceneLength){
 		scenes[numberOfScenes] = new OneScene(sceneImage, sceneLength);
-		
 		//Set numberOfScenes one higher to add the next scene one further in the scenes[] array
 		numberOfScenes++;
 	}
@@ -45,7 +44,7 @@ public class Animation {
 			sceneOfAnimation++;			
 			if(sceneOfAnimation > 29){
 				reset();
-			}else if(scenes[sceneOfAnimation].getImage() == null){
+			}else if(sceneOfAnimation > numberOfScenes - 1){
 				reset();
 			}
 			scenes[sceneOfAnimation].startScene();
@@ -54,6 +53,7 @@ public class Animation {
 	
 	//This is the method used to get the image that has to be displayed
 	public Image getCurrentSceneImage(){
+		System.out.println("Scene: " + sceneOfAnimation);
 		return scenes[sceneOfAnimation].getImage();
 	}
 	
