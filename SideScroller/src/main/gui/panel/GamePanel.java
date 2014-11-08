@@ -238,7 +238,7 @@ public class GamePanel extends Panel implements KeyListener{
 		
 	    if(keys[KeyEvent.VK_LEFT]){
 	    	if(testAnimation){
-	    		//character.setAnimationType(Champion.WALK_LEFT);
+	    		character.setAnimationType(Champion.WALK_LEFT);
 	    	}	    	
 	        newcharx -= MOVEPX;
 	    }else if(testAnimation){
