@@ -13,7 +13,7 @@ PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you hav
 
 **Changelog**
   - *v0.2.0*
-    - Added animations - *work in progress*
+    - Added animations
     - Added menu
     - Added loading screen
     - Added character selection screen
