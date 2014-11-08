@@ -19,7 +19,6 @@ public class Champion {
 	public void setAnimationType(int type) {
 		//We only have to change the animationtype when it is now running another type, otherwise the animation will continuously
 		//reset itself
-		System.out.println(type + " current: " + currentAnimationType);
 		if(currentAnimationType == type){
 			
 		}else{

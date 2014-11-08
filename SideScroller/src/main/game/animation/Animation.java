@@ -53,7 +53,6 @@ public class Animation {
 	
 	//This is the method used to get the image that has to be displayed
 	public Image getCurrentSceneImage(){
-		System.out.println("Scene: " + sceneOfAnimation);
 		return scenes[sceneOfAnimation].getImage();
 	}
 	
