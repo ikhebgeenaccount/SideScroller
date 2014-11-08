@@ -49,7 +49,7 @@ public class GamePanel extends Panel implements KeyListener{
 	private Champion character;
 	
 	//Set this to true to test animations, false to play without.
-	private boolean testAnimation = false;
+	private boolean testAnimation = true;
 	
 	//Layout variables
 	private GridBagConstraints c;
@@ -143,10 +143,10 @@ public class GamePanel extends Panel implements KeyListener{
 	//Images are loaded
 	public void loadPics(){
 		ClassLoader cldr = this.getClass().getClassLoader();
-		air = new ImageIcon(cldr.getResource("landscape/img/default/air.png")).getImage();
-		ground = new ImageIcon(cldr.getResource("landscape/img/default/ground.png")).getImage();
-		grass_ground = new ImageIcon(cldr.getResource("landscape/img/default/grass-ground.png")).getImage();
-		grass_air = new ImageIcon(cldr.getResource("landscape/img/default/grass-air.png")).getImage();
+		air = new ImageIcon(cldr.getResource("img/landscape/default/air.png")).getImage();
+		ground = new ImageIcon(cldr.getResource("img/landscape/default/ground.png")).getImage();
+		grass_ground = new ImageIcon(cldr.getResource("img/landscape/default/grass-ground.png")).getImage();
+		grass_air = new ImageIcon(cldr.getResource("img/landscape/default/grass-air.png")).getImage();
 	}
 	
 	//Called when a key is pressed

@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -12,6 +11,7 @@ import javax.swing.JPanel;
 import main.game.champion.Champion;
 import main.game.champion.champions.AlphaGuy;
 import main.gui.panel.GamePanel;
+import main.gui.panel.LoadPanel;
 import main.gui.panel.MenuPanel;
 import main.gui.panel.OptionPanel;
 import main.gui.panel.SelectPanel;
@@ -34,6 +34,7 @@ public class Main extends JFrame{
 	//Panels	
 	private static MenuPanel menuPanel;
 	private static GamePanel gamePanel;
+	private static LoadPanel loadPanel;
 	private static OptionPanel optionPanel;
 	private static SelectPanel selectPanel;
 	
@@ -57,6 +58,8 @@ public class Main extends JFrame{
 	
 	//Method to start game, creates character and game loop thread
 	public static void startGame(){
+		loadPanel = new LoadPanel(11, "Initializing settings");
+		setPanel(loadPanel);
 		//Set game properties
 		System.out.println("Initializing settings...");
 		
@@ -85,10 +88,12 @@ public class Main extends JFrame{
 		
 		//Create character
 		System.out.println("Creating character...");
+		loadPanel.setNextLoadPart("Creating character");
 		character = new AlphaGuy();
 		
 		//Create gamepanel
 		System.out.println("Setting up panel...");
+		loadPanel.setNextLoadPart("Setting up panel");
 		gamePanel = new GamePanel(character);
 		setPanel(gamePanel);
 		
@@ -233,5 +238,9 @@ public class Main extends JFrame{
 				}
 			}
 		}
+	}
+	
+	public static LoadPanel getLoadPanel(){
+		return loadPanel;
 	}
 }

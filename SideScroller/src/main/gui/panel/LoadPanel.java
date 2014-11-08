@@ -3,7 +3,10 @@ package main.gui.panel;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import main.gui.Panel;
@@ -28,23 +31,31 @@ public class LoadPanel extends Panel{
     private int barX;
     private int barY;
     
-    public LoadPanel(int parts){
+    public LoadPanel(int parts, String firstPartDescription){
         this.parts = parts;
         loadedParts = 0;
         
-        //Here we load the loading bar images and add them beneath the label
-        //The outline of the loading bar
-        //barOutline = 
-        		
-        //The full bar
-        //bar = 
-        		
-        //Setting bar properties
-        barWidth = bar.getWidth();
-        barHeight = bar.getHeight();
-        barPartWidth = barWidth/parts;
-        barX = 500 - (barHeight / 2);
-        barY = 250 - (barWidth /2);
+        try {
+        	//Here we load the loading bar images and add them beneath the label
+            //The outline of the loading bar
+        	barOutline = ImageIO.read(this.getClass().getClassLoader().getResourceAsStream("img/bar/barOutline.png"));
+        	
+        	//The full bar
+			bar = ImageIO.read(this.getClass().getClassLoader().getResourceAsStream("img/bar/bar.png"));
+			
+			//Setting bar properties
+	        barWidth = bar.getWidth();
+	        barHeight = bar.getHeight();
+	        barPartWidth = barWidth/parts;
+	        barX = 500 - (barHeight / 2);
+	        barY = 250 - (barWidth /2);
+	        
+	      //The to-display part of the loading screen, starts at zero
+	        barPart = bar.getSubimage(0, 0, barWidth * loadedParts, barHeight); 
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         
         //Set layout
         c = new GridBagConstraints();
@@ -53,13 +64,8 @@ public class LoadPanel extends Panel{
         c.gridy = 0;
         
         //Create label without text
-        loadingLabel = new JLabel();
+        loadingLabel = new JLabel(firstPartDescription);
         add(loadingLabel, c);
-        
-        
-        
-        //The to-display part of the loading screen, starts at zero
-        barPart = bar.getSubimage(0, 0, barWidth * loadedParts, barHeight); 
     }
     
     public void setNextLoadPart(String description){

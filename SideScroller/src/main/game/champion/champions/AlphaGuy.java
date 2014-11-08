@@ -18,6 +18,8 @@ public class AlphaGuy extends Champion{
 	private Animation currentAnimation;
 	
 	public AlphaGuy(){
+		String load = "Loading animations";
+		Main.getLoadPanel().setNextLoadPart(load);
 		System.out.println("Loading animations...");
 		ClassLoader cldr = this.getClass().getClassLoader();
 		animations = new Animation[8];		
@@ -29,22 +31,44 @@ public class AlphaGuy extends Champion{
 			
 			//Add the idle animation to animations[]
 			animations[Champion.IDLE]= new Animation(); 
-			BufferedImage idleSprite = ImageIO.read(cldr.getResourceAsStream("char/img/alphaguy/idle.png"));
+			BufferedImage idleSprite = ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/idle.png"));
 			int width = idleSprite.getWidth();
 			int parts = width/50;
 			for(int i =  0;i < parts; i++){
 				animations[Champion.IDLE].addScene(idleSprite.getSubimage(50 * i, 0, 50, 100), 1);
 			}
+			Main.getLoadPanel().setNextLoadPart(load);
 			
+			//Add the walk left animation to animations[]
+			Main.getLoadPanel().setNextLoadPart(load);
 			
 			//Add the walk right animation to animations[]
 			animations[Champion.WALK_RIGHT]= new Animation();
-			BufferedImage walkSprite = ImageIO.read(cldr.getResourceAsStream("char/img/alphaguy/walk.png"));
+			BufferedImage walkSprite = ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/walk.png"));
 			width = walkSprite.getWidth();
 			parts = width/50;
 			for(int i = 0;i < parts; i++){
 				animations[Champion.WALK_RIGHT].addScene(walkSprite.getSubimage(50 * i, 0, 50, 100), 10);
 			}
+			Main.getLoadPanel().setNextLoadPart(load);
+			
+			//Add the jump animation to animations[]
+			Main.getLoadPanel().setNextLoadPart(load);
+			
+			//Add the fall animation to animations[]
+			Main.getLoadPanel().setNextLoadPart(load);
+			
+			//Add the cast q animation to animations[]
+			Main.getLoadPanel().setNextLoadPart(load);
+			
+			//Add the cast w animation to animations[]
+			Main.getLoadPanel().setNextLoadPart(load);
+			
+			//Add the cast e animation to animations[]
+			Main.getLoadPanel().setNextLoadPart(load);
+			
+			//Add the cast r animation to animations[]
+			Main.getLoadPanel().setNextLoadPart(load);
 			
 			//Start idle animation
 			currentAnimation = animations[Champion.IDLE];
