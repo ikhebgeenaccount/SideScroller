@@ -50,8 +50,8 @@ public class LoadPanel extends Panel{
 	        barX = 500 - (barHeight / 2);
 	        barY = 250 - (barWidth /2);
 	        
-	      //The to-display part of the loading screen, starts at zero
-	        barPart = bar.getSubimage(0, 0, barWidth * loadedParts, barHeight); 
+	        //The to-display part of the loading screen, starts at zero
+	        barPart = bar.getSubimage(0, 0, 1, barHeight); 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -66,21 +66,32 @@ public class LoadPanel extends Panel{
         //Create label without text
         loadingLabel = new JLabel(firstPartDescription);
         add(loadingLabel, c);
+        System.out.println(loadedParts);
     }
     
     public void setNextLoadPart(String description){
+    	System.out.println(loadedParts);
         //Set new description for this loadpart
         loadingLabel.setText(description);
         
         //One more part loaded
-        loadedParts++;
-        barPart = bar.getSubimage(0, 0, barPartWidth * loadedParts, barHeight);
+        if(loadedParts < parts){
+        	loadedParts++;
+        }
+        try{
+        	barPart = bar.getSubimage(0, 0, barPartWidth * loadedParts - 1, barHeight);
+        }catch(Exception e){
+        	System.err.println(e.getMessage());
+        	System.err.println(barPartWidth + " * " + loadedParts + " = " + barPartWidth * loadedParts);
+        }
+       
+        repaint();
     }
     
     @Override
     public void paintComponent(Graphics g){
     	super.paintComponent(g);
-    	g.drawImage(barPart, barX, barY, null);
+    	g.drawImage(barPart, barX, barY - 20, null);
     }
 
 }

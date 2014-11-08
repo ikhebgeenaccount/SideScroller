@@ -6,10 +6,10 @@ import java.util.Properties;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 import main.game.champion.Champion;
 import main.game.champion.champions.AlphaGuy;
+import main.gui.Panel;
 import main.gui.panel.GamePanel;
 import main.gui.panel.LoadPanel;
 import main.gui.panel.MenuPanel;
@@ -58,7 +58,7 @@ public class Main extends JFrame{
 	
 	//Method to start game, creates character and game loop thread
 	public static void startGame(){
-		loadPanel = new LoadPanel(11, "Initializing settings");
+		loadPanel = new LoadPanel(12, "Initializing settings");
 		setPanel(loadPanel);
 		//Set game properties
 		System.out.println("Initializing settings...");
@@ -160,7 +160,7 @@ public class Main extends JFrame{
 	}
 	
 	//Method to change panel
-	public static void setPanel(JPanel panel){
+	public static void setPanel(Panel panel){
 		frame.getContentPane().removeAll();
 		frame.getContentPane().add(panel);
 		panel.requestFocusInWindow();

@@ -49,7 +49,7 @@ public class GamePanel extends Panel implements KeyListener{
 	private Champion character;
 	
 	//Set this to true to test animations, false to play without.
-	private boolean testAnimation = true;
+	private boolean testAnimation = false;
 	
 	//Layout variables
 	private GridBagConstraints c;
@@ -85,7 +85,7 @@ public class GamePanel extends Panel implements KeyListener{
 		
 		//Load idle animation, only used when not testing animations
 		ClassLoader cldr = this.getClass().getClassLoader();
-		charIdle = new ImageIcon(cldr.getResource("char/img/alphaguy/idle.png")).getImage();
+		charIdle = new ImageIcon(cldr.getResource("img/char/alphaguy/idle.png")).getImage();
 		
 		//Layout properties
 		c = new GridBagConstraints();
