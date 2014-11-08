@@ -44,16 +44,9 @@ public class Main extends JFrame{
 	
 	//Main method
 	public static void main(String[] args){
-		System.out.println("Initializing game...");
-		
-		//System.out.println("Reading config...");
-		//System.out.println("Updating settings...");
-		
-		System.out.println("Setting up frame...");
 		createFrame();		
 		//Thread for frames
 		frame.setVisible(true);
-		
 	}
 	
 	//Method to start game, creates character and game loop thread
@@ -61,7 +54,6 @@ public class Main extends JFrame{
 		loadPanel = new LoadPanel(12, "Initializing settings");
 		setPanel(loadPanel);
 		//Set game properties
-		System.out.println("Initializing settings...");
 		
 		try {			
 			//Read config.properties
@@ -72,13 +64,16 @@ public class Main extends JFrame{
 			
 			//Get properties from config.properties file
 			int maxFPS = Integer.getInteger(properties.getProperty("FPS"));
-			System.out.println(maxFPS);
 			boolean fpsCap = Boolean.getBoolean(properties.getProperty("fpsCap"));
 		}catch(IOException e){
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println(e.getMessage());
+			
+			//Manual
+			maxFPS = 45;
+			fpsCap = true;
+			ticksPS = 90;
 		}catch(NullPointerException e){
-			System.out.println("Can't find config.properties! Using default properties.");
+			System.err.println("Can't find config.properties! Using default properties.");
 			
 			//Manual
 			maxFPS = 45;
@@ -87,18 +82,15 @@ public class Main extends JFrame{
 		}		
 		
 		//Create character
-		System.out.println("Creating character...");
 		loadPanel.setNextLoadPart("Creating character");
 		character = new AlphaGuy();
 		
 		//Create gamepanel
-		System.out.println("Setting up panel...");
 		loadPanel.setNextLoadPart("Setting up panel");
 		gamePanel = new GamePanel(character);
 		setPanel(gamePanel);
 		
 		//Start game
-		System.out.println("Starting game...");
 		running = true;
 		
 		//Paintloop
@@ -206,7 +198,7 @@ public class Main extends JFrame{
 						currentFPS = 1000 / (System.currentTimeMillis() - startTime);
 					}					
 				}catch(InterruptedException e){
-					
+					System.err.println(e.getMessage());
 				}
 			}
 		}
@@ -234,7 +226,7 @@ public class Main extends JFrame{
 						Thread.sleep(tickTime - (System.currentTimeMillis() - startTime));
 					}
 				} catch (InterruptedException e) {
-					
+					System.err.println(e.getMessage());
 				}
 			}
 		}

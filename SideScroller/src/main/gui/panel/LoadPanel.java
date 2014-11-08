@@ -53,8 +53,7 @@ public class LoadPanel extends Panel{
 	        //The to-display part of the loading screen, starts at zero
 	        barPart = bar.getSubimage(0, 0, 1, barHeight); 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println(e.getMessage());
 		}
         
         //Set layout
@@ -66,11 +65,9 @@ public class LoadPanel extends Panel{
         //Create label without text
         loadingLabel = new JLabel(firstPartDescription);
         add(loadingLabel, c);
-        System.out.println(loadedParts);
     }
     
     public void setNextLoadPart(String description){
-    	System.out.println(loadedParts);
         //Set new description for this loadpart
         loadingLabel.setText(description);
         
@@ -82,7 +79,6 @@ public class LoadPanel extends Panel{
         	barPart = bar.getSubimage(0, 0, barPartWidth * loadedParts - 1, barHeight);
         }catch(Exception e){
         	System.err.println(e.getMessage());
-        	System.err.println(barPartWidth + " * " + loadedParts + " = " + barPartWidth * loadedParts);
         }
        
         repaint();

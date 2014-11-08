@@ -20,7 +20,6 @@ public class AlphaGuy extends Champion{
 	public AlphaGuy(){
 		String load = "Loading animations";
 		Main.getLoadPanel().setNextLoadPart(load);
-		System.out.println("Loading animations...");
 		ClassLoader cldr = this.getClass().getClassLoader();
 		animations = new Animation[8];		
 		try {
@@ -74,7 +73,7 @@ public class AlphaGuy extends Champion{
 			currentAnimation = animations[Champion.IDLE];
 			currentAnimation.start(0);
 		} catch (IOException e) {
-			System.out.println(e.getMessage());
+			System.err.println(e.getMessage());
 			Main.quitGame();
 		}
 	}
