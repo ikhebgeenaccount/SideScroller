@@ -44,7 +44,7 @@ public class AlphaGuy extends Champion{
 			width = walkSprite.getWidth();
 			parts = width/50;
 			for(int i = 0;i < parts; i++){
-				animations[Champion.WALK_RIGHT].addScene(walkSprite.getSubimage(50 * i, 0, 50, 100), 1000);
+				animations[Champion.WALK_RIGHT].addScene(walkSprite.getSubimage(50 * i, 0, 50, 100), 250);
 			}
 			Main.getLoadPanel().setNextLoadPart(load);
 			
@@ -80,20 +80,4 @@ public class AlphaGuy extends Champion{
 			Main.quitGame();
 		}
 	}
-	/*
-	@Override
-	public void setAnimationType(int type, long currentTime){
-		
-	}
-	
-	@Override
-	public Image getCurrentAnimationImage(){
-		return currentAnimation.getCurrentSceneImage();
-	}
-	
-	@Override
-	public void checkNextScene(long currentTime){
-		currentAnimation.nextScene(currentTime);
-	}*/
-
 }
