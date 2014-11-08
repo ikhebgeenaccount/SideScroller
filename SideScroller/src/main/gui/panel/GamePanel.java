@@ -35,8 +35,8 @@ public class GamePanel extends Panel implements KeyListener{
 	//The pixels that the character moves
 	private final int MOVEPX;
 	
-	//Time
-	private long time;
+	//Tick
+	private int tick;
 	
 	//Gravity and jump instances
 	private Gravity gravity;
@@ -58,6 +58,8 @@ public class GamePanel extends Panel implements KeyListener{
 	private JLabel currentFPSLabel;
 	
 	public GamePanel(Champion character){
+		tick = 0;
+		
 		//Get character
 		this.character = character;
 		
@@ -165,14 +167,14 @@ public class GamePanel extends Panel implements KeyListener{
 				if(onEdgeX){
 					if(currentLevel[matrix_y + 1][matrix_x_left] != 0){
 						jump.jumping = true;
-				    	jump.start_time = time;
+				    	jump.start_tick = tick;
 					}else{
 						
 					}
 				}else{
 					if(currentLevel[matrix_y + 1][matrix_x_left] != 0 || currentLevel[matrix_y + 1][matrix_x_left + 1] != 0){
 						jump.jumping = true;
-				    	jump.start_time = time;
+				    	jump.start_tick = tick;
 					}else{
 						
 					}
@@ -181,14 +183,14 @@ public class GamePanel extends Panel implements KeyListener{
 				if(onEdgeX){
 					if(currentLevel[matrix_y][matrix_x_left] != 0){
 						jump.jumping = true;
-				    	jump.start_time = time;
+				    	jump.start_tick = tick;
 					}else{
 						
 					}
 				}else{
 					if(currentLevel[matrix_y][matrix_x_left] != 0 || currentLevel[matrix_y][matrix_x_left] != 0){
 						jump.jumping = true;
-				    	jump.start_time = time;
+				    	jump.start_tick = tick;
 					}else{
 						
 					}
@@ -226,8 +228,8 @@ public class GamePanel extends Panel implements KeyListener{
 	 * 		- Checking if the location where the character is travelling is valid
 	 * 	
 	 */
-	public void update(long startTime){	
-		time = startTime;
+	public void update(){
+		tick++;
 		
 		keys[KeyEvent.VK_UP]= false; 
 		
@@ -343,14 +345,14 @@ public class GamePanel extends Panel implements KeyListener{
 	private class Jump{
 		
 		public boolean jumping;
-		public long start_time;
+		public int start_tick;
 		public int jump_px;
-		public long jump_time;
+		public int jump_tick;
 		
 		Jump(){
 			jumping = false;
 			jump_px = MOVEPX;
-			jump_time = (1000/45) * 17;
+			jump_tick = 31;
 		}
 	}
 	
@@ -402,7 +404,7 @@ public class GamePanel extends Panel implements KeyListener{
 		    				newchary = chary + gravity.falldown_px;
 		    				//gravity.setNextFall();
 		    			}else{
-		    				gravity.startFall(time);
+		    				gravity.startFall(tick);
 		    				newchary = chary + gravity.falldown_px;
 		    				//gravity.setNextFall();	    				
 		    			}
@@ -415,7 +417,7 @@ public class GamePanel extends Panel implements KeyListener{
 		    				newchary = chary + gravity.falldown_px;
 		    				//gravity.setNextFall();
 		    			}else{
-		    				gravity.startFall(time);
+		    				gravity.startFall(tick);
 		    				newchary = chary + gravity.falldown_px;
 		    				//gravity.setNextFall();	    				
 		    			}
@@ -430,7 +432,7 @@ public class GamePanel extends Panel implements KeyListener{
 		    				newchary = chary + gravity.falldown_px;
 		    				//gravity.setNextFall();
 		    			}else{
-		    				gravity.startFall(time);
+		    				gravity.startFall(tick);
 		    				newchary = chary + gravity.falldown_px;
 		    				//gravity.setNextFall();	    				
 		    			}
@@ -443,7 +445,7 @@ public class GamePanel extends Panel implements KeyListener{
 		    				newchary = chary + gravity.falldown_px;
 		    				//gravity.setNextFall();
 		    			}else{
-		    				gravity.startFall(time);
+		    				gravity.startFall(tick);
 		    				newchary = chary + gravity.falldown_px;
 		    				//gravity.setNextFall();	    				
 		    			}
@@ -455,7 +457,7 @@ public class GamePanel extends Panel implements KeyListener{
 		}else{
 			//Coordinates are changed: character jumps
 			//Also checks if the jump shouldn't end yet
-			if(time - jump.start_time <= jump.jump_time){
+			if(tick - jump.start_tick <= jump.jump_tick){
 				newchary -= jump.jump_px;
 			}else{
 				jump.jumping = false;
