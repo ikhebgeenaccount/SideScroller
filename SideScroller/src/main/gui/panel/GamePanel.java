@@ -49,7 +49,7 @@ public class GamePanel extends Panel implements KeyListener{
 	private Champion character;
 	
 	//Set this to true to test animations, false to play without.
-	private boolean testAnimation = false;
+	private boolean testAnimation = true;
 	
 	//Layout variables
 	private GridBagConstraints c;
@@ -131,7 +131,7 @@ public class GamePanel extends Panel implements KeyListener{
 		}
 		if(testAnimation){
 			g.drawImage(character.getCurrentAnimationImage(), charx, chary, null);
-			character.checkNextScene(time);
+			character.checkNextScene();
 		}else{
 			g.drawImage(charIdle, charx, chary, null);			
 		}
@@ -236,20 +236,20 @@ public class GamePanel extends Panel implements KeyListener{
 		
 	    if(keys[KeyEvent.VK_LEFT]){
 	    	if(testAnimation){
-	    		character.setAnimationType(Champion.WALK_LEFT, startTime);
+	    		character.setAnimationType(Champion.WALK_LEFT);
 	    	}	    	
 	        newcharx -= MOVEPX;
 	    }else if(testAnimation){
-	    	character.setAnimationType(Champion.IDLE, startTime);
+	    	character.setAnimationType(Champion.IDLE);
 	    }
 
 	    if(keys[KeyEvent.VK_RIGHT]){
 	    	if(testAnimation){
-	    		character.setAnimationType(Champion.WALK_RIGHT, startTime);
+	    		character.setAnimationType(Champion.WALK_RIGHT);
 	    	}	    	
 	        newcharx += MOVEPX;
 	    }else if(testAnimation){
-	    	character.setAnimationType(Champion.IDLE, startTime);
+	    	character.setAnimationType(Champion.IDLE);
 	    }
 	    
 	    checkGravity();

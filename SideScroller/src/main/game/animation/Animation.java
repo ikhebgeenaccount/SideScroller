@@ -20,9 +20,9 @@ public class Animation {
 	
 	//This method is called when the Animation should start. First, it's resetted, so it begins at the start. Then the first
 	//scene is started.
-	public void start(long startTime){
+	public void start(){
 		reset();
-		scenes[sceneOfAnimation].startScene(startTime);
+		scenes[sceneOfAnimation].startScene();
 	}
 	
 	//This resets the animation.
@@ -40,15 +40,15 @@ public class Animation {
 	
 	//This checks if the next scene has to be started, and if so, starts next scene.
 	//If the next scene does not exist it resets the animation
-	public void nextScene(long currentTime){
-		if(currentTime - scenes[sceneOfAnimation].getStartFrame() >= scenes[sceneOfAnimation].getLength()){
+	public void nextScene(){
+		if(System.currentTimeMillis() - scenes[sceneOfAnimation].getStartTime() >= scenes[sceneOfAnimation].getLength()){
 			sceneOfAnimation++;			
 			if(sceneOfAnimation > 29){
 				reset();
 			}else if(scenes[sceneOfAnimation].getImage() == null){
 				reset();
 			}
-			scenes[sceneOfAnimation].startScene(currentTime);
+			scenes[sceneOfAnimation].startScene();
 		}
 	}
 	
@@ -62,7 +62,7 @@ public class Animation {
 	private class OneScene{
 		private Image sceneImage;
 		private long sceneLength;
-		private long startFrame;
+		private long startTime;
 		
 		private OneScene(Image sceneImage, long sceneLength){
 			this.sceneImage = sceneImage;
@@ -78,12 +78,12 @@ public class Animation {
 		}
 		
 		//Used to start the scene
-		public void startScene(long startFrame){
-			this.startFrame = startFrame;
+		public void startScene(){
+			this.startTime = System.currentTimeMillis();
 		}
 		
-		public long getStartFrame(){
-			return startFrame;
+		public long getStartTime(){
+			return startTime;
 		}
 	}
 }

@@ -33,8 +33,9 @@ public class AlphaGuy extends Champion{
 			BufferedImage idleSprite = ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/idle.png"));
 			int width = idleSprite.getWidth();
 			int parts = width/50;
-			for(int i =  0;i < parts; i++){
+			for(int i =  0; i < parts; i++){
 				animations[Champion.IDLE].addScene(idleSprite.getSubimage(50 * i, 0, 50, 100), 1);
+				System.out.println("Added: " + i);
 			}
 			Main.getLoadPanel().setNextLoadPart(load);
 			
@@ -48,46 +49,46 @@ public class AlphaGuy extends Champion{
 			parts = width/50;
 			for(int i = 0;i < parts; i++){
 				animations[Champion.WALK_RIGHT].addScene(walkSprite.getSubimage(50 * i, 0, 50, 100), 10);
+				System.out.println("Added: " + i);
 			}
 			Main.getLoadPanel().setNextLoadPart(load);
 			
 			//Add the jump animation to animations[]
+			
 			Main.getLoadPanel().setNextLoadPart(load);
 			
 			//Add the fall animation to animations[]
+			
 			Main.getLoadPanel().setNextLoadPart(load);
 			
 			//Add the cast q animation to animations[]
+			
 			Main.getLoadPanel().setNextLoadPart(load);
 			
 			//Add the cast w animation to animations[]
+			
 			Main.getLoadPanel().setNextLoadPart(load);
 			
 			//Add the cast e animation to animations[]
+			
 			Main.getLoadPanel().setNextLoadPart(load);
 			
 			//Add the cast r animation to animations[]
+			
 			Main.getLoadPanel().setNextLoadPart(load);
 			
 			//Start idle animation
 			currentAnimation = animations[Champion.IDLE];
-			currentAnimation.start(0);
+			currentAnimation.start();
 		} catch (IOException e) {
 			System.err.println(e.getMessage());
 			Main.quitGame();
 		}
 	}
-	
+	/*
 	@Override
 	public void setAnimationType(int type, long currentTime){
-		//We only have to change the animationtype when it is now running another type, otherwise the animation will continuously
-		//reset itself
-		if(currentAnimation == animations[type]){
-			
-		}else{
-			currentAnimation = animations[type];
-			currentAnimation.start(currentTime);			
-		}
+		
 	}
 	
 	@Override
@@ -98,6 +99,6 @@ public class AlphaGuy extends Champion{
 	@Override
 	public void checkNextScene(long currentTime){
 		currentAnimation.nextScene(currentTime);
-	}
+	}*/
 
 }
