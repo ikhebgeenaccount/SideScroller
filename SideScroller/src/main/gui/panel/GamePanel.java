@@ -242,17 +242,15 @@ public class GamePanel extends Panel implements KeyListener{
 	    	}	    	
 	        newcharx -= MOVEPX;
 	    }else if(testAnimation){
-	    	character.setAnimationType(Champion.IDLE);
-	    }
-
-	    if(keys[KeyEvent.VK_RIGHT]){
-	    	if(testAnimation){
-	    		character.setAnimationType(Champion.WALK_RIGHT);
-	    	}	    	
-	        newcharx += MOVEPX;
-	    }else if(testAnimation){
-	    	character.setAnimationType(Champion.IDLE);
-	    }
+	    	if(keys[KeyEvent.VK_RIGHT]){
+		    	if(testAnimation){
+		    		character.setAnimationType(Champion.WALK_RIGHT);
+		    	}	    	
+		        newcharx += MOVEPX;
+		    }else if(testAnimation){
+		    	character.setAnimationType(Champion.IDLE);
+		    }
+	    }	    
 	    
 	    checkGravity();
 	    
