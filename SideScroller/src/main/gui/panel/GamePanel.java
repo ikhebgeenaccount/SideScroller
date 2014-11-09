@@ -397,7 +397,7 @@ public class GamePanel extends Panel implements KeyListener{
 	    			//Can move there
 	    			chary = newchary;
 	    		}
-	    	}	    	
+	    	}
 	    }
 	    
 	    if(!xmoved){
