@@ -56,6 +56,11 @@ public class MenuPanel extends Panel{
 		
 		//Create button to quit
 		quit = new JButton("Quit");
+		quit.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				System.exit(0);
+			}
+		});
 		add(quit, c);
 		
 		//Puts int labels FillerLabels in x-axis
