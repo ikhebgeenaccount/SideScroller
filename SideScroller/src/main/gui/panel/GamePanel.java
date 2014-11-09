@@ -330,6 +330,10 @@ public class GamePanel extends Panel implements KeyListener{
 	    	character.setAnimationType(Champion.IDLE);
 	    }
 	    
+	    System.out.println(levelID);
+	    System.out.println(matrix_x_bottom_right);
+	    System.out.println((matrix_x_bottom_right  + (levelID * 20)));
+	    
 	    //Check if character should go to next level
 	    if((matrix_x_bottom_right  + (levelID * 20))/(levelID + 1) > ((levelID + 1) * 20) - 1){
 	    	levelID++;
@@ -396,7 +400,7 @@ public class GamePanel extends Panel implements KeyListener{
 			//Here we check if the substance beneath the character is solid
 		    if(onEdgeX){
 		    	if(onEdgeY){
-		    		if(currentLevel[matrix_y + 1][matrix_x_left] == 0){
+		    		if(currentLevel[matrix_y + 1][matrix_x_left + (levelID * 20)] == 0){
 		    			if(gravity.falling){
 		    				newchary = chary + gravity.falldown_px;
 		    				//gravity.setNextFall();
@@ -409,7 +413,7 @@ public class GamePanel extends Panel implements KeyListener{
 		    			gravity.endFall();
 		    		}
 		    	}else{
-		    		if(currentLevel[matrix_y][matrix_x_left] == 0){
+		    		if(currentLevel[matrix_y][matrix_x_left + (levelID * 20)] == 0){
 		    			if(gravity.falling){
 		    				newchary = chary + gravity.falldown_px;
 		    				//gravity.setNextFall();
@@ -424,7 +428,7 @@ public class GamePanel extends Panel implements KeyListener{
 		    	}
 		    }else{
 		    	if(onEdgeY){
-		    		if(currentLevel[matrix_y + 1][matrix_x_left] == 0 && currentLevel[matrix_y + 1][matrix_x_left + 1] == 0){
+		    		if(currentLevel[matrix_y + 1][matrix_x_left + (levelID * 20)] == 0 && currentLevel[matrix_y + 1][matrix_x_left + (levelID * 20) + 1] == 0){
 		    			if(gravity.falling){
 		    				newchary = chary + gravity.falldown_px;
 		    				//gravity.setNextFall();
@@ -437,7 +441,7 @@ public class GamePanel extends Panel implements KeyListener{
 		    			gravity.endFall();
 		    		}	    		
 		    	}else{
-		    		if(currentLevel[matrix_y][matrix_x_left] == 0 && currentLevel[matrix_y][matrix_x_left + 1] == 0){
+		    		if(currentLevel[matrix_y][matrix_x_left + (levelID * 20)] == 0 && currentLevel[matrix_y][matrix_x_left + (levelID * 20) + 1] == 0){
 		    			if(gravity.falling){
 		    				newchary = chary + gravity.falldown_px;
 		    				//gravity.setNextFall();
