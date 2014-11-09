@@ -175,6 +175,7 @@ public class Main extends JFrame{
 		public void run(){
 			long startTime;
 			long frameTime = 1000/maxFPS;
+			long startTimeFPS = System.currentTimeMillis();
 			while(running){
 				//The startTime of this loop
 				startTime = System.currentTimeMillis();
@@ -192,11 +193,16 @@ public class Main extends JFrame{
 					}else if(fpsCap){
 						Thread.sleep(frameTime - (System.currentTimeMillis() - startTime));
 					}
-					if(System.currentTimeMillis() - startTime == 0){
-						currentFPS = maxFPS;
-					}else{
-						currentFPS = 1000 / (System.currentTimeMillis() - startTime);
-					}					
+					if(System.currentTimeMillis() - startTimeFPS >= 500){
+						if(System.currentTimeMillis() - startTime == 0){
+							currentFPS = maxFPS;
+							startTimeFPS = System.currentTimeMillis();
+						}else{
+							currentFPS = 1000 / (System.currentTimeMillis() - startTime);
+							startTimeFPS = System.currentTimeMillis();
+						}
+					}
+										
 				}catch(InterruptedException e){
 					System.err.println(e.getMessage());
 				}
