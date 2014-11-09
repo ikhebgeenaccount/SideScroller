@@ -191,8 +191,7 @@ public class GamePanel extends Panel implements KeyListener{
 	    }
 	    
 	    if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
-	    	chary = 0;
-	    	charx = 0;
+	    	Main.pauseGame();
 	    }
 	    
 	    if(e.getKeyCode() == KeyEvent.VK_SPACE){
