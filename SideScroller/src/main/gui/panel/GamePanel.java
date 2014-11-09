@@ -303,7 +303,7 @@ public class GamePanel extends Panel implements KeyListener{
 	    }
 	    //Check y-axis
 	    if(matrix_y_upper_left < 0  || matrix_y_upper_right < 0 || matrix_y_bottom_left < 0 || matrix_y_bottom_right < 0){
-	    	
+	    	ymoved = false;
 	    }else{
 	    	if(newchary > chary){
 	    		//Is falling down
