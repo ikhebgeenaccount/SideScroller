@@ -5,6 +5,6 @@ import javax.swing.JLabel;
 public class FillerLabel extends JLabel{
         
         public FillerLabel(){
-                setText("          "); //10 spaces
+        	setText("          "); //10 spaces
         }
 }
