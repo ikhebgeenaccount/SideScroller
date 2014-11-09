@@ -2,6 +2,7 @@ package main.gui;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
@@ -39,6 +40,10 @@ public class Panel extends JPanel{
 	@Override
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
+		//Draw default disclaimers
+		g.drawString("Developed by ikhebgeenaccount", 0, 483);
+		g.drawString("League of Legends is owned by Riot Games", 0, 497);
+		
 		//Draw default background image
 	}
 
