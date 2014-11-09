@@ -46,7 +46,7 @@ public class MenuPanel extends Panel{
 		
 		c.gridy++;
 		
-		c.gridy = addFillerLabelsY(3, c.gridy);
+		c.gridy = addFillerLabelsY(3, c.gridy); //TODO fix number of labels between buttons
 		
 		c.gridy++;
 		
