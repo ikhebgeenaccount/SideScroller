@@ -12,6 +12,8 @@ I am currently looking for artists, to create animations and environments.
 PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you have no reddit, add me ingame on EUW: ikhebgeenaccount.  
 
 **Changelog**
+  - *v0.2.1*
+    - Fixed a bug where the character would detect collision from the level before current level
   - *v0.2.0*
     - Added animations
     - Added menu
