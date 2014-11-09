@@ -1,14 +1,13 @@
 package main.gui.panel;
 
-import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 
 import main.Main;
 import main.game.champion.Champion;
@@ -51,9 +50,6 @@ public class GamePanel extends Panel implements KeyListener{
 	//Layout variables
 	private GridBagConstraints c;
 	
-	//Current FPS
-	private JLabel currentFPSLabel;
-	
 	public GamePanel(Champion character){
 		tick = 0;
 		
@@ -92,9 +88,6 @@ public class GamePanel extends Panel implements KeyListener{
 		c.gridy = 0;
 		c.gridx = 0;
 		
-		//Label with currentFPS
-		currentFPSLabel = new JLabel();
-		
 		//Set this as keylistener and make it focusable so the keylistener works
 		addKeyListener(this);
 		setFocusable(true);
@@ -128,10 +121,15 @@ public class GamePanel extends Panel implements KeyListener{
 				}
 			}
 		}
+		
+		//Draw scene of character
 		g.drawImage(character.getCurrentAnimationImage(), charx, chary, null);
+		
+		//Check if next scene should play
 		character.checkNextScene();
-		currentFPSLabel.setText(Main.getCurrentFPS());
-		add(currentFPSLabel, c);
+		
+		//Draw current FPS
+		g.drawString(Main.getCurrentFPS(), 985, 12);
 		g.dispose();
 	}
 	
