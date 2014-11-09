@@ -36,7 +36,9 @@ public class MenuPanel extends Panel{
 		
 		c.gridy++;
 		
-		c.gridy = addFillerLabelsY(3, c.gridy);
+		xy = addFillerLabelsY(3, c.gridx, c.gridy);
+		c.gridx = xy[0];
+		c.gridy = xy[1];
 		
 		c.gridy++;
 		
@@ -46,7 +48,9 @@ public class MenuPanel extends Panel{
 		
 		c.gridy++;
 		
-		c.gridy = addFillerLabelsY(3, c.gridy); //TODO fix number of labels between buttons
+		xy = addFillerLabelsY(3, c.gridx, c.gridy);
+		c.gridx = xy[0];
+		c.gridy = xy[1];
 		
 		c.gridy++;
 		
@@ -56,7 +60,9 @@ public class MenuPanel extends Panel{
 		
 		//Puts int labels FillerLabels in x-axis
 		c.gridy = 0;
-		c.gridx = addFillerLabelsX(27, c.gridx);
+		xy = addFillerLabelsX(27, c.gridx, c.gridy);
+		c.gridx = xy[0];
+		c.gridy = xy[1];
 	}
 	
 	@Override

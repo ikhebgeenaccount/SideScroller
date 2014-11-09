@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 public class Panel extends JPanel{
 	
 	private GridBagConstraints c;
+	public int[] xy;
 	
 	public Panel(){
 		setLayout(new GridBagLayout());
@@ -22,19 +23,23 @@ public class Panel extends JPanel{
 	}
 	
 	//Add amount FillerLabels from start in y
-	public int addFillerLabelsY(int amount, int start){	
-		for(c.gridy = start; c.gridy <= amount; c.gridy++){
+	public int[] addFillerLabelsY(int amount, int startX, int startY){
+		c.gridx = startX;
+		for(c.gridy = startY; c.gridy <= amount; c.gridy++){
 			add(new FillerLabel(), c);
 		}	
-		return c.gridy;
+		xy = new int[]{c.gridx, c.gridy};
+		return xy;
 	}
 	
 	//Add amount FillerLabels from start in x
-	public int addFillerLabelsX(int amount, int start){
-		for(c.gridx = start; c.gridx <= amount; c.gridx++){
+	public int[] addFillerLabelsX(int amount, int startX, int startY){
+		c.gridy = startY;
+		for(c.gridx = startX; c.gridx <= amount; c.gridx++){
 			add(new FillerLabel(), c);
 		}
-		return c.gridx;
+		xy = new int[]{c.gridx, c.gridy};
+		return xy;
 	}
 	
 	@Override
