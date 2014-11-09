@@ -155,14 +155,14 @@ public class GamePanel extends Panel implements KeyListener{
 	    if(keys[KeyEvent.VK_UP]){
 	    	if(onEdgeY){
 				if(onEdgeX){
-					if(currentLevel[matrix_y + 1][matrix_x_left ] != 0){
+					if(currentLevel[matrix_y + 1][matrix_x_left + (levelID * 20)] != 0){
 						jump.jumping = true;
 				    	jump.start_tick = tick;
 					}else{
 						
 					}
 				}else{
-					if(currentLevel[matrix_y + 1][matrix_x_left ] != 0 || currentLevel[matrix_y + 1][matrix_x_left + 1] != 0){
+					if(currentLevel[matrix_y + 1][matrix_x_left + (levelID * 20)] != 0 || currentLevel[matrix_y + 1][matrix_x_left + (levelID * 20) + 1] != 0){
 						jump.jumping = true;
 				    	jump.start_tick = tick;
 					}else{
@@ -171,14 +171,14 @@ public class GamePanel extends Panel implements KeyListener{
 				}
 			}else{
 				if(onEdgeX){
-					if(currentLevel[matrix_y][matrix_x_left ] != 0){
+					if(currentLevel[matrix_y][matrix_x_left + (levelID * 20)] != 0){
 						jump.jumping = true;
 				    	jump.start_tick = tick;
 					}else{
 						
 					}
 				}else{
-					if(currentLevel[matrix_y][matrix_x_left ] != 0 || currentLevel[matrix_y][matrix_x_left ] != 0){
+					if(currentLevel[matrix_y][matrix_x_left + (levelID * 20)] != 0 || currentLevel[matrix_y][matrix_x_left + (levelID * 20)] != 0){
 						jump.jumping = true;
 				    	jump.start_tick = tick;
 					}else{
@@ -235,7 +235,7 @@ public class GamePanel extends Panel implements KeyListener{
 		  	character.setAnimationType(Champion.IDLE);
 		}    
 	    
-onEdge();
+	    onEdge();
 		
 	    int matrix_x_left = roundDownToClosestMultipleOfFifty(charx)/50;
 	    int matrix_y =  roundDownToClosestMultipleOfFifty(chary + 99)/50;
@@ -412,6 +412,9 @@ onEdge();
 	    if((matrix_x_bottom_right  + (levelID * 20))/(levelID + 1) > ((levelID + 1) * 20) - 1){
 	    	levelID++;
 	    	charx = 0;
+	    }else if(matrix_x_bottom_right < 0 && levelID > 0){
+	    	levelID--;
+	    	charx = 950;
 	    }
 	    
 	}
