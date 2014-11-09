@@ -14,7 +14,7 @@ PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you hav
 **Changelog**
   - *v0.2.1*
     - Fixed a bug where the character would detect collision from the level before current level
-  - *v0.2.0*
+  - *v0.2.0* - **current release**
     - Added animations
     - Added menu
     - Added loading screen
@@ -27,7 +27,7 @@ PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you hav
     - Fixed non-fluid movement, now fluid
     - Fixed bug where the character wouldn't fall when jumping against a platform
     - Fixed bug where the character couldn't move when jumping against the top of the screen
-  - *v0.1.1* - **current release**
+  - *v0.1.1*
     - Fixed images not working
   - *v0.1.0*
     - Added graphics
