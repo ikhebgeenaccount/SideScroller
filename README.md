@@ -14,6 +14,8 @@ PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you hav
 **Changelog**
   - *v0.2.1*
     - Fixed a bug where the character would detect collision from the level before current level
+    - Fixed a bug where the character wasn't able to jump in next level
+    - Fixed next level, now you are able to walk back to previous level
   - *v0.2.0* - **current release**
     - Added animations
     - Added menu
