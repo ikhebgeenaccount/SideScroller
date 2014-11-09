@@ -58,7 +58,7 @@ public class MenuPanel extends Panel{
 		quit = new JButton("Quit");
 		quit.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				System.exit(0);
+				Main.quitGame();
 			}
 		});
 		add(quit, c);
