@@ -235,7 +235,81 @@ public class GamePanel extends Panel implements KeyListener{
 		  	character.setAnimationType(Champion.IDLE);
 		}    
 	    
-	    checkGravity();
+onEdge();
+		
+	    int matrix_x_left = roundDownToClosestMultipleOfFifty(charx)/50;
+	    int matrix_y =  roundDownToClosestMultipleOfFifty(chary + 99)/50;
+	    
+	    //If the character is not jumping, we check for gravity, otherwise we jump()
+		if(!jump.jumping){
+			//Here we check if the substance beneath the character is solid
+		    if(onEdgeX){
+		    	if(onEdgeY){
+		    		if(currentLevel[matrix_y + 1][matrix_x_left + (levelID * 20)] == 0){
+		    			if(gravity.falling){
+		    				newchary = chary + gravity.falldown_px;
+		    				//gravity.setNextFall();
+		    			}else{
+		    				gravity.startFall(tick);
+		    				newchary = chary + gravity.falldown_px;
+		    				//gravity.setNextFall();	    				
+		    			}
+		    		}else{
+		    			gravity.endFall();
+		    		}
+		    	}else{
+		    		if(currentLevel[matrix_y][matrix_x_left + (levelID * 20)] == 0){
+		    			if(gravity.falling){
+		    				newchary = chary + gravity.falldown_px;
+		    				//gravity.setNextFall();
+		    			}else{
+		    				gravity.startFall(tick);
+		    				newchary = chary + gravity.falldown_px;
+		    				//gravity.setNextFall();	    				
+		    			}
+		    		}else{
+		    			gravity.endFall();
+		    		}
+		    	}
+		    }else{
+		    	if(onEdgeY){
+		    		if(currentLevel[matrix_y + 1][matrix_x_left + (levelID * 20)] == 0 && currentLevel[matrix_y + 1][matrix_x_left + (levelID * 20) + 1] == 0){
+		    			if(gravity.falling){
+		    				newchary = chary + gravity.falldown_px;
+		    				//gravity.setNextFall();
+		    			}else{
+		    				gravity.startFall(tick);
+		    				newchary = chary + gravity.falldown_px;
+		    				//gravity.setNextFall();	    				
+		    			}
+		    		}else{
+		    			gravity.endFall();
+		    		}	    		
+		    	}else{
+		    		if(currentLevel[matrix_y][matrix_x_left + (levelID * 20)] == 0 && currentLevel[matrix_y][matrix_x_left + (levelID * 20) + 1] == 0){
+		    			if(gravity.falling){
+		    				newchary = chary + gravity.falldown_px;
+		    				//gravity.setNextFall();
+		    			}else{
+		    				gravity.startFall(tick);
+		    				newchary = chary + gravity.falldown_px;
+		    				//gravity.setNextFall();	    				
+		    			}
+		    		}else{
+		    			gravity.endFall();
+		    		}    		
+		    	}
+		    }
+		}else{
+			//Coordinates are changed: character jumps
+			//Also checks if the jump shouldn't end yet
+			if(tick - jump.start_tick <= jump.jump_tick){
+				newchary -= jump.jump_px;
+			}else{
+				jump.jumping = false;
+				newchary -= jump.jump_px;
+			}			
+		}
 	    
 	    boolean xmoved = true;
 	    boolean ymoved = true;
@@ -386,85 +460,6 @@ public class GamePanel extends Panel implements KeyListener{
 			//falldown_px = FALLDOWN_PX_START;
 			falling = false;
 		}
-	}
-	
-	//In the checkGravity() method the squares beneath the characters feet are checked if they are air, see resources/gravity.txt
-	public void checkGravity(){	    
-	    onEdge();
-		
-	    int matrix_x_left = roundDownToClosestMultipleOfFifty(charx)/50;
-	    int matrix_y =  roundDownToClosestMultipleOfFifty(chary + 99)/50;
-	    
-	    //If the character is not jumping, we check for gravity, otherwise we jump()
-		if(!jump.jumping){
-			//Here we check if the substance beneath the character is solid
-		    if(onEdgeX){
-		    	if(onEdgeY){
-		    		if(currentLevel[matrix_y + 1][matrix_x_left + (levelID * 20)] == 0){
-		    			if(gravity.falling){
-		    				newchary = chary + gravity.falldown_px;
-		    				//gravity.setNextFall();
-		    			}else{
-		    				gravity.startFall(tick);
-		    				newchary = chary + gravity.falldown_px;
-		    				//gravity.setNextFall();	    				
-		    			}
-		    		}else{
-		    			gravity.endFall();
-		    		}
-		    	}else{
-		    		if(currentLevel[matrix_y][matrix_x_left + (levelID * 20)] == 0){
-		    			if(gravity.falling){
-		    				newchary = chary + gravity.falldown_px;
-		    				//gravity.setNextFall();
-		    			}else{
-		    				gravity.startFall(tick);
-		    				newchary = chary + gravity.falldown_px;
-		    				//gravity.setNextFall();	    				
-		    			}
-		    		}else{
-		    			gravity.endFall();
-		    		}
-		    	}
-		    }else{
-		    	if(onEdgeY){
-		    		if(currentLevel[matrix_y + 1][matrix_x_left + (levelID * 20)] == 0 && currentLevel[matrix_y + 1][matrix_x_left + (levelID * 20) + 1] == 0){
-		    			if(gravity.falling){
-		    				newchary = chary + gravity.falldown_px;
-		    				//gravity.setNextFall();
-		    			}else{
-		    				gravity.startFall(tick);
-		    				newchary = chary + gravity.falldown_px;
-		    				//gravity.setNextFall();	    				
-		    			}
-		    		}else{
-		    			gravity.endFall();
-		    		}	    		
-		    	}else{
-		    		if(currentLevel[matrix_y][matrix_x_left + (levelID * 20)] == 0 && currentLevel[matrix_y][matrix_x_left + (levelID * 20) + 1] == 0){
-		    			if(gravity.falling){
-		    				newchary = chary + gravity.falldown_px;
-		    				//gravity.setNextFall();
-		    			}else{
-		    				gravity.startFall(tick);
-		    				newchary = chary + gravity.falldown_px;
-		    				//gravity.setNextFall();	    				
-		    			}
-		    		}else{
-		    			gravity.endFall();
-		    		}    		
-		    	}
-		    }
-		}else{
-			//Coordinates are changed: character jumps
-			//Also checks if the jump shouldn't end yet
-			if(tick - jump.start_tick <= jump.jump_tick){
-				newchary -= jump.jump_px;
-			}else{
-				jump.jumping = false;
-				newchary -= jump.jump_px;
-			}			
-		}		
 	}
 	
 	public int roundDownToClosestMultipleOfFifty(int num){
