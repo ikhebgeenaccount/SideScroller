@@ -1,5 +1,7 @@
 package main;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -124,6 +126,10 @@ public class Main extends JFrame{
 	//Method to quit game
 	public static void quitGame(){
 		running = false;
+		
+		System.out.println("Exiting");
+		
+		System.exit(0);
 	}
 	
 	//Frame is created and set in the middle of the screen
@@ -134,6 +140,11 @@ public class Main extends JFrame{
 		frame = new JFrame("SideScroller");
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		frame.addWindowListener(new WindowAdapter(){
+			public void windowClosing(WindowEvent e){
+				quitGame();
+			}
+		});
 		
 		//Create menuPanel and set that in frame
 		menuPanel = new MenuPanel();
