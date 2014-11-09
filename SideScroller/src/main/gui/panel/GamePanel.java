@@ -15,7 +15,7 @@ import main.gui.Panel;
 public class GamePanel extends Panel implements KeyListener{
 	
 	//Levels
-	private int levelID; //TODO make character go to next level when walking offscreen
+	private int levelID;
 	private int[][] currentLevel;
 	private int[][] levelOne;
 	
