@@ -404,10 +404,6 @@ public class GamePanel extends Panel implements KeyListener{
 	    	character.setAnimationType(Champion.IDLE);
 	    }
 	    
-	    System.out.println(levelID);
-	    System.out.println(matrix_x_bottom_right);
-	    System.out.println((matrix_x_bottom_right  + (levelID * 20)));
-	    
 	    //Check if character should go to next level
 	    if((matrix_x_bottom_right  + (levelID * 20))/(levelID + 1) > ((levelID + 1) * 20) - 1){
 	    	levelID++;
