@@ -12,13 +12,13 @@ I am currently looking for artists, to create animations and environments.
 PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you have no reddit, add me ingame on EUW: ikhebgeenaccount.  
 
 ####Changelog
-  - *v0.2.1*
+  - *v0.2.1* - **current release**
     - Added next levels in y-axis
     - Fixed a bug where the character would detect collision from the level before current level
     - Fixed a bug where the character wasn't able to jump in next level
     - Fixed next level, now you are able to walk back to previous level
     - Fixed sloppy movement between levels
-  - *v0.2.0* - **current release**
+  - *v0.2.0*
     - Added animations
     - Added menu
     - Added loading screen
