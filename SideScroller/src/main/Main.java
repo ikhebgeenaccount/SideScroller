@@ -81,7 +81,7 @@ public class Main extends JFrame{
 			maxFPS = 45;
 			fpsCap = true;
 			ticksPS = 90;
-		}		
+		}
 		
 		//Create character
 		loadPanel.setNextLoadPart("Creating character");
