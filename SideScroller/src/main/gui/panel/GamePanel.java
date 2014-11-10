@@ -16,6 +16,7 @@ public class GamePanel extends Panel implements KeyListener{
 	
 	//Levels
 	private int levelIDx;
+	private int levelIDy;
 	private int[][] currentLevel;
 	private int[][] levelOne;
 	
@@ -69,6 +70,7 @@ public class GamePanel extends Panel implements KeyListener{
 		createLevels();
 		currentLevel = levelOne;
 		levelIDx = 0;
+		levelIDy = 0;
 		
 		//Pixels that the character moves every update()
 		MOVEPX = 5;
@@ -108,7 +110,7 @@ public class GamePanel extends Panel implements KeyListener{
 		for(int x = 0; x < 20; x++){
 			for(int y = 0; y < 10; y++){
                 //Decide which landscape-img should be used
-				switch(currentLevel[y][x + (levelIDx * 20)]){
+				switch(currentLevel[y + (levelIDy * 10)][x + (levelIDx * 20)]){
 					case 0:g.drawImage(air, 50 * x, 50 * y, null);
 						break;
 					case 1:g.drawImage(ground, 50 * x, 50 * y, null);
@@ -155,14 +157,14 @@ public class GamePanel extends Panel implements KeyListener{
 	    if(keys[KeyEvent.VK_UP]){
 	    	if(onEdgeY){
 				if(onEdgeX){
-					if(currentLevel[matrix_y + 1][matrix_x_left + (levelIDx * 20)] != 0){
+					if(currentLevel[matrix_y + 1 + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] != 0){
 						jump.jumping = true;
 				    	jump.start_tick = tick;
 					}else{
 						
 					}
 				}else{
-					if(currentLevel[matrix_y + 1][matrix_x_left + (levelIDx * 20)] != 0 || currentLevel[matrix_y + 1][matrix_x_left + (levelIDx * 20) + 1] != 0){
+					if(currentLevel[matrix_y + 1 + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] != 0 || currentLevel[matrix_y + 1 + (levelIDy * 10)][matrix_x_left + (levelIDx * 20) + 1] != 0){
 						jump.jumping = true;
 				    	jump.start_tick = tick;
 					}else{
@@ -171,14 +173,14 @@ public class GamePanel extends Panel implements KeyListener{
 				}
 			}else{
 				if(onEdgeX){
-					if(currentLevel[matrix_y][matrix_x_left + (levelIDx * 20)] != 0){
+					if(currentLevel[matrix_y + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] != 0){
 						jump.jumping = true;
 				    	jump.start_tick = tick;
 					}else{
 						
 					}
 				}else{
-					if(currentLevel[matrix_y][matrix_x_left + (levelIDx * 20)] != 0 || currentLevel[matrix_y][matrix_x_left + (levelIDx * 20)] != 0){
+					if(currentLevel[matrix_y + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] != 0 || currentLevel[matrix_y + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] != 0){
 						jump.jumping = true;
 				    	jump.start_tick = tick;
 					}else{
@@ -245,7 +247,7 @@ public class GamePanel extends Panel implements KeyListener{
 			//Here we check if the substance beneath the character is solid
 		    if(onEdgeX){
 		    	if(onEdgeY){
-		    		if(currentLevel[matrix_y + 1][matrix_x_left + (levelIDx * 20)] == 0){
+		    		if(currentLevel[matrix_y + 1 + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] == 0){
 		    			if(gravity.falling){
 		    				newchary = chary + gravity.falldown_px;
 		    				//gravity.setNextFall();
@@ -258,7 +260,7 @@ public class GamePanel extends Panel implements KeyListener{
 		    			gravity.endFall();
 		    		}
 		    	}else{
-		    		if(currentLevel[matrix_y][matrix_x_left + (levelIDx * 20)] == 0){
+		    		if(currentLevel[matrix_y + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] == 0){
 		    			if(gravity.falling){
 		    				newchary = chary + gravity.falldown_px;
 		    				//gravity.setNextFall();
@@ -273,7 +275,7 @@ public class GamePanel extends Panel implements KeyListener{
 		    	}
 		    }else{
 		    	if(onEdgeY){
-		    		if(currentLevel[matrix_y + 1][matrix_x_left + (levelIDx * 20)] == 0 && currentLevel[matrix_y + 1][matrix_x_left + (levelIDx * 20) + 1] == 0){
+		    		if(currentLevel[matrix_y + 1 + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] == 0 && currentLevel[matrix_y + 1 + (levelIDy * 10)][matrix_x_left + (levelIDx * 20) + 1] == 0){
 		    			if(gravity.falling){
 		    				newchary = chary + gravity.falldown_px;
 		    				//gravity.setNextFall();
@@ -286,7 +288,7 @@ public class GamePanel extends Panel implements KeyListener{
 		    			gravity.endFall();
 		    		}	    		
 		    	}else{
-		    		if(currentLevel[matrix_y][matrix_x_left + (levelIDx * 20)] == 0 && currentLevel[matrix_y][matrix_x_left + (levelIDx * 20) + 1] == 0){
+		    		if(currentLevel[matrix_y + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] == 0 && currentLevel[matrix_y + (levelIDy * 10)][matrix_x_left + (levelIDx * 20) + 1] == 0){
 		    			if(gravity.falling){
 		    				newchary = chary + gravity.falldown_px;
 		    				//gravity.setNextFall();
@@ -357,7 +359,7 @@ public class GamePanel extends Panel implements KeyListener{
 	    	//Check if the coordinates where the character is moving are valid
 	    	if(newcharx > charx){
 	    		//Moving right
-	    		if(currentLevel[matrix_y_upper_right_old][matrix_x_upper_right + (levelIDx * 20)] != 0 || currentLevel[matrix_y_middle_right_old][matrix_x_middle_right + (levelIDx * 20)] != 0 || currentLevel[matrix_y_bottom_right_old][matrix_x_bottom_right + (levelIDx * 20)] != 0){
+	    		if(currentLevel[matrix_y_upper_right_old + (levelIDy * 10)][matrix_x_upper_right + (levelIDx * 20)] != 0 || currentLevel[matrix_y_middle_right_old + (levelIDy * 10)][matrix_x_middle_right + (levelIDx * 20)] != 0 || currentLevel[matrix_y_bottom_right_old + (levelIDy * 10)][matrix_x_bottom_right + (levelIDx * 20)] != 0){
 	    			//Can't move there!
 	    			xmoved = false;
 	    		}else{
@@ -366,7 +368,7 @@ public class GamePanel extends Panel implements KeyListener{
 	    		}
 	    	}else if(newcharx < charx){
 	    		//Moving left
-	    		if(currentLevel[matrix_y_upper_left_old][matrix_x_upper_left + (levelIDx * 20)] != 0 || currentLevel[matrix_y_middle_left_old][matrix_x_middle_left + (levelIDx * 20)] != 0 || currentLevel[matrix_y_bottom_left_old][matrix_x_bottom_left + (levelIDx * 20)] != 0){
+	    		if(currentLevel[matrix_y_upper_left_old + (levelIDy * 10)][matrix_x_upper_left + (levelIDx * 20)] != 0 || currentLevel[matrix_y_middle_left_old + (levelIDy * 10)][matrix_x_middle_left + (levelIDx * 20)] != 0 || currentLevel[matrix_y_bottom_left_old + (levelIDy * 10)][matrix_x_bottom_left + (levelIDx * 20)] != 0){
 	    			//Can't move there!
 	    			xmoved = false;
 	    		}else{
@@ -376,12 +378,12 @@ public class GamePanel extends Panel implements KeyListener{
 	    	}	    	
 	    }
 	    //Check y-axis
-	    if(matrix_y_upper_left < 0  || matrix_y_upper_right < 0 || matrix_y_bottom_left < 0 || matrix_y_bottom_right < 0){
+	    if(matrix_y_upper_left + (levelIDy * 10) < 0  || matrix_y_upper_right + (levelIDy * 10) < 0 || matrix_y_bottom_left + (levelIDy * 10) < 0 || matrix_y_bottom_right + (levelIDy * 10) < 0){
 	    	ymoved = false;
 	    }else{
 	    	if(newchary > chary){
 	    		//Is falling down
-	    		if(currentLevel[matrix_y_bottom_left][matrix_x_bottom_left_old + (levelIDx * 20)] != 0 || currentLevel[matrix_y_bottom_right][matrix_x_bottom_right_old + (levelIDx * 20)] != 0){
+	    		if(currentLevel[matrix_y_bottom_left + (levelIDy * 10)][matrix_x_bottom_left_old + (levelIDx * 20)] != 0 || currentLevel[matrix_y_bottom_right + (levelIDy * 10)][matrix_x_bottom_right_old + (levelIDx * 20)] != 0){
 	    			//Can't move there
 	    			ymoved = false;
 	    		}else{
@@ -390,7 +392,7 @@ public class GamePanel extends Panel implements KeyListener{
 	    		}	    			    		
 	    	}else if(newchary < chary){
 	    		//Is jumping
-	    		if(currentLevel[matrix_y_upper_left][matrix_x_upper_left_old + (levelIDx * 20)] != 0 || currentLevel[matrix_y_upper_right][matrix_x_upper_right_old + (levelIDx * 20)] != 0){
+	    		if(currentLevel[matrix_y_upper_left + (levelIDy * 10)][matrix_x_upper_left_old + (levelIDx * 20)] != 0 || currentLevel[matrix_y_upper_right + (levelIDy * 10)][matrix_x_upper_right_old + (levelIDx * 20)] != 0){
 	    			//Can't move there
 	    			ymoved = false;
 	    		}else{
@@ -404,13 +406,22 @@ public class GamePanel extends Panel implements KeyListener{
 	    	character.setAnimationType(Champion.IDLE);
 	    }
 	    
-	    //Check if character should go to next level
+	    //Check if character should go to next level in x-axis
 	    if((matrix_x_bottom_right  + (levelIDx * 20))/(levelIDx + 1) > ((levelIDx + 1) * 20) - 1){
 	    	levelIDx++;
 	    	charx = 0;
 	    }else if(matrix_x_bottom_right < 0 && levelIDx > 0){
 	    	levelIDx--;
 	    	charx = 950;
+	    }
+	    
+	    //Check if character should go to next level in y-axis
+	    if((matrix_y_bottom_right + (levelIDy * 10))/(levelIDy + 1) > ((levelIDy + 1) * 10) - 1){
+	    	levelIDy++;
+	    	chary = 0;
+	    }else if(matrix_y_bottom_right < 0 && levelIDy > 0){
+	    	levelIDy--;
+	    	chary = 450;
 	    }
 	    
 	}
