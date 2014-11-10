@@ -208,11 +208,6 @@ public class GamePanel extends Panel implements KeyListener{
 	    if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
 	    	Main.pauseGame();
 	    }
-	    
-	    if(e.getKeyCode() == KeyEvent.VK_SPACE){
-	    	chary = 350;
-	    	charx = 0;
-	    }
 	}
 	
 	//Called when a key is released (for jumping this is not the most optimal way to initiate the jump, it only starts when
@@ -433,16 +428,16 @@ public class GamePanel extends Panel implements KeyListener{
 	    if((matrix_x_bottom_right  + (levelIDx * 20))/(levelIDx + 1) > ((levelIDx + 1) * 20) - 1){
 	    	levelIDx++;
 	    	charx = 0;
-	    }else if(matrix_x_bottom_right < 0 && levelIDx > 0){
+	    }else if(matrix_x_bottom_left < 0 && levelIDx > 0){
 	    	levelIDx--;
 	    	charx = 950;
 	    }
 	    
 	    //Check if character should go to next level in y-axis
-	    if((matrix_y_bottom_right + (levelIDy * 10))/(levelIDy + 1) > ((levelIDy + 1) * 10) - 1){
+	    if((matrix_y_bottom_right + (levelIDy * 10))/(levelIDy + 1) > ((levelIDy + 1) * 10) - 1 && (matrix_y_middle_right + (levelIDy * 10))/(levelIDy + 1) > ((levelIDy + 1) * 10) - 1 && (matrix_y_upper_right + (levelIDy * 10))/(levelIDy + 1) > ((levelIDy + 1) * 10) - 1){
 	    	levelIDy++;
 	    	chary = -50;
-	    }else if(matrix_y_bottom_right < 0 && levelIDy > 0){
+	    }else if(matrix_y_upper_right < 0 && levelIDy > 0 && matrix_y_middle_right < 0){
 	    	levelIDy--;
 	    	chary = 500;
 	    }
@@ -532,9 +527,9 @@ public class GamePanel extends Panel implements KeyListener{
 								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0},
 								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0},
 								{0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1},
-								{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,0,0,0,0,0,1},
-								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1},
-								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0},
+								{0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,0,0,0,0,0,1},
+								{0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1},
+								{1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0},
 								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0},
 								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0},
 								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1},
