@@ -19,6 +19,8 @@ public class GamePanel extends Panel implements KeyListener{
 	private int levelIDy;
 	private int[][] currentLevel;
 	private int[][] levelOne;
+	private int levelLengthX;
+	private int levelLengthY;
 	
 	//Array for keys
 	private boolean[] keys;
@@ -71,6 +73,8 @@ public class GamePanel extends Panel implements KeyListener{
 		currentLevel = levelOne;
 		levelIDx = 0;
 		levelIDy = 0;
+		levelLengthX = currentLevel[0].length - 1;
+		levelLengthY = currentLevel.length -1;
 		
 		//Pixels that the character moves every update()
 		MOVEPX = 5;
@@ -153,18 +157,28 @@ public class GamePanel extends Panel implements KeyListener{
 	    int matrix_x_left = roundDownToClosestMultipleOfFifty(charx)/50 ;
 	    int matrix_y =  roundDownToClosestMultipleOfFifty(chary + 99)/50 ;
 	    
+	    boolean solid = false;
+	    
+	    try{
+	    	if(currentLevel[matrix_y + 1 + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] == 0){
+	    		
+	    	}
+	    }catch(ArrayIndexOutOfBoundsException e1){
+	    	solid = true;
+	    }
+	    
 	    //If the up-key is pressed, check if the square beneath the character is solid, so he can really jump
 	    if(keys[KeyEvent.VK_UP]){
 	    	if(onEdgeY){
 				if(onEdgeX){
-					if(currentLevel[matrix_y + 1 + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] != 0){
+					if(solid || currentLevel[matrix_y + 1 + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] != 0){
 						jump.jumping = true;
 				    	jump.start_tick = tick;
 					}else{
 						
 					}
 				}else{
-					if(currentLevel[matrix_y + 1 + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] != 0 || currentLevel[matrix_y + 1 + (levelIDy * 10)][matrix_x_left + (levelIDx * 20) + 1] != 0){
+					if(solid || currentLevel[matrix_y + 1 + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] != 0 || currentLevel[matrix_y + 1 + (levelIDy * 10)][matrix_x_left + (levelIDx * 20) + 1] != 0){
 						jump.jumping = true;
 				    	jump.start_tick = tick;
 					}else{
@@ -173,14 +187,14 @@ public class GamePanel extends Panel implements KeyListener{
 				}
 			}else{
 				if(onEdgeX){
-					if(currentLevel[matrix_y + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] != 0){
+					if(solid || currentLevel[matrix_y + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] != 0){
 						jump.jumping = true;
 				    	jump.start_tick = tick;
 					}else{
 						
 					}
 				}else{
-					if(currentLevel[matrix_y + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] != 0 || currentLevel[matrix_y + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] != 0){
+					if(solid || currentLevel[matrix_y + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] != 0 || currentLevel[matrix_y + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] != 0){
 						jump.jumping = true;
 				    	jump.start_tick = tick;
 					}else{
@@ -242,12 +256,21 @@ public class GamePanel extends Panel implements KeyListener{
 	    int matrix_x_left = roundDownToClosestMultipleOfFifty(charx)/50;
 	    int matrix_y =  roundDownToClosestMultipleOfFifty(chary + 99)/50;
 	    
+	    boolean solid = false;
+	    
+	    try{
+	    	if(currentLevel[matrix_y + 1 + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] == 0){
+	    		
+	    	}
+	    }catch(ArrayIndexOutOfBoundsException e){
+	    	solid = true;
+	    }
 	    //If the character is not jumping, we check for gravity, otherwise we jump()
 		if(!jump.jumping){
 			//Here we check if the substance beneath the character is solid
 		    if(onEdgeX){
 		    	if(onEdgeY){
-		    		if(currentLevel[matrix_y + 1 + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] == 0){
+		    		if(solid || currentLevel[matrix_y + 1 + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] == 0){
 		    			if(gravity.falling){
 		    				newchary = chary + gravity.falldown_px;
 		    				//gravity.setNextFall();
@@ -260,7 +283,7 @@ public class GamePanel extends Panel implements KeyListener{
 		    			gravity.endFall();
 		    		}
 		    	}else{
-		    		if(currentLevel[matrix_y + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] == 0){
+		    		if(solid || currentLevel[matrix_y + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] == 0){
 		    			if(gravity.falling){
 		    				newchary = chary + gravity.falldown_px;
 		    				//gravity.setNextFall();
@@ -275,7 +298,7 @@ public class GamePanel extends Panel implements KeyListener{
 		    	}
 		    }else{
 		    	if(onEdgeY){
-		    		if(currentLevel[matrix_y + 1 + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] == 0 && currentLevel[matrix_y + 1 + (levelIDy * 10)][matrix_x_left + (levelIDx * 20) + 1] == 0){
+		    		if(solid || currentLevel[matrix_y + 1 + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] == 0 && currentLevel[matrix_y + 1 + (levelIDy * 10)][matrix_x_left + (levelIDx * 20) + 1] == 0){
 		    			if(gravity.falling){
 		    				newchary = chary + gravity.falldown_px;
 		    				//gravity.setNextFall();
@@ -288,7 +311,7 @@ public class GamePanel extends Panel implements KeyListener{
 		    			gravity.endFall();
 		    		}	    		
 		    	}else{
-		    		if(currentLevel[matrix_y + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] == 0 && currentLevel[matrix_y + (levelIDy * 10)][matrix_x_left + (levelIDx * 20) + 1] == 0){
+		    		if(solid || currentLevel[matrix_y + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] == 0 && currentLevel[matrix_y + (levelIDy * 10)][matrix_x_left + (levelIDx * 20) + 1] == 0){
 		    			if(gravity.falling){
 		    				newchary = chary + gravity.falldown_px;
 		    				//gravity.setNextFall();
@@ -353,7 +376,7 @@ public class GamePanel extends Panel implements KeyListener{
     	*/
 	    //Check x-axis
 	    //Check if array is not out of bounds
-	    if(matrix_x_upper_left + (levelIDx * 20) < 0 || matrix_x_upper_right + (levelIDx * 20) < 0 || matrix_x_bottom_left + (levelIDx * 20) < 0 || matrix_x_bottom_right + (levelIDx * 20) < 0){
+	    if(matrix_x_upper_left + (levelIDx * 20) < 0 || matrix_x_upper_right + (levelIDx * 20) < 0 || matrix_x_bottom_left + (levelIDx * 20) < 0 || matrix_x_bottom_right + (levelIDx * 20) < 0 || matrix_x_upper_left + (levelIDx * 20) > levelLengthX || matrix_x_upper_right + (levelIDx * 20) > levelLengthX || matrix_x_bottom_left + (levelIDx * 20) > levelLengthX || matrix_x_bottom_right + (levelIDx * 20) > levelLengthX){
 	    	xmoved = false;
 	    }else{
 	    	//Check if the coordinates where the character is moving are valid
@@ -378,7 +401,7 @@ public class GamePanel extends Panel implements KeyListener{
 	    	}	    	
 	    }
 	    //Check y-axis
-	    if(matrix_y_upper_left + (levelIDy * 10) < 0  || matrix_y_upper_right + (levelIDy * 10) < 0 || matrix_y_bottom_left + (levelIDy * 10) < 0 || matrix_y_bottom_right + (levelIDy * 10) < 0){
+	    if(matrix_y_upper_left + (levelIDy * 10) < 0  || matrix_y_upper_right + (levelIDy * 10) < 0 || matrix_y_bottom_left + (levelIDy * 10) < 0 || matrix_y_bottom_right + (levelIDy * 10) < 0 || matrix_y_upper_left + (levelIDy * 10) > levelLengthY  || matrix_y_upper_right + (levelIDy * 10) > levelLengthY || matrix_y_bottom_left + (levelIDy * 10) > levelLengthY || matrix_y_bottom_right + (levelIDy * 10) > levelLengthY){
 	    	ymoved = false;
 	    }else{
 	    	if(newchary > chary){
@@ -418,12 +441,11 @@ public class GamePanel extends Panel implements KeyListener{
 	    //Check if character should go to next level in y-axis
 	    if((matrix_y_bottom_right + (levelIDy * 10))/(levelIDy + 1) > ((levelIDy + 1) * 10) - 1){
 	    	levelIDy++;
-	    	chary = 0;
+	    	chary = -50;
 	    }else if(matrix_y_bottom_right < 0 && levelIDy > 0){
 	    	levelIDy--;
-	    	chary = 450;
+	    	chary = 500;
 	    }
-	    System.out.println(levelIDy);
 	}
 	
 	//In this class the jumpvariables are stored
@@ -504,23 +526,23 @@ public class GamePanel extends Panel implements KeyListener{
 		levelOne = new int[][]{	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 								{1,1,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1},
-								{0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+								{1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1},
+								{0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0},
 								{0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0},
 								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0},
+								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0},
+								{0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1},
+								{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,0,0,0,0,0,1},
 								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1},
-								{0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1},
-								{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1},
-								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0},
+								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0},
 								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0},
+								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1},
+								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0},
+								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0},
+								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0},
 								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}};
+								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0}};
 		
 	}
 }
