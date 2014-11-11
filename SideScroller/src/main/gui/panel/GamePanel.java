@@ -230,20 +230,23 @@ public class GamePanel extends Panel implements KeyListener{
 	public void update(){
 		tick++;
 		
+		boolean xmovedleft = false;
+		boolean xmovedright = false;
+		boolean ymovedup = false;
+		boolean ymoveddown = false;
+		
 		keys[KeyEvent.VK_UP]= false; 
 		
 		newcharx = charx;
 		newchary = chary;
 		
-	    if(keys[KeyEvent.VK_LEFT]){
-	    	character.setAnimationType(Champion.WALK_LEFT);    	
+	    if(keys[KeyEvent.VK_LEFT]){ 	
 	        newcharx -= MOVEPX;
-	    }else if(keys[KeyEvent.VK_RIGHT]){
-		    	character.setAnimationType(Champion.WALK_RIGHT);    	
+	    }
+	    	
+	    if(keys[KeyEvent.VK_RIGHT]){  	
 		        newcharx += MOVEPX;
-		}else{
-		  	character.setAnimationType(Champion.IDLE);
-		}    
+		}   
 	    
 	    onEdge();
 		
@@ -382,6 +385,7 @@ public class GamePanel extends Panel implements KeyListener{
 	    		}else{
 	    			//Can move there
 	    			charx = newcharx;
+	    			xmovedright = true;
 	    		}
 	    	}else if(newcharx < charx){
 	    		//Moving left
@@ -391,6 +395,7 @@ public class GamePanel extends Panel implements KeyListener{
 	    		}else{
 	    			//Can move there
 	    			charx = newcharx;
+	    			xmovedleft = true;
 	    		}
 	    	}	    	
 	    }
@@ -406,6 +411,7 @@ public class GamePanel extends Panel implements KeyListener{
 	    		}else{
 	    			//Can move there
 	    			chary = newchary;
+	    			ymoveddown = true;
 	    		}	    			    		
 	    	}else if(newchary < chary){
 	    		//Is jumping
@@ -415,6 +421,7 @@ public class GamePanel extends Panel implements KeyListener{
 	    		}else{
 	    			//Can move there
 	    			chary = newchary;
+	    			ymovedup = true;
 	    		}
 	    	}
 	    }
@@ -439,6 +446,19 @@ public class GamePanel extends Panel implements KeyListener{
 	    }else if(matrix_y_upper_right < 0 && levelIDy > 0 && matrix_y_middle_right < 0){
 	    	levelIDy--;
 	    	chary = 500;
+	    }
+	    
+	    //Determine which animation should run
+	    if(ymovedup){
+	    	character.setAnimationType(Champion.JUMP);
+	    }else if(ymoveddown){
+	    	character.setAnimationType(Champion.FALL);
+	    }else if(xmovedleft){
+	    	character.setAnimationType(Champion.WALK_LEFT);
+	    }else if(xmovedright){
+	    	character.setAnimationType(Champion.WALK_RIGHT);
+	    }else{
+	    	character.setAnimationType(Champion.IDLE);
 	    }
 	}
 	
