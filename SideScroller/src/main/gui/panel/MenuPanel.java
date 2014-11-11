@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import main.Main;
+import main.gui.FillerLabel;
 import main.gui.Panel;
 
 public class MenuPanel extends Panel{
@@ -47,6 +48,7 @@ public class MenuPanel extends Panel{
 		c.gridy++;
 		
 		xy = addFillerLabelsY(3, c.gridx, c.gridy);
+		
 		c.gridx = xy[0];
 		c.gridy = xy[1];
 		

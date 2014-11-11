@@ -25,7 +25,7 @@ public class Panel extends JPanel{
 	//Add amount FillerLabels from start in y
 	public int[] addFillerLabelsY(int amount, int startX, int startY){
 		c.gridx = startX;
-		for(c.gridy = startY; c.gridy <= amount; c.gridy++){
+		for(c.gridy = startY; c.gridy - startY < amount; c.gridy++){
 			add(new FillerLabel(), c);
 		}	
 		xy = new int[]{c.gridx, c.gridy};
