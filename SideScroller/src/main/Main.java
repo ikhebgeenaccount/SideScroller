@@ -62,7 +62,6 @@ public class Main extends JFrame{
 			//Read config.properties
 			//See: http://stackoverflow.com/questions/26871358/getresourceasstream-returning-null-for-properties-file
 			Properties properties = new Properties();
-			System.out.println(Main.class.getClassLoader().getResource("config/config.properties").toString());
 			InputStream propertiesFile = Main.class.getClassLoader().getResourceAsStream("config/config.properties");
 			properties.load(propertiesFile);
 			
@@ -77,7 +76,7 @@ public class Main extends JFrame{
 			maxFPS = 45;
 			fpsCap = true;
 		}catch(NullPointerException e){
-			System.err.println(e.getStackTrace());
+			e.printStackTrace();
 			System.err.println("Can't find config.properties! Using default properties.");
 			
 			//Manual
