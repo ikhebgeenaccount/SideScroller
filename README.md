@@ -15,6 +15,7 @@ PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you hav
   - *v0.2.2*
     - Added jump animation
     - Added fall animation
+    - Added background image
     - Fixed menu aligning
   - *v0.2.1* - **current release**
     - Added next levels in y-axis
