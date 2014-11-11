@@ -4,6 +4,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.Properties;
 
 import javax.swing.JFrame;
@@ -59,8 +60,9 @@ public class Main extends JFrame{
 		
 		try {			
 			//Read config.properties
+			//See: http://stackoverflow.com/questions/26871358/getresourceasstream-returning-null-for-properties-file
 			Properties properties = new Properties();
-			
+			System.out.println(Main.class.getClassLoader().getResource("config/config.properties").toString());
 			InputStream propertiesFile = Main.class.getClassLoader().getResourceAsStream("config/config.properties");
 			properties.load(propertiesFile);
 			
@@ -68,20 +70,22 @@ public class Main extends JFrame{
 			int maxFPS = Integer.getInteger(properties.getProperty("FPS"));
 			boolean fpsCap = Boolean.getBoolean(properties.getProperty("fpsCap"));
 		}catch(IOException e){
+			System.err.println(e.getStackTrace());
 			System.err.println(e.getMessage());
 			
 			//Manual
 			maxFPS = 45;
 			fpsCap = true;
-			ticksPS = 90;
 		}catch(NullPointerException e){
+			System.err.println(e.getStackTrace());
 			System.err.println("Can't find config.properties! Using default properties.");
 			
 			//Manual
 			maxFPS = 45;
 			fpsCap = true;
-			ticksPS = 90;
 		}
+		
+		ticksPS = 90;
 		
 		//Create character
 		loadPanel.setNextLoadPart("Creating character");
