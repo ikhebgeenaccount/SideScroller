@@ -13,7 +13,7 @@ PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you hav
 
 ####Changelog
   - *v0.2.2*
-    - Added jumping animation
+    - Added jump animation
     - Added fall animation
   - *v0.2.1* - **current release**
     - Added next levels in y-axis
