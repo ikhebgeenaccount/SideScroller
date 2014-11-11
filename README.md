@@ -17,6 +17,7 @@ PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you hav
     - Added fall animation
     - Added background image
     - Fixed menu aligning
+    - Fixed config file not working
   - *v0.2.1* - **current release**
     - Added next levels in y-axis
     - Fixed a bug where the character would detect collision from the level before current level
