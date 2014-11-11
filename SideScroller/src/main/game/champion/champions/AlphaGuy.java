@@ -26,36 +26,18 @@ public class AlphaGuy extends Champion{
 			 */
 			
 			//Add the idle animation to animations[]
-			animations[Champion.IDLE]= new Animation(); 
 			BufferedImage idleSprite = ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/idle.png"));
-			int width = idleSprite.getWidth();
-			int parts = width/50;
-			for(int i =  0; i < parts; i++){
-				animations[Champion.IDLE].addScene(idleSprite.getSubimage(50 * i, 0, 50, 100), 1);
-			}
+			addAnimation(Champion.IDLE, idleSprite, 100);
 			Main.getLoadPanel().setNextLoadPart(load);
 			
-			//Add the walk left animation to animations[]
-			animations[Champion.WALK_LEFT]= new Animation();			
+			//Add the walk left animation to animations[]		
 			BufferedImage walkLeftSprite = ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/walkLeft.png"));
-			width = walkLeftSprite.getWidth();
-			parts = width/50;
-			for(int i = 0 ;i < parts; i++){
-				animations[Champion.WALK_LEFT].addScene(walkLeftSprite.getSubimage(50 * i, 0, 50, 100), 250);
-			}
-			for(int i = 0; i < 1000000000; i++){
-				
-			}
+			addAnimation(Champion.WALK_LEFT, walkLeftSprite, 250);
 			Main.getLoadPanel().setNextLoadPart(load);
 			
 			//Add the walk right animation to animations[]
-			animations[Champion.WALK_RIGHT]= new Animation();
 			BufferedImage walkRightSprite = ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/walkRight.png"));
-			width = walkRightSprite.getWidth();
-			parts = width/50;
-			for(int i = 0; i < parts; i++){
-				animations[Champion.WALK_RIGHT].addScene(walkRightSprite.getSubimage(50 * i, 0, 50, 100), 250);
-			}
+			addAnimation(Champion.WALK_RIGHT, walkRightSprite, 250);
 			Main.getLoadPanel().setNextLoadPart(load);
 			
 			//Add the jump animation to animations[]

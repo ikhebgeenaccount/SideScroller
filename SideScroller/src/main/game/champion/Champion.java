@@ -35,13 +35,13 @@ public class Champion {
 	public void checkNextScene(){
 		currentAnimation.nextScene();
 	}
-	/*
-	public void addAnimation(int type, BufferedImage animationSprite){
+	
+	public void addAnimation(int type, BufferedImage animationSprite, int sceneLength){
 		animations[type] = new Animation();
 		int scenes = animationSprite.getWidth() / 50;
 		for(int i = 0; i < scenes; i++){
-			animations[type].addScene(animationSprite.getSubimage())
+			animations[type].addScene(animationSprite.getSubimage(50 * i, 0, 50, 100), sceneLength);
 		}
-	}*/
+	}
 
 }
