@@ -42,7 +42,7 @@ public class AlphaGuy extends Champion{
 			
 			//Add the jump animation to animations[]
 			BufferedImage jumpSprite = ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/jump.png"));
-			addAnimation(Champion.FALL, jumpSprite, 250);
+			addAnimation(Champion.JUMP, jumpSprite, 250);
 			Main.getLoadPanel().setNextLoadPart(load);
 			
 			//Add the fall animation to animations[]
