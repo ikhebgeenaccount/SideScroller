@@ -12,11 +12,9 @@ import main.gui.Panel;
 
 public class MenuPanel extends Panel{
 	
-	private GridBagConstraints c;
 	private JButton startGame, options, quit;
 	
 	public MenuPanel(){
-		c = new GridBagConstraints();
 		
 		//Set c properties
 		c.anchor = GridBagConstraints.NORTHWEST;

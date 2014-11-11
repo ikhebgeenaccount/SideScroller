@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 
 public class Panel extends JPanel{
 	
-	private GridBagConstraints c;
+	public GridBagConstraints c;
 	public int[] xy;
 	
 	public Panel(){
