@@ -149,26 +149,25 @@ public class GamePanel extends Panel implements KeyListener{
 	
 	//Called when a key is pressed
 	public void keyPressed(KeyEvent e){
-	    keys[e.getKeyCode()] = true;
-	    
-	    
-	    onEdge();
-	    
-	    int matrix_x_left = roundDownToClosestMultipleOfFifty(charx)/50 ;
-	    int matrix_y =  roundDownToClosestMultipleOfFifty(chary + 99)/50 ;
-	    
-	    boolean solid = false;
-	    
-	    try{
-	    	if(currentLevel[matrix_y + 1 + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] == 0){
-	    		
-	    	}
-	    }catch(ArrayIndexOutOfBoundsException e1){
-	    	solid = true;
-	    }
+	    keys[e.getKeyCode()] = true;	    
 	    
 	    //If the up-key is pressed, check if the square beneath the character is solid, so he can really jump
 	    if(keys[KeyEvent.VK_UP]){
+	    	onEdge();
+		    
+		    int matrix_x_left = roundDownToClosestMultipleOfFifty(charx)/50 ;
+		    int matrix_y =  roundDownToClosestMultipleOfFifty(chary + 99)/50 ;
+		    
+		    boolean solid = false;
+		    
+		    try{
+		    	if(currentLevel[matrix_y + 1 + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] == 0){
+		    		
+		    	}
+		    }catch(ArrayIndexOutOfBoundsException e1){
+		    	solid = true;
+		    }
+		    
 	    	if(onEdgeY){
 				if(onEdgeX){
 					if(solid || currentLevel[matrix_y + 1 + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] != 0){
@@ -248,13 +247,13 @@ public class GamePanel extends Panel implements KeyListener{
 	    
 	    onEdge();
 		
-	    int matrix_x_left = roundDownToClosestMultipleOfFifty(charx)/50;
-	    int matrix_y =  roundDownToClosestMultipleOfFifty(chary + 99)/50;
+	    int matrix_x_old = roundDownToClosestMultipleOfFifty(charx)/50;
+	    int matrix_y_old =  roundDownToClosestMultipleOfFifty(chary + 99)/50;
 	    
 	    boolean solid = false;
 	    
 	    try{
-	    	if(currentLevel[matrix_y + 1 + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] == 0){
+	    	if(currentLevel[matrix_y_old + 1 + (levelIDy * 10)][matrix_x_old + (levelIDx * 20)] == 0){
 	    		
 	    	}
 	    }catch(ArrayIndexOutOfBoundsException e){
@@ -265,7 +264,7 @@ public class GamePanel extends Panel implements KeyListener{
 			//Here we check if the substance beneath the character is solid
 		    if(onEdgeX){
 		    	if(onEdgeY){
-		    		if(solid || currentLevel[matrix_y + 1 + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] == 0){
+		    		if(solid || currentLevel[matrix_y_old + 1 + (levelIDy * 10)][matrix_x_old + (levelIDx * 20)] == 0){
 		    			if(gravity.falling){
 		    				newchary = chary + gravity.falldown_px;
 		    				//gravity.setNextFall();
@@ -278,7 +277,7 @@ public class GamePanel extends Panel implements KeyListener{
 		    			gravity.endFall();
 		    		}
 		    	}else{
-		    		if(solid || currentLevel[matrix_y + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] == 0){
+		    		if(solid || currentLevel[matrix_y_old + (levelIDy * 10)][matrix_x_old + (levelIDx * 20)] == 0){
 		    			if(gravity.falling){
 		    				newchary = chary + gravity.falldown_px;
 		    				//gravity.setNextFall();
@@ -293,7 +292,7 @@ public class GamePanel extends Panel implements KeyListener{
 		    	}
 		    }else{
 		    	if(onEdgeY){
-		    		if(solid || currentLevel[matrix_y + 1 + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] == 0 && currentLevel[matrix_y + 1 + (levelIDy * 10)][matrix_x_left + (levelIDx * 20) + 1] == 0){
+		    		if(solid || currentLevel[matrix_y_old + 1 + (levelIDy * 10)][matrix_x_old + (levelIDx * 20)] == 0 && currentLevel[matrix_y_old + 1 + (levelIDy * 10)][matrix_x_old + (levelIDx * 20) + 1] == 0){
 		    			if(gravity.falling){
 		    				newchary = chary + gravity.falldown_px;
 		    				//gravity.setNextFall();
@@ -306,7 +305,7 @@ public class GamePanel extends Panel implements KeyListener{
 		    			gravity.endFall();
 		    		}	    		
 		    	}else{
-		    		if(solid || currentLevel[matrix_y + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] == 0 && currentLevel[matrix_y + (levelIDy * 10)][matrix_x_left + (levelIDx * 20) + 1] == 0){
+		    		if(solid || currentLevel[matrix_y_old + (levelIDy * 10)][matrix_x_old + (levelIDx * 20)] == 0 && currentLevel[matrix_y_old + (levelIDy * 10)][matrix_x_old + (levelIDx * 20) + 1] == 0){
 		    			if(gravity.falling){
 		    				newchary = chary + gravity.falldown_px;
 		    				//gravity.setNextFall();
@@ -331,7 +330,7 @@ public class GamePanel extends Panel implements KeyListener{
 			}			
 		}
 	    
-	    boolean xmoved = true;
+		boolean xmoved = true;
 	    boolean ymoved = true;
 	    
 	    //Here we calculate the coordinates of the character in the matrix for the new coordinates that are set by movement/gravity.
