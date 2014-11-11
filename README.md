@@ -12,6 +12,9 @@ I am currently looking for artists, to create animations and environments.
 PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you have no reddit, add me ingame on EUW: ikhebgeenaccount.  
 
 ####Changelog
+  - *v0.2.2*
+    - Added jump animation
+    - Added fall animation
   - *v0.2.1* - **current release**
     - Added next levels in y-axis
     - Fixed a bug where the character would detect collision from the level before current level
