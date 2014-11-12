@@ -1,5 +1,7 @@
 package main;
 
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
@@ -45,8 +47,20 @@ public class Main extends JFrame{
 	private static GameLoop gameLoop;
 	private static PaintLoop paintLoop;
 	
+	//Font
+	private static Font font;
+	
 	//Main method
 	public static void main(String[] args){
+		try {
+			font = Font.createFont(Font.TRUETYPE_FONT, Main.class.getClassLoader().getResourceAsStream("font/FromCartoonBlocks.ttf"));
+		} catch (FontFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		createFrame();		
 		//Thread for frames
 		frame.setVisible(true);
@@ -255,5 +269,9 @@ public class Main extends JFrame{
 	
 	public static LoadPanel getLoadPanel(){
 		return loadPanel;
+	}
+	
+	public static Font getFont(int size){
+		return font.deriveFont(Font.PLAIN, size);
 	}
 }
