@@ -170,17 +170,10 @@ public class Main extends JFrame{
 		//Create menuPanel and set that in frame
 		menuPanel = new MenuPanel();
 		frame.getContentPane().add(menuPanel);
+		optionPanel = new OptionPanel();
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 
-	}
-	
-	//Label to fill up space
-	private static class FillerLabel extends JLabel{
-		
-		private FillerLabel(){
-			setText("         ");
-		}
 	}
 	
 	//Method to change panel
@@ -280,5 +273,13 @@ public class Main extends JFrame{
 	
 	public static String getVersion(){
 		return VERSION;
+	}
+	
+	public static boolean getFPSCap(){
+		return fpsCap;
+	}
+
+	public static Panel getOptionPanel() {
+		return optionPanel;
 	}
 }
