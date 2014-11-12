@@ -15,7 +15,7 @@ import main.gui.Panel;
 public class MenuPanel extends Panel{
 	
 	private Button startGame, options, quit;
-	private Label createdBy, ownedBy;
+	private Label createdBy, ownedBy, title, version;
 	
 	public MenuPanel(){
 		
@@ -27,11 +27,24 @@ public class MenuPanel extends Panel{
 		c.gridy = 0;
 		
 		//Puts 27 FillerLabels in x-axis
-		xy = addFillerLabelsX(29, c.gridx, c.gridy);
+		xy = addFillerLabelsX(30, c.gridx, c.gridy);
 		c.gridx = 0;
 		c.gridy = xy[1];
 		
-		xy = addFillerLabelsY(5, c.gridx, c.gridy);
+		c.gridwidth = 15;
+		title = new Label("League of Legends: SideScroller", 32);
+		title.setForeground(Color.WHITE);
+		add(title, c);
+		
+		c.gridy++;
+		
+		version = new Label(Main.getVersion(), 20);
+		version.setForeground(Color.WHITE);
+		add(version, c);
+		
+		c.gridy++;
+		
+		xy = addFillerLabelsY(6, c.gridx, c.gridy);
 		c.gridx = xy[0];
 		c.gridy = xy[1];
 		
@@ -46,7 +59,7 @@ public class MenuPanel extends Panel{
 		
 		c.gridy++;
 		
-		xy = addFillerLabelsY(6, c.gridx, c.gridy);
+		xy = addFillerLabelsY(3, c.gridx, c.gridy);
 		c.gridx = xy[0];
 		c.gridy = xy[1];
 		
@@ -58,7 +71,7 @@ public class MenuPanel extends Panel{
 		
 		c.gridy++;
 		
-		xy = addFillerLabelsY(6, c.gridx, c.gridy);
+		xy = addFillerLabelsY(3, c.gridx, c.gridy);
 		
 		c.gridx = xy[0];
 		c.gridy = xy[1];
@@ -76,7 +89,7 @@ public class MenuPanel extends Panel{
 		
 		c.gridy++;
 		
-		xy = addFillerLabelsY(4, c.gridx, c.gridy);
+		xy = addFillerLabelsY(6, c.gridx, c.gridy);
 		c.gridx = xy[0];
 		c.gridy = xy[1];
 		
