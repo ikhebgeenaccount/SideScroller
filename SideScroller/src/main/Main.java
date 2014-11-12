@@ -66,12 +66,10 @@ public class Main extends JFrame{
 			properties.load(propertiesFile);
 			
 			//Get properties from config.properties file
-			int maxFPS = Integer.parseInt(properties.getProperty("FPS"));
-			System.out.println(properties.getProperty("FPS"));
-			System.out.println(maxFPS);
-			boolean fpsCap = Boolean.getBoolean(properties.getProperty("fpsCap"));
+			maxFPS = Integer.parseInt(properties.getProperty("FPS"));
+			fpsCap = Boolean.getBoolean(properties.getProperty("fpsCap"));
 		}catch(IOException e){
-			System.err.println(e.getStackTrace());
+			e.printStackTrace();
 			System.err.println(e.getMessage());
 			
 			//Manual
