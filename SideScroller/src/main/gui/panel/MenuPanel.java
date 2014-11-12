@@ -67,6 +67,11 @@ public class MenuPanel extends Panel{
 		
 		//Create button for options
 		options = new Button("Options");
+		options.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				Main.setPanel(Main.getOptionPanel());
+			}
+		});
 		add(options, c);
 		
 		c.gridy++;
