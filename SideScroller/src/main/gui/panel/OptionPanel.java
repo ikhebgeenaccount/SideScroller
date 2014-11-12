@@ -9,7 +9,9 @@ public class OptionPanel extends Panel{
 	public OptionPanel(){
 		
 		//Set layout properties
-		c.anchor = GridBagConstraints.WEST;
+		c.anchor = GridBagConstraints.NORTHWEST;
+		
+		
 		
 		
 	}
