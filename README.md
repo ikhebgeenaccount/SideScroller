@@ -17,6 +17,8 @@ PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you hav
     - Added fall animation
     - Added background image
     - Added font
+    - Added title in main menu
+    - Added version in main menu
     - Fixed menu aligning
     - Fixed config file not working
   - *v0.2.1* - **current release**
