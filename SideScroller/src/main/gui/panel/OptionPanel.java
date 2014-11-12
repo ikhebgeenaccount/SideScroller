@@ -33,11 +33,16 @@ public class OptionPanel extends Panel{
 		c.gridwidth = 15;		
 		
 		//Title
-		title = new Label("Options", 32);
+		title = new Label("Options", 40);
 		title.setForeground(Color.WHITE);
 		add(title, c);
 		
-		c.gridwidth = 1;
+		c.gridy++;
+		
+		xy = addFillerLabelsY(5, c.gridx, c.gridy);
+		c.gridx = xy[0];
+		c.gridy = xy[1];
+		
 		c.gridy++;
 		
 		//FPS text
