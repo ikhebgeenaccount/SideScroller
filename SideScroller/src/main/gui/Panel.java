@@ -50,8 +50,8 @@ public class Panel extends JPanel{
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		//Draw default disclaimers
-		g.drawString("Developed by ikhebgeenaccount", 0, 483);
-		g.drawString("League of Legends is owned by Riot Games", 0, 497);
+		//g.drawString("Developed by ikhebgeenaccount", 0, 483);
+		//g.drawString("League of Legends is owned by Riot Games", 0, 497);
 		
 		//Draw default background image
 		g.drawImage(background, 0, 0, null);
