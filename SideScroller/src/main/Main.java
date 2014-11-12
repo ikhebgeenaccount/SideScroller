@@ -23,6 +23,9 @@ import main.gui.panel.SelectPanel;
 
 public class Main extends JFrame{
 	
+	//Version
+	private static final String VERSION = "v0.2.2";
+	
 	//Game properties
 	private static int maxFPS;
 	private static long currentFPS;
@@ -273,5 +276,9 @@ public class Main extends JFrame{
 	
 	public static Font getFont(int size){
 		return font.deriveFont(Font.PLAIN, size);
+	}
+	
+	public static String getVersion(){
+		return VERSION;
 	}
 }
