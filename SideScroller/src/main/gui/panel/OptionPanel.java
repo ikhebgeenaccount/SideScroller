@@ -49,8 +49,7 @@ public class OptionPanel extends Panel{
 		
 		fpsTextBox = new JTextField();
 		fpsTextBox.setText(String.valueOF(Main.getMaxFPS()));
-		Dimension dim = new Dimension(fps.getHeight(), 50);
-		fpsTextBox.setSize(dim);
+		fpsTextBox.setSize(50, fps.getHeight());
 		add(fpsTextBox, c);
 		
 		c.gridx--;
