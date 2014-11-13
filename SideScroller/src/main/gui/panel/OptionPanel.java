@@ -30,19 +30,19 @@ public class OptionPanel extends Panel{
 		
 		c.gridy = 0;
 		c.gridx = 0;
-		c.gridwidth = 15;		
+		c.gridwidth = 2;		
 		
 		//Title
-		title = new Label("Options", 40);
+		title = new Label("Options", 32);
 		title.setForeground(Color.WHITE);
 		add(title, c);
 		
+		c.gridwidth = 1;
 		c.gridy++;
 		
-		xy = addFillerLabelsY(5, c.gridx, c.gridy);
+		xy = addFillerLabelsY(2, c.gridx, c.gridy);
 		c.gridx = xy[0];
 		c.gridy = xy[1];
-		
 		c.gridy++;
 		
 		//FPS text
@@ -53,8 +53,8 @@ public class OptionPanel extends Panel{
 		c.gridx++;
 		
 		fpsTextBox = new JTextField();
-		Dimension dim = new Dimension(fps.getHeight(), 50);
-		fpsTextBox.setSize(dim);
+		fpsTextBox.setText(String.valueOF(Main.getMaxFPS()));
+		fpsTextBox.setSize(50, fps.getHeight());
 		add(fpsTextBox, c);
 		
 		c.gridx--;
@@ -81,6 +81,11 @@ public class OptionPanel extends Panel{
 		c.gridx--;
 		c.gridy++;
 		
+		xy = addFillerLabelsY(3, c.gridx, c.gridy);
+		c.gridx = xy[0];
+		c.gridy = xy[1];
+		c.gridy++;
+		
 		saveButton = new Button("Save");
 		saveButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
@@ -88,6 +93,8 @@ public class OptionPanel extends Panel{
 			}
 		});
 		add(saveButton, c);
+		
+		addFillerLabelsY(9, c.gridx, c.gridy);
 		
 	}
 
