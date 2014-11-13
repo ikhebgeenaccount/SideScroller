@@ -12,6 +12,7 @@ import java.util.Properties;
 import javax.swing.JTextField;
 
 import main.Main;
+import main.gui.Button;
 import main.gui.Label;
 import main.gui.Panel;
 
