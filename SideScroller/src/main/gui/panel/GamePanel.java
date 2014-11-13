@@ -439,7 +439,6 @@ public class GamePanel extends Panel implements KeyListener{
 	    }
 	    
 	    //Check if character should go to next level in x-axis
-	    System.out.println((matrix_x_bottom_right  + (levelIDx * 20))/(levelIDx + 1) + " > " + (((levelIDx + 1) * 20) - 1));
 	    if((matrix_x_bottom_right  + (levelIDx * 20)) > ((levelIDx + 1) * 20) - 1){
 	    	levelIDx++;
 	    	charx = 0;
@@ -449,7 +448,6 @@ public class GamePanel extends Panel implements KeyListener{
 	    }
 	    
 	    //Check if character should go to next level in y-axis
-	    System.out.println(((matrix_y_bottom_right + (levelIDy * 10))/(levelIDy + 1)) + " > " + (((levelIDy + 1) * 10) - 1));
 	    if((matrix_y_bottom_right + (levelIDy * 10)) > ((levelIDy + 1) * 10) - 1 && (matrix_y_middle_right + (levelIDy * 10)) > ((levelIDy + 1) * 10) - 1 && (matrix_y_upper_right + (levelIDy * 10)) > ((levelIDy + 1) * 10) - 1){
 	    	levelIDy++;
 	    	chary = -50;
