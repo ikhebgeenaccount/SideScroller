@@ -28,9 +28,7 @@ public class OptionPanel extends Panel{
 	public OptionPanel(){
 		
 		//Set layout properties
-		c.anchor = GridBagConstraints.NORTHWEST;
-		
-		xy = addFillerLabelsX(27, 0, 0);
+		c.anchor = GridBagConstraints.WEST;
 		
 		c.gridy = 0;
 		c.gridx = 0;
