@@ -162,9 +162,16 @@ public class GamePanel extends Panel implements KeyListener{
 		    boolean solid = false;
 		    
 		    try{
-		    	if(currentLevel[matrix_y + 1 + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] == 0){
+		    	if(onEdgeY){
+		    		if(currentLevel[matrix_y + 1 + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] == 0){
 		    		
+		    		}	
+		    	}else{
+		    		if(currentLevel[matrix_y + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] == 0){
+		    		
+		    		}	
 		    	}
+		    	
 		    }catch(ArrayIndexOutOfBoundsException e1){
 		    	solid = true;
 		    }
