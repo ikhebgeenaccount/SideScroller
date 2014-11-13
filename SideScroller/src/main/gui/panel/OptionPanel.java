@@ -30,7 +30,7 @@ public class OptionPanel extends Panel{
 		
 		c.gridy = 0;
 		c.gridx = 0;
-		c.gridwidth = 15;		
+		c.gridwidth = 2;		
 		
 		//Title
 		title = new Label("Options", 32);
