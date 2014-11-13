@@ -72,11 +72,8 @@ public class Main extends JFrame{
 	
 	//Method to start game, creates character and game loop thread
 	public static void startGame(){
-		loadPanel = new LoadPanel(12, "Initializing settings");
+		loadPanel = new LoadPanel(11, "Initializing settings");
 		setPanel(loadPanel);
-		//Set game properties
-		
-		loadProperties();
 		
 		ticksPS = 90;
 		
@@ -171,7 +168,8 @@ public class Main extends JFrame{
 			//Get properties from config.properties file
 			maxFPS = Integer.parseInt(properties.getProperty("FPS"));
 			fpsCap = Boolean.parseBoolean(properties.getProperty("fpsCap"));
-			System.out.println(fpsCap);
+			
+			propertiesFile.close();
 		}catch(IOException e){
 			e.printStackTrace();
 			System.err.println(e.getMessage());
@@ -266,27 +264,44 @@ public class Main extends JFrame{
 		}
 	}
 	
+	//Methods to return panels
 	public static LoadPanel getLoadPanel(){
 		return loadPanel;
 	}
 	
+	public static MenuPanel getMenu(){
+		return menuPanel;
+	}
+
+	public static OptionPanel getOptionPanel() {
+		return optionPanel;
+	}
+	
+	//Method to return font
 	public static Font getFont(int size){
 		return font.deriveFont(Font.PLAIN, size);
 	}
 	
+	//Method to return Version string
 	public static String getVersion(){
 		return VERSION;
 	}
 	
+	//Methods to get game properties
 	public static boolean getFPSCap(){
 		return fpsCap;
-	}
-
-	public static Panel getOptionPanel() {
-		return optionPanel;
 	}
 	
 	public static int getMaxFPS(){
 		return maxFPS;
+	}
+	
+	//Methods to set game properties
+	public static void setFPSCap(boolean cap){
+		fpsCap = cap;
+	}
+	
+	public static void setMaxFPS(int fps){
+		maxFPS = fps;
 	}
 }

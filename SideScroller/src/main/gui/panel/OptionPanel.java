@@ -1,10 +1,13 @@
 package main.gui.panel;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.util.Properties;
 
 import javax.swing.JTextField;
 
@@ -26,7 +29,7 @@ public class OptionPanel extends Panel{
 		//Set layout properties
 		c.anchor = GridBagConstraints.NORTHWEST;
 		
-		xy = addFillerLabelsX(30, 0, 0);
+		xy = addFillerLabelsX(27, 0, 0);
 		
 		c.gridy = 0;
 		c.gridx = 0;
@@ -53,8 +56,9 @@ public class OptionPanel extends Panel{
 		c.gridx++;
 		
 		fpsTextBox = new JTextField();
-		fpsTextBox.setText(String.valueOF(Main.getMaxFPS()));
-		fpsTextBox.setSize(50, fps.getHeight());
+		fpsTextBox.setHorizontalAlignment(JTextField.RIGHT);
+		fpsTextBox.setText(String.valueOf(Main.getMaxFPS()));
+		fpsTextBox.setColumns(3);
 		add(fpsTextBox, c);
 		
 		c.gridx--;
@@ -89,7 +93,10 @@ public class OptionPanel extends Panel{
 		saveButton = new Button("Save");
 		saveButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				//Save settings
+				//Save settings				
+				Main.setMaxFPS(Integer.parseInt(fpsTextBox.getText()));
+				Main.setFPSCap(Boolean.parseBoolean(fpsButton.getText()));
+				Main.setPanel(Main.getMenu());
 			}
 		});
 		add(saveButton, c);
