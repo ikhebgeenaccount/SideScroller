@@ -40,6 +40,11 @@ public class OptionPanel extends Panel{
 		c.gridwidth = 1;
 		c.gridy++;
 		
+		xy = addFillerLabelsY(2, c.gridx, c.gridy);
+		c.gridx = xy[0];
+		c.gridy = xy[1];
+		c.gridy++;
+		
 		//FPS text
 		fps = new Label("Max FPS: ", 20);
 		fps.setForeground(Color.WHITE);
@@ -76,6 +81,11 @@ public class OptionPanel extends Panel{
 		c.gridx--;
 		c.gridy++;
 		
+		xy = addFillerLabelsY(3, c.gridx, c.gridy);
+		c.gridx = xy[0];
+		c.gridy = xy[1];
+		c.gridy++;
+		
 		saveButton = new Button("Save");
 		saveButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
@@ -83,6 +93,8 @@ public class OptionPanel extends Panel{
 			}
 		});
 		add(saveButton, c);
+		
+		addFillerLabelsY(9, c.gridx, c.gridy);
 		
 	}
 
