@@ -1,16 +1,16 @@
 package main;
 
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.util.Properties;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 import main.game.champion.Champion;
 import main.game.champion.champions.AlphaGuy;
@@ -39,7 +39,7 @@ public class Main extends JFrame{
 	//Character
 	private static Champion character;
 	
-	//Panels	
+	//Panels
 	private static MenuPanel menuPanel;
 	private static GamePanel gamePanel;
 	private static LoadPanel loadPanel;
@@ -56,7 +56,7 @@ public class Main extends JFrame{
 	//Main method
 	public static void main(String[] args){
 		try {
-			font = Font.createFont(Font.TRUETYPE_FONT, Main.class.getClassLoader().getResourceAsStream("font/FromCartoonBlocks.ttf"));
+			font = Font.createFont(Font.TRUETYPE_FONT, Main.class.getClassLoader().getResourceAsStream("font/neuropolitical rg.ttf"));
 		} catch (FontFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -139,6 +139,7 @@ public class Main extends JFrame{
 				quitGame();
 			}
 		});
+		frame.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		
 		//Create menuPanel and set that in frame
 		menuPanel = new MenuPanel();

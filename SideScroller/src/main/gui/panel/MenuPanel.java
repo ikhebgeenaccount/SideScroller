@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import main.Main;
+import main.gui.Button;
 import main.gui.Label;
 import main.gui.Panel;
 
@@ -27,9 +28,9 @@ public class MenuPanel extends Panel{
 		c.gridy = 0;
 		
 		//Puts 27 FillerLabels in x-axis
-		xy = addFillerLabelsX(30, c.gridx, c.gridy);
-		c.gridx = 0;
-		c.gridy = xy[1];
+		//xy = addFillerLabelsX(30, c.gridx, c.gridy);
+		//c.gridx = 0;
+		//c.gridy = xy[1];
 		
 		c.gridwidth = 15;
 		title = new Label("League of Legends: SideScroller", 32);
