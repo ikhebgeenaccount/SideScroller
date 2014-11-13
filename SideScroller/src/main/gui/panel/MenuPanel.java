@@ -35,17 +35,17 @@ public class MenuPanel extends Panel{
 		c.gridwidth = 15;
 		title = new Label("League of Legends: SideScroller", 32);
 		title.setForeground(Color.WHITE);
-		add(title, c);
+		contentPanel.add(title, c);
 		
 		c.gridy++;
 		
 		version = new Label(Main.getVersion(), 20);
 		version.setForeground(Color.WHITE);
-		add(version, c);
+		contentPanel.add(version, c);
 		
 		c.gridy++;
 		
-		xy = addFillerLabelsY(6, c.gridx, c.gridy);
+		xy = addFillerLabelsY(4, c.gridx, c.gridy);
 		c.gridx = xy[0];
 		c.gridy = xy[1];
 		
@@ -56,7 +56,7 @@ public class MenuPanel extends Panel{
 				Main.startGame();
 			}
 		});
-		add(startGame, c);
+		contentPanel.add(startGame, c);
 		
 		c.gridy++;
 		
@@ -73,7 +73,7 @@ public class MenuPanel extends Panel{
 				Main.setPanel(Main.getOptionPanel());
 			}
 		});
-		add(options, c);
+		contentPanel.add(options, c);
 		
 		c.gridy++;
 		
@@ -91,11 +91,11 @@ public class MenuPanel extends Panel{
 				Main.quitGame();
 			}
 		});
-		add(quit, c);
+		contentPanel.add(quit, c);
 		
 		c.gridy++;
 		
-		xy = addFillerLabelsY(6, c.gridx, c.gridy);
+		xy = addFillerLabelsY(7, c.gridx, c.gridy);
 		c.gridx = xy[0];
 		c.gridy = xy[1];
 		
@@ -105,13 +105,13 @@ public class MenuPanel extends Panel{
 		
 		createdBy = new Label("Developed by ikhebgeenaccount", 20);
 		createdBy.setForeground(Color.WHITE);
-		add(createdBy, c);
+		contentPanel.add(createdBy, c);
 		
 		c.gridy++;
 		
 		ownedBy = new Label("League of Legends is owned by Riot Games", 20);
 		ownedBy.setForeground(Color.WHITE);
-		add(ownedBy, c);
+		contentPanel.add(ownedBy, c);
 	}
 	
 	@Override

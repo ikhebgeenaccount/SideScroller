@@ -39,7 +39,7 @@ public class OptionPanel extends Panel{
 		//Title
 		title = new Label("Options", 32);
 		title.setForeground(Color.WHITE);
-		add(title, c);
+		contentPanel.add(title, c);
 		
 		c.gridwidth = 1;
 		c.gridy++;
@@ -52,7 +52,7 @@ public class OptionPanel extends Panel{
 		//FPS text
 		fps = new Label("Max FPS: ", 20);
 		fps.setForeground(Color.WHITE);
-		add(fps, c);
+		contentPanel.add(fps, c);
 		
 		c.gridx++;
 		
@@ -60,14 +60,14 @@ public class OptionPanel extends Panel{
 		fpsTextBox.setHorizontalAlignment(JTextField.RIGHT);
 		fpsTextBox.setText(String.valueOf(Main.getMaxFPS()));
 		fpsTextBox.setColumns(3);
-		add(fpsTextBox, c);
+		contentPanel.add(fpsTextBox, c);
 		
 		c.gridx--;
 		c.gridy++;
 		
 		fpsCap = new Label("FPS cap: ", 20);
 		fpsCap.setForeground(Color.WHITE);
-		add(fpsCap, c);
+		contentPanel.add(fpsCap, c);
 		
 		c.gridx++;
 		
@@ -81,7 +81,7 @@ public class OptionPanel extends Panel{
 				}
 			}
 		});
-		add(fpsButton, c);
+		contentPanel.add(fpsButton, c);
 		
 		c.gridx--;
 		c.gridy++;
@@ -100,7 +100,7 @@ public class OptionPanel extends Panel{
 				Main.setPanel(Main.getMenu());
 			}
 		});
-		add(saveButton, c);
+		contentPanel.add(saveButton, c);
 		
 		addFillerLabelsY(9, c.gridx, c.gridy);
 		

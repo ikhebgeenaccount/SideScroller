@@ -1,6 +1,7 @@
 package main.gui;
 
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -14,9 +15,16 @@ public class Panel extends JPanel{
 	public GridBagConstraints c;
 	public int[] xy;
 	public Image background;
+	public JPanel contentPanel;
 	
 	public Panel(){
-		setLayout(new GridBagLayout());
+		setLayout(new FlowLayout(FlowLayout.LEFT));
+		
+		contentPanel = new JPanel();
+		contentPanel.setLayout(new GridBagLayout());
+		contentPanel.setOpaque(false);
+		
+		add(contentPanel);
 		
 		c = new GridBagConstraints();
 		
@@ -30,7 +38,7 @@ public class Panel extends JPanel{
 	public int[] addFillerLabelsY(int amount, int startX, int startY){
 		c.gridx = startX;
 		for(c.gridy = startY; c.gridy - startY < amount; c.gridy++){
-			add(new FillerLabel(), c);
+			contentPanel.add(new FillerLabel(), c);
 		}	
 		xy = new int[]{c.gridx, c.gridy};
 		return xy;
@@ -40,7 +48,7 @@ public class Panel extends JPanel{
 	public int[] addFillerLabelsX(int amount, int startX, int startY){
 		c.gridy = startY;
 		for(c.gridx = startX; c.gridx <= amount; c.gridx++){
-			add(new FillerLabel(), c);
+			contentPanel.add(new FillerLabel(), c);
 		}
 		xy = new int[]{c.gridx, c.gridy};
 		return xy;

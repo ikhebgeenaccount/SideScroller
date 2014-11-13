@@ -139,11 +139,10 @@ public class Main extends JFrame{
 				quitGame();
 			}
 		});
-		frame.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		
 		//Create menuPanel and set that in frame
 		menuPanel = new MenuPanel();
-		frame.getContentPane().add(menuPanel);
+		frame.add(menuPanel);
 		optionPanel = new OptionPanel();
 		frame.pack();
 		frame.setLocationRelativeTo(null);
