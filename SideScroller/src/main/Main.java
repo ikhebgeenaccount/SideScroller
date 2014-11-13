@@ -64,6 +64,7 @@ public class Main extends JFrame{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		loadProperties();
 		createFrame();		
 		//Thread for frames
 		frame.setVisible(true);
@@ -75,32 +76,7 @@ public class Main extends JFrame{
 		setPanel(loadPanel);
 		//Set game properties
 		
-		try {			
-			//Read config.properties
-			//See: http://stackoverflow.com/questions/26871358/getresourceasstream-returning-null-for-properties-file
-			Properties properties = new Properties();
-			InputStream propertiesFile = Main.class.getClassLoader().getResourceAsStream("config/config.properties");
-			properties.load(propertiesFile);
-			
-			//Get properties from config.properties file
-			maxFPS = Integer.parseInt(properties.getProperty("FPS"));
-			fpsCap = Boolean.parseBoolean(properties.getProperty("fpsCap"));
-			System.out.println(fpsCap);
-		}catch(IOException e){
-			e.printStackTrace();
-			System.err.println(e.getMessage());
-			
-			//Manual
-			maxFPS = 45;
-			fpsCap = true;
-		}catch(NullPointerException e){
-			e.printStackTrace();
-			System.err.println("Can't find config.properties! Using default properties.");
-			
-			//Manual
-			maxFPS = 45;
-			fpsCap = true;
-		}
+		loadProperties();
 		
 		ticksPS = 90;
 		
@@ -183,6 +159,35 @@ public class Main extends JFrame{
 		panel.requestFocusInWindow();
 		frame.revalidate();
 		frame.repaint();
+	}
+	
+	//Read config/config.properties
+	public static void loadProperties(){
+		try {			
+			//Read config.properties
+			//See: http://stackoverflow.com/questions/26871358/getresourceasstream-returning-null-for-properties-file
+			Properties properties = new Properties();
+			InputStream propertiesFile = Main.class.getClassLoader().getResourceAsStream("config/config.properties");
+			properties.load(propertiesFile);
+			
+			//Get properties from config.properties file
+			maxFPS = Integer.parseInt(properties.getProperty("FPS"));
+			fpsCap = Boolean.parseBoolean(properties.getProperty("fpsCap"));
+			System.out.println(fpsCap);
+		}catch(IOException e){
+			e.printStackTrace();
+			System.err.println(e.getMessage());
+			
+			//Manual
+			maxFPS = 45;
+			fpsCap = true;
+		}catch(NullPointerException e){
+			e.printStackTrace();
+			
+			//Manual
+			maxFPS = 45;
+			fpsCap = true;
+		}
 	}
 	
 	//Method to return currentFPS
@@ -281,5 +286,9 @@ public class Main extends JFrame{
 
 	public static Panel getOptionPanel() {
 		return optionPanel;
+	}
+	
+	public static int getMaxFPS(){
+		return maxFPS;
 	}
 }
