@@ -163,9 +163,7 @@ public class Main extends JFrame{
 	
 	//Read config/config.properties
 	public static void loadProperties(){
-		try {			
-			//Read config.properties
-			//See: http://stackoverflow.com/questions/26871358/getresourceasstream-returning-null-for-properties-file
+		try {
 			Properties properties = new Properties();
 			InputStream propertiesFile = Main.class.getClassLoader().getResourceAsStream("config/config.properties");
 			properties.load(propertiesFile);
