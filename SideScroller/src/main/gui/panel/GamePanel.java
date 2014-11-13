@@ -152,6 +152,7 @@ public class GamePanel extends Panel implements KeyListener{
 	    keys[e.getKeyCode()] = true;	    
 	    
 	    //If the up-key is pressed, check if the square beneath the character is solid, so he can really jump
+	    //Bug found when constantly jumping on frame border
 	    if(keys[KeyEvent.VK_UP]){
 	    	onEdge();
 		    
