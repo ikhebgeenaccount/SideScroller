@@ -1,5 +1,7 @@
 package main.game.spell;
 
+import main.game.animation.Animation;
+
 public class Spell {
   
   public int[] coordinates;
