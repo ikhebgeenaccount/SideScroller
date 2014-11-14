@@ -1,4 +1,4 @@
-package main.game.champion.champions;
+package main.game.champion.champions.ezreal;
 
 import java.awt.Image;
 
