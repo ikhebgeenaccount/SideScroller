@@ -250,7 +250,13 @@ public class Main extends JFrame{
 				startTime = System.currentTimeMillis();
 				gamePanel.update();
 				try {
-					Thread.sleep(tickTime);
+					if(System.currentTimeMillis() - startTime > tickTime){
+						
+					}else if(System.currentTimeMillis() - startTime == tickTime){
+						
+					}else{
+						Thread.sleep(tickTime - (System.currentTimeMillis() - startTime));
+					}
 				} catch (InterruptedException e) {
 					System.err.println(e.getMessage());
 				}
