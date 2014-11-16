@@ -381,7 +381,7 @@ public class GamePanel extends Panel implements KeyListener{
     	*/
 	    //Check x-axis
 	    //Check if array is not out of bounds
-	    if(matrix_x_upper_left + (levelIDx * 20) < 0 || matrix_x_upper_right + (levelIDx * 20) < 0 || matrix_x_bottom_left + (levelIDx * 20) < 0 || matrix_x_bottom_right + (levelIDx * 20) < 0 || matrix_x_upper_left + (levelIDx * 20) > levelLengthX || matrix_x_upper_right + (levelIDx * 20) > levelLengthX || matrix_x_bottom_left + (levelIDx * 20) > levelLengthX || matrix_x_bottom_right + (levelIDx * 20) > levelLengthX){
+	    if(matrix_x_upper_left + (levelIDx * 20) < 0 || matrix_x_upper_right + (levelIDx * 20) < 0 || matrix_x_upper_left + (levelIDx * 20) > levelLengthX || matrix_x_upper_right + (levelIDx * 20) > levelLengthX){
 	    	xmoved = false;
 	    }else{
 	    	//Check if the coordinates where the character is moving are valid
@@ -408,11 +408,12 @@ public class GamePanel extends Panel implements KeyListener{
 	    	}	    	
 	    }
 	    //Check y-axis
-	    if(matrix_y_upper_left + (levelIDy * 10) < 0  || matrix_y_upper_right + (levelIDy * 10) < 0 || matrix_y_bottom_left + (levelIDy * 10) < 0 || matrix_y_bottom_right + (levelIDy * 10) < 0 || matrix_y_upper_left + (levelIDy * 10) > levelLengthY  || matrix_y_upper_right + (levelIDy * 10) > levelLengthY || matrix_y_bottom_left + (levelIDy * 10) > levelLengthY || matrix_y_bottom_right + (levelIDy * 10) > levelLengthY){
+	    if(matrix_y_bottom_left + (levelIDy * 10) < 0  || matrix_y_upper_right + (levelIDy * 10) < 0 || matrix_y_bottom_left + (levelIDy * 10) > levelLengthY  || matrix_y_upper_right + (levelIDy * 10) > levelLengthY){
 	    	ymoved = false;
 	    }else{
 	    	if(newchary > chary){
 	    		//Is falling down
+	    		
 	    		if(currentLevel[matrix_y_bottom_left + (levelIDy * 10)][matrix_x_bottom_left_old + (levelIDx * 20)] != 0 || currentLevel[matrix_y_bottom_right + (levelIDy * 10)][matrix_x_bottom_right_old + (levelIDx * 20)] != 0){
 	    			//Can't move there
 	    			ymoved = false;
@@ -437,9 +438,10 @@ public class GamePanel extends Panel implements KeyListener{
 	    if(!xmoved){
 	    	character.setAnimationType(Champion.IDLE);
 	    }
-	    
+	    System.out.println(levelIDx);
+	    System.out.println(levelLengthX);
 	    //Check if character should go to next level in x-axis
-	    if((matrix_x_bottom_right  + (levelIDx * 20)) > ((levelIDx + 1) * 20) - 1){
+	    if((matrix_x_bottom_right  + (levelIDx * 20)) > ((levelIDx + 1) * 20) - 1 && levelIDx * 20 <= levelLengthX){
 	    	levelIDx++;
 	    	charx = 0;
 	    }else if(matrix_x_bottom_left < 0 && levelIDx > 0){
