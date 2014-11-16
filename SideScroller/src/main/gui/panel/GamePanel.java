@@ -341,9 +341,6 @@ public class GamePanel extends Panel implements KeyListener{
 			}			
 		}
 	    
-		boolean xmoved = true;
-	    boolean ymoved = true;
-	    
 	    //Here we calculate the coordinates of the character in the matrix for the new coordinates that are set by movement/gravity.
 	    int matrix_x_upper_left = roundDownToClosestMultipleOfFifty(newcharx)/50;
 	    int matrix_y_upper_left = roundDownToClosestMultipleOfFifty(newchary)/50;
@@ -383,14 +380,13 @@ public class GamePanel extends Panel implements KeyListener{
 	    //Check x-axis
 	    //Check if array is not out of bounds
 	    if(matrix_x_upper_left + (levelIDx * 20) < 0 || matrix_x_upper_right + (levelIDx * 20) < 0 || matrix_x_upper_left + (levelIDx * 20) > levelLengthX || matrix_x_upper_right + (levelIDx * 20) > levelLengthX){
-	    	xmoved = false;
+
 	    }else{
 	    	//Check if the coordinates where the character is moving are valid
 	    	if(newcharx > charx){
 	    		//Moving right
 	    		if(currentLevel[matrix_y_upper_right_old + (levelIDy * 10)][matrix_x_upper_right + (levelIDx * 20)] != 0 || currentLevel[matrix_y_middle_right_old + (levelIDy * 10)][matrix_x_middle_right + (levelIDx * 20)] != 0 || currentLevel[matrix_y_bottom_right_old + (levelIDy * 10)][matrix_x_bottom_right + (levelIDx * 20)] != 0){
 	    			//Can't move there!
-	    			xmoved = false;
 	    		}else{
 	    			//Can move there
 	    			charx = newcharx;
@@ -400,7 +396,6 @@ public class GamePanel extends Panel implements KeyListener{
 	    		//Moving left
 	    		if(currentLevel[matrix_y_upper_left_old + (levelIDy * 10)][matrix_x_upper_left + (levelIDx * 20)] != 0 || currentLevel[matrix_y_middle_left_old + (levelIDy * 10)][matrix_x_middle_left + (levelIDx * 20)] != 0 || currentLevel[matrix_y_bottom_left_old + (levelIDy * 10)][matrix_x_bottom_left + (levelIDx * 20)] != 0){
 	    			//Can't move there!
-	    			xmoved = false;
 	    		}else{
 	    			//Can move there
 	    			charx = newcharx;
@@ -411,14 +406,13 @@ public class GamePanel extends Panel implements KeyListener{
 	    
 	    //Check y-axis
 	    if(matrix_y_bottom_left + (levelIDy * 10) < 0  || matrix_y_upper_right + (levelIDy * 10) < 0 || matrix_y_bottom_left + (levelIDy * 10) > levelLengthY  || matrix_y_upper_right + (levelIDy * 10) > levelLengthY){
-	    	ymoved = false;
+
 	    }else{
 	    	if(newchary > chary){
 	    		//Is falling down
 	    		
 	    		if(currentLevel[matrix_y_bottom_left + (levelIDy * 10)][matrix_x_bottom_left_old + (levelIDx * 20)] != 0 || currentLevel[matrix_y_bottom_right + (levelIDy * 10)][matrix_x_bottom_right_old + (levelIDx * 20)] != 0){
 	    			//Can't move there
-	    			ymoved = false;
 	    		}else{
 	    			//Can move there
 	    			chary = newchary;
@@ -428,7 +422,6 @@ public class GamePanel extends Panel implements KeyListener{
 	    		//Is jumping
 	    		if(currentLevel[matrix_y_upper_left + (levelIDy * 10)][matrix_x_upper_left_old + (levelIDx * 20)] != 0 || currentLevel[matrix_y_upper_right + (levelIDy * 10)][matrix_x_upper_right_old + (levelIDx * 20)] != 0){
 	    			//Can't move there
-	    			ymoved = false;
 	    		}else{
 	    			//Can move there
 	    			chary = newchary;
