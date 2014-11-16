@@ -202,22 +202,24 @@ public class Main extends JFrame{
 			long startTime;
 			long frameTime = 1000/maxFPS;
 			long startTimeFPS = System.currentTimeMillis();
+			long endTime;
 			while(running){
 				//The startTime of this loop
 				startTime = System.currentTimeMillis();
 				gamePanel.repaint();
+				endTime = System.currentTimeMillis();
 				try{
 					//If the time it took to paint this frame is bigger than the time set for one frame, it needs to instantly
 					//repaint(), since it is behind on schedule
-					if(System.currentTimeMillis() - startTime > frameTime){
+					if(endTime - startTime > frameTime){
 						
 					 //If the time it took to paint this frame is equal to the time set to paint one frame, it needs to 
 					 //instantly repaint(), since it is perfect on schedule
-					}else if(System.currentTimeMillis() - startTime == frameTime){
+					}else if(endTime - startTime == frameTime){
 						
 					 //If it took less time, we need to sleep the remaining millis of the loop time	
 					}else if(fpsCap){
-						Thread.sleep(frameTime - (System.currentTimeMillis() - startTime));
+						Thread.sleep(frameTime - (endTime - startTime));
 					}
 					if(System.currentTimeMillis() - startTimeFPS >= 500){
 						if(System.currentTimeMillis() - startTime == 0){
@@ -246,16 +248,18 @@ public class Main extends JFrame{
 		public void run(){
 			long startTime;
 			long tickTime = 1000/ticksPS;
+			long endTime;
 			while(running){
 				startTime = System.currentTimeMillis();
 				gamePanel.update();
+				endTime = System.currentTimeMillis();
 				try {
-					if(System.currentTimeMillis() - startTime > tickTime){
+					if(endTime - startTime > tickTime){
 						
-					}else if(System.currentTimeMillis() - startTime == tickTime){
+					}else if(endTime - startTime == tickTime){
 						
 					}else{
-						Thread.sleep(tickTime - (System.currentTimeMillis() - startTime));
+						Thread.sleep(tickTime - (endTime - startTime));
 					}
 				} catch (InterruptedException e) {
 					System.err.println(e.getMessage());
