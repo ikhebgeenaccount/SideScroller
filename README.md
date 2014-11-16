@@ -12,6 +12,8 @@ I am currently looking for artists, to create animations and environments.
 PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you have no reddit, add me ingame on EUW: ikhebgeenaccount.  
 
 ####Changelog
+  - *vo.2.3*
+    - Fixed a bug where the game would freeze when trying to move outside of the level
   - *v0.2.2* - **current release**
     - Added jump animation
     - Added fall animation
