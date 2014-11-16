@@ -31,6 +31,7 @@ public class Main extends JFrame{
 	private static long currentFPS;
 	private static boolean fpsCap;
 	private static int ticksPS;
+	private static long currentTPS;
 	private static boolean running;
 	
 	//Frame
@@ -186,11 +187,6 @@ public class Main extends JFrame{
 		}
 	}
 	
-	//Method to return currentFPS
-	public static String getCurrentFPS(){
-		return String.valueOf(currentFPS);
-	}
-	
 	//Thread for repaint(), graphics
 	private static class PaintLoop extends Thread{
 		
@@ -249,6 +245,7 @@ public class Main extends JFrame{
 			long startTime;
 			long tickTime = 1000/ticksPS;
 			long endTime;
+			long startTimeTPS = System.currentTimeMillis();
 			while(running){
 				startTime = System.currentTimeMillis();
 				gamePanel.update();
@@ -260,6 +257,16 @@ public class Main extends JFrame{
 						
 					}else{
 						Thread.sleep(tickTime - (endTime - startTime));
+					}
+					
+					if(System.currentTimeMillis() - startTimeTPS >= 500){
+						if(System.currentTimeMillis() - startTime == 0){
+							currentTPS = ticksPS;;
+							startTimeTPS = System.currentTimeMillis();
+						}else{
+							currentTPS = 1000 / (System.currentTimeMillis() - startTime);
+							startTimeTPS = System.currentTimeMillis();
+						}
 					}
 				} catch (InterruptedException e) {
 					System.err.println(e.getMessage());
@@ -307,5 +314,14 @@ public class Main extends JFrame{
 	
 	public static void setMaxFPS(int fps){
 		maxFPS = fps;
+	}
+	
+	//Methods to get current speed
+	public static String getCurrentFPS(){
+		return String.valueOf(currentFPS);
+	}
+	
+	public static String getCurrentTPS(){
+		return String.valueOf(currentTPS);
 	}
 }

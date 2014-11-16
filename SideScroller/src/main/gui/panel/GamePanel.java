@@ -135,6 +135,7 @@ public class GamePanel extends Panel implements KeyListener{
 		
 		//Draw current FPS
 		g.drawString(Main.getCurrentFPS(), 985, 12);
+		g.drawString(Main.getCurrentTPS(), 985, 24);
 		g.dispose();
 	}
 	
