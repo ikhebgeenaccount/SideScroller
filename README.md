@@ -13,6 +13,7 @@ PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you hav
 
 ####Changelog
   - *vo.2.3*
+    - Added 'death point' to jump, character will not fall nor jump in this period
     - Fixed a bug where the game would freeze when trying to move outside of the level
     - Fixed a rare bug where the game would freeze
   - *v0.2.2* - **current release**
