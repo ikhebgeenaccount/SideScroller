@@ -338,10 +338,13 @@ public class GamePanel extends Panel implements KeyListener{
 			//Also checks if the jump shouldn't end yet
 			if(tick - jump.start_tick <= jump.jump_tick){
 				newchary -= jump.jump_px;
+				jump.start_float_tick = tick;
+			}else if(tick - jump.start_float_tick <= jump.float_tick){
+				
 			}else{
 				jump.jumping = false;
 				newchary -= jump.jump_px;
-			}			
+			}
 		}
 	    
 	    //Here we calculate the coordinates of the character in the matrix for the new coordinates that are set by movement/gravity.
@@ -470,13 +473,16 @@ public class GamePanel extends Panel implements KeyListener{
 		
 		public boolean jumping;
 		public int start_tick;
+		public int start_float_tick;
 		public int jump_px;
 		public int jump_tick;
+		public int float_tick;
 		
 		Jump(){
 			jumping = false;
 			jump_px = MOVEPX;
 			jump_tick = 31;
+			float_tick = 7;
 		}
 	}
 	
