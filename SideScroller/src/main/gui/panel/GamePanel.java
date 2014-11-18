@@ -14,8 +14,6 @@ import main.gui.Panel;
 
 public class GamePanel extends Panel implements KeyListener{
 	
-	//MAKE CHARACTER FLOAT FOR A FEW FRAMES AT THE TOP OF THE JUMP
-	
 	//Levels
 	private int levelIDx;
 	private int levelIDy;
