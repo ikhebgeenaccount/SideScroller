@@ -1,6 +1,7 @@
 package main.game.champion;
 
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.image.BufferedImage;
 
 import main.game.animation.Animation;
@@ -11,9 +12,12 @@ public class Champion {
 	public Animation[] animations;
 	public Animation currentAnimation;
 	private int currentAnimationType;
+	private Point coordinations;
 		
 	public Champion(){
 		currentAnimationType = 0;
+		
+		coordinations = new Point();
 	}
 
 	public void setAnimationType(int type) {
@@ -42,6 +46,15 @@ public class Champion {
 		for(int i = 0; i < scenes; i++){
 			animations[type].addScene(animationSprite.getSubimage(50 * i, 0, 50, 100), sceneLength);
 		}
+	}
+	
+	public Point getCoordinations(){
+		return coordinations;
+	}
+	
+	public void setCoordinations(int x, int y){
+		coordinations.x = x;
+		coordinations.y = y;
 	}
 
 }

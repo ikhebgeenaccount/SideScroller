@@ -64,8 +64,7 @@ public class GamePanel extends Panel implements KeyListener{
 		keys = new boolean[1000];
 		
 		//Set character coordinates to 0
-		charx = 0;
-		chary = 0;
+		character.setCoordinations(0, 0);
 		
 		//Set first level and create levels
 		createLevels();
@@ -123,7 +122,7 @@ public class GamePanel extends Panel implements KeyListener{
 		}
 		
 		//Draw scene of character
-		g.drawImage(character.getCurrentAnimationImage(), charx, chary, null);
+		g.drawImage(character.getCurrentAnimationImage(), character.getCoordinations().x, character.getCoordinations().y, null);
 		
 		//Check if next scene should play
 		character.checkNextScene();
@@ -150,6 +149,9 @@ public class GamePanel extends Panel implements KeyListener{
 	    //If the up-key is pressed, check if the square beneath the character is solid, so he can really jump
 	    if(keys[KeyEvent.VK_UP]){
 	    	onEdge();
+	    	
+	    	charx = character.getCoordinations().x;
+	    	chary = character.getCoordinations().y;
 		    
 		    int matrix_x_left = roundDownToClosestMultipleOfFifty(charx)/50 ;
 		    int matrix_y =  roundDownToClosestMultipleOfFifty(chary + 99)/50 ;
@@ -232,6 +234,9 @@ public class GamePanel extends Panel implements KeyListener{
 	 */
 	public void update(){
 		tick++;
+		
+		charx = character.getCoordinations().x;
+    	chary = character.getCoordinations().y;
 		
 		boolean xmovedleft = false;
 		boolean xmovedright = false;
@@ -458,6 +463,8 @@ public class GamePanel extends Panel implements KeyListener{
 	    }else{
 	    	character.setAnimationType(Champion.IDLE);
 	    }
+	    
+	    character.setCoordinations(charx, chary);
 	}
 	
 	//In this class the jumpvariables are stored
