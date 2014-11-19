@@ -27,7 +27,6 @@ public class GamePanel extends Panel implements KeyListener{
 	
 	//Images
 	private Image ground, air, grass_ground, grass_air;
-	private Image charIdle;
 	
 	//Coordinates of the character
 	private int charx, chary;
@@ -82,10 +81,6 @@ public class GamePanel extends Panel implements KeyListener{
 		//Gravity and Jump instances
 		gravity = new Gravity();
 		jump = new Jump();
-		
-		//Load idle animation, only used when not testing animations
-		ClassLoader cldr = this.getClass().getClassLoader();
-		charIdle = new ImageIcon(cldr.getResource("img/char/alphaguy/idle.png")).getImage();
 		
 		//Layout properties
 		c = new GridBagConstraints();
