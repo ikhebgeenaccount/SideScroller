@@ -122,7 +122,7 @@ public class GamePanel extends Panel implements KeyListener{
 		}
 		
 		//Draw scene of character
-		g.drawImage(character.getCurrentAnimationImage(), character.getCoordinations().x, character.getCoordinations().y, null);
+		g.drawImage(character.getCurrentAnimationImage(), character.getCoordinates().x, character.getCoordinates().y, null);
 		
 		//Check if next scene should play
 		character.checkNextScene();
@@ -150,8 +150,8 @@ public class GamePanel extends Panel implements KeyListener{
 	    if(keys[KeyEvent.VK_UP]){
 	    	onEdge();
 	    	
-	    	charx = character.getCoordinations().x;
-	    	chary = character.getCoordinations().y;
+	    	charx = character.getCoordinates().x;
+	    	chary = character.getCoordinates().y;
 		    
 		    int matrix_x_left = roundDownToClosestMultipleOfFifty(charx)/50 ;
 		    int matrix_y =  roundDownToClosestMultipleOfFifty(chary + 99)/50 ;
@@ -235,8 +235,8 @@ public class GamePanel extends Panel implements KeyListener{
 	public void update(){
 		tick++;
 		
-		charx = character.getCoordinations().x;
-    	chary = character.getCoordinations().y;
+		charx = character.getCoordinates().x;
+    	chary = character.getCoordinates().y;
 		
 		boolean xmovedleft = false;
 		boolean xmovedright = false;
