@@ -3,7 +3,7 @@
 - **v0.2.3:**
   - Character doesn't fall when trying to move out of the level at the left side.
   - Jumping is incosistent when jumping between levels, sometimes the character jumps higher than other times.
-  - Collision is net detected correctly when moving between levels.
+  - Collision is not detected correctly when moving between levels.
 - **v0.2.2:**
   - ~~ArrayIndexOutOfBoundsException when trying to move further than level is created.~~
   - Character doesn't fall when trying to move out of the level at the left side.
