@@ -1,7 +1,6 @@
 package main.game.champion;
 
 import java.awt.Image;
-import java.awt.Point;
 import java.awt.image.BufferedImage;
 
 import main.game.animation.Animation;
@@ -12,7 +11,7 @@ public class Champion {
 	public Animation[] animations;
 	public Animation currentAnimation;
 	private int currentAnimationType;
-	private Point coordinations;
+	private Coordinate coordinations;
 		
 	public Champion(){
 		currentAnimationType = 0;
