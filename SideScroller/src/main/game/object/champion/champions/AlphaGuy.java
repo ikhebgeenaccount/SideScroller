@@ -1,4 +1,4 @@
-package main.game.champion.champions;
+package main.game.object.champion.champions;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
 
 import main.Main;
 import main.game.animation.Animation;
-import main.game.champion.Champion;
+import main.game.object.champion.Champion;
 
 public class AlphaGuy extends Champion{
 	

@@ -9,7 +9,7 @@ import java.awt.event.KeyListener;
 import javax.swing.ImageIcon;
 
 import main.Main;
-import main.game.champion.Champion;
+import main.game.object.champion.Champion;
 import main.gui.Panel;
 
 public class GamePanel extends Panel implements KeyListener{

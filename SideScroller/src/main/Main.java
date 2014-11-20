@@ -12,8 +12,8 @@ import java.util.Properties;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import main.game.champion.Champion;
-import main.game.champion.champions.AlphaGuy;
+import main.game.object.champion.Champion;
+import main.game.object.champion.champions.AlphaGuy;
 import main.gui.Panel;
 import main.gui.panel.GamePanel;
 import main.gui.panel.LoadPanel;

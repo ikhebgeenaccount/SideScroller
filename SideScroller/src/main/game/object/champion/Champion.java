@@ -1,4 +1,4 @@
-package main.game.champion;
+package main.game.object.champion;
 
 import main.game.object.GameObject;
 
