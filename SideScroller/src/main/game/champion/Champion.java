@@ -17,7 +17,7 @@ public class Champion {
 	public Champion(){
 		currentAnimationType = 0;
 		
-		coordinations = new Point();
+		coordinations = new Coordinate();
 	}
 
 	public void setAnimationType(int type) {
@@ -48,7 +48,7 @@ public class Champion {
 		}
 	}
 	
-	public Point getCoordinations(){
+	public Coordinate getCoordinations(){
 		return coordinations;
 	}
 	
