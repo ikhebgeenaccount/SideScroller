@@ -17,8 +17,7 @@ public class AlphaGuy extends Champion{
 	public AlphaGuy(){
 		String load = "Loading animations";
 		Main.getLoadPanel().setNextLoadPart(load);
-		ClassLoader cldr = this.getClass().getClassLoader();
-		animations = new Animation[8];		
+		ClassLoader cldr = this.getClass().getClassLoader();	
 		try {
 			/* All the animations are in one big image, that is why we use the getSubimage() function to get al the
 			 * picture for the animations.
@@ -67,8 +66,7 @@ public class AlphaGuy extends Champion{
 			Main.getLoadPanel().setNextLoadPart(load);
 			
 			//Start idle animation
-			currentAnimation = animations[Champion.IDLE];
-			currentAnimation.start();
+			setAnimationType(Champion.IDLE);
 		} catch (IOException e) {
 			System.err.println(e.getMessage());
 			Main.quitGame();
