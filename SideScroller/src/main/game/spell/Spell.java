@@ -5,12 +5,13 @@ import main.game.coordinate.Coordinate;
 
 public class Spell {
   
-  public Coordinate coordinates;
-  public int range;
-  public int damage;
+  private Coordinate coordinates;
+  private int range;
+  private int damage;
   
-  public Animation[] animations;
-  public Animation currentAnimation;
+  private Animation[] animations;
+  private Animation currentAnimation;
+  private int currentAnimationType;
   public static final int APPEAR = 0, TRAVEL = 1, HIT = 2;
   
   private boolean isFired;
