@@ -74,7 +74,7 @@ public class GameObject {
 		return speed;
 	}
 	
-	public int setSpeed(int speed){
+	public void setSpeed(int speed){
 		this.speed = speed;
 	}
 }
