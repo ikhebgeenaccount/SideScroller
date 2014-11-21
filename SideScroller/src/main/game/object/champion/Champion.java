@@ -8,6 +8,9 @@ public class Champion extends GameObject{
 		
 	public Champion(){
 		
+		//Movement speed in px
+		setSpeed(5);
+		
 	}
 
 }
