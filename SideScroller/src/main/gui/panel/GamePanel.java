@@ -32,9 +32,6 @@ public class GamePanel extends Panel implements KeyListener{
 	private int charx, chary;
 	private int newcharx, newchary;
 	
-	//The pixels that the character moves
-	private final int MOVEPX;
-	
 	//Tick
 	private int tick;
 	
@@ -73,9 +70,6 @@ public class GamePanel extends Panel implements KeyListener{
 		levelIDy = 0;
 		levelLengthX = currentLevel[0].length - 1;
 		levelLengthY = currentLevel.length -1;
-		
-		//Pixels that the character moves every update()
-		MOVEPX = 5;
 		
 		//Gravity and Jump instances
 		gravity = new Gravity();
@@ -249,11 +243,11 @@ public class GamePanel extends Panel implements KeyListener{
 		newchary = chary;
 		
 	    if(keys[KeyEvent.VK_LEFT]){ 	
-	        newcharx -= MOVEPX;
+	        newcharx -= character.getSpeed();
 	    }
 	    	
 	    if(keys[KeyEvent.VK_RIGHT]){  	
-		        newcharx += MOVEPX;
+		        newcharx += character.getSpeed();
 		}   
 	    
 	    onEdge();
@@ -479,7 +473,7 @@ public class GamePanel extends Panel implements KeyListener{
 		
 		Jump(){
 			jumping = false;
-			jump_px = MOVEPX;
+			jump_px = character.getSpeed();
 			jump_tick = 31;
 			float_tick = 7;
 		}
@@ -499,8 +493,8 @@ public class GamePanel extends Panel implements KeyListener{
 		
 		Gravity(){
 			falling = false;
-			falldown_px = MOVEPX;
-			FALLDOWN_PX_START = MOVEPX;
+			falldown_px = character.getSpeed();
+			FALLDOWN_PX_START = character.getSpeed();
 		}
 		
 		//We start the fall by telling falling = true
