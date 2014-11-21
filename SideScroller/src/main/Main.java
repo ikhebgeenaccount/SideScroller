@@ -1,6 +1,5 @@
 package main;
 
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.event.WindowAdapter;
@@ -10,10 +9,9 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import main.game.object.champion.Champion;
-import main.game.object.champion.champions.AlphaGuy;
+import main.game.object.champion.champions.ezreal.Ezreal;
 import main.gui.Panel;
 import main.gui.panel.GamePanel;
 import main.gui.panel.LoadPanel;
@@ -80,7 +78,7 @@ public class Main extends JFrame{
 		
 		//Create character
 		loadPanel.setNextLoadPart("Creating character");
-		character = new AlphaGuy();
+		character = new Ezreal();
 		
 		//Create gamepanel
 		loadPanel.setNextLoadPart("Setting up panel");
