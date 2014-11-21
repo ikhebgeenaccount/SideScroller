@@ -8,10 +8,16 @@ import main.game.coordinate.Coordinate;
 
 public class GameObject {
 	
+	//Animations
 	private Animation[] animations;
 	private Animation currentAnimation;
 	private int currentAnimationType;
+	
+	//Coordinates
 	private Coordinate coordinates;
+	
+	//Speed in px
+	private int speed;
 	
 	public GameObject(){
 		coordinates = new Coordinate();
@@ -62,5 +68,13 @@ public class GameObject {
 	public void setCoordinations(int x, int y){
 		coordinates.x = x;
 		coordinates.y = y;
+	}
+	
+	public int getSpeed(){
+		return speed;
+	}
+	
+	public int setSpeed(int speed){
+		this.speed = speed;
 	}
 }
