@@ -33,7 +33,7 @@ public class Spell extends GameObject{
 		this.range = range;
 	}
 
-	public void fire(Coordinate startCoodinates){
+	public void fire(Coordinate startCoordinates){
 		this.startCoordinates = startCoordinates;
 		coordinates = this.startCoordinates;
 	}
