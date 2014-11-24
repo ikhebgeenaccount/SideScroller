@@ -57,7 +57,8 @@ public class Spell extends GameObject{
 			}
 		}
 	}
-
+	
+	//Only call getCurrentSceneImage() if isFired()!
 	public boolean isFired(){
 		return isFired;
 	}
