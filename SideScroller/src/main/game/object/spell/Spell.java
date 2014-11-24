@@ -45,6 +45,7 @@ public class Spell extends GameObject{
 				//Move
 			}else{
 				//Out of range
+				isFired = false;
 			}
 		}else{
 			//Spell is moving to the right
@@ -52,6 +53,7 @@ public class Spell extends GameObject{
 				//Move
 			}else{
 				//Out of range
+				isFired = false;
 			}
 		}
 	}
