@@ -24,10 +24,10 @@ public class StatusBar extends JPanel{
 	@Override
 	public void paintComponent(Graphics g){
 		//Get cooldowns
-		int qcd = Main.getGamePanel().getCharacter.getRemainingCooldown(Champion.Q);
-		int wcd = Main.getGamePanel().getCharacter.getRemainingCooldown(Champion.W);
-		int ecd = Main.getGamePanel().getCharacter.getRemainingCooldown(Champion.E);
-		int rcd = Main.getGamePanel().getCharacter.getRemainingCooldown(Champion.R);
+		long qcd = Main.getGamePanel().getCharacter.getRemainingCooldown(Champion.Q);
+		long wcd = Main.getGamePanel().getCharacter.getRemainingCooldown(Champion.W);
+		long ecd = Main.getGamePanel().getCharacter.getRemainingCooldown(Champion.E);
+		long rcd = Main.getGamePanel().getCharacter.getRemainingCooldown(Champion.R);
 		
 		//Draw spell icons
 		if(qcd == 0){
