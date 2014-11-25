@@ -7,22 +7,20 @@ public class Spell extends GameObject{
 
 	public static final int APPEAR = 0, TRAVEL = 1, HIT = 2;
 	
+	//Spell properties
 	private int range;
 	private int damage;
 	private long cooldown;
 	
+	//Current location and start location
 	private Coordinate coordinates;
 	private Coordinate startCoordinates;
-
+	
+	//Active properties
 	private boolean isFired;
 	private long startTime;
-	
 	private long currentCooldown;
-
-	public Spell(){
-		
-	}
-
+	
 	public Spell(int range, int damage, int speed, long cooldown){
 		setRange(range);
 		setDamage(damage);
@@ -79,13 +77,12 @@ public class Spell extends GameObject{
 		return isFired;
 	}
 	
-	public String getRemainingCooldown(){
+	public long getRemainingCooldown(){
 		if(System.currentTimeMillis - starTime > 0){
 			currentCooldown = System.currentTimeMillis() - startTime;
-			return String.valueOf(currentCooldown);
 		}else{
 			currentCooldown = 0;
-			return "0";
 		}
+		return currentCooldown;
 	}
 }
