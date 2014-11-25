@@ -41,8 +41,9 @@ public class Spell extends GameObject{
 		this.cooldown = cooldown;
 	}
 
-	public void fire(Coordinate startCoordinates, long startTime){
+	public void fire(Coordinate startCoordinates, boolean movedLeft){
 		if(currentCooldown == 0){
+			this.moveLeft = movedLeft;
 			this.startTime = startTime;
 			this.startCoordinates = startCoordinates;
 			coordinates = this.startCoordinates;
@@ -52,7 +53,7 @@ public class Spell extends GameObject{
 		}
 	}
 	
-	public void move(boolean moveLeft){ //moveLeft = true, if moving left, false when moving right
+	public void move(){ //moveLeft = true, if moving left, false when moving right
 		if(moveLeft){
 			//Spell is moving to the left
 			if(coordinates.x - startCoordinates.x > 0){
