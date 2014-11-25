@@ -71,17 +71,14 @@ public class Main extends JFrame{
 	
 	//Method to start game, creates character and game loop thread
 	public static void startGame(){
-		loadPanel = new LoadPanel(11, "Initializing settings");
 		setPanel(loadPanel);
 		
 		ticksPS = 90;
 		
 		//Create character
-		loadPanel.setNextLoadPart("Creating character");
 		character = new Ezreal();
 		
 		//Create gamepanel
-		loadPanel.setNextLoadPart("Setting up panel");
 		gamePanel = new GamePanel(character);
 		setPanel(gamePanel);
 		
