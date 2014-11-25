@@ -8,6 +8,14 @@ public class StatusBar extends JPanel{
 		setPreferredSize(new Dimension(1000, 80));
 		
 		setLayout(new FlowLayout(FlowLayout.CENTER));
+		
+		//Load pics
+		try{
+			qIcon = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/char" + Main.getGamePanel().getCharacterName() + "qIcon.png"));
+			wIcon = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/char" + Main.getGamePanel().getCharacterName() + "wIcon.png"));
+			eIcon = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/char" + Main.getGamePanel().getCharacterName() + "eIcon.png"));
+			rIcon = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/char" + Main.getGamePanel().getCharacterName() + "rIcon.png"));
+		}
 	}
 	
 	@Override
