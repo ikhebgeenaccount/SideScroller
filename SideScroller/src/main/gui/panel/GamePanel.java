@@ -211,19 +211,19 @@ public class GamePanel extends Panel implements KeyListener{
 	    }
 		
 		if(keys[KeyEvent.VK_Q]){
-			character.castQ(movedLeft);
+			character.castQ(movedLeft, character.getCoordinates());
 		}
 		
 		if(keys[KeyEvent.VK_W]){
-			character.castW(movedLeft);
+			character.castW(movedLeft, character.getCoordinates());
 		}
 		
 		if(keys[KeyEvent.VK_E]){
-			character.castE(movedLeft);
+			character.castE(movedLeft, character.getCoordinates());
 		}
 		
 		if(keys[KeyEvent.VK_R]){
-			character.castR(movedLeft);
+			character.castR(movedLeft, character.getCoordinates());
 		}
 	}
 	
