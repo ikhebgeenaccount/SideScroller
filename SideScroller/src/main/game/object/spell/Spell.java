@@ -44,7 +44,7 @@ public class Spell extends GameObject{
 	public void fire(Coordinate startCoordinates, boolean movedLeft){
 		if(currentCooldown == 0){
 			this.moveLeft = movedLeft;
-			this.startTime = startTime;
+			this.startTime = System.currentTimeMillis();
 			this.startCoordinates = startCoordinates;
 			coordinates = this.startCoordinates;
 			isFired = true;
