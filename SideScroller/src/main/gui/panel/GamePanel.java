@@ -401,6 +401,7 @@ public class GamePanel extends Panel implements KeyListener{
 	    	//Check if the coordinates where the character is moving are valid
 	    	if(newcharx > charx){
 	    		//Moving right
+	    		movedLeft = false;
 	    		if(currentLevel[matrix_y_upper_right_old + (levelIDy * 10)][matrix_x_upper_right + (levelIDx * 20)] != 0 || currentLevel[matrix_y_middle_right_old + (levelIDy * 10)][matrix_x_middle_right + (levelIDx * 20)] != 0 || currentLevel[matrix_y_bottom_right_old + (levelIDy * 10)][matrix_x_bottom_right + (levelIDx * 20)] != 0){
 	    			//Can't move there!
 	    		}else{
@@ -410,6 +411,7 @@ public class GamePanel extends Panel implements KeyListener{
 	    		}
 	    	}else if(newcharx < charx){
 	    		//Moving left
+	    		movedLeft = true;
 	    		if(currentLevel[matrix_y_upper_left_old + (levelIDy * 10)][matrix_x_upper_left + (levelIDx * 20)] != 0 || currentLevel[matrix_y_middle_left_old + (levelIDy * 10)][matrix_x_middle_left + (levelIDx * 20)] != 0 || currentLevel[matrix_y_bottom_left_old + (levelIDy * 10)][matrix_x_bottom_left + (levelIDx * 20)] != 0){
 	    			//Can't move there!
 	    		}else{
