@@ -283,6 +283,10 @@ public class Main extends JFrame{
 		return optionPanel;
 	}
 	
+	public static GamePanel getGamePanel(){
+		return gamePanel;
+	}
+	
 	//Method to return font
 	public static Font getFont(int size){
 		return font.deriveFont(Font.PLAIN, size);
