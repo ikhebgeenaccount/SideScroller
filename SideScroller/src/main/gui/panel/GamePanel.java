@@ -44,15 +44,17 @@ public class GamePanel extends Panel implements KeyListener{
 	
 	//The character instance of Champion
 	private Champion character;
+	private String characterName;
 	
 	//Layout variables
 	private GridBagConstraints c;
 	
-	public GamePanel(Champion character){
+	public GamePanel(Champion character, String characterName){
 		tick = 0;
 		
 		//Get character
 		this.character = character;
+		this.characterName = characterName;
 		
 		//Load environment images
 		loadPics();
@@ -570,5 +572,10 @@ public class GamePanel extends Panel implements KeyListener{
 								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}};
 		
+	}
+	
+	//Getter for String characterName
+	public String getCharacterName(){
+		return characterName;
 	}
 }
