@@ -13,7 +13,7 @@ PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you hav
 
 ####Changelog
   - *v0.3.0*
-    - 
+    - Removed loading screen
   - *v0.2.3* - **current release**
     - Added 'death point' to jump, character will not fall nor jump in this period
     - Fixed a bug where the game would freeze when trying to move outside of the level
