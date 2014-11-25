@@ -18,20 +18,20 @@ public class Champion extends GameObject{
 		
 	}
 	
-	public void castQ(Coordinate startCoordinate){
-		q.fire(startCoordinate);
+	public void castQ(Coordinate startCoordinate, boolean movedLeft){
+		q.fire(startCoordinate, movedLeft);
 	}
 	
-	public void castW(Coordinate startCoordinate){
-		w.fire(startCoordinate);
+	public void castW(Coordinate startCoordinate, boolean movedLeft){
+		w.fire(startCoordinate, movedLeft);
 	}
 	
-	public void castE(Coordinate startCoordinate){
-		e.fire(startCoordinate);
+	public void castE(Coordinate startCoordinate, boolean movedLeft){
+		e.fire(startCoordinate, movedLeft);
 	}
 	
-	public void castR(Coordinate startCoordinate){
-		r.fire(startCoordinate);
+	public void castR(Coordinate startCoordinate, boolean movedLeft){
+		r.fire(startCoordinate, movedLeft);
 	}
 	
 	public String getRemainingCooldown(int spell){
