@@ -34,17 +34,17 @@ public class Champion extends GameObject{
 		r.fire(startCoordinate, movedLeft);
 	}
 	
-	public String getRemainingCooldown(int spell){
+	public long getRemainingCooldown(int spell){
 		if(spell == Q){
 			return q.getRemainingCooldown();
 		}else if(spell == W){
 			return w.getRemainingCooldown();
 		}else if(spell == E){
 			return e.getRemainingCooldown();
-		}else if(spell == r){
+		}else if(spell == R){
 			return r.getRemainingCooldown();
 		}else{
-			return "Spell not found";
+			return 0;
 		}
 	}
 
