@@ -78,6 +78,9 @@ public class GamePanel extends Panel implements KeyListener{
 		gravity = new Gravity();
 		jump = new Jump();
 		
+		//First spell will be fired to the right
+		movedLeft = false;
+		
 		//Layout properties
 		c = new GridBagConstraints();
 		c.anchor = GridBagConstraints.NORTHEAST;
