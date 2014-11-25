@@ -79,7 +79,7 @@ public class Main extends JFrame{
 		character = new Ezreal();
 		
 		//Create gamepanel
-		gamePanel = new GamePanel(character);
+		gamePanel = new GamePanel(character, "ezreal");
 		setPanel(gamePanel);
 		
 		//Start game
