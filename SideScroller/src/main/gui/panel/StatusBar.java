@@ -27,6 +27,9 @@ public class StatusBar extends JPanel{
 		g.drawImage(rIcon, 565, 0, null);
 		
 		//Draw remaining cooldowns
-		
+		g.drawString(Main.getGamePanel().getCharacter().getRemainingCooldown(Champion.Q), 385, 52, null);
+		g.drawString(Main.getGamePanel().getCharacter().getRemainingCooldown(Champion.W), 445, 52, null);
+		g.drawString(Main.getGamePanel().getCharacter().getRemainingCooldown(Champion.E), 505, 52, null);
+		g.drawString(Main.getGamePanel().getCharacter().getRemainingCooldown(Champion.R), 565, 52, null);
 	}
 }
