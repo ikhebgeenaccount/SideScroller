@@ -7,8 +7,6 @@ public class StatusBar extends JPanel{
 	public StatusBar(){
 		setPreferredSize(new Dimension(1000, 80));
 		
-		setLayout(new FlowLayout(FlowLayout.CENTER));
-		
 		//Load pics
 		try{
 			qIcon = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/char" + Main.getGamePanel().getCharacterName() + "qIcon.png"));
