@@ -20,6 +20,7 @@ public class Spell extends GameObject{
 	private boolean isFired;
 	private long startTime;
 	private long currentCooldown;
+	private boolean moveLeft;
 	
 	public Spell(int range, int damage, int speed, long cooldown){
 		setRange(range);
@@ -79,7 +80,7 @@ public class Spell extends GameObject{
 	}
 	
 	public long getRemainingCooldown(){
-		if(System.currentTimeMillis - starTime > 0){
+		if(System.currentTimeMillis() - startTime > 0){
 			currentCooldown = System.currentTimeMillis() - startTime;
 		}else{
 			currentCooldown = 0;
