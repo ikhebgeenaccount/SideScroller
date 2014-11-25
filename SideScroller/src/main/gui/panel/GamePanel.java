@@ -31,6 +31,7 @@ public class GamePanel extends Panel implements KeyListener{
 	//Coordinates of the character
 	private int charx, chary;
 	private int newcharx, newchary;
+	private boolean movedLeft;
 	
 	//Tick
 	private int tick;
@@ -208,6 +209,22 @@ public class GamePanel extends Panel implements KeyListener{
 	    if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
 	    	Main.pauseGame();
 	    }
+		
+		if(keys[KeyEvent.VK_Q]){
+			character.castQ(movedLeft);
+		}
+		
+		if(keys[KeyEvent.VK_W]){
+			character.castW(movedLeft);
+		}
+		
+		if(keys[KeyEvent.VK_E]){
+			character.castE(movedLeft);
+		}
+		
+		if(keys[KeyEvent.VK_R]){
+			character.castR(movedLeft);
+		}
 	}
 	
 	//Called when a key is released (for jumping this is not the most optimal way to initiate the jump, it only starts when
