@@ -578,4 +578,9 @@ public class GamePanel extends Panel implements KeyListener{
 	public String getCharacterName(){
 		return characterName;
 	}
+	
+	//Getter for character
+	public Champion getCharacter(){
+		return character;
+	}
 }
