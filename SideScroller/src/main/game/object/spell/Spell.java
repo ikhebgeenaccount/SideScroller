@@ -9,20 +9,26 @@ public class Spell extends GameObject{
 	
 	private int range;
 	private int damage;
+	private long cooldown;
 	
 	private Coordinate coordinates;
 	private Coordinate startCoordinates;
 
 	private boolean isFired;
+	private long startTime;
+	
+	private long currentCooldown;
 
 	public Spell(){
 		
 	}
 
-	public Spell(int range, int damage, int speed){
+	public Spell(int range, int damage, int speed, long cooldown){
 		setRange(range);
 		setDamage(damage);
 		setSpeed(speed);
+		setCooldown(cooldown);
+		currentCooldown = 0;
 	}
 
 	public void setDamage(int damage){
@@ -32,10 +38,20 @@ public class Spell extends GameObject{
 	public void setRange(int range){
 		this.range = range;
 	}
+	
+	public void setCooldown(long cooldown){
+		this.cooldown = cooldown;
+	}
 
-	public void fire(Coordinate startCoordinates){
-		this.startCoordinates = startCoordinates;
-		coordinates = this.startCoordinates;
+	public void fire(Coordinate startCoordinates, long startTime){
+		if(currentCooldown == 0){
+			this.startTime = startTime;
+			this.startCoordinates = startCoordinates;
+			coordinates = this.startCoordinates;
+			isFired = true;
+		}else{
+			isFired = false;
+		}
 	}
 	
 	public void move(boolean moveLeft){ //moveLeft = true, if moving left, false when moving right
@@ -61,5 +77,15 @@ public class Spell extends GameObject{
 	//Only call getCurrentSceneImage() if isFired()!
 	public boolean isFired(){
 		return isFired;
+	}
+	
+	public String getRemainingCooldown(){
+		if(System.currentTimeMillis - starTime > 0){
+			currentCooldown = System.currentTimeMillis() - startTime;
+			return String.valueOf(currentCooldown);
+		}else{
+			currentCooldown = 0;
+			return "0";
+		}
 	}
 }
