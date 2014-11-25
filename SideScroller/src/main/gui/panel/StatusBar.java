@@ -1,5 +1,16 @@
 package main.gui.panel;
 
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.JPanel;
+
+import main.Main;
+import main.game.object.champion.Champion;
+
 public class StatusBar extends JPanel{
 	
 	private Image qIcon, wIcon, eIcon, rIcon;
@@ -18,16 +29,18 @@ public class StatusBar extends JPanel{
 			eIconGrayed = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/char" + Main.getGamePanel().getCharacterName() + "eIconGrayed.png"));
 			rIcon = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/char" + Main.getGamePanel().getCharacterName() + "rIcon.png"));
 			rIconGrayed = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/char" + Main.getGamePanel().getCharacterName() + "rIconGrayed.png"));
+		}catch(IOException e){
+			e.printStackTrace();
 		}
 	}
 	
 	@Override
 	public void paintComponent(Graphics g){
 		//Get cooldowns
-		long qcd = Main.getGamePanel().getCharacter.getRemainingCooldown(Champion.Q);
-		long wcd = Main.getGamePanel().getCharacter.getRemainingCooldown(Champion.W);
-		long ecd = Main.getGamePanel().getCharacter.getRemainingCooldown(Champion.E);
-		long rcd = Main.getGamePanel().getCharacter.getRemainingCooldown(Champion.R);
+		long qcd = Main.getGamePanel().getCharacter().getRemainingCooldown(Champion.Q);
+		long wcd = Main.getGamePanel().getCharacter().getRemainingCooldown(Champion.W);
+		long ecd = Main.getGamePanel().getCharacter().getRemainingCooldown(Champion.E);
+		long rcd = Main.getGamePanel().getCharacter().getRemainingCooldown(Champion.R);
 		
 		//Draw spell icons
 		if(qcd == 0){
@@ -52,9 +65,9 @@ public class StatusBar extends JPanel{
 		}
 		
 		//Draw remaining cooldowns
-		g.drawString(String.valueOf(qcd), 385, 52, null);
-		g.drawString(String.valueOf(wcd), 445, 52, null);
-		g.drawString(String.valueOf(ecd), 505, 52, null);
-		g.drawString(String.valueOf(rcd), 565, 52, null);
+		g.drawString(String.valueOf(qcd), 385, 52);
+		g.drawString(String.valueOf(wcd), 445, 52);
+		g.drawString(String.valueOf(ecd), 505, 52);
+		g.drawString(String.valueOf(rcd), 565, 52);
 	}
 }
