@@ -49,11 +49,11 @@ public class GameObject {
 		}
 	}
 	
-	public void addAnimation(int type, BufferedImage animationSprite, int sceneLength, int frameWidth){
+	public void addAnimation(int type, BufferedImage animationSprite, int sceneLength, int frameWidth, int frameHeight){
 		animations[type] = new Animation(frameWidth);
 		int scenes = animationSprite.getWidth() / frameWidth;
 		for(int i = 0; i < scenes; i++){
-			animations[type].addScene(animationSprite.getSubimage(frameWidth * i, 0, 50, 100), sceneLength);
+			animations[type].addScene(animationSprite.getSubimage(frameWidth * i, 0, frameWidth, frameHeight), sceneLength);
 		}
 	}
 	
@@ -64,6 +64,7 @@ public class GameObject {
 	
 	//Return the image of the current scene
 	public Image getCurrentAnimationImage() {
+		System.out.println(currentAnimationType);
 		return currentAnimation.getCurrentSceneImage();
 	}
 	
