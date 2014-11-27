@@ -47,6 +47,9 @@ public class GamePanel extends Panel implements KeyListener{
 	private Champion character;
 	private String characterName;
 	
+	//
+	private boolean isFiredQ, isFiredW, isFiredE, isFiredR;
+	
 	//Layout variables
 	private GridBagConstraints c;
 	
@@ -214,19 +217,19 @@ public class GamePanel extends Panel implements KeyListener{
 	    }
 		
 		if(keys[KeyEvent.VK_Q]){
-			character.castQ(character.getCoordinates(), movedLeft);
+			isFiredQ = character.castQ(character.getCoordinates(), movedLeft);
 		}
 		
 		if(keys[KeyEvent.VK_W]){
-			character.castW(character.getCoordinates(), movedLeft);
+			isFiredW = character.castW(character.getCoordinates(), movedLeft);
 		}
 		
 		if(keys[KeyEvent.VK_E]){
-			character.castE(character.getCoordinates(), movedLeft);
+			isFiredE = character.castE(character.getCoordinates(), movedLeft);
 		}
 		
 		if(keys[KeyEvent.VK_R]){
-			character.castR(character.getCoordinates(), movedLeft);
+			isFiredR = character.castR(character.getCoordinates(), movedLeft);
 		}
 	}
 	

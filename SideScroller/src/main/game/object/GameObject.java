@@ -49,6 +49,14 @@ public class GameObject {
 		}
 	}
 	
+	public void addAnimation(int type, BufferedImage animationSprite, int sceneLength, int frameWidth){
+		animations[type] = new Animation(frameWidth);
+		int scenes = animationSprite.getWidth() / frameWidth;
+		for(int i = 0; i < scenes; i++){
+			animations[type].addScene(animationSprite.getSubimage(frameWidth * i, 0, 50, 100), sceneLength);
+		}
+	}
+	
 	//Check if the next scene should start playing
 	public void checkNextScene(){
 		currentAnimation.nextScene();

@@ -42,7 +42,7 @@ public class Spell extends GameObject{
 		this.cooldown = cooldown;
 	}
 
-	public void fire(Coordinate startCoordinates, boolean movedLeft){
+	public boolean fire(Coordinate startCoordinates, boolean movedLeft){
 		if(currentCooldown == 0){
 			this.moveLeft = movedLeft;
 			this.startTime = System.currentTimeMillis();
@@ -51,7 +51,8 @@ public class Spell extends GameObject{
 			isFired = true;
 		}else{
 			isFired = false;
-		}
+		}		
+		return isFired;
 	}
 	
 	public void move(){ //moveLeft = true, if moving left, false when moving right
@@ -86,13 +87,5 @@ public class Spell extends GameObject{
 			currentCooldown = 0;
 		}
 		return currentCooldown;
-	}
-	
-	public void addAnimation(int type, BufferedImage animationSprite, int sceneLength, int frameWidth){
-		animations[type] = new Animation(frameWidth);
-		int scenes = animationSprite.getWidth() / frameWidth;
-		for(int i = 0; i < scenes; i++){
-			animations[type].addScene(animationSprite.getSubimage(frameWidth * i, 0, 50, 100), sceneLength);
-		}
 	}
 }
