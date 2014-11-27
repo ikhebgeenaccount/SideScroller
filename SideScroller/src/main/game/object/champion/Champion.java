@@ -9,7 +9,7 @@ public class Champion extends GameObject{
 	public static final int IDLE = 0, WALK_LEFT = 1, WALK_RIGHT = 2, JUMP = 3, FALL = 4, CAST_Q = 5, CAST_W = 6, CAST_E = 7, CAST_R = 8;
 	public static final int Q = 0, W = 1, E = 2, R = 3;
 	
-	private Spell q, w, e, r;
+	public Spell q, w, e, r;
 	
 	public Champion(){
 		
