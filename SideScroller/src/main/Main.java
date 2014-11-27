@@ -11,7 +11,7 @@ import java.util.Properties;
 import javax.swing.JFrame;
 
 import main.game.object.champion.Champion;
-import main.game.object.champion.champions.ezreal.Ezreal;
+import main.game.object.champion.champions.alphaguy.AlphaGuy;
 import main.gui.Panel;
 import main.gui.panel.GamePanel;
 import main.gui.panel.LoadPanel;
@@ -71,15 +71,14 @@ public class Main extends JFrame{
 	
 	//Method to start game, creates character and game loop thread
 	public static void startGame(){
-		setPanel(loadPanel);
 		
 		ticksPS = 90;
 		
 		//Create character
-		character = new Ezreal();
+		character = new AlphaGuy();
 		
 		//Create gamepanel
-		gamePanel = new GamePanel(character, "ezreal");
+		gamePanel = new GamePanel(character, "alphaguy");
 		setPanel(gamePanel);
 		
 		//Start game
