@@ -5,7 +5,7 @@ import main.game.object.GameObject;
 
 public class Spell extends GameObject{
 
-	public static final int APPEAR = 0, TRAVEL = 1, HIT = 2;
+	public static final int APPEAR = 0, TRAVEL = 1, DISSAPEAR = 2, HIT = 3;
 	
 	//Spell properties
 	private int range;
@@ -86,5 +86,13 @@ public class Spell extends GameObject{
 			currentCooldown = 0;
 		}
 		return currentCooldown;
+	}
+	
+	public void addAnimation(int type, BufferedImage animationSprite, int sceneLength, int frameWidth){
+		animations[type] = new Animation(frameWidth);
+		int scenes = animationSprite.getWidth() / frameWidth;
+		for(int i = 0; i < scenes; i++){
+			animations[type].addScene(animationSprite.getSubimage(frameWidth * i, 0, 50, 100), sceneLength);
+		}
 	}
 }
