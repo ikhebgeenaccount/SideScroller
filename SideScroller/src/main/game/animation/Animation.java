@@ -65,6 +65,10 @@ public class Animation {
 		return scenes[sceneOfAnimation].getImage();
 	}
 	
+	public int getFrameWidth(){
+		return frameWidth;
+	}
+	
 	//This class holds information about one scene of the animation. That information is: the image, the length in frames and the
 	//start of the animation in frames
 	private class OneScene{
