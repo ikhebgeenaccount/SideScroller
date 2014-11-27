@@ -5,7 +5,7 @@ import main.game.object.GameObject;
 
 public class Spell extends GameObject{
 
-	public static final int APPEAR = 0, TRAVEL = 1, DISSAPEAR = 2, HIT = 3;
+	public static final int APPEAR = 0, TRAVEL = 1, DISAPPEAR = 2, HIT = 3;
 	
 	//Spell properties
 	private int range;
