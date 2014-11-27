@@ -7,6 +7,7 @@ public class Animation {
 	private OneScene[] scenes;
 	private int sceneOfAnimation;
 	private int numberOfScenes;
+	private int frameWidth;
 	
 	/* In the constructor we create an array for all the scenes that the animation will contain. Maximum of 30 scenes.
 	 * We also set numberOfScenes to zero, because there are no scenes yet.
@@ -16,6 +17,14 @@ public class Animation {
 		scenes = new OneScene[30];
 		numberOfScenes = 0;
 		reset();
+		frameWidth = 50;
+	}
+	
+	public Animation(int frameWidth){
+		scenes = new OneScene[30];
+		numberOfScenes = 0;
+		reset();
+		this.frameWidth = frameWidth;
 	}
 	
 	//This method is called when the Animation should start. First, it's resetted, so it begins at the start. Then the first
