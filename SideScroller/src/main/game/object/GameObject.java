@@ -63,8 +63,7 @@ public class GameObject {
 	}
 	
 	//Return the image of the current scene
-	public Image getCurrentAnimationImage() {
-		System.out.println(currentAnimationType);
+	public Image getCurrentAnimationImage(){
 		return currentAnimation.getCurrentSceneImage();
 	}
 	
