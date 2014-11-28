@@ -32,17 +32,17 @@ public class Ezreal extends Champion{
 			int width = 70;
 			int height = 15;
 			q.addAnimation(Spell.APPEAR, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/qAppear.png")), 250, width, height);
-			q.addAnimation(Spell.TRAVEL, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/qAppear.png")), 250, width, height);
-			q.addAnimation(Spell.DISAPPEAR, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/qAppear.png")), 250, width, height);
-			q.addAnimation(Spell.HIT, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/qAppear.png")), 250, width, height);
+			q.addAnimation(Spell.TRAVEL, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/qTravel.png")), 250, width, height);
+			q.addAnimation(Spell.DISAPPEAR, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/qDisappear.png")), 250, width, height);
+			q.addAnimation(Spell.HIT, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/qHit.png")), 250, width, height);
 			
 			w = new Spell(500, 100, 10, 5);
 			width = 50;
 			height = 30;
 			w.addAnimation(Spell.APPEAR, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/wAppear.png")), 250, width, height);
-			w.addAnimation(Spell.TRAVEL, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/wAppear.png")), 250, width, height);
-			w.addAnimation(Spell.DISAPPEAR, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/wAppear.png")), 250, width, height);
-			w.addAnimation(Spell.HIT, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/wAppear.png")), 250, width, height);
+			w.addAnimation(Spell.TRAVEL, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/wTravel.png")), 250, width, height);
+			w.addAnimation(Spell.DISAPPEAR, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/wDisappear.png")), 250, width, height);
+			w.addAnimation(Spell.HIT, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/wHit.png")), 250, width, height);
 			
 			e = new EzrealE();
 			
@@ -50,9 +50,9 @@ public class Ezreal extends Champion{
 			width = 100;
 			height = 80;
 			r.addAnimation(Spell.APPEAR, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/rAppear.png")), 250, width, height);
-			r.addAnimation(Spell.TRAVEL, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/rAppear.png")), 250, width, height);
-			r.addAnimation(Spell.DISAPPEAR, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/rAppear.png")), 250, width, height);
-			r.addAnimation(Spell.HIT, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/rAppear.png")), 250, width, height);
+			r.addAnimation(Spell.TRAVEL, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/rTravel.png")), 250, width, height);
+			r.addAnimation(Spell.DISAPPEAR, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/rDisappear.png")), 250, width, height);
+			r.addAnimation(Spell.HIT, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/rHit.png")), 250, width, height);
 			
 			//Add the idle animation to animations[]
 			BufferedImage idleSprite = ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/idle.png"));
