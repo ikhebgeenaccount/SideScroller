@@ -26,6 +26,33 @@ public class Ezreal extends Champion{
 			 * picture for the animations.
 			 * I have decided to put the animations in one image because the resource folder will be less messy this way. 
 			 */
+			 
+			//Create spells
+			q = new Spell(600, 200, 10, 5);
+			int width = 70;
+			int height = 15;
+			q.addAnimation(Spell.APPEAR, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/qAppear.png")), 250, width, height);
+			q.addAnimation(Spell.TRAVEL, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/qAppear.png")), 250, width, height);
+			q.addAnimation(Spell.DISAPPEAR, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/qAppear.png")), 250, width, height);
+			q.addAnimation(Spell.HIT, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/qAppear.png")), 250, width, height);
+			
+			w = new Spell(500, 100, 10, 5);
+			width = 50;
+			height = 30;
+			w.addAnimation(Spell.APPEAR, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/wAppear.png")), 250, width, height);
+			w.addAnimation(Spell.TRAVEL, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/wAppear.png")), 250, width, height);
+			w.addAnimation(Spell.DISAPPEAR, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/wAppear.png")), 250, width, height);
+			w.addAnimation(Spell.HIT, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/wAppear.png")), 250, width, height);
+			
+			e = new EzrealE();
+			
+			r = new Spell(2000, 500, 10, 10);
+			width = 100;
+			height = 80;
+			r.addAnimation(Spell.APPEAR, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/rAppear.png")), 250, width, height);
+			r.addAnimation(Spell.TRAVEL, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/rAppear.png")), 250, width, height);
+			r.addAnimation(Spell.DISAPPEAR, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/rAppear.png")), 250, width, height);
+			r.addAnimation(Spell.HIT, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/rAppear.png")), 250, width, height);
 			
 			//Add the idle animation to animations[]
 			BufferedImage idleSprite = ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/idle.png"));
