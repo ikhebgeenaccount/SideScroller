@@ -130,6 +130,24 @@ public class GamePanel extends Panel implements KeyListener{
 		//Check if next scene should play
 		character.checkNextScene();
 		
+		//Draw spells if fired
+		if(character.q.isFired()){
+			g.drawImage(character.q.getCurrentAnimationImage(), character.q.getCoordinates().x, character.q.getCoordinates().y, null);
+			character.q.checkNextScene();
+		}
+		if(character.w.isFired()){
+			g.drawImage(character.w.getCurrentAnimationImage(), character.w.getCoordinates().x, character.w.getCoordinates().y, null);
+			character.w.checkNextScene();
+		}
+		if(character.e.isFired()){
+			g.drawImage(character.e.getCurrentAnimationImage(), character.e.getCoordinates().x, character.e.getCoordinates().y, null);
+			character.e.checkNextScene();
+		}
+		if(character.r.isFired()){
+			g.drawImage(character.r.getCurrentAnimationImage(), character.r.getCoordinates().x, character.r.getCoordinates().y, null);
+			character.r.checkNextScene();
+		}
+		
 		//Draw current FPS
 		g.drawString(Main.getCurrentFPS(), 985, 12);
 		g.drawString(Main.getCurrentTPS(), 985, 24);
