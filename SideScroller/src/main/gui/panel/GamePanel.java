@@ -490,6 +490,20 @@ public class GamePanel extends Panel implements KeyListener{
 	    	chary = 500;
 	    }
 	    
+	    //Check next scenes for spells
+	    if(character.q.isFired()){
+	    	character.q.move();
+	    }
+	    if(character.w.isFired()){
+	    	character.w.move();
+	    }
+	    if(character.e.isFired()){
+	    	character.e.move();
+	    }
+	    if(character.r.isFired()){
+	    	character.r.move();
+	    }
+	    
 	    //Determine which animation should run
 	    if(ymovedup){
 	    	character.setAnimationType(Champion.JUMP);
