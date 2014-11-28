@@ -44,20 +44,20 @@ public class Ezreal extends Champion{
 			addAnimation(Champion.JUMP, jumpSprite, 250);
 			
 			//Add the fall animation to animations[]
-			BufferedImage fallSprite = ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/fall.png"));
+			BufferedImage fallSprite = ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/fall.png"));
 			addAnimation(Champion.FALL, fallSprite, 250);
 			
 			//Add the cast q animation to animations[]
-			
+			addAnimation(Champion.CAST_Q, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/castQ.png")), 250);
 			
 			//Add the cast w animation to animations[]
-			
+			addAnimation(Champion.CAST_W, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/castW.png")), 250);
 			
 			//Add the cast e animation to animations[]
-			
+			addAnimation(Champion.CAST_E, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/castE.png")), 250);
 			
 			//Add the cast r animation to animations[]
-			
+			addAnimation(Champion.CAST_R, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/castR.png")), 250);
 			
 			//Start idle animation
 			setAnimationType(Champion.IDLE);
