@@ -28,19 +28,19 @@ public class Ezreal extends Champion{
 			 */
 			
 			//Add the idle animation to animations[]
-			BufferedImage idleSprite = ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/idle.png"));
+			BufferedImage idleSprite = ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/idle.png"));
 			addAnimation(Champion.IDLE, idleSprite, 100);
 			
 			//Add the walk left animation to animations[]		
-			BufferedImage walkLeftSprite = ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/walkLeft.png"));
+			BufferedImage walkLeftSprite = ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/walkLeft.png"));
 			addAnimation(Champion.WALK_LEFT, walkLeftSprite, 250);
 			
 			//Add the walk right animation to animations[]
-			BufferedImage walkRightSprite = ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/walkRight.png"));
+			BufferedImage walkRightSprite = ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/walkRight.png"));
 			addAnimation(Champion.WALK_RIGHT, walkRightSprite, 250);
 			
 			//Add the jump animation to animations[]
-			BufferedImage jumpSprite = ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/jump.png"));
+			BufferedImage jumpSprite = ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/jump.png"));
 			addAnimation(Champion.JUMP, jumpSprite, 250);
 			
 			//Add the fall animation to animations[]
