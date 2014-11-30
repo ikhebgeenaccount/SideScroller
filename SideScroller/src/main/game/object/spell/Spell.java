@@ -29,6 +29,10 @@ public class Spell extends GameObject{
 		setCooldown(cooldown);
 		currentCooldown = 0;
 	}
+	
+	public Spell(){
+		
+	}
 
 	public void setDamage(int damage){
 		this.damage = damage;

@@ -1,5 +1,11 @@
 package main.game.object.champion.champions.ezreal;
 
-public class EzrealE{
+import main.game.object.spell.Spell;
+
+public class EzrealE extends Spell{
+	
+	public EzrealE(){
+		
+	}
 
 }

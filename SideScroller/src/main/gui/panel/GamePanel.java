@@ -139,10 +139,10 @@ public class GamePanel extends Panel implements KeyListener{
 			g.drawImage(character.w.getCurrentAnimationImage(), character.w.getCoordinates().x, character.w.getCoordinates().y, null);
 			character.w.checkNextScene();
 		}
-		if(character.e.isFired()){
-			g.drawImage(character.e.getCurrentAnimationImage(), character.e.getCoordinates().x, character.e.getCoordinates().y, null);
-			character.e.checkNextScene();
-		}
+	//	if(character.e.isFired()){
+	//		g.drawImage(character.e.getCurrentAnimationImage(), character.e.getCoordinates().x, character.e.getCoordinates().y, null);
+	//		character.e.checkNextScene();
+	//	}
 		if(character.r.isFired()){
 			g.drawImage(character.r.getCurrentAnimationImage(), character.r.getCoordinates().x, character.r.getCoordinates().y, null);
 			character.r.checkNextScene();
