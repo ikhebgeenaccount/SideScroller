@@ -16,8 +16,8 @@ public class AlphaGuy extends Champion {
 		
 		
 		try {
-			/* All the animations are in one big image, that is why we use the getSubimage() function to get al the
-			 * picture for the animations.
+			/* All the animations are in one big image, that is why we use the getSubimage() function to get all the
+			 * pictures for the animations.
 			 * I have decided to put the animations in one image because the resource folder will be less messy this way. 
 			 */			
 

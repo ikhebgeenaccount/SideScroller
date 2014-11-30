@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 
 import main.Main;
 import main.game.object.champion.Champion;
+import main.game.object.spell.Spell;
 import main.gui.Panel;
 
 public class GamePanel extends Panel implements KeyListener{
@@ -497,9 +498,9 @@ public class GamePanel extends Panel implements KeyListener{
 	    if(character.w.isFired()){
 	    	character.w.move();
 	    }
-	    if(character.e.isFired()){
-	    	character.e.move();
-	    }
+	    //if(character.e.isFired()){
+	    //	character.e.move();
+	    //}
 	    if(character.r.isFired()){
 	    	character.r.move();
 	    }

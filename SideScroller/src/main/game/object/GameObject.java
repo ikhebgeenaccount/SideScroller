@@ -12,6 +12,7 @@ public class GameObject {
 	private Animation[] animations;
 	private Animation currentAnimation;
 	private int currentAnimationType;
+	private int[] animationsLength;
 	
 	//Coordinates
 	private Coordinate coordinates;
@@ -25,6 +26,8 @@ public class GameObject {
 		animations = new Animation[10];
 		currentAnimation = new Animation();
 		currentAnimationType = -1;
+		
+		animationsLength = new int[30];
 	}
 	
 	//Animation methods
@@ -47,6 +50,7 @@ public class GameObject {
 		for(int i = 0; i < scenes; i++){
 			animations[type].addScene(animationSprite.getSubimage(50 * i, 0, 50, 100), sceneLength);
 		}
+		animationsLength[type] = scenes * sceneLength;
 	}
 	
 	public void addAnimation(int type, BufferedImage animationSprite, int sceneLength, int frameWidth, int frameHeight){
@@ -55,6 +59,7 @@ public class GameObject {
 		for(int i = 0; i < scenes; i++){
 			animations[type].addScene(animationSprite.getSubimage(frameWidth * i, 0, frameWidth, frameHeight), sceneLength);
 		}
+		animationsLength[type] = scenes * sceneLength;
 	}
 	
 	//Check if the next scene should start playing
@@ -84,5 +89,9 @@ public class GameObject {
 	
 	public void setSpeed(int speed){
 		this.speed = speed;
+	}
+	
+	public int getCurrentAnimationLength(){
+		return animationsLength[currentAnimationType];
 	}
 }

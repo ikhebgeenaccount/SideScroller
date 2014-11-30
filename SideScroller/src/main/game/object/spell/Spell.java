@@ -6,6 +6,7 @@ import main.game.object.GameObject;
 public class Spell extends GameObject{
 
 	public static final int APPEAR = 0, TRAVEL = 1, DISAPPEAR = 2, HIT = 3;
+	private int[] animationsLength;
 	
 	//Spell properties
 	private int range;
@@ -23,6 +24,7 @@ public class Spell extends GameObject{
 	private boolean moveLeft;
 	
 	public Spell(int range, int damage, int speed, long cooldown){
+		animationsLength = new int[4];
 		setRange(range);
 		setDamage(damage);
 		setSpeed(speed);
@@ -31,7 +33,7 @@ public class Spell extends GameObject{
 	}
 	
 	public Spell(){
-		
+		animationsLength = new int[4];
 	}
 
 	public void setDamage(int damage){
@@ -53,6 +55,7 @@ public class Spell extends GameObject{
 			this.startCoordinates = startCoordinates;
 			coordinates = this.startCoordinates;
 			isFired = true;
+			setAnimationType(Spell.TRAVEL);
 		}else{
 			isFired = false;
 		}		
@@ -67,6 +70,7 @@ public class Spell extends GameObject{
 			}else{
 				//Out of range
 				isFired = false;
+				setAnimationType(Spell.DISAPPEAR); //Won't play since isFired is already false, needs fixing.
 			}
 		}else{
 			//Spell is moving to the right
@@ -75,11 +79,11 @@ public class Spell extends GameObject{
 			}else{
 				//Out of range
 				isFired = false;
+				setAnimationType(Spell.DISAPPEAR);
 			}
 		}
 	}
 	
-	//Only call getCurrentSceneImage() if isFired()!
 	public boolean isFired(){
 		return isFired;
 	}
