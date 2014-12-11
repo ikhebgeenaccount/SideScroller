@@ -78,9 +78,13 @@ public class GameObject {
 	}
 	
 	//Set the coordinates for this GameObject
-	public void setCoordinations(int x, int y){
+	public void setCoordinates(int x, int y){
 		coordinates.x = x;
 		coordinates.y = y;
+	}
+	
+	public void setCoordinates(Coordinate coordinates){
+		this.coordinates = coordinates;
 	}
 	
 	public int getSpeed(){

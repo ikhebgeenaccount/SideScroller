@@ -68,7 +68,7 @@ public class GamePanel extends Panel implements KeyListener{
 		keys = new boolean[1000];
 		
 		//Set character coordinates to 0
-		character.setCoordinations(0, 0);
+		character.setCoordinates(0, 0);
 		
 		//Set first level and create levels
 		createLevels();
@@ -530,7 +530,7 @@ public class GamePanel extends Panel implements KeyListener{
 	    	character.setAnimationType(Champion.IDLE);
 	    }
 	    
-	    character.setCoordinations(charx, chary);
+	    character.setCoordinates(charx, chary);
 	}
 	
 	//In this class the jumpvariables are stored
