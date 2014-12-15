@@ -247,7 +247,7 @@ public class GamePanel extends Panel implements KeyListener{
 			keys[KeyEvent.VK_W] = false;
 		}
 		
-		if(keys[KeyEvent.VK_E] && character.e.getRemainingCooldown() == 0){
+		if(keys[KeyEvent.VK_E] /*&& character.e.getRemainingCooldown() == 0*/){
 			//isFiredE = character.castE(character.getCoordinates(), movedLeft);
 		}else{
 			keys[KeyEvent.VK_E] = false;
