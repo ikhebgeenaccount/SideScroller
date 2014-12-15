@@ -22,7 +22,7 @@ public class Spell extends GameObject{
 	private long currentCooldown;
 	private boolean moveLeft;
 	
-	public Spell(int range, int damage, int speed, long cooldown){
+	public Spell(int range, int damage, int speed, long cooldowninms){
 		animationsLength = new int[4];
 		setRange(range);
 		setDamage(damage);
@@ -55,6 +55,7 @@ public class Spell extends GameObject{
 			setCoordinates(this.startCoordinates);
 			isFired = true;
 			setAnimationType(Spell.TRAVEL);
+			currentCooldown = cooldown;
 		}else{
 			isFired = false;
 		}		
@@ -62,6 +63,7 @@ public class Spell extends GameObject{
 	}
 	
 	public void move(){ //moveLeft = true, if moving left, false when moving right
+		System.out.println("(" + getCoordinates().x + "," + getCoordinates().y + ")");
 		if(moveLeft){
 			//Spell is moving to the left
 			if(getCoordinates().x - startCoordinates.x >= 0){
@@ -91,7 +93,7 @@ public class Spell extends GameObject{
 	}
 	
 	public long getRemainingCooldown(){
-		if(System.currentTimeMillis() - startTime > 0 && currentCooldown != 0){
+		if(System.currentTimeMillis() - startTime < cooldown){
 			currentCooldown = System.currentTimeMillis() - startTime;
 		}else{
 			currentCooldown = 0;

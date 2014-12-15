@@ -167,7 +167,7 @@ public class GamePanel extends Panel implements KeyListener{
 	    	onEdge();
 	    	
 		charx = character.getCoordinates().x;
-    		chary = character.getCoordinates().y;
+    	chary = character.getCoordinates().y;
 	    
 		int matrix_x_left = roundDownToClosestMultipleOfFifty(charx)/50 ;
 		int matrix_y =  roundDownToClosestMultipleOfFifty(chary + 99)/50 ;
@@ -271,6 +271,7 @@ public class GamePanel extends Panel implements KeyListener{
 	 * 	
 	 */
 	public void update(){
+		System.out.println(character.q.getRemainingCooldown());
 		tick++;
 		
 		charx = character.getCoordinates().x;
@@ -291,7 +292,7 @@ public class GamePanel extends Panel implements KeyListener{
 		}
 	    	
 		if(keys[KeyEvent.VK_RIGHT]){  	
-		        newcharx += character.getSpeed();
+		    newcharx += character.getSpeed();
 		}   
 	    
 		onEdge();
@@ -531,9 +532,6 @@ public class GamePanel extends Panel implements KeyListener{
 	    }
 	    
 	    character.setCoordinates(charx, chary);
-	    
-	    //Testing
-	    System.out.println(character.getCoordinates().x + "," + character.getCoordinates().y);
 	}
 	
 	//In this class the jumpvariables are stored
