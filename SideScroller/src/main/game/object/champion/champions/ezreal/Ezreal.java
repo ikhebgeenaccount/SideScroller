@@ -15,10 +15,10 @@ public class Ezreal extends Champion{
 	
 	public Ezreal(){
 		//Create spells
-		q = new Spell(600, 200, 10, 5);
-		w = new Spell(500, 100, 10, 5);
+		q = new Spell(600, 200, 10, 5000);
+		w = new Spell(500, 100, 10, 5000);
 		
-		r = new Spell(2000, 500, 10, 10);
+		r = new Spell(2000, 500, 10, 10000);
 		
 		ClassLoader cldr = this.getClass().getClassLoader();	
 		try {
