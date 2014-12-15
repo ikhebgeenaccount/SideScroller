@@ -531,6 +531,9 @@ public class GamePanel extends Panel implements KeyListener{
 	    }
 	    
 	    character.setCoordinates(charx, chary);
+	    
+	    //Testing
+	    System.out.println(character.getCoordinates().x + "," + character.getCoordinates().y);
 	}
 	
 	//In this class the jumpvariables are stored
