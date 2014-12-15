@@ -67,6 +67,7 @@ public class Spell extends GameObject{
 			//Spell is moving to the left
 			if(coordinates.x - startCoordinates.x > 0){
 				//Move
+				coordinates.x = coordinates.x - getSpeed();
 			}else{
 				//Out of range
 				isFired = false;
@@ -76,6 +77,7 @@ public class Spell extends GameObject{
 			//Spell is moving to the right
 			if(startCoordinates.x - coordinates.x > 0){
 				//Move
+				coordinates.x = coordinates.x + getSpeed();
 			}else{
 				//Out of range
 				isFired = false;
