@@ -235,20 +235,28 @@ public class GamePanel extends Panel implements KeyListener{
 	    	Main.pauseGame();
 	    }
 		
-		if(keys[KeyEvent.VK_Q]){
+		if(keys[KeyEvent.VK_Q] && character.q.getRemainingCooldown() == 0){
 			isFiredQ = character.castQ(character.getCoordinates(), movedLeft);
+		}else{
+			keys[KeyEvent.VK_Q] = false;
 		}
 		
-		if(keys[KeyEvent.VK_W]){
+		if(keys[KeyEvent.VK_W] && character.w.getRemainingCooldown() == 0){
 			isFiredW = character.castW(character.getCoordinates(), movedLeft);
+		}else{
+			keys[KeyEvent.VK_W] = false;
 		}
 		
-		if(keys[KeyEvent.VK_E]){
+		if(keys[KeyEvent.VK_E] && character.e.getRemainingCooldown() == 0){
 			//isFiredE = character.castE(character.getCoordinates(), movedLeft);
+		}else{
+			keys[KeyEvent.VK_E] = false;
 		}
 		
-		if(keys[KeyEvent.VK_R]){
+		if(keys[KeyEvent.VK_R] && character.r.getRemainingCooldown() == 0){
 			isFiredR = character.castR(character.getCoordinates(), movedLeft);
+		}else{
+			keys[KeyEvent.VK_R] = false;
 		}
 	}
 	
