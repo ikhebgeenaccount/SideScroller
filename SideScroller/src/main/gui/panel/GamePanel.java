@@ -85,12 +85,6 @@ public class GamePanel extends Panel implements KeyListener{
 		//First spell will be fired to the right
 		movedLeft = false;
 		
-		//Layout properties
-		c = new GridBagConstraints();
-		c.anchor = GridBagConstraints.NORTHEAST;
-		c.gridy = 0;
-		c.gridx = 0;
-		
 		//Set this as keylistener and make it focusable so the keylistener works
 		addKeyListener(this);
 		setFocusable(true);
@@ -111,7 +105,7 @@ public class GamePanel extends Panel implements KeyListener{
 		//j is y
 		for(int x = 0; x < 20; x++){
 			for(int y = 0; y < 10; y++){
-                //Decide which landscape-img should be used
+                		//Decide which landscape-img should be used
 				switch(currentLevel[y + (levelIDy * 10)][x + (levelIDx * 20)]){
 					case 0:g.drawImage(air, 50 * x, 50 * y, null);
 						break;
@@ -172,28 +166,27 @@ public class GamePanel extends Panel implements KeyListener{
 	    if(keys[KeyEvent.VK_UP]){
 	    	onEdge();
 	    	
-	    	charx = character.getCoordinates().x;
-	    	chary = character.getCoordinates().y;
-		    
-		    int matrix_x_left = roundDownToClosestMultipleOfFifty(charx)/50 ;
-		    int matrix_y =  roundDownToClosestMultipleOfFifty(chary + 99)/50 ;
-		    
-		    boolean solid = false;
-		    
-		    try{
-		    	if(onEdgeY){
-		    		if(currentLevel[matrix_y + 1 + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] == 0){
-		    		
-		    		}	
-		    	}else{
-		    		if(currentLevel[matrix_y + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] == 0){
-		    		
-		    		}	
-		    	}
-		    	
-		    }catch(ArrayIndexOutOfBoundsException e1){
-		    	solid = true;
-		    }
+		charx = character.getCoordinates().x;
+    		chary = character.getCoordinates().y;
+	    
+		int matrix_x_left = roundDownToClosestMultipleOfFifty(charx)/50 ;
+		int matrix_y =  roundDownToClosestMultipleOfFifty(chary + 99)/50 ;
+	    
+		boolean solid = false;
+	    
+		try{
+			if(onEdgeY){
+				if(currentLevel[matrix_y + 1 + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] == 0){
+
+				}
+			}else{
+				if(currentLevel[matrix_y + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] == 0){
+
+				}
+			}
+		}catch(ArrayIndexOutOfBoundsException e1){
+			solid = true;
+		}
 		    
 	    	if(onEdgeY){
 				if(onEdgeX){
@@ -229,11 +222,11 @@ public class GamePanel extends Panel implements KeyListener{
 				}
 			}
 	    	
-	    }
-	    
-	    if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
-	    	Main.pauseGame();
-	    }
+		}
+	
+		if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
+			Main.pauseGame();
+		}
 		
 		if(keys[KeyEvent.VK_Q] && character.q.getRemainingCooldown() == 0){
 			isFiredQ = character.castQ(character.getCoordinates(), movedLeft);
@@ -260,8 +253,7 @@ public class GamePanel extends Panel implements KeyListener{
 		}
 	}
 	
-	//Called when a key is released (for jumping this is not the most optimal way to initiate the jump, it only starts when
-	//the up-key is released, feels a bit sloppy)
+	//Called when a key is released 
 	public void keyReleased(KeyEvent e){
 	    keys[e.getKeyCode()] = false;
 	    
@@ -282,7 +274,7 @@ public class GamePanel extends Panel implements KeyListener{
 		tick++;
 		
 		charx = character.getCoordinates().x;
-    	chary = character.getCoordinates().y;
+		chary = character.getCoordinates().y;
 		
 		boolean xmovedleft = false;
 		boolean xmovedright = false;
@@ -294,15 +286,15 @@ public class GamePanel extends Panel implements KeyListener{
 		newcharx = charx;
 		newchary = chary;
 		
-	    if(keys[KeyEvent.VK_LEFT]){ 	
-	        newcharx -= character.getSpeed();
-	    }
+		if(keys[KeyEvent.VK_LEFT]){ 	
+			newcharx -= character.getSpeed();
+		}
 	    	
-	    if(keys[KeyEvent.VK_RIGHT]){  	
+		if(keys[KeyEvent.VK_RIGHT]){  	
 		        newcharx += character.getSpeed();
 		}   
 	    
-	    onEdge();
+		onEdge();
 		
 	    int matrix_x_old = roundDownToClosestMultipleOfFifty(charx)/50;
 	    int matrix_y_old =  roundDownToClosestMultipleOfFifty(chary + 99)/50;
