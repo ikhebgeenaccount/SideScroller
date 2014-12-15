@@ -22,19 +22,19 @@ public class AlphaGuy extends Champion {
 			 */			
 
 			//Create spells
-			q = new Spell(600, 200, 10, 5);
+			q = new Spell(600, 200, 10, 5000);
 			q.addAnimation(Spell.APPEAR, ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/qAppear.png")), 250, 70, 15);
 			q.addAnimation(Spell.TRAVEL, ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/qAppear.png")), 250, 70, 15);
 			q.addAnimation(Spell.DISAPPEAR, ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/qAppear.png")), 250, 70, 15);
 			q.addAnimation(Spell.HIT, ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/qAppear.png")), 250, 70, 15);
 			
-			w = new Spell(500, 100, 10, 5);
+			w = new Spell(500, 100, 10, 5000);
 			w.addAnimation(Spell.APPEAR, ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/wAppear.png")), 250, 50, 30);
 			w.addAnimation(Spell.TRAVEL, ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/wAppear.png")), 250, 50, 30);
 			w.addAnimation(Spell.DISAPPEAR, ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/wAppear.png")), 250, 50, 30);
 			w.addAnimation(Spell.HIT, ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/wAppear.png")), 250, 50, 30);
 			
-			r = new Spell(2000, 500, 10, 10);
+			r = new Spell(2000, 500, 10, 10000);
 			r.addAnimation(Spell.APPEAR, ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/rAppear.png")), 250, 100, 80);
 			r.addAnimation(Spell.TRAVEL, ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/rAppear.png")), 250, 100, 80);
 			r.addAnimation(Spell.DISAPPEAR, ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/rAppear.png")), 250, 100, 80);

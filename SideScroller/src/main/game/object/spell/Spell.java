@@ -27,7 +27,7 @@ public class Spell extends GameObject{
 		setRange(range);
 		setDamage(damage);
 		setSpeed(speed);
-		setCooldown(cooldown);
+		setCooldown(cooldowninms);
 		currentCooldown = 0;
 	}
 	
@@ -43,8 +43,8 @@ public class Spell extends GameObject{
 		this.range = range;
 	}
 	
-	public void setCooldown(long cooldown){
-		this.cooldown = cooldown;
+	public void setCooldown(long cooldowninms){
+		this.cooldown = cooldowninms;
 	}
 
 	public boolean fire(Coordinate startCoordinates, boolean movedLeft){
@@ -62,30 +62,34 @@ public class Spell extends GameObject{
 		return isFired;
 	}
 	
-	public void move(){ //moveLeft = true, if moving left, false when moving right
-		System.out.println("(" + getCoordinates().x + "," + getCoordinates().y + ")");
+	public boolean move(){ //moveLeft = true, if moving left, false when moving right
+		boolean move;
 		if(moveLeft){
 			//Spell is moving to the left
-			if(getCoordinates().x - startCoordinates.x >= 0){
+			if(getCoordinates().x - startCoordinates.x >= range){
 				//Move
-				System.out.println("moving left with " + getSpeed());
+				move = true;
 				setCoordinates(getCoordinates().x - getSpeed(), getCoordinates().y);
 			}else{
 				//Out of range
+				move = false;
 				isFired = false;
 				setAnimationType(Spell.DISAPPEAR); //Won't play since isFired is already false, needs fixing.
 			}
 		}else{
 			//Spell is moving to the right
-			if(startCoordinates.x - getCoordinates().x >= 0){
+			if(startCoordinates.x - getCoordinates().x >= range){
 				//Move
+				move = true;
 				setCoordinates(getCoordinates().x + getSpeed(), getCoordinates().y);
 			}else{
 				//Out of range
+				move = false;
 				isFired = false;
 				setAnimationType(Spell.DISAPPEAR);
 			}
 		}
+		return move;
 	}
 	
 	public boolean isFired(){

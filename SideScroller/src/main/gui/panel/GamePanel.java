@@ -271,7 +271,6 @@ public class GamePanel extends Panel implements KeyListener{
 	 * 	
 	 */
 	public void update(){
-		System.out.println(character.q.getRemainingCooldown());
 		tick++;
 		
 		charx = character.getCoordinates().x;
@@ -494,16 +493,16 @@ public class GamePanel extends Panel implements KeyListener{
 	    
 	    //Check next scenes for spells
 	    if(character.q.isFired()){
-	    	character.q.move();
+	    	isFiredQ = character.q.move();
 	    }
 	    if(character.w.isFired()){
-	    	character.w.move();
+	    	isFiredW = character.w.move();
 	    }
 	    //if(character.e.isFired()){
-	    //	character.e.move();
+	    //	isFiredE = character.e.move();
 	    //}
 	    if(character.r.isFired()){
-	    	character.r.move();
+	    	isFiredR = character.r.move();
 	    }
 	    
 	    //Determine which animation should run
