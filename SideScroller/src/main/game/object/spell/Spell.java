@@ -13,8 +13,7 @@ public class Spell extends GameObject{
 	private int damage;
 	private long cooldown;
 	
-	//Current location and start location
-	private Coordinate coordinates;
+	//Start location
 	private Coordinate startCoordinates;
 	
 	//Active properties
@@ -53,7 +52,7 @@ public class Spell extends GameObject{
 			this.moveLeft = movedLeft;
 			this.startTime = System.currentTimeMillis();
 			this.startCoordinates = startCoordinates;
-			coordinates = this.startCoordinates;
+			setCoordinates(this.startCoordinates);
 			isFired = true;
 			setAnimationType(Spell.TRAVEL);
 		}else{
@@ -65,9 +64,10 @@ public class Spell extends GameObject{
 	public void move(){ //moveLeft = true, if moving left, false when moving right
 		if(moveLeft){
 			//Spell is moving to the left
-			if(coordinates.x - startCoordinates.x > 0){
+			if(getCoordinates().x - startCoordinates.x >= 0){
 				//Move
-				coordinates.x = coordinates.x - getSpeed();
+				System.out.println("moving left with " + getSpeed());
+				setCoordinates(getCoordinates().x - getSpeed(), getCoordinates().y);
 			}else{
 				//Out of range
 				isFired = false;
@@ -75,9 +75,9 @@ public class Spell extends GameObject{
 			}
 		}else{
 			//Spell is moving to the right
-			if(startCoordinates.x - coordinates.x > 0){
+			if(startCoordinates.x - getCoordinates().x >= 0){
 				//Move
-				coordinates.x = coordinates.x + getSpeed();
+				setCoordinates(getCoordinates().x + getSpeed(), getCoordinates().y);
 			}else{
 				//Out of range
 				isFired = false;
@@ -91,7 +91,7 @@ public class Spell extends GameObject{
 	}
 	
 	public long getRemainingCooldown(){
-		if(System.currentTimeMillis() - startTime > 0){
+		if(System.currentTimeMillis() - startTime > 0 && currentCooldown != 0){
 			currentCooldown = System.currentTimeMillis() - startTime;
 		}else{
 			currentCooldown = 0;
