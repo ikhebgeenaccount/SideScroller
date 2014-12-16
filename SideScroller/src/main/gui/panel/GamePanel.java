@@ -50,7 +50,7 @@ public class GamePanel extends Panel implements KeyListener{
 	
 	//
 	private boolean isFiredQ, isFiredW, isFiredE, isFiredR;
-	private boolean isFlyingQ, isFlyingW, isFlyingE, isFlyinR;
+	private boolean isFlyingQ, isFlyingW, isFlyingE, isFlyingR;
 	
 	//Layout variables
 	private GridBagConstraints c;
