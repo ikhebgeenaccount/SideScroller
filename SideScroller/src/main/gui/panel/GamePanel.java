@@ -160,33 +160,33 @@ public class GamePanel extends Panel implements KeyListener{
 	
 	//Called when a key is pressed
 	public void keyPressed(KeyEvent e){
-	    keys[e.getKeyCode()] = true;	    
-	    
-	    //If the up-key is pressed, check if the square beneath the character is solid, so he can really jump
-	    if(keys[KeyEvent.VK_UP]){
-	    	onEdge();
+		keys[e.getKeyCode()] = true;	    
+		
+		//If the up-key is pressed, check if the square beneath the character is solid, so he can really jump
+		if(keys[KeyEvent.VK_UP]){
+			onEdge();
 	    	
-		charx = character.getCoordinates().x;
-    	chary = character.getCoordinates().y;
+			charx = character.getCoordinates().x;
+    		chary = character.getCoordinates().y;
 	    
-		int matrix_x_left = roundDownToClosestMultipleOfFifty(charx)/50 ;
-		int matrix_y =  roundDownToClosestMultipleOfFifty(chary + 99)/50 ;
+			int matrix_x_left = roundDownToClosestMultipleOfFifty(charx)/50 ;
+			int matrix_y =  roundDownToClosestMultipleOfFifty(chary + 99)/50 ;
 	    
-		boolean solid = false;
+			boolean solid = false;
 	    
-		try{
-			if(onEdgeY){
-				if(currentLevel[matrix_y + 1 + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] == 0){
+			try{
+				if(onEdgeY){
+					if(currentLevel[matrix_y + 1 + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] == 0){
 
+					}
+				}else{
+					if(currentLevel[matrix_y + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] == 0){
+	
+					}
 				}
-			}else{
-				if(currentLevel[matrix_y + (levelIDy * 10)][matrix_x_left + (levelIDx * 20)] == 0){
-
-				}
+			}catch(ArrayIndexOutOfBoundsException e1){
+				solid = true;
 			}
-		}catch(ArrayIndexOutOfBoundsException e1){
-			solid = true;
-		}
 		    
 	    	if(onEdgeY){
 				if(onEdgeX){
@@ -255,8 +255,7 @@ public class GamePanel extends Panel implements KeyListener{
 	
 	//Called when a key is released 
 	public void keyReleased(KeyEvent e){
-	    keys[e.getKeyCode()] = false;
-	    
+		keys[e.getKeyCode()] = false;
 	}
 	
 	//Is called when the ASCII-character for that particular button is send to the computer
@@ -296,78 +295,78 @@ public class GamePanel extends Panel implements KeyListener{
 	    
 		onEdge();
 		
-	    int matrix_x_old = roundDownToClosestMultipleOfFifty(charx)/50;
-	    int matrix_y_old =  roundDownToClosestMultipleOfFifty(chary + 99)/50;
+		int matrix_x_old = roundDownToClosestMultipleOfFifty(charx)/50;
+		int matrix_y_old =  roundDownToClosestMultipleOfFifty(chary + 99)/50;
 	    
-	    boolean solid = false;
+		boolean solid = false;
 	    
-	    try{
-	    	if(currentLevel[matrix_y_old + 1 + (levelIDy * 10)][matrix_x_old + (levelIDx * 20)] == 0){
-	    		
-	    	}
-	    }catch(ArrayIndexOutOfBoundsException e){
-	    	solid = true;
-	    }
-	    //If the character is not jumping, we check for gravity, otherwise we jump()
+		try{
+			if(currentLevel[matrix_y_old + 1 + (levelIDy * 10)][matrix_x_old + (levelIDx * 20)] == 0){
+			
+			}
+		}catch(ArrayIndexOutOfBoundsException e){
+			solid = true;
+		}
+		//If the character is not jumping, we check for gravity, otherwise we jump()
 		if(!jump.jumping){
 			//Here we check if the substance beneath the character is solid
-		    if(onEdgeX){
-		    	if(onEdgeY){
-		    		if(solid || currentLevel[matrix_y_old + 1 + (levelIDy * 10)][matrix_x_old + (levelIDx * 20)] == 0){
-		    			if(gravity.falling){
-		    				newchary = chary + gravity.falldown_px;
-		    				//gravity.setNextFall();
-		    			}else{
-		    				gravity.startFall(tick);
-		    				newchary = chary + gravity.falldown_px;
-		    				//gravity.setNextFall();	    				
-		    			}
-		    		}else{
-		    			gravity.endFall();
-		    		}
-		    	}else{
-		    		if(solid || currentLevel[matrix_y_old + (levelIDy * 10)][matrix_x_old + (levelIDx * 20)] == 0){
-		    			if(gravity.falling){
-		    				newchary = chary + gravity.falldown_px;
-		    				//gravity.setNextFall();
-		    			}else{
-		    				gravity.startFall(tick);
-		    				newchary = chary + gravity.falldown_px;
-		    				//gravity.setNextFall();	    				
-		    			}
-		    		}else{
-		    			gravity.endFall();
-		    		}
-		    	}
-		    }else{
-		    	if(onEdgeY){
-		    		if(solid || currentLevel[matrix_y_old + 1 + (levelIDy * 10)][matrix_x_old + (levelIDx * 20)] == 0 && currentLevel[matrix_y_old + 1 + (levelIDy * 10)][matrix_x_old + (levelIDx * 20) + 1] == 0){
-		    			if(gravity.falling){
-		    				newchary = chary + gravity.falldown_px;
-		    				//gravity.setNextFall();
-		    			}else{
-		    				gravity.startFall(tick);
-		    				newchary = chary + gravity.falldown_px;
-		    				//gravity.setNextFall();	    				
-		    			}
-		    		}else{
-		    			gravity.endFall();
-		    		}	    		
-		    	}else{
-		    		if(solid || currentLevel[matrix_y_old + (levelIDy * 10)][matrix_x_old + (levelIDx * 20)] == 0 && currentLevel[matrix_y_old + (levelIDy * 10)][matrix_x_old + (levelIDx * 20) + 1] == 0){
-		    			if(gravity.falling){
-		    				newchary = chary + gravity.falldown_px;
-		    				//gravity.setNextFall();
-		    			}else{
-		    				gravity.startFall(tick);
-		    				newchary = chary + gravity.falldown_px;
-		    				//gravity.setNextFall();	    				
-		    			}
-		    		}else{
-		    			gravity.endFall();
-		    		}    		
-		    	}
-		    }
+			if(onEdgeX){
+				if(onEdgeY){
+					if(solid || currentLevel[matrix_y_old + 1 + (levelIDy * 10)][matrix_x_old + (levelIDx * 20)] == 0){
+						if(gravity.falling){
+							newchary = chary + gravity.falldown_px;
+							//gravity.setNextFall();
+						}else{
+							gravity.startFall(tick);
+							newchary = chary + gravity.falldown_px;
+							//gravity.setNextFall();	    				
+						}
+					}else{
+						gravity.endFall();
+					}
+				}else{
+					if(solid || currentLevel[matrix_y_old + (levelIDy * 10)][matrix_x_old + (levelIDx * 20)] == 0){
+						if(gravity.falling){
+							newchary = chary + gravity.falldown_px;
+							//gravity.setNextFall();
+						}else{
+							gravity.startFall(tick);
+							newchary = chary + gravity.falldown_px;
+							//gravity.setNextFall();	    				
+						}
+					}else{
+						gravity.endFall();
+					}
+				}
+			}else{
+				if(onEdgeY){
+					if(solid || currentLevel[matrix_y_old + 1 + (levelIDy * 10)][matrix_x_old + (levelIDx * 20)] == 0 && currentLevel[matrix_y_old + 1 + (levelIDy * 10)][matrix_x_old + (levelIDx * 20) + 1] == 0){
+						if(gravity.falling){
+							newchary = chary + gravity.falldown_px;
+							//gravity.setNextFall();
+						}else{
+							gravity.startFall(tick);
+							newchary = chary + gravity.falldown_px;
+							//gravity.setNextFall();	    				
+						}
+					}else{
+						gravity.endFall();
+					}	    		
+				}else{
+					if(solid || currentLevel[matrix_y_old + (levelIDy * 10)][matrix_x_old + (levelIDx * 20)] == 0 && currentLevel[matrix_y_old + (levelIDy * 10)][matrix_x_old + (levelIDx * 20) + 1] == 0){
+						if(gravity.falling){
+							newchary = chary + gravity.falldown_px;
+							//gravity.setNextFall();
+						}else{
+							gravity.startFall(tick);
+							newchary = chary + gravity.falldown_px;
+							//gravity.setNextFall();	    				
+						}
+					}else{
+						gravity.endFall();
+					}    		
+				}
+			}
 		}else{
 			//Coordinates are changed: character jumps
 			//Also checks if the jump shouldn't end yet
@@ -382,155 +381,163 @@ public class GamePanel extends Panel implements KeyListener{
 			}
 		}
 	    
-	    //Here we calculate the coordinates of the character in the matrix for the new coordinates that are set by movement/gravity.
-	    int matrix_x_upper_left = roundDownToClosestMultipleOfFifty(newcharx)/50;
-	    int matrix_y_upper_left = roundDownToClosestMultipleOfFifty(newchary)/50;
-	    int matrix_x_upper_right = roundDownToClosestMultipleOfFifty(newcharx + 49)/50;
-	    int matrix_y_upper_right = matrix_y_upper_left;
-	    int matrix_x_middle_left = matrix_x_upper_left;
-	    int matrix_y_middle_left = roundDownToClosestMultipleOfFifty(newchary + 49)/50;
-	    int matrix_x_middle_right = matrix_x_upper_right;
-	    int matrix_y_middle_right = matrix_y_middle_left;
-	    int matrix_x_bottom_left = matrix_x_upper_left;
-	    int matrix_y_bottom_left = roundDownToClosestMultipleOfFifty(newchary + 99)/50;
-	    int matrix_x_bottom_right = matrix_x_upper_right;
-	    int matrix_y_bottom_right = matrix_y_bottom_left;
+		//Here we calculate the coordinates of the character in the matrix for the new coordinates that are set by movement/gravity.
+		int matrix_x_upper_left = roundDownToClosestMultipleOfFifty(newcharx)/50;
+		int matrix_y_upper_left = roundDownToClosestMultipleOfFifty(newchary)/50;
+		int matrix_x_upper_right = roundDownToClosestMultipleOfFifty(newcharx + 49)/50;
+		int matrix_y_upper_right = matrix_y_upper_left;
+		int matrix_x_middle_left = matrix_x_upper_left;
+		int matrix_y_middle_left = roundDownToClosestMultipleOfFifty(newchary + 49)/50;
+		int matrix_x_middle_right = matrix_x_upper_right;
+		int matrix_y_middle_right = matrix_y_middle_left;
+		int matrix_x_bottom_left = matrix_x_upper_left;
+		int matrix_y_bottom_left = roundDownToClosestMultipleOfFifty(newchary + 99)/50;
+		int matrix_x_bottom_right = matrix_x_upper_right;
+		int matrix_y_bottom_right = matrix_y_bottom_left;
 	    
 	    //Here we calculate the coordinates of the character in the matrix for the old coordinates, from before this update().
-	    int matrix_x_upper_left_old = roundDownToClosestMultipleOfFifty(charx)/50;
-	    int matrix_y_upper_left_old = roundDownToClosestMultipleOfFifty(chary)/50;
-	    int matrix_x_upper_right_old = roundDownToClosestMultipleOfFifty(charx + 49)/50;
-	    int matrix_y_upper_right_old = matrix_y_upper_left_old;
-	    int matrix_x_middle_left_old = matrix_x_upper_left_old;
-	    int matrix_y_middle_left_old = roundDownToClosestMultipleOfFifty(chary + 49)/50;
-	    int matrix_x_middle_right_old = matrix_x_upper_right_old;
-	    int matrix_y_middle_right_old = matrix_y_middle_left_old;
-	    int matrix_x_bottom_left_old = matrix_x_upper_left_old;
-	    int matrix_y_bottom_left_old = roundDownToClosestMultipleOfFifty(chary + 99)/50;
-	    int matrix_x_bottom_right_old = matrix_x_upper_right_old;
-	    int matrix_y_bottom_right_old = matrix_y_bottom_left_old;
+		int matrix_x_upper_left_old = roundDownToClosestMultipleOfFifty(charx)/50;
+		int matrix_y_upper_left_old = roundDownToClosestMultipleOfFifty(chary)/50;
+		int matrix_x_upper_right_old = roundDownToClosestMultipleOfFifty(charx + 49)/50;
+		int matrix_y_upper_right_old = matrix_y_upper_left_old;
+		int matrix_x_middle_left_old = matrix_x_upper_left_old;
+		int matrix_y_middle_left_old = roundDownToClosestMultipleOfFifty(chary + 49)/50;
+		int matrix_x_middle_right_old = matrix_x_upper_right_old;
+		int matrix_y_middle_right_old = matrix_y_middle_left_old;
+		int matrix_x_bottom_left_old = matrix_x_upper_left_old;
+		int matrix_y_bottom_left_old = roundDownToClosestMultipleOfFifty(chary + 99)/50;
+		int matrix_x_bottom_right_old = matrix_x_upper_right_old;
+		int matrix_y_bottom_right_old = matrix_y_bottom_left_old;
 	    
-    	/*Here we check if the character is allowed to move to the newcharx, newchary. We check the x- and y-axis independently
-    	 *because we can move in two directions: if the character is falling down, but the right-arrow-key is also pressed, but 
-    	 *he can't move to the right because of a solid block, he still needs to fall down. If we check x and y at the same time
-    	 *the character will get stuck and won't fall down even though that should happen.
-    	 *This is also the reason why we use old coordinates, from before this update(). When we check the y-axis, we check the
-    	 *newchary but the charx (old), because the old coordinate is always valid, but we need to check the newchary. Vice versa
-    	 *for the x-axis.
-    	*/
-	    //Check x-axis
-	    //Check if array is not out of bounds
-	    if(matrix_x_upper_left + (levelIDx * 20) < 0 || matrix_x_upper_right + (levelIDx * 20) < 0 || matrix_x_upper_left + (levelIDx * 20) > levelLengthX || matrix_x_upper_right + (levelIDx * 20) > levelLengthX){
+		/*Here we check if the character is allowed to move to the newcharx, newchary. We check the x- and y-axis independently
+		 *because we can move in two directions: if the character is falling down, but the right-arrow-key is also pressed, but 
+		 *he can't move to the right because of a solid block, he still needs to fall down. If we check x and y at the same time
+		 *the character will get stuck and won't fall down even though that should happen.
+		 *This is also the reason why we use old coordinates, from before this update(). When we check the y-axis, we check the
+		 *newchary but the charx (old), because the old coordinate is always valid, but we need to check the newchary. Vice versa
+		 *for the x-axis.
+		*/
+		//Check x-axis
+		//Check if array is not out of bounds
+		if(matrix_x_upper_left + (levelIDx * 20) < 0 || matrix_x_upper_right + (levelIDx * 20) < 0 || matrix_x_upper_left + (levelIDx * 20) > levelLengthX || matrix_x_upper_right + (levelIDx * 20) > levelLengthX){
+		
+		}else{
+			//Check if the coordinates where the character is moving are valid
+			if(newcharx > charx){
+				//Moving right
+				movedLeft = false;
+				if(currentLevel[matrix_y_upper_right_old + (levelIDy * 10)][matrix_x_upper_right + (levelIDx * 20)] != 0 || currentLevel[matrix_y_middle_right_old + (levelIDy * 10)][matrix_x_middle_right + (levelIDx * 20)] != 0 || currentLevel[matrix_y_bottom_right_old + (levelIDy * 10)][matrix_x_bottom_right + (levelIDx * 20)] != 0){
+					//Can't move there!
+				}else{
+					//Can move there
+					charx = newcharx;
+					xmovedright = true;
+				}
+			}else if(newcharx < charx){
+				//Moving left
+				movedLeft = true;
+				if(currentLevel[matrix_y_upper_left_old + (levelIDy * 10)][matrix_x_upper_left + (levelIDx * 20)] != 0 || currentLevel[matrix_y_middle_left_old + (levelIDy * 10)][matrix_x_middle_left + (levelIDx * 20)] != 0 || currentLevel[matrix_y_bottom_left_old + (levelIDy * 10)][matrix_x_bottom_left + (levelIDx * 20)] != 0){
+					//Can't move there!
+				}else{
+					//Can move there
+					charx = newcharx;
+					xmovedleft = true;
+				}
+			}	    	
+		}
+	    
+		//Check y-axis
+		if(matrix_y_bottom_left + (levelIDy * 10) < 0  || matrix_y_upper_right + (levelIDy * 10) < 0 || matrix_y_bottom_left + (levelIDy * 10) > levelLengthY  || matrix_y_upper_right + (levelIDy * 10) > levelLengthY){
 
-	    }else{
-	    	//Check if the coordinates where the character is moving are valid
-	    	if(newcharx > charx){
-	    		//Moving right
-	    		movedLeft = false;
-	    		if(currentLevel[matrix_y_upper_right_old + (levelIDy * 10)][matrix_x_upper_right + (levelIDx * 20)] != 0 || currentLevel[matrix_y_middle_right_old + (levelIDy * 10)][matrix_x_middle_right + (levelIDx * 20)] != 0 || currentLevel[matrix_y_bottom_right_old + (levelIDy * 10)][matrix_x_bottom_right + (levelIDx * 20)] != 0){
-	    			//Can't move there!
-	    		}else{
-	    			//Can move there
-	    			charx = newcharx;
-	    			xmovedright = true;
-	    		}
-	    	}else if(newcharx < charx){
-	    		//Moving left
-	    		movedLeft = true;
-	    		if(currentLevel[matrix_y_upper_left_old + (levelIDy * 10)][matrix_x_upper_left + (levelIDx * 20)] != 0 || currentLevel[matrix_y_middle_left_old + (levelIDy * 10)][matrix_x_middle_left + (levelIDx * 20)] != 0 || currentLevel[matrix_y_bottom_left_old + (levelIDy * 10)][matrix_x_bottom_left + (levelIDx * 20)] != 0){
-	    			//Can't move there!
-	    		}else{
-	    			//Can move there
-	    			charx = newcharx;
-	    			xmovedleft = true;
-	    		}
-	    	}	    	
-	    }
-	    
-	    //Check y-axis
-	    if(matrix_y_bottom_left + (levelIDy * 10) < 0  || matrix_y_upper_right + (levelIDy * 10) < 0 || matrix_y_bottom_left + (levelIDy * 10) > levelLengthY  || matrix_y_upper_right + (levelIDy * 10) > levelLengthY){
+		}else{
+			if(newchary > chary){
+				//Is falling down
 
-	    }else{
-	    	if(newchary > chary){
-	    		//Is falling down
-	    		
-	    		if(currentLevel[matrix_y_bottom_left + (levelIDy * 10)][matrix_x_bottom_left_old + (levelIDx * 20)] != 0 || currentLevel[matrix_y_bottom_right + (levelIDy * 10)][matrix_x_bottom_right_old + (levelIDx * 20)] != 0){
-	    			//Can't move there
-	    		}else{
-	    			//Can move there
-	    			chary = newchary;
-	    			ymoveddown = true;
-	    		}	    			    		
-	    	}else if(newchary < chary){
-	    		//Is jumping
-	    		if(currentLevel[matrix_y_upper_left + (levelIDy * 10)][matrix_x_upper_left_old + (levelIDx * 20)] != 0 || currentLevel[matrix_y_upper_right + (levelIDy * 10)][matrix_x_upper_right_old + (levelIDx * 20)] != 0){
-	    			//Can't move there
-	    		}else{
-	    			//Can move there
-	    			chary = newchary;
-	    			ymovedup = true;
-	    		}
-	    	}
-	    }
+				if(currentLevel[matrix_y_bottom_left + (levelIDy * 10)][matrix_x_bottom_left_old + (levelIDx * 20)] != 0 || currentLevel[matrix_y_bottom_right + (levelIDy * 10)][matrix_x_bottom_right_old + (levelIDx * 20)] != 0){
+					//Can't move there
+				}else{
+					//Can move there
+					chary = newchary;
+					ymoveddown = true;
+				}	    			    		
+			}else if(newchary < chary){
+				//Is jumping
+				if(currentLevel[matrix_y_upper_left + (levelIDy * 10)][matrix_x_upper_left_old + (levelIDx * 20)] != 0 || currentLevel[matrix_y_upper_right + (levelIDy * 10)][matrix_x_upper_right_old + (levelIDx * 20)] != 0){
+					//Can't move there
+				}else{
+					//Can move there
+					chary = newchary;
+					ymovedup = true;
+				}
+			}
+		}
 	    
-	    //Check if character should go to next level in x-axis
-	    if((matrix_x_bottom_right  + (levelIDx * 20)) > ((levelIDx + 1) * 20) - 1 && (levelIDx + 1) * 20 <= levelLengthX){
-	    	levelIDx++;
-	    	charx = 0;
-	    }else if(matrix_x_bottom_left < 0 && levelIDx > 0){
-	    	levelIDx--;
-	    	charx = 950;
-	    }
+		//Check if character should go to next level in x-axis
+		if((matrix_x_bottom_right  + (levelIDx * 20)) > ((levelIDx + 1) * 20) - 1 && (levelIDx + 1) * 20 <= levelLengthX){
+			levelIDx++;
+			charx = 0;
+		}else if(matrix_x_bottom_left < 0 && levelIDx > 0){
+			levelIDx--;
+			charx = 950;
+		}
 	    
-	    //Check if character should go to next level in y-axis
-	    if((matrix_y_bottom_right + (levelIDy * 10)) > ((levelIDy + 1) * 10) - 1 && (matrix_y_middle_right + (levelIDy * 10)) > ((levelIDy + 1) * 10) - 1 && (matrix_y_upper_right + (levelIDy * 10)) > ((levelIDy + 1) * 10) - 1){
-	    	levelIDy++;
-	    	chary = -50;
-	    }else if(matrix_y_upper_right < 0 && levelIDy > 0 && matrix_y_middle_right < 0){
-	    	levelIDy--;
-	    	chary = 500;
-	    }
+		//Check if character should go to next level in y-axis
+		if((matrix_y_bottom_right + (levelIDy * 10)) > ((levelIDy + 1) * 10) - 1 && (matrix_y_middle_right + (levelIDy * 10)) > ((levelIDy + 1) * 10) - 1 && (matrix_y_upper_right + (levelIDy * 10)) > ((levelIDy + 1) * 10) - 1){
+			levelIDy++;
+			chary = -50;
+		}else if(matrix_y_upper_right < 0 && levelIDy > 0 && matrix_y_middle_right < 0){
+			levelIDy--;
+			chary = 500;
+		}
 	    
-	    //Check next scenes for spells
-	    if(character.q.isFired()){
-	    	isFiredQ = character.q.move();
-	    }
-	    if(character.w.isFired()){
-	    	isFiredW = character.w.move();
-	    }
-	    //if(character.e.isFired()){
-	    //	isFiredE = character.e.move();
-	    //}
-	    if(character.r.isFired()){
-	    	isFiredR = character.r.move();
-	    }
+		//Check next scenes for spells
+		if(character.q.isFired()){
+			character.q.move();
+		}else{
+		   	isFiredQ = false;
+		}
+		if(character.w.isFired()){
+			character.w.move();
+		}else{
+			isFiredW = false;
+		}
+		//if(character.e.isFired()){
+		//	isFiredE = character.e.move();
+		//}else{
+		//	isFiredE = false;
+		//}
+		if(character.r.isFired()){
+			character.r.move();
+		}else{
+			isFiredR = false;
+		}
 	    
-	    //Determine which animation should run
-	    if(ymovedup){
-	    	character.setAnimationType(Champion.JUMP);
-	    }else if(ymoveddown){
-	    	character.setAnimationType(Champion.FALL);
-	    }else if(xmovedleft){
-	    	character.setAnimationType(Champion.WALK_LEFT);
-	    }else if(xmovedright){
-	    	character.setAnimationType(Champion.WALK_RIGHT);
-	    }else if(isFiredQ){
-	    	character.setAnimationType(Champion.CAST_Q);
-	    	isFiredQ = false;
-	    }else if(isFiredW){
-	    	character.setAnimationType(Champion.CAST_W);
-	    	isFiredW = false;
-	    }else if(isFiredE){
-	    	character.setAnimationType(Champion.CAST_E);
-	    	isFiredE = false;
-	    }else if(isFiredR){
-	    	character.setAnimationType(Champion.CAST_R);
-	    	isFiredR = false;
-	    }else{
-	    	character.setAnimationType(Champion.IDLE);
-	    }
-	    
-	    character.setCoordinates(charx, chary);
+		//Determine which animation should run
+		if(ymovedup){
+			character.setAnimationType(Champion.JUMP);
+		}else if(ymoveddown){
+			character.setAnimationType(Champion.FALL);
+		}else if(xmovedleft){
+		character.setAnimationType(Champion.WALK_LEFT);
+		}else if(xmovedright){
+			character.setAnimationType(Champion.WALK_RIGHT);
+		}else if(isFiredQ){
+			character.setAnimationType(Champion.CAST_Q);
+			isFiredQ = false;
+		}else if(isFiredW){
+			character.setAnimationType(Champion.CAST_W);
+			isFiredW = false;
+		}else if(isFiredE){
+			character.setAnimationType(Champion.CAST_E);
+			isFiredE = false;
+		}else if(isFiredR){
+			character.setAnimationType(Champion.CAST_R);
+			isFiredR = false;
+		}else{
+			character.setAnimationType(Champion.IDLE);
+		}
+
+		character.setCoordinates(charx, chary);
 	}
 	
 	//In this class the jumpvariables are stored
