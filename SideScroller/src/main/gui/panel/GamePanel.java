@@ -1,7 +1,6 @@
 package main.gui.panel;
 
 import java.awt.Graphics;
-import java.awt.GridBagConstraints;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -10,7 +9,6 @@ import javax.swing.ImageIcon;
 
 import main.Main;
 import main.game.object.champion.Champion;
-import main.game.object.spell.Spell;
 import main.gui.Panel;
 
 public class GamePanel extends Panel implements KeyListener{
@@ -51,9 +49,6 @@ public class GamePanel extends Panel implements KeyListener{
 	//
 	private boolean isFiredQ, isFiredW, isFiredE, isFiredR;
 	private boolean isFlyingQ, isFlyingW, isFlyingE, isFlyingR;
-	
-	//Layout variables
-	private GridBagConstraints c;
 	
 	public GamePanel(Champion character, String characterName){
 		tick = 0;
