@@ -50,6 +50,7 @@ public class GamePanel extends Panel implements KeyListener{
 	
 	//
 	private boolean isFiredQ, isFiredW, isFiredE, isFiredR;
+	private boolean isFlyingQ, isFlyingW, isFlyingE, isFlyinR;
 	
 	//Layout variables
 	private GridBagConstraints c;
@@ -84,6 +85,12 @@ public class GamePanel extends Panel implements KeyListener{
 		
 		//First spell will be fired to the right
 		movedLeft = false;
+		
+		//No spell is currently flying
+		isFlyingQ = false;
+		isFlyingW = false;
+		isFlyingE = false;
+		isFlyingR = false;
 		
 		//Set this as keylistener and make it focusable so the keylistener works
 		addKeyListener(this);
@@ -126,19 +133,19 @@ public class GamePanel extends Panel implements KeyListener{
 		character.checkNextScene();
 		
 		//Draw spells if fired
-		if(character.q.isFired()){
+		if(isFlyingQ){
 			g.drawImage(character.q.getCurrentAnimationImage(), character.q.getCoordinates().x, character.q.getCoordinates().y, null);
 			character.q.checkNextScene();
 		}
-		if(character.w.isFired()){
+		if(isFlyingW){
 			g.drawImage(character.w.getCurrentAnimationImage(), character.w.getCoordinates().x, character.w.getCoordinates().y, null);
 			character.w.checkNextScene();
 		}
-	//	if(character.e.isFired()){
+	//	if(isFlyingE){
 	//		g.drawImage(character.e.getCurrentAnimationImage(), character.e.getCoordinates().x, character.e.getCoordinates().y, null);
 	//		character.e.checkNextScene();
 	//	}
-		if(character.r.isFired()){
+		if(isFlyingR){
 			g.drawImage(character.r.getCurrentAnimationImage(), character.r.getCoordinates().x, character.r.getCoordinates().y, null);
 			character.r.checkNextScene();
 		}
@@ -167,7 +174,7 @@ public class GamePanel extends Panel implements KeyListener{
 			onEdge();
 	    	
 			charx = character.getCoordinates().x;
-    		chary = character.getCoordinates().y;
+			chary = character.getCoordinates().y;
 	    
 			int matrix_x_left = roundDownToClosestMultipleOfFifty(charx)/50 ;
 			int matrix_y =  roundDownToClosestMultipleOfFifty(chary + 99)/50 ;
@@ -492,24 +499,16 @@ public class GamePanel extends Panel implements KeyListener{
 	    
 		//Check next scenes for spells
 		if(character.q.isFired()){
-			character.q.move();
-		}else{
-		   	isFiredQ = false;
+			isFlyingQ = character.q.move();
 		}
 		if(character.w.isFired()){
-			character.w.move();
-		}else{
-			isFiredW = false;
+			isFlyingW = character.w.move();
 		}
 		//if(character.e.isFired()){
-		//	isFiredE = character.e.move();
-		//}else{
-		//	isFiredE = false;
+		//	isFlyingE = character.e.move();
 		//}
 		if(character.r.isFired()){
-			character.r.move();
-		}else{
-			isFiredR = false;
+			isFlyingR = character.r.move();
 		}
 	    
 		//Determine which animation should run
