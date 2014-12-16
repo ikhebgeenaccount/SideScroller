@@ -66,7 +66,7 @@ public class Spell extends GameObject{
 		boolean move;
 		if(moveLeft){
 			//Spell is moving to the left
-			if(getCoordinates().x - startCoordinates.x >= range){
+			if(getCoordinates().x - startCoordinates.x > range){
 				//Move
 				move = true;
 				setCoordinates(getCoordinates().x - getSpeed(), getCoordinates().y);
@@ -78,7 +78,7 @@ public class Spell extends GameObject{
 			}
 		}else{
 			//Spell is moving to the right
-			if(startCoordinates.x - getCoordinates().x >= range){
+			if(startCoordinates.x - getCoordinates().x > range){
 				//Move
 				move = true;
 				setCoordinates(getCoordinates().x + getSpeed(), getCoordinates().y);
