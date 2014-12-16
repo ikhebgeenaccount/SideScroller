@@ -43,7 +43,7 @@ public class GameObject {
 		}
 	}
 	
-	//Add an animation
+	//Add an animation with default frame size: 50 x 100
 	public void addAnimation(int type, BufferedImage animationSprite, int sceneLength){
 		animations[type] = new Animation();
 		int scenes = animationSprite.getWidth() / 50;
@@ -53,6 +53,7 @@ public class GameObject {
 		animationsLength[type] = scenes * sceneLength;
 	}
 	
+	//Add an animation with different frame size: frameWidth x frameHeight
 	public void addAnimation(int type, BufferedImage animationSprite, int sceneLength, int frameWidth, int frameHeight){
 		animations[type] = new Animation(frameWidth);
 		int scenes = animationSprite.getWidth() / frameWidth;
