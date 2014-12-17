@@ -240,7 +240,7 @@ public class GamePanel extends Panel implements KeyListener{
 		
 		if(keys[KeyEvent.VK_W] && character.w.getRemainingCooldown() == 0){
 			isFiredW = character.castW(character.getCoordinates(), movedLeft);
-			isFlyingW = isFiredW
+			isFlyingW = isFiredW;
 		}else{
 			keys[KeyEvent.VK_W] = false;
 		}
@@ -254,7 +254,7 @@ public class GamePanel extends Panel implements KeyListener{
 		
 		if(keys[KeyEvent.VK_R] && character.r.getRemainingCooldown() == 0){
 			isFiredR = character.castR(character.getCoordinates(), movedLeft);
-			isFlyingR = isFiredR
+			isFlyingR = isFiredR;
 		}else{
 			keys[KeyEvent.VK_R] = false;
 		}
