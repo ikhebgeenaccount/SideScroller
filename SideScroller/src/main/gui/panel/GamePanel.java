@@ -46,7 +46,8 @@ public class GamePanel extends Panel implements KeyListener{
 	private Champion character;
 	private String characterName;
 	
-	//
+	//isFired is for animations, only gets true for the duration of the animation (not yet implemented)
+	//isFlying is for the spells itself, to check if a spell is currently on screen and needs to be drawed and moved
 	private boolean isFiredQ, isFiredW, isFiredE, isFiredR;
 	private boolean isFlyingQ, isFlyingW, isFlyingE, isFlyingR;
 	
@@ -232,24 +233,28 @@ public class GamePanel extends Panel implements KeyListener{
 		
 		if(keys[KeyEvent.VK_Q] && character.q.getRemainingCooldown() == 0){
 			isFiredQ = character.castQ(character.getCoordinates(), movedLeft);
+			isFlyingQ = isFiredQ;
 		}else{
 			keys[KeyEvent.VK_Q] = false;
 		}
 		
 		if(keys[KeyEvent.VK_W] && character.w.getRemainingCooldown() == 0){
 			isFiredW = character.castW(character.getCoordinates(), movedLeft);
+			isFlyingW = isFiredW
 		}else{
 			keys[KeyEvent.VK_W] = false;
 		}
 		
 		if(keys[KeyEvent.VK_E] /*&& character.e.getRemainingCooldown() == 0*/){
 			//isFiredE = character.castE(character.getCoordinates(), movedLeft);
+			//isFlyingE = isFiredE
 		}else{
 			keys[KeyEvent.VK_E] = false;
 		}
 		
 		if(keys[KeyEvent.VK_R] && character.r.getRemainingCooldown() == 0){
 			isFiredR = character.castR(character.getCoordinates(), movedLeft);
+			isFlyingR = isFiredR
 		}else{
 			keys[KeyEvent.VK_R] = false;
 		}
@@ -493,16 +498,16 @@ public class GamePanel extends Panel implements KeyListener{
 		}
 	    
 		//Check next scenes for spells
-		if(character.q.isFired()){
+		if(isFlyingQ){
 			isFlyingQ = character.q.move();
 		}
-		if(character.w.isFired()){
+		if(isFlyingW){
 			isFlyingW = character.w.move();
 		}
-		//if(character.e.isFired()){
+		//if(isFlyingE){
 		//	isFlyingE = character.e.move();
 		//}
-		if(character.r.isFired()){
+		if(isFlyingR){
 			isFlyingR = character.r.move();
 		}
 	    
