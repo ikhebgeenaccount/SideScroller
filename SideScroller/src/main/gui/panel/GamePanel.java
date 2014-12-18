@@ -132,7 +132,6 @@ public class GamePanel extends Panel implements KeyListener{
 		if(isFlyingQ){
 			g.drawImage(character.q.getCurrentAnimationImage(), character.q.getCoordinates().x, character.q.getCoordinates().y, null);
 			character.q.checkNextScene();
-			System.out.println("repaint: " + character.q.getCoordinates().x + "," + character.q.getCoordinates().y);
 		}
 		if(isFlyingW){
 			g.drawImage(character.w.getCurrentAnimationImage(), character.w.getCoordinates().x, character.w.getCoordinates().y, null);
