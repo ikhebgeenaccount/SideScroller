@@ -43,7 +43,7 @@ public class GameObject {
 		}
 	}
 	
-	//Add an animation with default frame size: 50 x 100
+	//Add an animation with default frame size: 50 x 100 (for characters)
 	public void addAnimation(int type, BufferedImage animationSprite, int sceneLength){
 		animations[type] = new Animation();
 		int scenes = animationSprite.getWidth() / 50;
@@ -80,8 +80,8 @@ public class GameObject {
 	
 	//Set the coordinates for this GameObject
 	public void setCoordinates(int x, int y){
-		coordinates.x = x;
-		coordinates.y = y;
+		this.coordinates.x = x;
+		this.coordinates.y = y;
 	}
 	
 	public void setCoordinates(Coordinate coordinates){
