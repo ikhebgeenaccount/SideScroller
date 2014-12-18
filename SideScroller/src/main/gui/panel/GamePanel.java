@@ -132,6 +132,7 @@ public class GamePanel extends Panel implements KeyListener{
 		if(isFlyingQ){
 			g.drawImage(character.q.getCurrentAnimationImage(), character.q.getCoordinates().x, character.q.getCoordinates().y, null);
 			character.q.checkNextScene();
+			System.out.println("repaint: " + character.q.getCoordinates().x + "," + character.q.getCoordinates().y);
 		}
 		if(isFlyingW){
 			g.drawImage(character.w.getCurrentAnimationImage(), character.w.getCoordinates().x, character.w.getCoordinates().y, null);
@@ -500,6 +501,7 @@ public class GamePanel extends Panel implements KeyListener{
 		//Check next scenes for spells
 		if(isFlyingQ){
 			isFlyingQ = character.q.move();
+			System.out.println(character.q.getCoordinates().x + "," + character.q.getCoordinates().y);
 		}
 		if(isFlyingW){
 			isFlyingW = character.w.move();
