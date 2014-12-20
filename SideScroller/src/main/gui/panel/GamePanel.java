@@ -500,7 +500,6 @@ public class GamePanel extends Panel implements KeyListener{
 		//Check next scenes for spells
 		if(isFlyingQ){
 			isFlyingQ = character.q.move();
-			System.out.println(character.q.getCoordinates().x + "," + character.q.getCoordinates().y);
 		}
 		if(isFlyingW){
 			isFlyingW = character.w.move();
