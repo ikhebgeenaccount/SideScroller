@@ -51,7 +51,8 @@ public class Spell extends GameObject{
 		if(currentCooldown == 0){
 			this.moveLeft = movedLeft;
 			this.startTime = System.currentTimeMillis();
-			this.startCoordinates = startCoordinates;
+			this.startCoordinates = new Coordinate();
+			this.startCoordinates.setCoordinates(startCoordinates);
 			setCoordinates(this.startCoordinates);
 			isFired = true;
 			setAnimationType(Spell.TRAVEL);
@@ -66,7 +67,7 @@ public class Spell extends GameObject{
 		boolean move;
 		if(moveLeft){
 			//Spell is moving to the left
-			if(getCoordinates().x - startCoordinates.x < range){
+			if(startCoordinates.x - getCoordinates().x < range){
 				//Move
 				move = true;
 				setCoordinates(getCoordinates().x - getSpeed(), getCoordinates().y);
@@ -78,7 +79,7 @@ public class Spell extends GameObject{
 			}
 		}else{
 			//Spell is moving to the right
-			if(startCoordinates.x - getCoordinates().x < range){
+			if(getCoordinates().x - startCoordinates.x < range){
 				//Move
 				move = true;
 				setCoordinates(getCoordinates().x + getSpeed(), getCoordinates().y);
