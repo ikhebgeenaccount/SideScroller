@@ -137,10 +137,10 @@ public class GamePanel extends Panel implements KeyListener{
 			g.drawImage(character.w.getCurrentAnimationImage(), character.w.getCoordinates().x, character.w.getCoordinates().y, null);
 			character.w.checkNextScene();
 		}
-	//	if(isFlyingE){
-	//		g.drawImage(character.e.getCurrentAnimationImage(), character.e.getCoordinates().x, character.e.getCoordinates().y, null);
-	//		character.e.checkNextScene();
-	//	}
+		if(isFlyingE){
+			g.drawImage(character.e.getCurrentAnimationImage(), character.e.getCoordinates().x, character.e.getCoordinates().y, null);
+			character.e.checkNextScene();
+		}
 		if(isFlyingR){
 			g.drawImage(character.r.getCurrentAnimationImage(), character.r.getCoordinates().x, character.r.getCoordinates().y, null);
 			character.r.checkNextScene();
@@ -245,9 +245,9 @@ public class GamePanel extends Panel implements KeyListener{
 			keys[KeyEvent.VK_W] = false;
 		}
 		
-		if(keys[KeyEvent.VK_E] /*&& character.e.getRemainingCooldown() == 0*/){
-			//isFiredE = character.castE(character.getCoordinates(), movedLeft);
-			//isFlyingE = isFiredE
+		if(keys[KeyEvent.VK_E] && character.e.getRemainingCooldown() == 0){
+			isFiredE = character.castE(character.getCoordinates(), movedLeft);
+			isFlyingE = isFiredE;
 		}else{
 			keys[KeyEvent.VK_E] = false;
 		}

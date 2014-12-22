@@ -17,7 +17,7 @@ public class Ezreal extends Champion{
 		//Create spells
 		q = new Spell(600, 200, 10, 5000);
 		w = new Spell(500, 100, 10, 5000);
-		
+		e = new EzrealE();
 		r = new Spell(2000, 500, 10, 10000);
 		
 		ClassLoader cldr = this.getClass().getClassLoader();	

@@ -97,6 +97,11 @@ public class Spell extends GameObject{
 		return isFired;
 	}
 	
+	public void startCooldown(){
+		startTime = System.currentTimeMillis();
+		currentCooldown = cooldown;
+	}
+	
 	public long getRemainingCooldown(){
 		if(System.currentTimeMillis() - startTime < cooldown){
 			currentCooldown = System.currentTimeMillis() - startTime;
