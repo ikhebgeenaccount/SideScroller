@@ -51,8 +51,12 @@ public class GamePanel extends Panel implements KeyListener{
 	private boolean isFiredQ, isFiredW, isFiredE, isFiredR;
 	private boolean isFlyingQ, isFlyingW, isFlyingE, isFlyingR;
 	
+	private StatusBar statusBar;
+	
 	public GamePanel(Champion character, String characterName){
 		tick = 0;
+		
+		setLayout(null);
 		
 		//Get character
 		this.character = character;
@@ -87,6 +91,11 @@ public class GamePanel extends Panel implements KeyListener{
 		isFlyingW = false;
 		isFlyingE = false;
 		isFlyingR = false;
+		
+		statusBar = new StatusBar();
+		add(statusBar);
+		statusBar.setLocation(0,0);
+		statusBar.repaint();
 		
 		//Set this as keylistener and make it focusable so the keylistener works
 		addKeyListener(this);
@@ -145,6 +154,8 @@ public class GamePanel extends Panel implements KeyListener{
 			g.drawImage(character.r.getCurrentAnimationImage(), character.r.getCoordinates().x, character.r.getCoordinates().y, null);
 			character.r.checkNextScene();
 		}
+		
+		statusBar.repaint();
 		
 		//Draw current FPS
 		g.drawString(Main.getCurrentFPS(), 985, 12);

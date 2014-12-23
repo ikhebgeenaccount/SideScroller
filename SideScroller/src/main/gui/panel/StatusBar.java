@@ -17,7 +17,7 @@ public class StatusBar extends JPanel{
 	private Image qIconGrayed, wIconGrayed, eIconGrayed, rIconGrayed;
 	
 	public StatusBar(){
-		setPreferredSize(new Dimension(1000, 80));
+		setPreferredSize(new Dimension(200, 40));
 		
 		//Load pics
 		try{
@@ -31,6 +31,8 @@ public class StatusBar extends JPanel{
 			rIconGrayed = ImageIO.read(getClass().getClassLoader().getResourceAsStream("img/char" + Main.getGamePanel().getCharacterName() + "rIconGrayed.png"));
 		}catch(IOException e){
 			e.printStackTrace();
+		}catch(NullPointerException e){
+			e.printStackTrace();
 		}
 	}
 	
@@ -41,7 +43,7 @@ public class StatusBar extends JPanel{
 		long wcd = Main.getGamePanel().getCharacter().getRemainingCooldown(Champion.W);
 		long ecd = Main.getGamePanel().getCharacter().getRemainingCooldown(Champion.E);
 		long rcd = Main.getGamePanel().getCharacter().getRemainingCooldown(Champion.R);
-		
+		/*
 		//Draw spell icons
 		if(qcd == 0){
 			g.drawImage(qIcon, 385, 0, null);
@@ -62,12 +64,12 @@ public class StatusBar extends JPanel{
 			g.drawImage(rIcon, 385, 0, null);
 		}else{
 			g.drawImage(rIconGrayed, 385, 0, null);
-		}
+		}*/
 		
 		//Draw remaining cooldowns
-		g.drawString(String.valueOf(qcd), 385, 52);
-		g.drawString(String.valueOf(wcd), 445, 52);
-		g.drawString(String.valueOf(ecd), 505, 52);
-		g.drawString(String.valueOf(rcd), 565, 52);
+		g.drawString("Q: " + String.valueOf(qcd), 25, 5);
+		g.drawString("W: " + String.valueOf(wcd), 75, 52);
+		//g.drawString("E: " + String.valueOf(ecd), 125, 52);
+		g.drawString("R: " + String.valueOf(rcd), 175, 52);
 	}
 }
