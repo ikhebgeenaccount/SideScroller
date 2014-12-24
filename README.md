@@ -14,6 +14,9 @@ I am currently looking for artists, to create animations and environments.
 PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you have no reddit, add me ingame on EUW: ikhebgeenaccount.  
 
 ####Changelog
+  - *v0.3.1*
+    - Added grass
+    - Changed color of ground
   - *v0.3.0* - **current release**
     - Added spells
     - Added spell animations
