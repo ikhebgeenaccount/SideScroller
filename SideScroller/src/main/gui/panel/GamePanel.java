@@ -155,6 +155,8 @@ public class GamePanel extends Panel implements KeyListener{
 			character.r.checkNextScene();
 		}
 		
+		add(statusBar);
+		statusBar.setLocation(0,0);
 		statusBar.repaint();
 		
 		//Draw current FPS

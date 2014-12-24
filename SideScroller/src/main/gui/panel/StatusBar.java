@@ -1,5 +1,6 @@
 package main.gui.panel;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -18,6 +19,8 @@ public class StatusBar extends JPanel{
 	
 	public StatusBar(){
 		setPreferredSize(new Dimension(200, 40));
+		
+		setBackground(Color.BLUE);
 		
 		//Load pics
 		try{
