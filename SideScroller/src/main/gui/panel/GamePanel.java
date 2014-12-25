@@ -52,8 +52,6 @@ public class GamePanel extends Panel implements KeyListener{
 	private boolean isFiredQ, isFiredW, isFiredE, isFiredR;
 	private boolean isFlyingQ, isFlyingW, isFlyingE, isFlyingR;
 	
-	private StatusBar statusBar;
-	
 	public GamePanel(Champion character, String characterName){
 		tick = 0;
 		
@@ -92,11 +90,6 @@ public class GamePanel extends Panel implements KeyListener{
 		isFlyingW = false;
 		isFlyingE = false;
 		isFlyingR = false;
-		
-		statusBar = new StatusBar();
-		add(statusBar);
-		statusBar.setLocation(0,0);
-		statusBar.repaint();
 		
 		//Set this as keylistener and make it focusable so the keylistener works
 		addKeyListener(this);
@@ -158,8 +151,31 @@ public class GamePanel extends Panel implements KeyListener{
 		
 		//Update spell cooldowns and spellicons
 		g.setColor(Color.WHITE);
-		g.fillRect(0, 0, 400, 35);
+		g.fillRect(375, 465, 250, 35);
 		
+		g.setColor(Color.BLACK);
+		if(character.q.getRemainingCooldown() == 0){
+			
+		}else{
+			g.drawString(String.valueOf((double)Math.round(((double)(character.q.getCooldown() - character.q.getRemainingCooldown()) / 1000) * 10)/10), 425, 495);
+		}	
+		if(character.w.getRemainingCooldown() == 0){
+			
+		}else{
+			g.drawString(String.valueOf((double)Math.round(((double)(character.w.getCooldown() - character.w.getRemainingCooldown()) / 1000) * 10)/10), 475, 495);
+		}
+		if(character.e.getRemainingCooldown() == 0){
+			
+		}else{
+			g.drawString(String.valueOf((double)Math.round(((double)(character.e.getCooldown() - character.e.getRemainingCooldown()) / 1000) * 10)/10), 525, 495);
+		}	//(double)Math.round(((character.e.getCooldown() - character.e.getRemainingCooldown()) / 1000) * 10)/10;
+		if(character.r.getRemainingCooldown() == 0){
+			
+		}else{
+			g.drawString(String.valueOf((double)Math.round(((double)(character.r.getCooldown() - character.r.getRemainingCooldown()) / 1000) * 10)/10), 575, 495);
+		}
+		
+		g.setColor(Color.BLACK);
 		//Draw current FPS
 		if(Integer.parseInt(Main.getCurrentFPS()) > 99){
 			g.drawString(Main.getCurrentFPS(), 977, 12);
