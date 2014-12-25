@@ -1,5 +1,6 @@
 package main.gui.panel;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
@@ -155,12 +156,17 @@ public class GamePanel extends Panel implements KeyListener{
 			character.r.checkNextScene();
 		}
 		
-		add(statusBar);
-		statusBar.setLocation(0,0);
-		statusBar.repaint();
+		//Update spell cooldowns and spellicons
+		g.setColor(Color.WHITE);
+		g.fillRect(0, 0, 400, 35);
 		
 		//Draw current FPS
-		g.drawString(Main.getCurrentFPS(), 985, 12);
+		if(Integer.parseInt(Main.getCurrentFPS()) > 99){
+			g.drawString(Main.getCurrentFPS(), 977, 12);
+		}else{
+			g.drawString(Main.getCurrentFPS(), 985, 12);
+		}
+		
 		g.drawString(Main.getCurrentTPS(), 985, 24);
 		g.dispose();
 	}
