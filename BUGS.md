@@ -1,7 +1,7 @@
 ## Bugs
 
 - **v0.3.0**
-  - After Esc once to menu, StatusBar throws IllegalArgumentException instead of NullPointerException.
+  - ~~After Esc once to menu, StatusBar throws IllegalArgumentException instead of NullPointerException.~~
   - Ezreals E allows you to teleport inside blocks.
   - Character doesn't fall when trying to move out of the level at the left side.
   - Jumping is incosistent when jumping between levels, sometimes the character jumps higher than other times.
