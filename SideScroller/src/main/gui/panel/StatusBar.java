@@ -36,6 +36,8 @@ public class StatusBar extends JPanel{
 			e.printStackTrace();
 		}catch(NullPointerException e){
 			e.printStackTrace();
+		}catch(IllegalArgumentException e){
+			e.printStackTrace();
 		}
 	}
 	
