@@ -16,6 +16,7 @@ PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you hav
 ####Changelog
   - *v0.3.1*
     - Added grass
+    - Fixed a bug where you could not start the game again after returning to the menu once
     - Changed color of ground
   - *v0.3.0* - **current release**
     - Added spells
