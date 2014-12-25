@@ -12,13 +12,15 @@ import javax.swing.JPanel;
 import main.Main;
 import main.game.object.champion.Champion;
 
+@Deprecated
 public class StatusBar extends JPanel{
 	
 	private Image qIcon, wIcon, eIcon, rIcon;
 	private Image qIconGrayed, wIconGrayed, eIconGrayed, rIconGrayed;
 	
 	public StatusBar(){
-		setPreferredSize(new Dimension(200, 40));
+		setPreferredSize(new Dimension(200, 35));
+		setOpaque(true);
 		
 		setBackground(Color.BLUE);
 		
@@ -73,8 +75,8 @@ public class StatusBar extends JPanel{
 		
 		//Draw remaining cooldowns
 		g.drawString("Q: " + String.valueOf(qcd), 25, 5);
-		g.drawString("W: " + String.valueOf(wcd), 75, 52);
-		//g.drawString("E: " + String.valueOf(ecd), 125, 52);
-		g.drawString("R: " + String.valueOf(rcd), 175, 52);
+		g.drawString("W: " + String.valueOf(wcd), 75, 5);
+		//g.drawString("E: " + String.valueOf(ecd), 125, 5);
+		g.drawString("R: " + String.valueOf(rcd), 175, 5);
 	}
 }
