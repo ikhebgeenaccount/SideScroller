@@ -16,6 +16,7 @@ public class EzrealE extends Spell{
 	}
 	
 	@Override
+	//Needs checking if movement is valid
 	public boolean fire(Coordinate startCoordinates, boolean movedLeft){
 		if(getRemainingCooldown() == 0){
 			if(movedLeft){
