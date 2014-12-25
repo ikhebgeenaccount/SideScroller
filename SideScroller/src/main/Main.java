@@ -166,7 +166,6 @@ public class Main extends JFrame{
 			propertiesFile.close();
 		}catch(IOException e){
 			e.printStackTrace();
-			System.err.println(e.getMessage());
 			
 			//Manual
 			maxFPS = 45;
@@ -221,7 +220,7 @@ public class Main extends JFrame{
 					}
 										
 				}catch(InterruptedException e){
-					System.err.println(e.getMessage());
+					e.printStackTrace();
 				}
 			}
 		}
@@ -262,7 +261,7 @@ public class Main extends JFrame{
 						}
 					}
 				} catch (InterruptedException e) {
-					System.err.println(e.getMessage());
+					e.printStackTrace();
 				}
 			}
 		}
