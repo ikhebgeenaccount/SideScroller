@@ -11,6 +11,6 @@ Then the most important part of this whole wall of text: you guys probably want 
 
 **TL;DR** - Creating a game, need help with graphics and such. Contact me if interested.
 
-**[Download link](https://github.com/ikhebgeenaccount/SideScroller/releases)**
+**[Download link](https://github.com/ikhebgeenaccount/SideScroller/releases)** - You will need [Java](http://www.java.com) to play this game.
 
 **[Source code for those interested](https://github.com/ikhebgeenaccount/SideScroller/tree/master/SideScroller)**
