@@ -694,4 +694,12 @@ public class GamePanel extends Panel implements KeyListener{
 	public Champion getCharacter(){
 		return character;
 	}
+	
+	public int[][] getCurrentLevel(){
+		return currentLevel;
+	}
+	
+	public int[] getLevelIDs(){
+		return new int[]{levelIDx, levelIDy};
+	}
 }
