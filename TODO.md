@@ -5,5 +5,5 @@
 3. Add more options for levels, change the way levels are saved, use config.
 4. Add health.
 5. Add enemies.
-6. Create hit detector.
+6. Create hit detector. (GameObject[])
 7. Release beta.
