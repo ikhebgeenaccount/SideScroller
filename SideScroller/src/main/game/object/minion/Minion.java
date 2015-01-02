@@ -16,5 +16,9 @@ public class Minion extends GameObject {
 	public void setRange(int range){
 		this.range = range;
 	}
+	
+	public void move(){
+		
+	}
 
 }
