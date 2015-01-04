@@ -8,6 +8,8 @@ public class Minion extends GameObject {
 	
 	private int range;
 	
+	private boolean moveLeft;
+	
 	public Minion(int speed, int range){
 		setSpeed(speed);
 		setRange(range);
@@ -18,7 +20,13 @@ public class Minion extends GameObject {
 	}
 	
 	public void move(){
-		
+		/* For move():
+		 * 	1. Check if this should attack
+		 * 	2. If yes, attack
+		 * 	3. If not, check if this should proceed in current direction, thus if it is valid to move to the next position 
+		 * 	4. If valid, move to next position
+		 * 	5. If not valid, turn around and change moveLeft
+		 */
 	}
 
 }
