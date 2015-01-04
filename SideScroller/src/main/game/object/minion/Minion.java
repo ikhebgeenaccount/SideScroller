@@ -4,7 +4,7 @@ import main.game.object.GameObject;
 
 public class Minion extends GameObject {
 	
-	private static final int WALK_RIGHT = 0, WALK_LEFT = 1, ATTACK = 2, DIE = 3; 
+	private static final int WALK_RIGHT = 0, WALK_LEFT = 1, ATTACK = 2, DIE = 3, BE_DEAD = 4; 
 	
 	private int range;
 	
