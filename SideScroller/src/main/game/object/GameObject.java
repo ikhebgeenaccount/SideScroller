@@ -20,6 +20,9 @@ public class GameObject {
 	//Speed in px
 	private int speed;
 	
+	private int health;
+	private int currentHealth;
+	
 	public GameObject(){
 		coordinates = new Coordinate();
 		
@@ -103,5 +106,22 @@ public class GameObject {
 	
 	public int[] getSize(){
 		return new int[]{currentAnimation.getFrameWidth(), currentAnimation.getFrameHeight()};
+	}
+	
+	public void setHealth(int health){
+		this.health = health;
+		currentHealth = health;
+	}
+	
+	public int getHealth(){
+		return health;
+	}
+	
+	public int getCurrentHealth(){
+		return currentHealth;
+	}
+	
+	public void damage(int damage){
+		currentHealth -= damage;
 	}
 }
