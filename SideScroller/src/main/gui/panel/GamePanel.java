@@ -181,7 +181,9 @@ public class GamePanel extends Panel implements KeyListener{
 		length *= 8;
 		g.drawString(Main.getCurrentFPS(), 1000 - length, 12);
 		
-		g.drawString(Main.getCurrentTPS(), 985, 24);
+		length = String.valueOf(Main.getCurrentTPS()).length();
+		length *= 8;
+		g.drawString(Main.getCurrentTPS(), 1000 - length, 24);
 		g.dispose();
 	}
 	
