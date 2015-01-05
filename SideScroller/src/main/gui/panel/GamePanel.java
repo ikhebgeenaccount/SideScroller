@@ -133,14 +133,14 @@ public class GamePanel extends Panel implements KeyListener{
 				
 				int index = 1;
 				
-				for(int i = 0; i < minionsTypeCfg.length; i++){
+				for(int i = 0; i < minionTypeCfg.length; i++){
 					String[] typeCfg = minionTypeCfg[i].split(":");
 					Minion type;
 					switch(Integer.parseInt(typeCfg[0])){
 						case 0: type = new MeleeMinion();
 							break;
 						case 1: type = new CasterMinion();
-							break
+							break;
 						case 2: type = new SiegeMinion();
 							break;
 						case 3: type = new SuperMinion();
@@ -164,9 +164,9 @@ public class GamePanel extends Panel implements KeyListener{
 					//type:[x.y]|[x.y]|[x.y]|x.y]
 					String[] minionCoordinatesCfg = typeCfg[1].split("|");
 					
-					for(int i = 0; i < minionCoordinatesCfg.length; i++){
+					for(i = 0; i < minionCoordinatesCfg.length; i++){
 						inLevel[index] = type;
-						type.setCoordinates(minionCoordinatesCfg[i].substring(1,1), minionCoordinatesCfg[i].substring(3,1));
+						type.setCoordinates(Integer.parseInt(minionCoordinatesCfg[i].substring(1,1)), Integer.parseInt(minionCoordinatesCfg[i].substring(3,1)));
 						index++;
 					}
 				}
