@@ -2,12 +2,14 @@ package main.game.object.minion;
 
 import main.Main;
 import main.game.object.GameObject;
+import main.game.object.champion.Champion;
 
 public class Minion extends GameObject {
 	
 	private static final int WALK_RIGHT = 0, WALK_LEFT = 1, ATTACK = 2, DIE = 3, BE_DEAD = 4; 
 	
 	private int range;
+	private int damage;
 	
 	private boolean moveLeft;
 	
@@ -24,6 +26,10 @@ public class Minion extends GameObject {
 		this.range = range;
 	}
 	
+	public void setDamage(int damage){
+		this.damage = damage;
+	}
+	
 	public void move(){
 		/* For move():
 		 * 	1. Check if this should attack
@@ -34,13 +40,36 @@ public class Minion extends GameObject {
 		 */
 		
 		GameObject[] onScreen = Main.getGamePanel().getOnScreenObjects();
+		int coordx = getCoordinates().x;
+		int coordy = getCoordinates().y;
 		 
 		 //Check if this should attack
 		 //To check if this should attack we need a way to check where all GameObjects are onscreen. 
 		for(int i = 0; i < onScreen.length; i++){
-			int width = onScreen[i].getSize()[0];
-			int height = onScreen[i].getSize()[1];
+			//We should only consider attacking if this GameObject is a Champion
+			if(onScreen[i] instanceof Champion){
+
+				int width = onScreen[i].getSize()[0];
+				int height = onScreen[i].getSize()[1];
+				
+				int targetcoordx = onScreen[i].getCoordinates().x;
+				int targetcoordy = onScreen[i].getCoordinates().y;
+				
+				if(coordy >= targetcoordy + height && coordy + getSize()[1] <= targetcoordy && coordx >= targetcoordx + width && coordx + getSize()[1] <= targetcoordx){
+					//Target is in range.
+					setAnimationType(Minion.ATTACK);
+					onScreen[i].damage(damage);
+				}
+			}
 		}
+	}
+	
+	public int getDamage(){
+		return damage;
+	}
+	
+	public int getRange(){
+		return range;
 	}
 
 }
