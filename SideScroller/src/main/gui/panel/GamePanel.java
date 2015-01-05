@@ -14,6 +14,16 @@ import main.game.coordinate.Coordinate;
 import main.game.object.GameObject;
 import main.game.object.champion.Champion;
 import main.game.object.minion.Minion;
+import main.game.object.minion.minions.Baron;
+import main.game.object.minion.minions.BlueGolem;
+import main.game.object.minion.minions.CasterMinion;
+import main.game.object.minion.minions.Dragon;
+import main.game.object.minion.minions.LargeWolf;
+import main.game.object.minion.minions.MeleeMinion;
+import main.game.object.minion.minions.MiniLizard;
+import main.game.object.minion.minions.RedLizard;
+import main.game.object.minion.minions.SiegeMinion;
+import main.game.object.minion.minions.SuperMinion;
 import main.gui.Panel;
 
 public class GamePanel extends Panel implements KeyListener{
