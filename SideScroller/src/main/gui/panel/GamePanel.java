@@ -177,11 +177,9 @@ public class GamePanel extends Panel implements KeyListener{
 		
 		g.setColor(Color.BLACK);
 		//Draw current FPS
-		if(Integer.parseInt(Main.getCurrentFPS()) > 99){
-			g.drawString(Main.getCurrentFPS(), 977, 12);
-		}else{
-			g.drawString(Main.getCurrentFPS(), 985, 12);
-		}
+		int length = String.valueOf(Main.getCurrentFPS()).length();
+		length *= 8;
+		g.drawString(Main.getCurrentFPS(), 1000 - length, 12);
 		
 		g.drawString(Main.getCurrentTPS(), 985, 24);
 		g.dispose();
