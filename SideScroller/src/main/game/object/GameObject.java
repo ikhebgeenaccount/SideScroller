@@ -55,7 +55,7 @@ public class GameObject {
 	
 	//Add an animation with different frame size: frameWidth x frameHeight
 	public void addAnimation(int type, BufferedImage animationSprite, int sceneLength, int frameWidth, int frameHeight){
-		animations[type] = new Animation(frameWidth);
+		animations[type] = new Animation(frameWidth, frameHeight);
 		int scenes = animationSprite.getWidth() / frameWidth;
 		for(int i = 0; i < scenes; i++){
 			animations[type].addScene(animationSprite.getSubimage(frameWidth * i, 0, frameWidth, frameHeight), sceneLength);
@@ -99,5 +99,9 @@ public class GameObject {
 	
 	public int getCurrentAnimationLength(){
 		return animationsLength[currentAnimationType];
+	}
+	
+	public int[] getSize(){
+		return new int[]{currentAnimation.getFrameWidth(), currentAnimation.getFrameHeight()};
 	}
 }
