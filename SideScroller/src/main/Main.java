@@ -22,7 +22,7 @@ import main.gui.panel.SelectPanel;
 public class Main extends JFrame{
 	
 	//Version
-	private static final String VERSION = "v0.3.1";
+	private static final String VERSION = "v0.4.0";
 	
 	//Game properties
 	private static int maxFPS;
