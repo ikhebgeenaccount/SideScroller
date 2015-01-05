@@ -1,5 +1,6 @@
 package main.game.object.minion;
 
+import main.Main;
 import main.game.object.GameObject;
 
 public class Minion extends GameObject {
@@ -31,9 +32,15 @@ public class Minion extends GameObject {
 		 * 	4. If valid, move to next position
 		 * 	5. If not valid, turn around and change moveLeft
 		 */
+		
+		GameObject[] onScreen = Main.getGamePanel().getOnScreenObjects();
 		 
 		 //Check if this should attack
 		 //To check if this should attack we need a way to check where all GameObjects are onscreen. 
+		for(int i = 0; i < onScreen.length; i++){
+			int width = onScreen[i].getSize()[0];
+			int height = onScreen[i].getSize()[1];
+		}
 	}
 
 }
