@@ -10,6 +10,10 @@ public class Minion extends GameObject {
 	
 	private boolean moveLeft;
 	
+	public Minion(){
+		
+	}
+	
 	public Minion(int speed, int range){
 		setSpeed(speed);
 		setRange(range);
