@@ -153,6 +153,8 @@ public class GamePanel extends Panel implements KeyListener{
 							break;
 						case 9: type = new Baron();
 							break;
+						default: type = new MeleeMinion();
+							break;
 					}
 					//[0]  [1] 		(split(":"))
 					//type:[x.y]|[x.y]|[x.y]|x.y]
