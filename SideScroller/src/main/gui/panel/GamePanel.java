@@ -60,6 +60,8 @@ public class GamePanel extends Panel implements KeyListener{
 	private Coordinate endSquare;
 	private String theme;
 	
+	private boolean initializeLevelsWithProperties = false;
+	
 	public GamePanel(Champion character, String characterName){
 		tick = 0;
 		
@@ -105,61 +107,65 @@ public class GamePanel extends Panel implements KeyListener{
 		
 		//Read level
 		try{
-			Properties levelOneCfg = new Properties();
-			levelOneCfg.load(getClass().getClassLoader().getResourceAsStream("levels/one.properties"));
 			
-			theme = levelOneCfg.getProperty("theme");
-			
-			//Read properties of startSquare and endSquare, start and end of level
-			String startSquareCfg = levelOneCfg.getProperty("startSquare");
-			startSquare.x = Integer.parseInt(startSquareCfg.split(",")[0]);
-			startSquare.y = Integer.parseInt(startSquareCfg.split(",")[1]);
-			
-			String endSquareCfg = levelOneCfg.getProperty("startSquare");
-			endSquare.x = Integer.parseInt(endSquareCfg.split(",")[0]);
-			endSquare.y = Integer.parseInt(endSquareCfg.split(",")[1]);
-			
-			//Read minions, fill inLevel with corresponding type
-			String minionsCfg = levelOneCfg.getProperty("minions");
-			String[] minionTypeCfg = minionsCfg.split(",");
-			
-			int index = 1;
-			
-			for(int i = 0; i < minionsTypeCfg.length; i++){
-				String[] typeCfg = minionTypeCfg[i].split(":");
-				Minion type;
-				switch(Integer.parseInt(typeCfg[0])){
-					case 0: type = new MeleeMinion();
-						break;
-					case 1: type = new CasterMinion();
-						break
-					case 2: type = new SiegeMinion();
-						break;
-					case 3: type = new SuperMinion();
-						break;
-					case 4: type = new MiniLizard();
-						break;
-					case 5: type = new LargeWolf();
-						break;
-					case 6: type = new RedLizard();
-						break;
-					case 7: type = new BlueGolem();
-						break;
-					case 8: type = new Dragon();
-						break;
-					case 9: type = new Baron();
-						break;
-				}
-				//[0]  [1] 		(split(":"))
-				//type:[x.y]|[x.y]|[x.y]|x.y]
-				String[] minionCoordinatesCfg = typeCfg[1].split("|");
+			if(initializeLevelsWithProperties){
+				Properties levelOneCfg = new Properties();
+				levelOneCfg.load(getClass().getClassLoader().getResourceAsStream("levels/one.properties"));
 				
-				for(int i = 0; i < minionCoordinatesCfg.length; i++){
-					inLevel[index] = type;
-					type.setCoordinates(minionCoordinatesCfg[i].substring(1,1), minionCoordinatesCfg[i].substring(3,1));
-					index++;
+				theme = levelOneCfg.getProperty("theme");
+			
+				//Read properties of startSquare and endSquare, start and end of level
+				String startSquareCfg = levelOneCfg.getProperty("startSquare");
+				startSquare.x = Integer.parseInt(startSquareCfg.split(",")[0]);
+				startSquare.y = Integer.parseInt(startSquareCfg.split(",")[1]);
+			
+				String endSquareCfg = levelOneCfg.getProperty("startSquare");
+				endSquare.x = Integer.parseInt(endSquareCfg.split(",")[0]);
+				endSquare.y = Integer.parseInt(endSquareCfg.split(",")[1]);
+			
+				//Read minions, fill inLevel with corresponding type
+				String minionsCfg = levelOneCfg.getProperty("minions");
+				String[] minionTypeCfg = minionsCfg.split(",");
+				
+				int index = 1;
+				
+				for(int i = 0; i < minionsTypeCfg.length; i++){
+					String[] typeCfg = minionTypeCfg[i].split(":");
+					Minion type;
+					switch(Integer.parseInt(typeCfg[0])){
+						case 0: type = new MeleeMinion();
+							break;
+						case 1: type = new CasterMinion();
+							break
+						case 2: type = new SiegeMinion();
+							break;
+						case 3: type = new SuperMinion();
+							break;
+						case 4: type = new MiniLizard();
+							break;
+						case 5: type = new LargeWolf();
+							break;
+						case 6: type = new RedLizard();
+							break;
+						case 7: type = new BlueGolem();
+							break;
+						case 8: type = new Dragon();
+							break;
+						case 9: type = new Baron();
+							break;
+					}
+					//[0]  [1] 		(split(":"))
+					//type:[x.y]|[x.y]|[x.y]|x.y]
+					String[] minionCoordinatesCfg = typeCfg[1].split("|");
+					
+					for(int i = 0; i < minionCoordinatesCfg.length; i++){
+						inLevel[index] = type;
+						type.setCoordinates(minionCoordinatesCfg[i].substring(1,1), minionCoordinatesCfg[i].substring(3,1));
+						index++;
+					}
 				}
 			}
+			
 		}catch(NullPointerException e){
 			e.printStackTrace();
 		}
