@@ -23,6 +23,7 @@ PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you hav
     - Fixed a bug where the current FPS wasn't completely visible when >= 100
     - Fixed a bug where the character could teleport into ground with Ezreals E
     - Changed color of ground
+    - Changed the way levels are loaded, which gives more customizability
   - *v0.3.0* - **current release**
     - Added spells
     - Added spell animations
