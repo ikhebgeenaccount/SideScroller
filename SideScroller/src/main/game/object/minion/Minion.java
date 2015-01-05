@@ -27,6 +27,9 @@ public class Minion extends GameObject {
 		 * 	4. If valid, move to next position
 		 * 	5. If not valid, turn around and change moveLeft
 		 */
+		 
+		 //Check if this should attack
+		 //To check if this should attack we need a way to check where all GameObjects are onscreen. 
 	}
 
 }
