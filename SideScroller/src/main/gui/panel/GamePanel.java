@@ -166,6 +166,7 @@ public class GamePanel extends Panel implements KeyListener{
 						index++;
 					}
 				}
+				updateGameObjects();
 			}
 			
 		}catch(NullPointerException e){
@@ -602,18 +603,22 @@ public class GamePanel extends Panel implements KeyListener{
 		if((matrix_x_bottom_right  + (levelIDx * 20)) > ((levelIDx + 1) * 20) - 1 && (levelIDx + 1) * 20 <= levelLengthX){
 			levelIDx++;
 			charx = 0;
+			updateGameObjects();
 		}else if(matrix_x_bottom_left < 0 && levelIDx > 0){
 			levelIDx--;
 			charx = 950;
+			updateGameObjects();
 		}
 	    
 		//Check if character should go to next level in y-axis
 		if((matrix_y_bottom_right + (levelIDy * 10)) > ((levelIDy + 1) * 10) - 1 && (matrix_y_middle_right + (levelIDy * 10)) > ((levelIDy + 1) * 10) - 1 && (matrix_y_upper_right + (levelIDy * 10)) > ((levelIDy + 1) * 10) - 1){
 			levelIDy++;
 			chary = -50;
+			updateGameObjects();
 		}else if(matrix_y_upper_right < 0 && levelIDy > 0 && matrix_y_middle_right < 0){
 			levelIDy--;
 			chary = 500;
+			updateGameObjects();
 		}
 	    
 		//Check next scenes for spells
@@ -710,6 +715,23 @@ public class GamePanel extends Panel implements KeyListener{
 	public int roundDownToClosestMultipleOfFifty(int num){
 		int mod = num % 50;
 		return num-mod;    
+	}
+	
+	//Update GameObject[] onScreen;
+	public void updateGameObjects(){
+		int maxX = levelIDx * 20;
+		int minX = (levelIDx - 1) * 20;
+		int maxY = levelIDy * 10;
+		int minY = (levelIDy - 1) * 10;
+		
+		onScreen = new GameObject[50];
+		
+		for(int i = 0; i < inLevel.length; i++){
+			Coordinate coordinate = inLevel[i].getCoordinate();
+			if(coordinate.x < maxX && coordinate.x > minX && coordinate.y < maxY && coordinate.y > minY){
+				onScreen[i] = inLevel[i];
+			}
+		}
 	}
 	
 	//Checks if the character is on the edge of a square on the y- and x-axis, if so, onEdgeY = true, or onEdgeX = true.
