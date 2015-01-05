@@ -114,4 +114,8 @@ public class Spell extends GameObject{
 	public long getCooldown() {
 		return cooldown;
 	}
+	
+	public int getDamage(){
+		return damage;
+	}
 }
