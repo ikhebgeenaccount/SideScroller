@@ -58,6 +58,7 @@ public class GamePanel extends Panel implements KeyListener{
 	//Level properties
 	private Coordinate startSquare;
 	private Coordinate endSquare;
+	private String theme;
 	
 	public GamePanel(Champion character, String characterName){
 		tick = 0;
@@ -67,9 +68,6 @@ public class GamePanel extends Panel implements KeyListener{
 		//Get character
 		this.character = character;
 		this.characterName = characterName;
-		
-		//Load environment images
-		loadPics();
 		
 		//Create array for keys
 		keys = new boolean[1000];
@@ -110,6 +108,8 @@ public class GamePanel extends Panel implements KeyListener{
 			Properties levelOneCfg = new Properties();
 			levelOneCfg.load(getClass().getClassLoader().getResourceAsStream("levels/one.properties"));
 			
+			theme = levelOneCfg.getProperty("theme");
+			
 			//Read properties of startSquare and endSquare, start and end of level
 			String startSquareCfg = levelOneCfg.getProperty("startSquare");
 			startSquare.x = Integer.parseInt(startSquareCfg.split(",")[0]);
@@ -120,7 +120,46 @@ public class GamePanel extends Panel implements KeyListener{
 			endSquare.y = Integer.parseInt(endSquareCfg.split(",")[1]);
 			
 			//Read minions, fill inLevel with corresponding type
+			String minionsCfg = levelOneCfg.getProperty("minions");
+			String[] minionTypeCfg = minionsCfg.split(",");
 			
+			int index = 1;
+			
+			for(int i = 0; i < minionsTypeCfg.length; i++){
+				String[] typeCfg = minionTypeCfg[i].split(":");
+				Minion type;
+				switch(Integer.parseInt(typeCfg[0])){
+					case 0: type = new MeleeMinion();
+						break;
+					case 1: type = new CasterMinion();
+						break
+					case 2: type = new SiegeMinion();
+						break;
+					case 3: type = new SuperMinion();
+						break;
+					case 4: type = new MiniLizard();
+						break;
+					case 5: type = new LargeWolf();
+						break;
+					case 6: type = new RedLizard();
+						break;
+					case 7: type = new BlueGolem();
+						break;
+					case 8: type = new Dragon();
+						break;
+					case 9: type = new Baron();
+						break;
+				}
+				//[0]  [1] 		(split(":"))
+				//type:[x.y]|[x.y]|[x.y]|x.y]
+				String[] minionCoordinatesCfg = typeCfg[1].split("|");
+				
+				for(int i = 0; i < minionCoordinatesCfg.length; i++){
+					inLevel[index] = type;
+					type.setCoordinates(minionCoordinatesCfg[i].substring(1,1), minionCoordinatesCfg[i].substring(3,1));
+					index++;
+				}
+			}
 		}catch(NullPointerException e){
 			e.printStackTrace();
 		}
@@ -128,6 +167,9 @@ public class GamePanel extends Panel implements KeyListener{
 		//Set this as keylistener and make it focusable so the keylistener works
 		addKeyListener(this);
 		setFocusable(true);
+		
+		//Load environment images
+		loadPics();
 	}
 	
 	/* Fill the panel with landscape
@@ -224,10 +266,10 @@ public class GamePanel extends Panel implements KeyListener{
 	//Images are loaded
 	public void loadPics(){
 		ClassLoader cldr = this.getClass().getClassLoader();
-		air = new ImageIcon(cldr.getResource("img/landscape/default/air.png")).getImage();
-		ground = new ImageIcon(cldr.getResource("img/landscape/default/ground.png")).getImage();
-		grass_ground = new ImageIcon(cldr.getResource("img/landscape/default/grass-ground.png")).getImage();
-		grass_air = new ImageIcon(cldr.getResource("img/landscape/default/grass-air.png")).getImage();
+		air = new ImageIcon(cldr.getResource("img/landscape/" + theme + "/air.png")).getImage();
+		ground = new ImageIcon(cldr.getResource("img/landscape/" + theme + "/ground.png")).getImage();
+		grass_ground = new ImageIcon(cldr.getResource("img/landscape/" + theme + "/grass-ground.png")).getImage();
+		grass_air = new ImageIcon(cldr.getResource("img/landscape/" + theme + "/grass-air.png")).getImage();
 	}
 	
 	//Called when a key is pressed
