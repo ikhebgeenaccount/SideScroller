@@ -52,6 +52,13 @@ public class GamePanel extends Panel implements KeyListener{
 	private boolean isFiredQ, isFiredW, isFiredE, isFiredR;
 	private boolean isFlyingQ, isFlyingW, isFlyingE, isFlyingR;
 	
+	//The GameObject[]s that are in this level and those that are onscreen. For checks we will only check onscreen.
+	private GameObject[] inLevel, onScreen;
+	
+	//Level properties
+	private Coordinate startSquare;
+	private Coordinate endSquare;
+	
 	public GamePanel(Champion character, String characterName){
 		tick = 0;
 		
@@ -90,6 +97,33 @@ public class GamePanel extends Panel implements KeyListener{
 		isFlyingW = false;
 		isFlyingE = false;
 		isFlyingR = false;
+		
+		//Create GameObject[]s
+		int objectCap = 50;//Max 50 GameObject in one level!
+		inLevel = new GameObject[objectCap];
+		onScreen = new GameObject[objectCap];//Since inLevel has a cap of 50, onScreen doesn't need more than that
+		
+		inLevel[0] = character;
+		
+		//Read level
+		try{
+			Properties levelOneCfg = new Properties();
+			levelOneCfg.load(getClass().getClassLoader().getResourceAsStream("levels/one.properties"));
+			
+			//Read properties of startSquare and endSquare, start and end of level
+			String startSquareCfg = levelOneCfg.getProperty("startSquare");
+			startSquare.x = Integer.parseInt(startSquareCfg.split(",")[0]);
+			startSquare.y = Integer.parseInt(startSquareCfg.split(",")[1]);
+			
+			String endSquareCfg = levelOneCfg.getProperty("startSquare");
+			endSquare.x = Integer.parseInt(endSquareCfg.split(",")[0]);
+			endSquare.y = Integer.parseInt(endSquareCfg.split(",")[1]);
+			
+			//Read minions, fill inLevel with corresponding type
+			
+		}catch(NullPointerException e){
+			e.printStackTrace();
+		}
 		
 		//Set this as keylistener and make it focusable so the keylistener works
 		addKeyListener(this);
