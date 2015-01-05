@@ -825,4 +825,8 @@ public class GamePanel extends Panel implements KeyListener{
 	public int[] getLevelIDs(){
 		return new int[]{levelIDx, levelIDy};
 	}
+	
+	public GameObject[] getOnScreenObjects(){
+		return onScreen;
+	}
 }
