@@ -5,11 +5,15 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Properties;
 
 import javax.swing.ImageIcon;
 
 import main.Main;
+import main.game.coordinate.Coordinate;
+import main.game.object.GameObject;
 import main.game.object.champion.Champion;
+import main.game.object.minion.Minion;
 import main.gui.Panel;
 
 public class GamePanel extends Panel implements KeyListener{
@@ -727,7 +731,7 @@ public class GamePanel extends Panel implements KeyListener{
 		onScreen = new GameObject[50];
 		
 		for(int i = 0; i < inLevel.length; i++){
-			Coordinate coordinate = inLevel[i].getCoordinate();
+			Coordinate coordinate = inLevel[i].getCoordinates();
 			if(coordinate.x < maxX && coordinate.x > minX && coordinate.y < maxY && coordinate.y > minY){
 				onScreen[i] = inLevel[i];
 			}
