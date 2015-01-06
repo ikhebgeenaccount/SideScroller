@@ -539,7 +539,7 @@ public class GamePanel extends Panel implements KeyListener{
 		int matrix_x_bottom_right = matrix_x_upper_right;
 		int matrix_y_bottom_right = matrix_y_bottom_left;
 	    
-	    //Here we calculate the coordinates of the character in the matrix for the old coordinates, from before this update().
+		//Here we calculate the coordinates of the character in the matrix for the old coordinates, from before this update().
 		int matrix_x_upper_left_old = roundDownToClosestMultipleOfFifty(charx)/50;
 		int matrix_y_upper_left_old = roundDownToClosestMultipleOfFifty(chary)/50;
 		int matrix_x_upper_right_old = roundDownToClosestMultipleOfFifty(charx + 49)/50;
@@ -729,7 +729,7 @@ public class GamePanel extends Panel implements KeyListener{
 		}
 	}
 	
-	public int roundDownToClosestMultipleOfFifty(int num){
+	public static int roundDownToClosestMultipleOfFifty(int num){
 		int mod = num % 50;
 		return num-mod;    
 	}
