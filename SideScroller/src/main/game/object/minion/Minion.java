@@ -31,6 +31,7 @@ public class Minion extends GameObject {
 	}
 	
 	public void move(){
+		boolean activity = false;
 		/* For move():
 		 * 	1. Check if this should attack
 		 * 	2. If yes, attack
@@ -43,8 +44,7 @@ public class Minion extends GameObject {
 		int coordx = getCoordinates().x;
 		int coordy = getCoordinates().y;
 		 
-		 //Check if this should attack
-		 //To check if this should attack we need a way to check where all GameObjects are onscreen. 
+		 //Check if this should attack 
 		for(int i = 0; i < onScreen.length; i++){
 			//We should only consider attacking if this GameObject is a Champion
 			if(onScreen[i] instanceof Champion){
@@ -59,9 +59,12 @@ public class Minion extends GameObject {
 					//Target is in range.
 					setAnimationType(Minion.ATTACK);
 					onScreen[i].damage(damage);
+					activity = true;
 				}
 			}
 		}
+		
+		
 	}
 	
 	public int getDamage(){
