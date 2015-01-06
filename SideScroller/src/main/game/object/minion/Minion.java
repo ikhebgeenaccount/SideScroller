@@ -68,8 +68,8 @@ public class Minion extends GameObject {
 		int levelIDx = Main.getGamePanel().getLevelIDs()[0];
 		int levelIDy = Main.getGamePanel().getLevelIDs()[1];
 		
-		int matrixcoordx = Main.getGamePanel().roundDownToClosestMultipleOfFifty(getCoordinates().x)/50;
-		int matrixcoordy = Main.getGamePanel().roundDownToClosestMultipleOfFifty(getCoordinates().y)/50;
+		int matrixcoordx = main.game.gui.panel.GamePanel.roundDownToClosestMultipleOfFifty(getCoordinates().x)/50;
+		int matrixcoordy = main.game.gui.panel.GamePanel.roundDownToClosestMultipleOfFifty(getCoordinates().y)/50;
 		
 		int matrixheight = (getSize()[1] + 49)/50;//Round up to multiple of fifty
 		int matrixwidth = (getSize()[0] + 49)/50;
