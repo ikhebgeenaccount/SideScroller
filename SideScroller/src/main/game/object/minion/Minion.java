@@ -79,6 +79,7 @@ public class Minion extends GameObject {
 			
 		}else if(activity){
 			//Move right
+			
 		}
 	}
 	
