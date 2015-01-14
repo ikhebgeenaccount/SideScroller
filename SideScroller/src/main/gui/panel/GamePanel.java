@@ -182,6 +182,8 @@ public class GamePanel extends Panel implements KeyListener{
 					}
 				}
 				updateGameObjects();
+			}else{
+				theme = "default";
 			}
 			
 		}catch(NullPointerException e){
