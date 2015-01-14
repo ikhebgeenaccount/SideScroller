@@ -181,11 +181,12 @@ public class GamePanel extends Panel implements KeyListener{
 						index++;
 					}
 				}
-				updateGameObjects();
+				
 			}else{
 				theme = "default";
 			}
 			
+			updateGameObjects();
 		}catch(NullPointerException e){
 			e.printStackTrace();
 		}catch(IOException e){
@@ -617,27 +618,29 @@ public class GamePanel extends Panel implements KeyListener{
 				}
 			}
 		}
+		
+		boolean levelChanged = false;
 	    
 		//Check if character should go to next level in x-axis
 		if((matrix_x_bottom_right  + (levelIDx * 20)) > ((levelIDx + 1) * 20) - 1 && (levelIDx + 1) * 20 <= levelLengthX){
 			levelIDx++;
 			charx = 0;
-			updateGameObjects();
+			levelChanged = true;
 		}else if(matrix_x_bottom_left < 0 && levelIDx > 0){
 			levelIDx--;
 			charx = 950;
-			updateGameObjects();
+			levelChanged = true;
 		}
 	    
 		//Check if character should go to next level in y-axis
 		if((matrix_y_bottom_right + (levelIDy * 10)) > ((levelIDy + 1) * 10) - 1 && (matrix_y_middle_right + (levelIDy * 10)) > ((levelIDy + 1) * 10) - 1 && (matrix_y_upper_right + (levelIDy * 10)) > ((levelIDy + 1) * 10) - 1){
 			levelIDy++;
 			chary = -50;
-			updateGameObjects();
+			levelChanged = true;
 		}else if(matrix_y_upper_right < 0 && levelIDy > 0 && matrix_y_middle_right < 0){
 			levelIDy--;
 			chary = 500;
-			updateGameObjects();
+			levelChanged = true;
 		}
 	    
 		//Check next scenes for spells
@@ -680,6 +683,10 @@ public class GamePanel extends Panel implements KeyListener{
 		}
 
 		character.setCoordinates(charx, chary);
+		
+		if(levelChanged){
+			updateGameObjects();
+		}
 	}
 	
 	//In this class the jumpvariables are stored
@@ -744,11 +751,13 @@ public class GamePanel extends Panel implements KeyListener{
 		int minY = (levelIDy - 1) * 10;
 		
 		onScreen = new GameObject[50];
-		
 		for(int i = 0; i < inLevel.length; i++){
-			Coordinate coordinate = inLevel[i].getCoordinates();
-			if(coordinate.x < maxX && coordinate.x > minX && coordinate.y < maxY && coordinate.y > minY){
-				onScreen[i] = inLevel[i];
+			if(inLevel[i] != null){
+				Coordinate coordinate = inLevel[i].getCoordinates();
+				if(coordinate.x < maxX && coordinate.x > minX && coordinate.y < maxY && coordinate.y > minY){
+					onScreen[i] = inLevel[i];
+				}
+				
 			}
 		}
 	}
