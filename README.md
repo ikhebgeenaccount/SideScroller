@@ -3,7 +3,7 @@
 SideScroller aims to create a League of Legends themed 2D platformer, including champions with abilities, minions and jungle monsters. 
 
 ###Download
-[Download the latest version.](https://github.com/ikhebgeenaccount/SideScroller/releases)
+[Download the latest version.](https://github.com/ikhebgeenaccount/SideScroller/releases)  
 You need to have [Java 8](http://www.java.com) installed to play this game!
 
 When experiencing bugs or game freezes, download **runlolsidescroller.bat** in the same folder as **LoLSidescroller.jar** and run the **.bat**. When you are given errors or experiencing bugs please report them to me on [reddit](http://www.reddit.com/u/ikhebgeenaccount) or via GitHub. Be sure to check the [known issues](https://github.com/ikhebgeenaccount/SideScroller/blob/master/BUGS.md) before reporting any bugs!
