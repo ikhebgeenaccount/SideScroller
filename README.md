@@ -4,6 +4,15 @@ SideScroller aims to create a League of Legends themed 2D platformer, including 
 
 [Download the latest version.](https://github.com/ikhebgeenaccount/SideScroller/releases)
 
+Would you like to help me with this project, or have a great idea?
+I am currently looking for artists, to create animations and environments.
+PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you have no reddit, add me ingame on EUW: ikhebgeenaccount.
+You can also hop on to [this redditthread]() and share your ideas or art there!
+
+You need to have [Java 8](http://www.java.com) installed to play this game!
+
+When experiencing bugs or game freezes, download **runlolsidescroller.bat** in the same folder as **LoLSidescroller.jar** and run the **.bat**. When you are given errors or experiencing bugs please report them to me on [reddit](http://www.reddit.com/u/ikhebgeenaccount) or via GitHub. Be sure to check the [known issues](https://github.com/ikhebgeenaccount/SideScroller/blob/master/BUGS.md) before reporting any bugs!
+
 SideScroller isn’t endorsed by Riot Games and doesn’t reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc.
 
 ####Planned features:
