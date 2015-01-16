@@ -22,7 +22,7 @@ import main.gui.panel.SelectPanel;
 public class Main extends JFrame{
 	
 	//Version
-	private static final String VERSION = "v0.3.0";
+	private static final String VERSION = "v0.4.0";
 	
 	//Game properties
 	private static int maxFPS;
@@ -70,8 +70,7 @@ public class Main extends JFrame{
 	}
 	
 	//Method to start game, creates character and game loop thread
-	public static void startGame(){
-		
+	public static void startGame(){		
 		ticksPS = 90;
 		
 		//Create character
@@ -167,7 +166,6 @@ public class Main extends JFrame{
 			propertiesFile.close();
 		}catch(IOException e){
 			e.printStackTrace();
-			System.err.println(e.getMessage());
 			
 			//Manual
 			maxFPS = 45;
@@ -222,7 +220,7 @@ public class Main extends JFrame{
 					}
 										
 				}catch(InterruptedException e){
-					System.err.println(e.getMessage());
+					e.printStackTrace();
 				}
 			}
 		}
@@ -263,7 +261,7 @@ public class Main extends JFrame{
 						}
 					}
 				} catch (InterruptedException e) {
-					System.err.println(e.getMessage());
+					e.printStackTrace();
 				}
 			}
 		}

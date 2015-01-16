@@ -1,14 +1,30 @@
 package main.gui.panel;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
+import java.util.Properties;
 
 import javax.swing.ImageIcon;
 
 import main.Main;
+import main.game.coordinate.Coordinate;
+import main.game.object.GameObject;
 import main.game.object.champion.Champion;
+import main.game.object.minion.Minion;
+import main.game.object.minion.minions.Baron;
+import main.game.object.minion.minions.BlueGolem;
+import main.game.object.minion.minions.CasterMinion;
+import main.game.object.minion.minions.Dragon;
+import main.game.object.minion.minions.LargeWolf;
+import main.game.object.minion.minions.MeleeMinion;
+import main.game.object.minion.minions.MiniLizard;
+import main.game.object.minion.minions.RedLizard;
+import main.game.object.minion.minions.SiegeMinion;
+import main.game.object.minion.minions.SuperMinion;
 import main.gui.Panel;
 
 public class GamePanel extends Panel implements KeyListener{
@@ -51,7 +67,15 @@ public class GamePanel extends Panel implements KeyListener{
 	private boolean isFiredQ, isFiredW, isFiredE, isFiredR;
 	private boolean isFlyingQ, isFlyingW, isFlyingE, isFlyingR;
 	
-	private StatusBar statusBar;
+	//The GameObject[]s that are in this level and those that are onscreen. For checks we will only check onscreen.
+	private GameObject[] inLevel, onScreen;
+	
+	//Level properties
+	private Coordinate startSquare;
+	private Coordinate endSquare;
+	private String theme;
+	
+	private boolean initializeLevelsWithProperties = false;
 	
 	public GamePanel(Champion character, String characterName){
 		tick = 0;
@@ -61,9 +85,6 @@ public class GamePanel extends Panel implements KeyListener{
 		//Get character
 		this.character = character;
 		this.characterName = characterName;
-		
-		//Load environment images
-		loadPics();
 		
 		//Create array for keys
 		keys = new boolean[1000];
@@ -92,14 +113,92 @@ public class GamePanel extends Panel implements KeyListener{
 		isFlyingE = false;
 		isFlyingR = false;
 		
-		statusBar = new StatusBar();
-		add(statusBar);
-		statusBar.setLocation(0,0);
-		statusBar.repaint();
+		//Create GameObject[]s
+		int objectCap = 50;//Max 50 GameObject in one level!
+		inLevel = new GameObject[objectCap];
+		onScreen = new GameObject[objectCap];//Since inLevel has a cap of 50, onScreen doesn't need more than that
+		
+		inLevel[0] = character;
+		
+		//Read level
+		try{
+			
+			if(initializeLevelsWithProperties){
+				Properties levelOneCfg = new Properties();
+				levelOneCfg.load(getClass().getClassLoader().getResourceAsStream("levels/one.properties"));
+				
+				theme = levelOneCfg.getProperty("theme");
+			
+				//Read properties of startSquare and endSquare, start and end of level
+				String startSquareCfg = levelOneCfg.getProperty("startSquare");
+				startSquare.x = Integer.parseInt(startSquareCfg.split(",")[0]);
+				startSquare.y = Integer.parseInt(startSquareCfg.split(",")[1]);
+			
+				String endSquareCfg = levelOneCfg.getProperty("startSquare");
+				endSquare.x = Integer.parseInt(endSquareCfg.split(",")[0]);
+				endSquare.y = Integer.parseInt(endSquareCfg.split(",")[1]);
+			
+				//Read minions, fill inLevel with corresponding type
+				String minionsCfg = levelOneCfg.getProperty("minions");
+				String[] minionTypeCfg = minionsCfg.split(",");
+				
+				int index = 1;
+				
+				for(int i = 0; i < minionTypeCfg.length; i++){
+					String[] typeCfg = minionTypeCfg[i].split(":");
+					Minion type;
+					switch(Integer.parseInt(typeCfg[0])){
+						case 0: type = new MeleeMinion();
+							break;
+						case 1: type = new CasterMinion();
+							break;
+						case 2: type = new SiegeMinion();
+							break;
+						case 3: type = new SuperMinion();
+							break;
+						case 4: type = new MiniLizard();
+							break;
+						case 5: type = new LargeWolf();
+							break;
+						case 6: type = new RedLizard();
+							break;
+						case 7: type = new BlueGolem();
+							break;
+						case 8: type = new Dragon();
+							break;
+						case 9: type = new Baron();
+							break;
+						default: type = new MeleeMinion();
+							break;
+					}
+					//[0]  [1] 		(split(":"))
+					//type:[x.y]|[x.y]|[x.y]|x.y]
+					String[] minionCoordinatesCfg = typeCfg[1].split("|");
+					
+					for(i = 0; i < minionCoordinatesCfg.length; i++){
+						inLevel[index] = type;
+						type.setCoordinates(Integer.parseInt(minionCoordinatesCfg[i].substring(1,1)), Integer.parseInt(minionCoordinatesCfg[i].substring(3,1)));
+						index++;
+					}
+				}
+				
+			}else{
+				theme = "default";
+			}
+			
+			updateGameObjects();
+		}catch(NullPointerException e){
+			e.printStackTrace();
+		}catch(IOException e){
+			e.printStackTrace();
+		}
 		
 		//Set this as keylistener and make it focusable so the keylistener works
 		addKeyListener(this);
 		setFocusable(true);
+		
+		//Load environment images
+		loadPics();
 	}
 	
 	/* Fill the panel with landscape
@@ -155,21 +254,51 @@ public class GamePanel extends Panel implements KeyListener{
 			character.r.checkNextScene();
 		}
 		
-		statusBar.repaint();
+		//Update spell cooldowns and spellicons
+		g.setColor(Color.WHITE);
+		g.fillRect(375, 465, 250, 35);
 		
+		g.setColor(Color.BLACK);
+		if(character.q.getRemainingCooldown() == 0){
+			
+		}else{
+			g.drawString(String.valueOf((double)Math.round(((double)(character.q.getCooldown() - character.q.getRemainingCooldown()) / 1000) * 10)/10), 425, 495);
+		}	
+		if(character.w.getRemainingCooldown() == 0){
+			
+		}else{
+			g.drawString(String.valueOf((double)Math.round(((double)(character.w.getCooldown() - character.w.getRemainingCooldown()) / 1000) * 10)/10), 475, 495);
+		}
+		if(character.e.getRemainingCooldown() == 0){
+			
+		}else{
+			g.drawString(String.valueOf((double)Math.round(((double)(character.e.getCooldown() - character.e.getRemainingCooldown()) / 1000) * 10)/10), 525, 495);
+		}	//(double)Math.round(((character.e.getCooldown() - character.e.getRemainingCooldown()) / 1000) * 10)/10;
+		if(character.r.getRemainingCooldown() == 0){
+			
+		}else{
+			g.drawString(String.valueOf((double)Math.round(((double)(character.r.getCooldown() - character.r.getRemainingCooldown()) / 1000) * 10)/10), 575, 495);
+		}
+		
+		g.setColor(Color.BLACK);
 		//Draw current FPS
-		g.drawString(Main.getCurrentFPS(), 985, 12);
-		g.drawString(Main.getCurrentTPS(), 985, 24);
+		int length = String.valueOf(Main.getCurrentFPS()).length();
+		length *= 8;
+		g.drawString(Main.getCurrentFPS(), 1000 - length, 12);
+		
+		length = String.valueOf(Main.getCurrentTPS()).length();
+		length *= 8;
+		g.drawString(Main.getCurrentTPS(), 1000 - length, 24);
 		g.dispose();
 	}
 	
 	//Images are loaded
 	public void loadPics(){
 		ClassLoader cldr = this.getClass().getClassLoader();
-		air = new ImageIcon(cldr.getResource("img/landscape/default/air.png")).getImage();
-		ground = new ImageIcon(cldr.getResource("img/landscape/default/ground.png")).getImage();
-		grass_ground = new ImageIcon(cldr.getResource("img/landscape/default/grass-ground.png")).getImage();
-		grass_air = new ImageIcon(cldr.getResource("img/landscape/default/grass-air.png")).getImage();
+		air = new ImageIcon(cldr.getResource("img/landscape/" + theme + "/air.png")).getImage();
+		ground = new ImageIcon(cldr.getResource("img/landscape/" + theme + "/ground.png")).getImage();
+		grass_ground = new ImageIcon(cldr.getResource("img/landscape/" + theme + "/grass-ground.png")).getImage();
+		grass_air = new ImageIcon(cldr.getResource("img/landscape/" + theme + "/grass-air.png")).getImage();
 	}
 	
 	//Called when a key is pressed
@@ -413,7 +542,7 @@ public class GamePanel extends Panel implements KeyListener{
 		int matrix_x_bottom_right = matrix_x_upper_right;
 		int matrix_y_bottom_right = matrix_y_bottom_left;
 	    
-	    //Here we calculate the coordinates of the character in the matrix for the old coordinates, from before this update().
+		//Here we calculate the coordinates of the character in the matrix for the old coordinates, from before this update().
 		int matrix_x_upper_left_old = roundDownToClosestMultipleOfFifty(charx)/50;
 		int matrix_y_upper_left_old = roundDownToClosestMultipleOfFifty(chary)/50;
 		int matrix_x_upper_right_old = roundDownToClosestMultipleOfFifty(charx + 49)/50;
@@ -489,23 +618,29 @@ public class GamePanel extends Panel implements KeyListener{
 				}
 			}
 		}
+		
+		boolean levelChanged = false;
 	    
 		//Check if character should go to next level in x-axis
 		if((matrix_x_bottom_right  + (levelIDx * 20)) > ((levelIDx + 1) * 20) - 1 && (levelIDx + 1) * 20 <= levelLengthX){
 			levelIDx++;
 			charx = 0;
+			levelChanged = true;
 		}else if(matrix_x_bottom_left < 0 && levelIDx > 0){
 			levelIDx--;
 			charx = 950;
+			levelChanged = true;
 		}
 	    
 		//Check if character should go to next level in y-axis
 		if((matrix_y_bottom_right + (levelIDy * 10)) > ((levelIDy + 1) * 10) - 1 && (matrix_y_middle_right + (levelIDy * 10)) > ((levelIDy + 1) * 10) - 1 && (matrix_y_upper_right + (levelIDy * 10)) > ((levelIDy + 1) * 10) - 1){
 			levelIDy++;
 			chary = -50;
+			levelChanged = true;
 		}else if(matrix_y_upper_right < 0 && levelIDy > 0 && matrix_y_middle_right < 0){
 			levelIDy--;
 			chary = 500;
+			levelChanged = true;
 		}
 	    
 		//Check next scenes for spells
@@ -548,6 +683,10 @@ public class GamePanel extends Panel implements KeyListener{
 		}
 
 		character.setCoordinates(charx, chary);
+		
+		if(levelChanged){
+			updateGameObjects();
+		}
 	}
 	
 	//In this class the jumpvariables are stored
@@ -599,9 +738,28 @@ public class GamePanel extends Panel implements KeyListener{
 		}
 	}
 	
-	public int roundDownToClosestMultipleOfFifty(int num){
+	public static int roundDownToClosestMultipleOfFifty(int num){
 		int mod = num % 50;
 		return num-mod;    
+	}
+	
+	//Update GameObject[] onScreen;
+	public void updateGameObjects(){
+		int maxX = levelIDx * 20;
+		int minX = (levelIDx - 1) * 20;
+		int maxY = levelIDy * 10;
+		int minY = (levelIDy - 1) * 10;
+		
+		onScreen = new GameObject[50];
+		for(int i = 0; i < inLevel.length; i++){
+			if(inLevel[i] != null){
+				Coordinate coordinate = inLevel[i].getCoordinates();
+				if(coordinate.x < maxX && coordinate.x > minX && coordinate.y < maxY && coordinate.y > minY){
+					onScreen[i] = inLevel[i];
+				}
+				
+			}
+		}
 	}
 	
 	//Checks if the character is on the edge of a square on the y- and x-axis, if so, onEdgeY = true, or onEdgeX = true.
@@ -631,13 +789,13 @@ public class GamePanel extends Panel implements KeyListener{
 		levelOne = new int[][]{	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 								{2,2,2,0,0,0,0,0,0,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{1,1,1,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{0,1,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,2,2,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+								{1,1,1,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+								{0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,0,0,0,0,0,0,0,0,0,0,0,0,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+								{0,1,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,2,2,1,1,0,0,0,0,0,0,0,0,0,0,0,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 								{0,0,0,0,0,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{0,0,0,2,2,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,1,1,1,1,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+								{0,0,0,2,2,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,2,2,2,2,2,2,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 								{0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 								{0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -669,5 +827,17 @@ public class GamePanel extends Panel implements KeyListener{
 	//Getter for character
 	public Champion getCharacter(){
 		return character;
+	}
+	
+	public int[][] getCurrentLevel(){
+		return currentLevel;
+	}
+	
+	public int[] getLevelIDs(){
+		return new int[]{levelIDx, levelIDy};
+	}
+	
+	public GameObject[] getOnScreenObjects(){
+		return onScreen;
 	}
 }

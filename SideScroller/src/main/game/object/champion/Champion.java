@@ -11,6 +11,9 @@ public class Champion extends GameObject{
 	
 	public Spell q, w, e, r;
 	
+	private int health;
+	private int currentHealth;
+	
 	public Champion(){
 		
 		//Movement speed in px

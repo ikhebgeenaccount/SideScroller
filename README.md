@@ -2,6 +2,8 @@
 
 SideScroller aims to create a League of Legends themed 2D platformer, including champions with abilities, minions and jungle monsters. 
 
+[Download the latest version.](https://github.com/ikhebgeenaccount/SideScroller/releases)
+
 SideScroller isn’t endorsed by Riot Games and doesn’t reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc.
 
 ####Planned features:
@@ -14,6 +16,14 @@ I am currently looking for artists, to create animations and environments.
 PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you have no reddit, add me ingame on EUW: ikhebgeenaccount.  
 
 ####Changelog
+  - *v0.4.0*
+    - Added statusbar with spellcooldowns
+    - Added grass
+    - Fixed a bug where you could not start the game again after returning to the menu once
+    - Fixed a bug where the current FPS wasn't completely visible when >= 100
+    - Fixed a bug where the character could teleport into ground with Ezreals E
+    - Changed color of ground
+    - Changed the way levels are loaded, which gives more customizability
   - *v0.3.0* - **current release**
     - Added spells
     - Added spell animations

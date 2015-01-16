@@ -7,7 +7,7 @@ public class Animation {
 	private OneScene[] scenes;
 	private int sceneOfAnimation;
 	private int numberOfScenes;
-	private int frameWidth;
+	private int frameWidth, frameHeight;
 	
 	/* In the constructor we create an array for all the scenes that the animation will contain. Maximum of 30 scenes.
 	 * We also set numberOfScenes to zero, because there are no scenes yet.
@@ -18,13 +18,15 @@ public class Animation {
 		numberOfScenes = 0;
 		reset();
 		frameWidth = 50;
+		frameHeight = 100;
 	}
 	
-	public Animation(int frameWidth){
+	public Animation(int frameWidth, int frameHeight){
 		scenes = new OneScene[30];
 		numberOfScenes = 0;
 		reset();
 		this.frameWidth = frameWidth;
+		this.frameHeight = frameHeight;
 	}
 	
 	//This method is called when the Animation should start. First, it's resetted, so it begins at the start. Then the first
@@ -67,6 +69,10 @@ public class Animation {
 	
 	public int getFrameWidth(){
 		return frameWidth;
+	}
+	
+	public int getFrameHeight(){
+		return frameHeight;
 	}
 	
 	//This class holds information about one scene of the animation. That information is: the image, the length in frames and the
