@@ -16,3 +16,5 @@
 - Replace animations and art with good animations and art
 - Create more levels, with:
 	- Different themes
+- Add environment graphics (trees etc.)
+- Add some champions
