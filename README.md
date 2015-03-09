@@ -2,6 +2,8 @@
 
 SideScroller aims to create a League of Legends themed 2D platformer, including champions with abilities, minions and jungle monsters. 
 
+SideScroller isn’t endorsed by Riot Games and doesn’t reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc. 
+
 ###Download
 [Download the latest version.](https://github.com/ikhebgeenaccount/SideScroller/releases)  
 You need to have [Java 8](http://www.java.com) installed to play this game!
@@ -13,8 +15,6 @@ Would you like to help me with this project, or have a great idea?
 I am currently looking for artists, to create animations and environments.
 PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you have no reddit, add me ingame on EUW: ikhebgeenaccount.
 You can also hop on to [this redditthread]() and share your ideas or art there!
-
-SideScroller isn’t endorsed by Riot Games and doesn’t reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc.
 
 ##Planned features:
   - Levels with ending boss fights against Baron, Dragon, etc.
