@@ -26,7 +26,7 @@ I am currently looking for artists, to create animations and environments.
 PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you have no reddit, add me ingame on EUW: ikhebgeenaccount.  
 
 ##Changelog
-  - *v0.4.0*
+  - *v0.4.0* - **current release**
     - Added statusbar with spellcooldowns
     - Added grass
     - Fixed a bug where you could not start the game again after returning to the menu once
@@ -34,7 +34,7 @@ PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you hav
     - Fixed a bug where the character could teleport into ground with Ezreals E
     - Changed color of ground
     - Changed the way levels are loaded, which gives more customizability
-  - *v0.3.0* - **current release**
+  - *v0.3.0*
     - Added spells
     - Added spell animations
     - Added casting animations
