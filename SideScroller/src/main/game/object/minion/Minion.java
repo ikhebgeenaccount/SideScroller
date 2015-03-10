@@ -11,6 +11,7 @@ public class Minion extends GameObject {
 	private int range;
 	private int damage;
 	private long attackLength; //In seconds
+	private long attackStart;
 	
 	private boolean moveLeft;
 	
@@ -34,6 +35,7 @@ public class Minion extends GameObject {
 	
 	public void setAttackLength(int attacklength){
 		this.attackLength = attackLength;
+		attackStart = 0;
 	}
 	
 	public void move(){
@@ -63,8 +65,10 @@ public class Minion extends GameObject {
 				
 				if(coordy >= targetcoordy + height && coordy + getSize()[1] <= targetcoordy && coordx >= targetcoordx + width && coordx + getSize()[1] <= targetcoordx){
 					//Target is in range: attack
-					setAnimationType(Minion.ATTACK);
-					onScreen[i].damage(getDamage());
+					if(System.currentTimeMillis() - attackStart >= attackLength){
+						//Attack
+						onScreen[i].damage(getDamage());
+					}
 					activity = true;
 				}
 			}
@@ -91,6 +95,16 @@ public class Minion extends GameObject {
 			}else{
 				//Turn around
 				moveLeft = !moveLeft;
+			}
+		}
+		
+		if(activity){
+			setAnimationType(Minion.ATTACK);
+		}else{
+			if(moveLeft){
+				setAnimationType(Minion.WALK_LEFT);
+			}else{
+				setAnimationType(Minion.WALK_RIGHT);
 			}
 		}
 	}
