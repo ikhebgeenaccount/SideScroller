@@ -1,6 +1,6 @@
 ## Bugs
 
-- **v0.4.0-pre**
+- **v0.4.0**
   - Character doesn't fall when trying to move out of the level at the left side.
   - Jumping is incosistent when jumping between levels, sometimes the character jumps higher than other times.
   - Collision is not detected correctly when moving between levels.
