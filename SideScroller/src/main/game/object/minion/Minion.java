@@ -56,7 +56,7 @@ public class Minion extends GameObject {
 				int targetcoordy = onScreen[i].getCoordinates().y;
 				
 				if(coordy >= targetcoordy + height && coordy + getSize()[1] <= targetcoordy && coordx >= targetcoordx + width && coordx + getSize()[1] <= targetcoordx){
-					//Target is in range.
+					//Target is in range: attack
 					setAnimationType(Minion.ATTACK);
 					onScreen[i].damage(damage);
 					activity = true;
@@ -80,8 +80,6 @@ public class Minion extends GameObject {
 		}else if(!activity){
 			//Move right
 			
-		}else{
-			//Attack
 		}
 	}
 	
