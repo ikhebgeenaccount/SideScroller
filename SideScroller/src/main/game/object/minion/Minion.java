@@ -10,6 +10,7 @@ public class Minion extends GameObject {
 	
 	private int range;
 	private int damage;
+	private long attackLength; //In seconds
 	
 	private boolean moveLeft;
 	
@@ -17,9 +18,10 @@ public class Minion extends GameObject {
 		
 	}
 	
-	public Minion(int speed, int range){
+	public Minion(int speed, int range, long attackLength){
 		setSpeed(speed);
 		setRange(range);
+		setAttackLength(attackLength);
 	}
 	
 	public void setRange(int range){
@@ -28,6 +30,10 @@ public class Minion extends GameObject {
 	
 	public void setDamage(int damage){
 		this.damage = damage;
+	}
+	
+	public void setAttackLength(int attacklength){
+		this.attackLength = attackLength;
 	}
 	
 	public void move(){
@@ -58,7 +64,7 @@ public class Minion extends GameObject {
 				if(coordy >= targetcoordy + height && coordy + getSize()[1] <= targetcoordy && coordx >= targetcoordx + width && coordx + getSize()[1] <= targetcoordx){
 					//Target is in range: attack
 					setAnimationType(Minion.ATTACK);
-					onScreen[i].damage(damage);
+					onScreen[i].damage(getDamage());
 					activity = true;
 				}
 			}
@@ -68,18 +74,24 @@ public class Minion extends GameObject {
 		int levelIDx = Main.getGamePanel().getLevelIDs()[0];
 		int levelIDy = Main.getGamePanel().getLevelIDs()[1];
 		
+		//Calculate coordinates and sizes of Minion
 		int matrixcoordx = main.gui.panel.GamePanel.roundDownToClosestMultipleOfFifty(getCoordinates().x)/50;
 		int matrixcoordy = main.gui.panel.GamePanel.roundDownToClosestMultipleOfFifty(getCoordinates().y)/50;
 		
 		int matrixheight = (getSize()[1] + 49)/50;//Round up to multiple of fifty
 		int matrixwidth = (getSize()[0] + 49)/50;
 		
-		if(moveLeft && !activity){
-			//Move left
+		if(!activity){
+			//Check if next step can be made
+			boolean nextstep = true;
 			
-		}else if(!activity){
-			//Move right
-			
+			//Move accordingly
+			if(nextstep){
+				//Move
+			}else{
+				//Turn around
+				moveLeft = !moveLeft;
+			}
 		}
 	}
 	
