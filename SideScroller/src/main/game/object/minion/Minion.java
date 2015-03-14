@@ -33,7 +33,7 @@ public class Minion extends GameObject {
 		this.damage = damage;
 	}
 	
-	public void setAttackLength(int attacklength){
+	public void setAttackLength(long attackLength){
 		this.attackLength = attackLength;
 		attackStart = 0;
 	}

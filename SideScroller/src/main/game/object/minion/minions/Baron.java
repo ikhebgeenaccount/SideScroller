@@ -8,9 +8,4 @@ public class Baron extends Minion {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Baron(int speed, int range) {
-		super(speed, range);
-		// TODO Auto-generated constructor stub
-	}
-
 }

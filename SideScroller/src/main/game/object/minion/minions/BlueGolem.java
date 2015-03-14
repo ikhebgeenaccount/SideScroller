@@ -8,9 +8,4 @@ public class BlueGolem extends Minion {
 		// TODO Auto-generated constructor stub
 	}
 
-	public BlueGolem(int speed, int range) {
-		super(speed, range);
-		// TODO Auto-generated constructor stub
-	}
-
 }

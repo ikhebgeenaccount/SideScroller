@@ -8,9 +8,4 @@ public class Dragon extends Minion {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Dragon(int speed, int range) {
-		super(speed, range);
-		// TODO Auto-generated constructor stub
-	}
-
 }
