@@ -51,6 +51,9 @@ public class Minion extends GameObject {
 		GameObject[] onScreen = Main.getGamePanel().getOnScreenObjects();
 		int coordx = getCoordinates().x;
 		int coordy = getCoordinates().y;
+		
+		int newcoordx = coordx;
+		int newcoordy = coordy;
 		 
 		 //Check if this should attack 
 		for(int i = 0; i < onScreen.length; i++){
@@ -79,8 +82,8 @@ public class Minion extends GameObject {
 		int levelIDy = Main.getGamePanel().getLevelIDs()[1];
 		
 		//Calculate coordinates and sizes of Minion
-		int matrixcoordx = main.gui.panel.GamePanel.roundDownToClosestMultipleOfFifty(getCoordinates().x)/50;
-		int matrixcoordy = main.gui.panel.GamePanel.roundDownToClosestMultipleOfFifty(getCoordinates().y)/50;
+		int matrixcoordx = main.gui.panel.GamePanel.roundDownToClosestMultipleOfFifty(coordx)/50;
+		int matrixcoordy = main.gui.panel.GamePanel.roundDownToClosestMultipleOfFifty(coordy)/50;
 		
 		int matrixheight = (getSize()[1] + 49)/50;//Round up to multiple of fifty
 		int matrixwidth = (getSize()[0] + 49)/50;
@@ -88,6 +91,71 @@ public class Minion extends GameObject {
 		if(!activity){
 			//Check if next step can be made
 			boolean nextstep = true;
+			
+			if(moveLeft){
+				//Moving left
+				if(getSpeed() >= 50){
+					//Check next tile
+					if(matrixcoordx != main.gui.panel.GamePanel.roundDownToClosestMultipleOfFifty(coordx - getSpeed())){
+						//Moving to next tile
+						//Check if next tile is valid to move on
+						if(level[matrixcoordy + (levelIDy * 10)][matrixcoordx + (levelIDx * 20) - 1] != 0){
+							nextstep = false;
+						}else{
+							nextstep = true;
+							newcoordx -= getSpeed();
+						}
+					}
+				}else{
+					//Check if we stay on current tile
+					if(matrixcoordx != main.gui.panel.GamePanel.roundDownToClosestMultipleOfFifty(coordx - getSpeed())){
+						//Moving to next tile
+						//Check if next tile is valid to move on
+						if(level[matrixcoordy + (levelIDy * 10)][matrixcoordx + (levelIDx * 20) - 1] != 0){
+							nextstep = false;
+						}else{
+							nextstep = true;
+							newcoordx -= getSpeed();
+						}
+					}else{
+						//Staying on current tile
+						//Don't have to check: last move was valid so this one is as well
+						newcoordx -= getSpeed();
+						nextstep = true;
+					}
+				}
+			}else{
+				if(getSpeed() >= 50){
+					//Check next tile
+					if(matrixcoordx != main.gui.panel.GamePanel.roundDownToClosestMultipleOfFifty(coordx + getSpeed())){
+						//Moving to next tile
+						//Check if next tile is valid to move on
+						if(level[matrixcoordy + (levelIDy * 10)][matrixcoordx + (levelIDx * 20) + 1] != 0){
+							nextstep = false;
+						}else{
+							nextstep = true;
+							newcoordx += getSpeed();
+						}
+					}
+				}else{
+					//Check if we stay on current tile
+					if(matrixcoordx != main.gui.panel.GamePanel.roundDownToClosestMultipleOfFifty(coordx + getSpeed())){
+						//Moving to next tile
+						//Check if next tile is valid to move on
+						if(level[matrixcoordy + (levelIDy * 10)][matrixcoordx + (levelIDx * 20) + 1] != 0){
+							nextstep = false;
+						}else{
+							nextstep = true;
+							newcoordx += getSpeed();
+						}
+					}else{
+						//Staying on current tile
+						//Don't have to check: last move was valid so this one is as well
+						newcoordx += getSpeed();
+						nextstep = true;
+					}
+				}				
+			}
 			
 			//Move accordingly
 			if(nextstep){
