@@ -23,7 +23,7 @@ public class GameObject {
 	
 	//Speed in px
 	private int startSpeed;
-	private int speed;
+	private int speed, yspeed;
 	
 	private int health;
 	private int currentHealth;
@@ -120,20 +120,20 @@ public class GameObject {
 		}
 		
 		public void setSpeed(int speed){
-			this.speed = speed;
+			this.startSpeed = speed;
 		}
 		
 		public void accelerate(int acceleration){
-			this.speed += acceleration;
+			this.yspeed += acceleration;
 		}
 		
 		public void resetSpeed(){
-			this.speed = startSpeed;
+			this.yspeed = startSpeed;
 		}
 		
 		public boolean moveUp(NavMesh navMesh){
 			boolean move = true;
-			for(int i = 0; i <= speed; i++){
+			for(int i = 0; i <= yspeed; i++){
 				for(int j = 0; j < width; j++){
 					if(getCoordinates().y - 1 >= 0){
 						int rgb = navMesh.getRGB(getCoordinates().x + j, getCoordinates().y - 1);
@@ -157,7 +157,7 @@ public class GameObject {
 		
 		public boolean moveDown(NavMesh navMesh){
 			boolean move = true;
-			for(int i = 0; i <= speed; i++){
+			for(int i = 0; i <= yspeed; i++){
 				for(int j = 0; j < width; j++){
 					if(getCoordinates().y + height + 1 <= navMesh.getHeight()){
 						int rgb = navMesh.getRGB(getCoordinates().x + j, getCoordinates().y + height);
