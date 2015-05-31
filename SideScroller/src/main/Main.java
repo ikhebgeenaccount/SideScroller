@@ -71,7 +71,7 @@ public class Main extends JFrame{
 	
 	//Method to start game, creates character and game loop thread
 	public static void startGame(){		
-		ticksPS = 90;
+		ticksPS = 10;
 		
 		//Create character
 		character = new AlphaGuy();
