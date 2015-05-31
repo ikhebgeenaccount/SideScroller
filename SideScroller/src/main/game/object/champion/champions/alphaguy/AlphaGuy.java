@@ -12,8 +12,7 @@ import main.game.object.spell.Spell;
 public class AlphaGuy extends Champion {
 	
 	public AlphaGuy(){
-		ClassLoader cldr = this.getClass().getClassLoader();
-		
+		ClassLoader cldr = this.getClass().getClassLoader();		
 		
 		try {
 			/* All the animations are in one big image, that is why we use the getSubimage() function to get all the
@@ -44,35 +43,35 @@ public class AlphaGuy extends Champion {
 			
 			//Add the idle animation to animations[]
 			BufferedImage idleSprite = ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/idle.png"));
-			addAnimation(Champion.IDLE, idleSprite, 100);
+			addAnimation(Champion.IDLE, idleSprite, 100, 50, 100);
 			
 			//Add the walk left animation to animations[]		
 			BufferedImage walkLeftSprite = ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/walkLeft.png"));
-			addAnimation(Champion.WALK_LEFT, walkLeftSprite, 250);
+			addAnimation(Champion.WALK_LEFT, walkLeftSprite, 250, 50, 100);
 			
 			//Add the walk right animation to animations[]
 			BufferedImage walkRightSprite = ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/walkRight.png"));
-			addAnimation(Champion.WALK_RIGHT, walkRightSprite, 250);
+			addAnimation(Champion.WALK_RIGHT, walkRightSprite, 250, 50, 100);
 			
 			//Add the jump animation to animations[]
 			BufferedImage jumpSprite = ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/jump.png"));
-			addAnimation(Champion.JUMP, jumpSprite, 250);
+			addAnimation(Champion.JUMP, jumpSprite, 250, 50, 100);
 			
 			//Add the fall animation to animations[]
 			BufferedImage fallSprite = ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/fall.png"));
-			addAnimation(Champion.FALL, fallSprite, 250);
+			addAnimation(Champion.FALL, fallSprite, 250, 50, 100);
 			
 			//Add the cast q animation to animations[]
-			addAnimation(Champion.CAST_Q, ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/castQ.png")), 250);
+			addAnimation(Champion.CAST_Q, ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/castQ.png")), 250, 50, 100);
 			
 			//Add the cast w animation to animations[]
-			addAnimation(Champion.CAST_W, ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/castW.png")), 250);
+			addAnimation(Champion.CAST_W, ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/castW.png")), 250, 50, 100);
 			
 			//Add the cast e animation to animations[]
-			addAnimation(Champion.CAST_E, ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/castE.png")), 250);
+			addAnimation(Champion.CAST_E, ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/castE.png")), 250, 50, 100);
 			
 			//Add the cast r animation to animations[]
-			addAnimation(Champion.CAST_R, ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/castR.png")), 250);
+			addAnimation(Champion.CAST_R, ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/castR.png")), 250, 50, 100);
 			
 			//Start idle animation
 			setAnimationType(Champion.IDLE);
