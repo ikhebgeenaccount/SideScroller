@@ -1,10 +1,12 @@
 package main.game.object;
 
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 import main.game.animation.Animation;
 import main.game.coordinate.Coordinate;
+import main.game.navmesh.NavMesh;
 
 public class GameObject {
 	
@@ -17,7 +19,10 @@ public class GameObject {
 	//Coordinates
 	private Coordinate coordinates;
 	
+	private int width, height;
+	
 	//Speed in px
+	private int startSpeed;
 	private int speed;
 	
 	private int health;
@@ -47,6 +52,7 @@ public class GameObject {
 	}
 	
 	//Add an animation with default frame size: 50 x 100 (for characters)
+	@Deprecated
 	public void addAnimation(int type, BufferedImage animationSprite, int sceneLength){
 		animations[type] = new Animation();
 		int scenes = animationSprite.getWidth() / 50;
@@ -59,6 +65,8 @@ public class GameObject {
 	//Add an animation with different frame size: frameWidth x frameHeight
 	public void addAnimation(int type, BufferedImage animationSprite, int sceneLength, int frameWidth, int frameHeight){
 		animations[type] = new Animation(frameWidth, frameHeight);
+		width = frameWidth;
+		height = frameHeight;
 		int scenes = animationSprite.getWidth() / frameWidth;
 		for(int i = 0; i < scenes; i++){
 			animations[type].addScene(animationSprite.getSubimage(frameWidth * i, 0, frameWidth, frameHeight), sceneLength);
@@ -123,5 +131,111 @@ public class GameObject {
 	
 	public void damage(int damage){
 		currentHealth -= damage;
+	}
+	
+	public void accelerate(int acceleration){
+		this.speed += acceleration;
+	}
+	
+	public void resetSpeed(){
+		this.speed = startSpeed;
+	}
+	
+	public boolean moveUp(NavMesh navMesh){
+		boolean move = true;
+		for(int i = 0; i <= speed; i++){
+			for(int j = 0; j < width; j++){
+				if(getCoordinates().y - 1 >= 0){
+					int rgb = navMesh.getRGB(getCoordinates().x + j, getCoordinates().y - 1);
+					
+					if(rgb != Color.BLUE.getRGB()){
+						//Not allowed to move
+						move = false;
+						break;
+					}					
+				}else{
+					move = false;
+				}
+			}
+			if(move){
+				//Move
+				setCoordinates(getCoordinates().x, getCoordinates().y - 1);
+			}
+		}
+		return move;		
+	}
+	
+	public boolean moveDown(NavMesh navMesh){
+		boolean move = true;
+		for(int i = 0; i <= speed; i++){
+			for(int j = 0; j < width; j++){
+				if(getCoordinates().y + height + 1 <= navMesh.getHeight()){
+					int rgb = navMesh.getRGB(getCoordinates().x + j, getCoordinates().y + height);
+					
+					if(rgb != Color.BLUE.getRGB()){
+						//Not allowed to move
+						move = false;
+						break;
+					}
+				}else{
+					move = false;
+				}
+			}
+			if(move){
+				//Move
+				setCoordinates(getCoordinates().x, getCoordinates().y + 1);
+			}
+		}
+		return move;
+	}
+	
+	public boolean moveLeft(NavMesh navMesh){
+		boolean move = true;
+		for(int i = 0; i <= speed; i++){
+			for(int j = 0; j < height; j++){
+				if(getCoordinates().x - 1 >= 0){
+					int rgb = navMesh.getRGB(getCoordinates().x - 1, getCoordinates().y + j);
+					
+					if(rgb != Color.BLUE.getRGB()){
+						//Not allowed to move
+						move = false;
+						break;
+					}					
+				}else{
+					move = false;
+				}
+			}
+			
+			if(move){
+				//Move
+				setCoordinates(getCoordinates().x - 1, getCoordinates().y);
+			}
+		}
+		return move;
+	}
+	
+	public boolean moveRight(NavMesh navMesh){
+		boolean move = true;
+		for(int i = 0; i <= speed; i++){
+			for(int j = 0; j < height; j++){
+				if(getCoordinates().x + width + 1 <= navMesh.getWidth()){
+					int rgb = navMesh.getRGB(getCoordinates().x + width, getCoordinates().y + j);
+					
+					if(rgb != Color.BLUE.getRGB()){
+						//Not allowed to move
+						move = false;
+						break;
+					}					
+				}else{
+					move = false;
+				}
+			}
+			
+			if(move){
+				//Move
+				setCoordinates(getCoordinates().x + 1, getCoordinates().y);
+			}				
+		}
+		return move;
 	}
 }
