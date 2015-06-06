@@ -26,6 +26,13 @@ I am currently looking for artists, to create animations and environments.
 PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you have no reddit, add me ingame on EUW: ikhebgeenaccount.  
 
 ##Changelog
+  - *v0.5.0*
+    - Completely rewritten the way collisions and gravity are detected:
+      - Added acceleration and deceleration when falling and jumping
+      - Fixed a bug where you could move out of the level
+      - Fixed a bug where you could move out of the level and float on air
+      - Increased performance
+      - Increased accuracy
   - *v0.4.0* - **current release**
     - Added statusbar with spellcooldowns
     - Added grass
