@@ -119,16 +119,23 @@ public class GameObject {
 			return speed;
 		}
 		
+		public int getYSpeed(){
+			return yspeed;
+		}
+		
 		public void setSpeed(int speed){
 			this.startSpeed = speed;
+			this.speed = speed;
 		}
 		
 		public void accelerate(int acceleration){
-			this.yspeed += acceleration;
+			if(yspeed + acceleration > 0){
+				yspeed += acceleration;
+			}
 		}
 		
 		public void resetSpeed(){
-			this.yspeed = startSpeed;
+			this.yspeed = 0;
 		}
 		
 		public boolean moveUp(NavMesh navMesh){
