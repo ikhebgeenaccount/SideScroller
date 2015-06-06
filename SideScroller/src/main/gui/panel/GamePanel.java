@@ -460,10 +460,12 @@ public class GamePanel extends Panel implements KeyListener{
 						character.moveUp(navMesh);
 					}else{
 						jumpStartTick = tick;
-						character.accelerate(5);
+						character.accelerate(18);
 					}
 				}
 			}
+			
+			System.out.println("Jump | jumping: "  + jumping + "; tick: " + tick + "; jumpStartTick: " + jumpStartTick + "; character.getYSpeed(): " + character.getYSpeed());
 			
 			if(jumping){
 				if(tick - jumpStartTick <= JUMP_LENGTH_TICK){
@@ -472,10 +474,12 @@ public class GamePanel extends Panel implements KeyListener{
 				}else{
 					//Not jumping anymore
 					jumping = false;
+					character.resetSpeed();
 				}
 				if(!moveUp){
 					//character was not able to move up, stop jumping
 					jumping = false;
+					character.resetSpeed();
 				}else{
 					//character was able to jump, decelerate
 					character.accelerate(-1);
