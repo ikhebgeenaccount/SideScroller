@@ -375,13 +375,13 @@ public class GamePanel extends Panel implements KeyListener{
 		
 		//Check if levelID should change
 		Coordinate characterCoordinate = character.getCoordinates();
-		if(characterCoordinate.x + character.getWidth() > 1000){
+		if(characterCoordinate.x + character.getWidth()/2 > 1000 * levelIDx){
 			levelIDx++;
 		}
 		if(characterCoordinate.x < 1000 * levelIDx){
 			levelIDx--;
 		}
-		if(characterCoordinate.y + character.getHeight() > 500){
+		if(characterCoordinate.y + character.getHeight()/2 > 500 * levelIDy){
 			levelIDy++;
 		}
 		if(characterCoordinate.y < 500 * levelIDy){
