@@ -89,7 +89,15 @@ public class GameObject {
 		}
 		
 		public int[] getSize(){
-			return new int[]{currentAnimation.getFrameWidth(), currentAnimation.getFrameHeight()};
+			return new int[]{width, height};
+		}
+		
+		public int getWidth(){
+			return width;
+		}
+		
+		public int getHeight(){
+			return height;
 		}
 	
 		
