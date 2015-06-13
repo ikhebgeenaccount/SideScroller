@@ -45,7 +45,7 @@ PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you hav
     - Added spells
     - Added spell animations
     - Added casting animations
-    - ~~Added a statusbar with spellicons and cooldowns~~ - Not yet added to UI
+    - ~~Added a statusbar with spellicons and cooldowns~~
     - Removed loading screen
   - *v0.2.3*
     - Added 'death point' to jump, character will not fall nor jump in this period
