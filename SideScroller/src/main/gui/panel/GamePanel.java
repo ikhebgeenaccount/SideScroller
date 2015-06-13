@@ -394,7 +394,7 @@ public class GamePanel extends Panel implements KeyListener{
 		}else if(moveDown){
 			character.setAnimationType(Champion.FALL);
 		}else if(moveLeft){
-		character.setAnimationType(Champion.WALK_LEFT);
+			character.setAnimationType(Champion.WALK_LEFT);
 		}else if(moveRight){
 			character.setAnimationType(Champion.WALK_RIGHT);
 		}else if(isFiredQ){
