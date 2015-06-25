@@ -324,9 +324,11 @@ public class GamePanel extends Panel implements KeyListener{
 		//Check left and right movement
 		if(keys[KeyEvent.VK_LEFT]){
 			moveLeft = character.moveLeft(navMesh);
+			movedLeft = true;
 		}
 		if(keys[KeyEvent.VK_RIGHT]){
 			moveRight = character.moveRight(navMesh);
+			movedLeft = false;
 		}
 
 		if(keys[KeyEvent.VK_UP]){
