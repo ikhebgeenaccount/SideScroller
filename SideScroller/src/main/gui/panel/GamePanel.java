@@ -226,19 +226,19 @@ public class GamePanel extends Panel implements KeyListener{
 		
 		//Draw spells if fired
 		if(isFlyingQ){
-			g.drawImage(character.q.getCurrentAnimationImage(), character.q.getCoordinates().x, character.q.getCoordinates().y, null);
+			g.drawImage(character.q.getCurrentAnimationImage(), character.q.getCoordinates().x - levelIDx * 1000, character.q.getCoordinates().y - levelIDy * 500, null);
 			character.q.checkNextScene();
 		}
 		if(isFlyingW){
-			g.drawImage(character.w.getCurrentAnimationImage(), character.w.getCoordinates().x, character.w.getCoordinates().y, null);
+			g.drawImage(character.w.getCurrentAnimationImage(), character.w.getCoordinates().x - levelIDx * 1000, character.w.getCoordinates().y - levelIDy * 500, null);
 			character.w.checkNextScene();
 		}
 		if(isFlyingE){
-			g.drawImage(character.e.getCurrentAnimationImage(), character.e.getCoordinates().x, character.e.getCoordinates().y, null);
+			g.drawImage(character.e.getCurrentAnimationImage(), character.e.getCoordinates().x - levelIDx * 1000, character.e.getCoordinates().y - levelIDy * 500, null);
 			character.e.checkNextScene();
 		}
 		if(isFlyingR){
-			g.drawImage(character.r.getCurrentAnimationImage(), character.r.getCoordinates().x, character.r.getCoordinates().y, null);
+			g.drawImage(character.r.getCurrentAnimationImage(), character.r.getCoordinates().x * levelIDx * 1000, character.r.getCoordinates().y - levelIDy * 500, null);
 			character.r.checkNextScene();
 		}
 		
