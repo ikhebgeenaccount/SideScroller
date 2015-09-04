@@ -238,7 +238,7 @@ public class GamePanel extends Panel implements KeyListener{
 			character.e.checkNextScene();
 		}
 		if(isFlyingR){
-			g.drawImage(character.r.getCurrentAnimationImage(), character.r.getCoordinates().x * levelIDx * 1000, character.r.getCoordinates().y - levelIDy * 500, null);
+			g.drawImage(character.r.getCurrentAnimationImage(), character.r.getCoordinates().x - levelIDx * 1000, character.r.getCoordinates().y - levelIDy * 500, null);
 			character.r.checkNextScene();
 		}
 		
@@ -430,9 +430,9 @@ public class GamePanel extends Panel implements KeyListener{
 		if(isFlyingW){
 			isFlyingW = character.w.move();
 		}
-		//if(isFlyingE){
-		//	isFlyingE = character.e.move();
-		//}
+		if(isFlyingE){
+			isFlyingE = character.e.move();
+		}
 		if(isFlyingR){
 			isFlyingR = character.r.move();
 		}
