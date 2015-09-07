@@ -30,7 +30,7 @@ PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you hav
     - Completely rewritten the way collisions and gravity are detected:
       - Added acceleration and deceleration when falling and jumping
       - Fixed a bug where you could move out of the level
-      - Fixed a bug where you could move out of the level and float on air
+      - Fixed a bug where you could move out of the level and float in the air
       - Fixed a bug where you could get stuck on the edge of a tile
       - Increased performance
       - Increased accuracy
