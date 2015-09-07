@@ -1,7 +1,7 @@
 ## Bugs
 
 - **v0.5.0**
-  - Ezreal R doesn't move.
+  - ~~Ezreal R doesn't move.~~
   - When firing Ezreal R to the left, the animation is the wrong way around
 - **v0.4.0**
   - Character doesn't fall when trying to move out of the level at the left side.
