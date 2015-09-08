@@ -6,18 +6,11 @@ import main.game.object.spell.Spell;
 
 public class EzrealE extends Spell{
 	
-	private int distance; //Has to be a mulitple of 50!!!
-	
-	private int[] checks;
+	private int distance;
 	
 	public EzrealE(){
 		setCooldown(7000);
 		distance = 200;
-		
-		checks = new int[distance/50 * 2];
-		for(int i = 0; i < distance/50 * 2; i++){
-			checks[i] = i;
-		}
 	}
 	
 	@Override
