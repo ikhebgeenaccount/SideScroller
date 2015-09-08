@@ -213,7 +213,7 @@ public class GamePanel extends Panel implements KeyListener{
 						break;	
 					case 2:g.drawImage(grass_ground, 50 * x, 50 * y, null);
 						break;
-					case 3:g.drawImage(grass_air, 50 * x, 50 * y, null);
+					default:g.drawImage(air, 50 * x, 50 * y, null);
 						break;
 				}
 			}
@@ -300,7 +300,6 @@ public class GamePanel extends Panel implements KeyListener{
 		air = new ImageIcon(cldr.getResource("img/landscape/" + theme + "/air.png")).getImage();
 		ground = new ImageIcon(cldr.getResource("img/landscape/" + theme + "/ground.png")).getImage();
 		grass_ground = new ImageIcon(cldr.getResource("img/landscape/" + theme + "/grass-ground.png")).getImage();
-		grass_air = new ImageIcon(cldr.getResource("img/landscape/" + theme + "/grass-air.png")).getImage();
 	}
 	
 	//Called when a key is pressed
@@ -504,6 +503,7 @@ public class GamePanel extends Panel implements KeyListener{
 	/*Levels:
 	 * 0. Air
 	 * 1. Ground
+	 * 2. Grass
 	 */
 	//Create levels
 	public void createLevels(){
@@ -534,10 +534,9 @@ public class GamePanel extends Panel implements KeyListener{
 								{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,2,2,2,2,2,2,2,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 								{1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 								{1,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{0,0,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+								{0,0,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}};
-		
+								{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2}};		
 	}
 	
 	//Getter for String characterName
