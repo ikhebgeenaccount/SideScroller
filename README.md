@@ -14,16 +14,11 @@ When experiencing bugs or game freezes, download **runlolsidescroller.bat** in t
 Would you like to help me with this project, or have a great idea?
 I am currently looking for artists, to create animations and environments.
 PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you have no reddit, add me ingame on EUW: ikhebgeenaccount.
-You can also hop on to [this redditthread]() and share your ideas or art there!
 
 ##Planned features:
   - Levels with ending boss fights against Baron, Dragon, etc.
   - Passive and abilities from champions created in a 2D platformer
-  - Great graphics
-  
-Would you like to help me with this project?  
-I am currently looking for artists, to create animations and environments.  
-PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you have no reddit, add me ingame on EUW: ikhebgeenaccount.  
+  - Great graphics 
 
 ##Changelog
   - *v0.5.0*
