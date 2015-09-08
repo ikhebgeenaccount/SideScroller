@@ -546,4 +546,8 @@ public class GamePanel extends Panel implements KeyListener{
 	public GameObject[] getOnScreenObjects(){
 		return onScreen;
 	}
+
+	public NavMesh getNavMesh() {
+		return navMesh;
+	}
 }
