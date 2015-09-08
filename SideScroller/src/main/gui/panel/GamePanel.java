@@ -286,7 +286,6 @@ public class GamePanel extends Panel implements KeyListener{
 		air = new ImageIcon(cldr.getResource("img/landscape/" + theme + "/air.png")).getImage();
 		ground = new ImageIcon(cldr.getResource("img/landscape/" + theme + "/ground.png")).getImage();
 		grass_ground = new ImageIcon(cldr.getResource("img/landscape/" + theme + "/grass-ground.png")).getImage();
-		grass_air = new ImageIcon(cldr.getResource("img/landscape/" + theme + "/grass-air.png")).getImage();
 	}
 	
 	//Called when a key is pressed
