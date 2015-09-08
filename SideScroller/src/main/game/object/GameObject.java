@@ -23,7 +23,7 @@ public class GameObject {
 	
 	//Speed in px
 	private int startSpeed;
-	private int speed, yspeed;
+	private int speed, yspeed, defaultSpeed;
 	
 	private int health;
 	private int currentHealth;
@@ -125,6 +125,14 @@ public class GameObject {
 	
 		public int getSpeed(){
 			return speed;
+		}
+		
+		public int getDefaultSpeed(){
+			return defaultSpeed;
+		}
+		
+		public void setDefaultSpeed(int defaultSpeed){
+			this.defaultSpeed = defaultSpeed;
 		}
 		
 		public int getYSpeed(){

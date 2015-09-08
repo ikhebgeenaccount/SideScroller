@@ -18,6 +18,7 @@ public class Champion extends GameObject{
 		
 		//Movement speed in px
 		setSpeed(8);
+		setDefaultSpeed(8);
 		
 	}
 	
