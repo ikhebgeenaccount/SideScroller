@@ -27,6 +27,7 @@ import main.game.object.minion.minions.MiniLizard;
 import main.game.object.minion.minions.RedLizard;
 import main.game.object.minion.minions.SiegeMinion;
 import main.game.object.minion.minions.SuperMinion;
+import main.game.object.spell.Spell;
 import main.gui.Panel;
 
 public class GamePanel extends Panel implements KeyListener{
@@ -242,31 +243,8 @@ public class GamePanel extends Panel implements KeyListener{
 			character.r.checkNextScene();
 		}
 		
-		//Update spell cooldowns and spellicons
-		g.setColor(Color.WHITE);
-		g.fillRect(375, 465, 250, 35);
 		
-		g.setColor(Color.BLACK);
-		if(character.q.getRemainingCooldown() == 0){
-			
-		}else{
-			g.drawString(String.valueOf((double)Math.round(((double)(character.q.getCooldown() - character.q.getRemainingCooldown()) / 1000) * 10)/10), 425, 495);
-		}	
-		if(character.w.getRemainingCooldown() == 0){
-			
-		}else{
-			g.drawString(String.valueOf((double)Math.round(((double)(character.w.getCooldown() - character.w.getRemainingCooldown()) / 1000) * 10)/10), 475, 495);
-		}
-		if(character.e.getRemainingCooldown() == 0){
-			
-		}else{
-			g.drawString(String.valueOf((double)Math.round(((double)(character.e.getCooldown() - character.e.getRemainingCooldown()) / 1000) * 10)/10), 525, 495);
-		}	//(double)Math.round(((character.e.getCooldown() - character.e.getRemainingCooldown()) / 1000) * 10)/10;
-		if(character.r.getRemainingCooldown() == 0){
-			
-		}else{
-			g.drawString(String.valueOf((double)Math.round(((double)(character.r.getCooldown() - character.r.getRemainingCooldown()) / 1000) * 10)/10), 575, 495);
-		}
+		drawCooldowns(g);
 		
 		g.setColor(Color.BLACK);
 		//Draw current FPS
@@ -280,6 +258,42 @@ public class GamePanel extends Panel implements KeyListener{
 		g.dispose();
 	}
 	
+	//Cooldown: Tekent de cooldowns op het scherm.
+	//return: void; arg1: Graphic g;
+	//argument g als workaround:
+	//Zou g een private member mogen worden van GamePanel?
+	public void drawCooldowns(Graphics g){
+		final int SPELL_BOX_X = 375;
+		final int SPELL_BOX_Y = 465;
+		final int SPELL_BOX_W = 250;
+		final int SPELL_BOX_H = 35;
+		
+		//Draw spellbox
+		g.setColor(Color.GREEN);
+		g.fillRect(SPELL_BOX_X, SPELL_BOX_Y, SPELL_BOX_W, SPELL_BOX_H);
+				
+		Spell spells[] = {character.q , character.w, character.e, character.r};
+		//spell_index is voor q = 0; w=1;e=2;r=3;
+		int spell_index =0;
+		for( Spell spl : spells){	
+			
+			g.setColor(Color.BLACK);
+			if(spl.getRemainingCooldown() != 0){
+				//range 0 tot 1
+				double cooldown_percentage =    1 - (double)( spl.getRemainingCooldown()) /spl.getCooldown();
+					
+				//Teken het cooldown balkje
+				g.setColor(Color.BLUE);
+				int cooldown_balk_w = (int)(SPELL_BOX_W /4 * cooldown_percentage);
+				g.fillRect(SPELL_BOX_X + spell_index*(SPELL_BOX_W /4)  , SPELL_BOX_Y, cooldown_balk_w , SPELL_BOX_H);
+						
+				//Laat de waarde van de resterende cooldown zien
+				g.setColor(Color.WHITE);
+				g.drawString(String.valueOf((double)Math.round(((double)(spl.getCooldown() - spl.getRemainingCooldown()) / 1000) * 10)/10), SPELL_BOX_X + spell_index*(SPELL_BOX_W /4), 495);
+			}
+			spell_index++;
+		}
+	}
 	//Images are loaded
 	public void loadPics(){
 		ClassLoader cldr = this.getClass().getClassLoader();
