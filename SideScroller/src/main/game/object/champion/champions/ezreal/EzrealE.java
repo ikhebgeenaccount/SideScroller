@@ -26,49 +26,18 @@ public class EzrealE extends Spell{
 	}
 	
 	@Override
-	//Needs checking if movement is valid
 	public boolean fire(Coordinate startCoordinates, boolean movedLeft){
-		int levelIDx = Main.getGamePanel().getLevelIDs()[0];
-		int levelIDy = Main.getGamePanel().getLevelIDs()[1];		
-		int[][] level = Main.getGamePanel().getCurrentLevel();
-		
-		int newcoord;		
+		startCooldown();
+		boolean fired = true;
 		if(movedLeft){
-			newcoord = startCoordinates.x - 200;
+			Main.getGamePanel().getCharacter().setSpeed(distance);
+			fired = Main.getGamePanel().getCharacter().moveLeft(Main.getGamePanel().getNavMesh());
+			Main.getGamePanel().getCharacter().setSpeed(Main.getGamePanel().getCharacter().getDefaultSpeed());
 		}else{
-			newcoord = startCoordinates.x + 200;
+			Main.getGamePanel().getCharacter().setSpeed(distance);
+			fired = Main.getGamePanel().getCharacter().moveRight(Main.getGamePanel().getNavMesh());
+			Main.getGamePanel().getCharacter().setSpeed(Main.getGamePanel().getCharacter().getDefaultSpeed());
 		}
-		
-		//Upper left
-		int matrixcoordx = Main.getGamePanel().roundDownToClosestMultipleOfFifty(newcoord)/50;	
-		int matrixcoordy = Main.getGamePanel().roundDownToClosestMultipleOfFifty(startCoordinates.y)/50;
-		int checked = 0;
-		
-		for(int i = 0; i < checks.length; i++){
-			try{
-				if(level[matrixcoordy][matrixcoordx] != 0 || level[matrixcoordy + 1][matrixcoordx] != 0){
-					checked++;
-					double even = (double) checked/2;
-					if(even == Math.round(even)){
-						matrixcoordx -= checks[checked];
-					}else{
-						matrixcoordx += checks[checked];
-					}
-				}else{
-					Main.getGamePanel().getCharacter().getCoordinates().setX(matrixcoordx * 50);
-					startCooldown();
-				}
-			}catch(ArrayIndexOutOfBoundsException e){
-				checked++;
-				double even = (double) checked/2;
-				if(even == Math.round(even)){
-					matrixcoordx -= checks[checked];
-				}else{
-					matrixcoordx += checks[checked];
-				}
-			}
-		}
-		
 		return false;
 	}
 
