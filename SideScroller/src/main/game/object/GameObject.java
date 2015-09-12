@@ -52,14 +52,10 @@ public class GameObject {
 		}
 		
 		//Add an animation with default frame size: 50 x 100 (for characters)
+		//Waarom deze als depricated aangeven?
 		@Deprecated
 		public void addAnimation(int type, BufferedImage animationSprite, int sceneLength){
-			animations[type] = new Animation();
-			int scenes = animationSprite.getWidth() / 50;
-			for(int i = 0; i < scenes; i++){
-				animations[type].addScene(animationSprite.getSubimage(50 * i, 0, 50, 100), sceneLength);
-			}
-			animationsLength[type] = scenes * sceneLength;
+			addAnimation(type, animationSprite, sceneLength, 50, 100);
 		}
 		
 		//Add an animation with different frame size: frameWidth x frameHeight
