@@ -29,6 +29,7 @@ PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you hav
       - Fixed a bug where you could get stuck on the edge of a tile
       - Increased performance
       - Increased accuracy
+	- Added shrinking bar to display cooldowns
   - *v0.4.0* - **current release**
     - Added statusbar with spellcooldowns
     - Added grass
