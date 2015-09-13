@@ -159,11 +159,10 @@ public class GameObject {
 						
 						if(rgb != Color.BLUE.getRGB()){
 							//Not allowed to move
-							move = false;
-							break;
+							return false;
 						}					
 					}else{
-						move = false;
+						return false;
 					}
 				}
 				if(move){
@@ -171,7 +170,7 @@ public class GameObject {
 					setCoordinates(getCoordinates().x, getCoordinates().y - 1);
 				}
 			}
-			return move;		
+			return true;		
 		}
 		
 		public boolean moveDown(NavMesh navMesh){
@@ -183,11 +182,10 @@ public class GameObject {
 						
 						if(rgb != Color.BLUE.getRGB()){
 							//Not allowed to move
-							move = false;
-							break;
+							return false;
 						}
 					}else{
-						move = false;
+						return false;
 					}
 				}
 				if(move){
@@ -195,7 +193,7 @@ public class GameObject {
 					setCoordinates(getCoordinates().x, getCoordinates().y + 1);
 				}
 			}
-			return move;
+			return true;
 		}
 		
 		public boolean moveLeft(NavMesh navMesh){
@@ -207,11 +205,10 @@ public class GameObject {
 						
 						if(rgb != Color.BLUE.getRGB()){
 							//Not allowed to move
-							move = false;
-							break;
+							return false;
 						}					
 					}else{
-						move = false;
+						return false;
 					}
 				}
 				
@@ -220,7 +217,7 @@ public class GameObject {
 					setCoordinates(getCoordinates().x - 1, getCoordinates().y);
 				}
 			}
-			return move;
+			return true;
 		}
 		
 		public boolean moveRight(NavMesh navMesh){
@@ -232,11 +229,10 @@ public class GameObject {
 						
 						if(rgb != Color.BLUE.getRGB()){
 							//Not allowed to move
-							move = false;
-							break;
+							return false;
 						}					
 					}else{
-						move = false;
+						return false;
 					}
 				}
 				
@@ -245,8 +241,45 @@ public class GameObject {
 					setCoordinates(getCoordinates().x + 1, getCoordinates().y);
 				}				
 			}
-			return move;
-		}		
+			return true;
+		}	
+		
+		public boolean blinkUp(NavMesh navMesh, boolean movedLeft, int distance){
+			
+		}
+		
+		public boolean blink(NavMesh navMesh, boolean movedLeft, int distanceX, int distanceY){
+			int i = 0;
+			int j = 0;
+			boolean allowed = true;
+			
+			//Check if the place where the character is going is allowed
+			while(allowed && i < getWidth()){
+				while(allowed && j < getHeight()){
+					if(navMesh.getRGB(getCoordinates().x + distanceX + i, getCoordinates().y + distanceY + j)!= Color.BLUE.getRGB()){
+						allowed = false;
+					}
+					j++;
+				}
+				i++;
+			}
+			
+			
+			if(allowed){
+				setCoordinates(getCoordinates().x + distanceX, getCoordinates().y + distanceY);
+				return true;
+			}else{
+				//Search for first place from destination to departure point where the character can move to
+			}
+		}
+		
+		public boolean blinkLeft(NavMesh navMesh, boolean movedLeft, int distance){
+			
+		}
+		
+		public boolean blinkRight(NavMesh navMesh, boolean moveLeft, int distance){
+			
+		}
 		
 		
 		
