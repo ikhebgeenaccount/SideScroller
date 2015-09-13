@@ -31,7 +31,6 @@ public class EzrealE extends Spell{
 			fired = Main.getGamePanel().getCharacter().moveRight(Main.getGamePanel().getNavMesh());
 			Main.getGamePanel().getCharacter().setSpeed(Main.getGamePanel().getCharacter().getDefaultSpeed());
 		}
-		return false;
+		return false;		
 	}
-
 }
