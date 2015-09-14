@@ -245,6 +245,7 @@ public class GameObject {
 		}
 		
 		public boolean blink(NavMesh navMesh, boolean movedLeft, int distanceX){
+			long start = System.currentTimeMillis();
 			int i = 0;
 			int j = 0;
 			boolean allowed = true;
@@ -262,8 +263,8 @@ public class GameObject {
 			
 			
 			if(allowed){
-				System.out.println("allowed on first try");
 				setCoordinates(coordinates.x + distanceX, coordinates.y);
+				printTime(start);
 				return true;
 			}else{
 				//Search for first place from destination to departure point where the character can move to
@@ -286,9 +287,7 @@ public class GameObject {
 				i = distanceX;
 				
 				while(!allowed && i != 0){
-					System.out.println(i);
 				 	if(navMesh.getRGB(coordinates.x + i, coordinates.y) == Color.BLUE.getRGB()){
-				 		System.out.println("pixel blue check location");
 				 		//Do full check for this location
 				 		
 				 		//We assume there are no red pixels in this location (innocent until proven guilty, eh), so boolean red = false. Then, when
@@ -301,9 +300,7 @@ public class GameObject {
 				 			y = 0;
 							while(!red && y < height){
 								//Check pixel
-								System.out.println("checking pixel (" + (coordinates.x + i) + "," + (coordinates.y + y) + ")");
 								if(navMesh.getRGB(coordinates.x + i + x, coordinates.y + y) == Color.RED.getRGB()){
-									System.out.println("red pixel found");
 									red = true;
 								}
 								y++;
@@ -312,17 +309,22 @@ public class GameObject {
 						}
 				 		if(!red){
 				 			//No red pixels found in this location, so the character can move here
-				 			System.out.println("Setting coordinates (" + (coordinates.x + i) + "," + coordinates.y + ")");
 				 			setCoordinates(coordinates.x + i, coordinates.y);
+				 			printTime(start);
 				 			return true;
 				 		}
 				   	}
-				 	i--;
+				 	i -= 25;
 				 }
+				printTime(start);
 				 //If you end up here, there are no valid places between int distance and the starting point. So, return false
 				 return false;
 			}
-		}		
+		}	
+		
+		public void printTime(long start){
+			System.out.println(System.currentTimeMillis() - start);
+		}
 		
 		
 	//Combat methods		
