@@ -21,7 +21,7 @@ PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you hav
   - Great graphics 
 
 ##Changelog
-  - *v0.5.0*
+  - *v0.5.0* - **current release**
     - Completely rewritten the way collisions and gravity are detected:
       - Added acceleration and deceleration when falling and jumping
       - Fixed a bug where you could move out of the level
@@ -30,7 +30,7 @@ PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you hav
       - Increased performance
       - Increased accuracy
 	- Added shrinking bar to display cooldowns
-  - *v0.4.0* - **current release**
+  - *v0.4.0*
     - Added statusbar with spellcooldowns
     - Added grass
     - Fixed a bug where you could not start the game again after returning to the menu once
