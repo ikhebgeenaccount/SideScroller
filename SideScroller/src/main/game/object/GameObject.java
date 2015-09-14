@@ -154,8 +154,8 @@ public class GameObject {
 			boolean move = true;
 			for(int i = 0; i <= yspeed; i++){
 				for(int j = 0; j < width; j++){
-					if(getCoordinates().y - 1 >= 0){
-						int rgb = navMesh.getRGB(getCoordinates().x + j, getCoordinates().y - 1);
+					if(coordinates.y - 1 >= 0){
+						int rgb = navMesh.getRGB(coordinates.x + j, coordinates.y - 1);
 						
 						if(rgb != Color.BLUE.getRGB()){
 							//Not allowed to move
@@ -167,7 +167,7 @@ public class GameObject {
 				}
 				if(move){
 					//Move
-					setCoordinates(getCoordinates().x, getCoordinates().y - 1);
+					setCoordinates(coordinates.x, coordinates.y - 1);
 				}
 			}
 			return true;		
@@ -177,8 +177,8 @@ public class GameObject {
 			boolean move = true;
 			for(int i = 0; i <= yspeed; i++){
 				for(int j = 0; j < width; j++){
-					if(getCoordinates().y + height + 1 <= navMesh.getHeight()){
-						int rgb = navMesh.getRGB(getCoordinates().x + j, getCoordinates().y + height);
+					if(coordinates.y + height + 1 <= navMesh.getHeight()){
+						int rgb = navMesh.getRGB(coordinates.x + j, coordinates.y + height);
 						
 						if(rgb != Color.BLUE.getRGB()){
 							//Not allowed to move
@@ -190,7 +190,7 @@ public class GameObject {
 				}
 				if(move){
 					//Move
-					setCoordinates(getCoordinates().x, getCoordinates().y + 1);
+					setCoordinates(coordinates.x, coordinates.y + 1);
 				}
 			}
 			return true;
@@ -200,8 +200,8 @@ public class GameObject {
 			boolean move = true;
 			for(int i = 0; i <= speed; i++){
 				for(int j = 0; j < height; j++){
-					if(getCoordinates().x - 1 >= 0){
-						int rgb = navMesh.getRGB(getCoordinates().x - 1, getCoordinates().y + j);
+					if(coordinates.x - 1 >= 0){
+						int rgb = navMesh.getRGB(coordinates.x - 1, coordinates.y + j);
 						
 						if(rgb != Color.BLUE.getRGB()){
 							//Not allowed to move
@@ -214,7 +214,7 @@ public class GameObject {
 				
 				if(move){
 					//Move
-					setCoordinates(getCoordinates().x - 1, getCoordinates().y);
+					setCoordinates(coordinates.x - 1, coordinates.y);
 				}
 			}
 			return true;
@@ -224,8 +224,8 @@ public class GameObject {
 			boolean move = true;
 			for(int i = 0; i <= speed; i++){
 				for(int j = 0; j < height; j++){
-					if(getCoordinates().x + width + 1 <= navMesh.getWidth()){
-						int rgb = navMesh.getRGB(getCoordinates().x + width, getCoordinates().y + j);
+					if(coordinates.x + width + 1 <= navMesh.getWidth()){
+						int rgb = navMesh.getRGB(coordinates.x + width, coordinates.y + j);
 						
 						if(rgb != Color.BLUE.getRGB()){
 							//Not allowed to move
@@ -238,17 +238,13 @@ public class GameObject {
 				
 				if(move){
 					//Move
-					setCoordinates(getCoordinates().x + 1, getCoordinates().y);
+					setCoordinates(coordinates.x + 1, coordinates.y);
 				}				
 			}
 			return true;
-		}	
-		
-		public boolean blinkUp(NavMesh navMesh, boolean movedLeft, int distance){
-			
 		}
 		
-		public boolean blink(NavMesh navMesh, boolean movedLeft, int distanceX, int distanceY){
+		public boolean blink(NavMesh navMesh, boolean movedLeft, int distanceX){
 			int i = 0;
 			int j = 0;
 			boolean allowed = true;
@@ -256,7 +252,7 @@ public class GameObject {
 			//Check if the place where the character is going is allowed
 			while(allowed && i < getWidth()){
 				while(allowed && j < getHeight()){
-					if(navMesh.getRGB(getCoordinates().x + distanceX + i, getCoordinates().y + distanceY + j)!= Color.BLUE.getRGB()){
+					if(navMesh.getRGB(coordinates.x + distanceX + i, coordinates.y + j)!= Color.BLUE.getRGB()){
 						allowed = false;
 					}
 					j++;
@@ -266,21 +262,67 @@ public class GameObject {
 			
 			
 			if(allowed){
-				setCoordinates(getCoordinates().x + distanceX, getCoordinates().y + distanceY);
+				System.out.println("allowed on first try");
+				setCoordinates(coordinates.x + distanceX, coordinates.y);
 				return true;
 			}else{
 				//Search for first place from destination to departure point where the character can move to
+				
+				//BUT HOW???!!!!
+				
+				/*
+				 * First, we start looking for the first blue pixel (this is air). For every (dx, dy) we check the topleft corner of the character 
+				 * for air. (This is character coordinate(0,0)). If this is air, we do the same check as above for the destination, but for the
+				 * current coordinate. If this location is valid, we move the character here. If not, we move the character 1 closer to its 
+				 * departure point.
+				 * 
+				 * So:
+				 * 
+				 */
+				
+				
+				//BUG: even when the top left pixel is red, the complete check is still executed.
+
+				i = distanceX;
+				
+				while(!allowed && i != 0){
+					System.out.println(i);
+				 	if(navMesh.getRGB(coordinates.x + i, coordinates.y) == Color.BLUE.getRGB()){
+				 		System.out.println("pixel blue check location");
+				 		//Do full check for this location
+				 		
+				 		//We assume there are no red pixels in this location (innocent until proven guilty, eh), so boolean red = false. Then, when
+				 		//we start checking the pixels, if we encounter a red one, the boolean red is set to true. This means that at the end of 
+				 		//the check, if we end up with red == true, the location is invalid. If boolean red == false, however, the location has no 
+				 		//red pixels and is therefore valid to move to.
+				 		boolean red = false;
+				 		int x = 0, y = 0;
+				 		while(!red && x < width){
+				 			y = 0;
+							while(!red && y < height){
+								//Check pixel
+								System.out.println("checking pixel (" + (coordinates.x + i) + "," + (coordinates.y + y) + ")");
+								if(navMesh.getRGB(coordinates.x + i + x, coordinates.y + y) == Color.RED.getRGB()){
+									System.out.println("red pixel found");
+									red = true;
+								}
+								y++;
+							}
+							x++;
+						}
+				 		if(!red){
+				 			//No red pixels found in this location, so the character can move here
+				 			System.out.println("Setting coordinates (" + (coordinates.x + i) + "," + coordinates.y + ")");
+				 			setCoordinates(coordinates.x + i, coordinates.y);
+				 			return true;
+				 		}
+				   	}
+				 	i--;
+				 }
+				 //If you end up here, there are no valid places between int distance and the starting point. So, return false
+				 return false;
 			}
-		}
-		
-		public boolean blinkLeft(NavMesh navMesh, boolean movedLeft, int distance){
-			
-		}
-		
-		public boolean blinkRight(NavMesh navMesh, boolean moveLeft, int distance){
-			
-		}
-		
+		}		
 		
 		
 	//Combat methods		

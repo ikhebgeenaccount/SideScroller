@@ -20,17 +20,10 @@ public class EzrealE extends Spell{
 	
 	@Override
 	public boolean fire(Coordinate startCoordinates, boolean movedLeft){
-		startCooldown();
-		boolean fired = true;
-		if(movedLeft){
-			Main.getGamePanel().getCharacter().setSpeed(distance);
-			fired = Main.getGamePanel().getCharacter().moveLeft(Main.getGamePanel().getNavMesh());
-			Main.getGamePanel().getCharacter().setSpeed(Main.getGamePanel().getCharacter().getDefaultSpeed());
-		}else{
-			Main.getGamePanel().getCharacter().setSpeed(distance);
-			fired = Main.getGamePanel().getCharacter().moveRight(Main.getGamePanel().getNavMesh());
-			Main.getGamePanel().getCharacter().setSpeed(Main.getGamePanel().getCharacter().getDefaultSpeed());
+		if(Main.getGamePanel().getCharacter().blink(Main.getGamePanel().getNavMesh(), movedLeft, distance)){
+			startCooldown();
 		}
+		//We have to return false no matter what, since no projectile is fired.
 		return false;		
 	}
 }
