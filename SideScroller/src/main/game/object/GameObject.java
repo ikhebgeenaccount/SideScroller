@@ -264,7 +264,6 @@ public class GameObject {
 			
 			if(allowed){
 				setCoordinates(coordinates.x + distanceX, coordinates.y);
-				printTime(start);
 				return true;
 			}else{
 				//Search for first place from destination to departure point where the character can move to
@@ -310,20 +309,14 @@ public class GameObject {
 				 		if(!red){
 				 			//No red pixels found in this location, so the character can move here
 				 			setCoordinates(coordinates.x + i, coordinates.y);
-				 			printTime(start);
 				 			return true;
 				 		}
 				   	}
 				 	i -= 25;
-				 }
-				printTime(start);
-				 //If you end up here, there are no valid places between int distance and the starting point. So, return false
-				 return false;
+				}
+				//If you end up here, there are no valid places between int distance and the starting point. So, return false
+				return false;
 			}
-		}	
-		
-		public void printTime(long start){
-			System.out.println(System.currentTimeMillis() - start);
 		}
 		
 		
