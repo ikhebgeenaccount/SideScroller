@@ -14,7 +14,6 @@ import main.game.object.champion.Champion;
 import main.game.object.champion.champions.alphaguy.AlphaGuy;
 import main.gui.Panel;
 import main.gui.panel.GamePanel;
-import main.gui.panel.LoadPanel;
 import main.gui.panel.MenuPanel;
 import main.gui.panel.OptionPanel;
 import main.gui.panel.SelectPanel;
@@ -41,7 +40,6 @@ public class Main extends JFrame{
 	//Panels
 	private static MenuPanel menuPanel;
 	private static GamePanel gamePanel;
-	private static LoadPanel loadPanel;
 	private static OptionPanel optionPanel;
 	private static SelectPanel selectPanel;
 	
@@ -265,11 +263,6 @@ public class Main extends JFrame{
 				}
 			}
 		}
-	}
-	
-	//Methods to return panels
-	public static LoadPanel getLoadPanel(){
-		return loadPanel;
 	}
 	
 	public static MenuPanel getMenu(){
