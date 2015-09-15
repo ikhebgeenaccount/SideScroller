@@ -42,7 +42,7 @@ public class GamePanel extends Panel implements KeyListener{
 	private boolean[] keys;
 	
 	//Images
-	private Image ground, air, grass_ground, grass_air;
+	private Image ground, air, grass_ground;
 	
 	
 	private boolean movedLeft;
@@ -68,6 +68,10 @@ public class GamePanel extends Panel implements KeyListener{
 	private String theme;
 	
 	private boolean initializeLevelsWithProperties = false;
+	
+	
+	//Test minion
+	private MeleeMinion meleeMinion;
 	
 	public GamePanel(Champion character, String characterName){
 		tick = 0;
@@ -106,6 +110,13 @@ public class GamePanel extends Panel implements KeyListener{
 		inLevel = new GameObject[objectCap];
 		onScreen = new GameObject[objectCap];//Since inLevel has a cap of 50, onScreen doesn't need more than that
 		
+
+		
+		//Create test minion
+		meleeMinion = new MeleeMinion();
+		meleeMinion.setCoordinates(0, 50);
+		inLevel[1] = meleeMinion;
+		
 		inLevel[0] = character;
 		
 		//Read level
@@ -136,27 +147,27 @@ public class GamePanel extends Panel implements KeyListener{
 					String[] typeCfg = minionTypeCfg[i].split(":");
 					Minion type;
 					switch(Integer.parseInt(typeCfg[0])){
-						case 0: type = new MeleeMinion();
+						case 0: type = new MeleeMinion(); System.out.println(0);
 							break;
-						case 1: type = new CasterMinion();
+						case 1: type = new CasterMinion(); System.out.println(1);
 							break;
-						case 2: type = new SiegeMinion();
+						case 2: type = new SiegeMinion(); System.out.println(2);
 							break;
-						case 3: type = new SuperMinion();
+						case 3: type = new SuperMinion(); System.out.println(3);
 							break;
-						case 4: type = new MiniLizard();
+						case 4: type = new MiniLizard(); System.out.println(4);
 							break;
-						case 5: type = new LargeWolf();
+						case 5: type = new LargeWolf(); System.out.println(5);
 							break;
-						case 6: type = new RedLizard();
+						case 6: type = new RedLizard(); System.out.println(6);
 							break;
-						case 7: type = new BlueGolem();
+						case 7: type = new BlueGolem(); System.out.println(7);
 							break;
-						case 8: type = new Dragon();
+						case 8: type = new Dragon(); System.out.println(8);
 							break;
-						case 9: type = new Baron();
+						case 9: type = new Baron(); System.out.println(9);
 							break;
-						default: type = new MeleeMinion();
+						default: type = new MeleeMinion(); System.out.println(0);
 							break;
 					}
 					//[0]  [1] 		(split(":"))
@@ -187,6 +198,9 @@ public class GamePanel extends Panel implements KeyListener{
 		
 		//Load environment images
 		loadPics();
+		
+		onScreen[0] = character;
+		onScreen[1] = meleeMinion;
 	}
 	
 	/* Fill the panel with landscape
@@ -218,11 +232,12 @@ public class GamePanel extends Panel implements KeyListener{
 			}
 		}
 		
-		//Draw scene of character
-		g.drawImage(character.getCurrentAnimationImage(), character.getCoordinates().x - levelIDx * 1000, character.getCoordinates().y - levelIDy * 500, null);
-		
-		//Check if next scene should play
-		character.checkNextScene();
+		for(GameObject object : onScreen){
+			if(object != null){
+				g.drawImage(object.getCurrentAnimationImage(), object.getCoordinates().x, object.getCoordinates().y, null);
+				object.checkNextScene();
+			}
+		}
 		
 		//Draw spells if fired
 		if(isFlyingQ){
@@ -473,6 +488,13 @@ public class GamePanel extends Panel implements KeyListener{
 		}else{
 			character.setAnimationType(Champion.IDLE);
 		}
+		
+		for(GameObject object : onScreen){
+			if(object != null && object instanceof Minion){
+				Minion minion = (Minion) object;
+				minion.move();
+			}
+		}
 	}
 	
 	public static int roundDownToClosestMultipleOfFifty(int num){
@@ -482,10 +504,10 @@ public class GamePanel extends Panel implements KeyListener{
 	
 	//Update GameObject[] onScreen;
 	public void updateGameObjects(){
-		int maxX = levelIDx * 20;
-		int minX = (levelIDx - 1) * 20;
-		int maxY = levelIDy * 10;
-		int minY = (levelIDy - 1) * 10;
+		int maxX = levelIDx * 50 * 20;
+		int minX = (levelIDx - 1) * 50 * 20;
+		int maxY = levelIDy * 50 * 10;
+		int minY = (levelIDy - 1) * 50 * 10;
 		
 		onScreen = new GameObject[50];
 		for(int i = 0; i < inLevel.length; i++){
