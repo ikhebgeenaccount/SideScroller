@@ -312,7 +312,7 @@ public class GameObject {
 				 			return true;
 				 		}
 				   	}
-				 	i -= 25;
+				 	i = i < 0 ? i + 25 : i - 25;
 				}
 				//If you end up here, there are no valid places between int distance and the starting point. So, return false
 				return false;
