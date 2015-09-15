@@ -55,36 +55,31 @@ public class Ezreal extends Champion{
 			r.addAnimation(Spell.HIT, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/rHit.png")), 250, width, height);
 			
 			//Add the idle animation to animations[]
-			BufferedImage idleSprite = ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/idle.png"));
-			addAnimation(Champion.IDLE, idleSprite, 100);
+			addAnimation(Champion.IDLE, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/idle.png")), 100, 100, 50);
 			
-			//Add the walk left animation to animations[]		
-			BufferedImage walkLeftSprite = ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/walkLeft.png"));
-			addAnimation(Champion.WALK_LEFT, walkLeftSprite, 250);
+			//Add the walk left animation to animations[]
+			addAnimation(Champion.WALK_LEFT, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/walkLeft.png")), 250, 100, 50);
 			
 			//Add the walk right animation to animations[]
-			BufferedImage walkRightSprite = ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/walkRight.png"));
-			addAnimation(Champion.WALK_RIGHT, walkRightSprite, 250);
+			addAnimation(Champion.WALK_RIGHT, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/walkRight.png")), 250, 100, 50);
 			
 			//Add the jump animation to animations[]
-			BufferedImage jumpSprite = ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/jump.png"));
-			addAnimation(Champion.JUMP, jumpSprite, 250);
+			addAnimation(Champion.JUMP, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/jump.png")), 250, 100, 50);
 			
 			//Add the fall animation to animations[]
-			BufferedImage fallSprite = ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/fall.png"));
-			addAnimation(Champion.FALL, fallSprite, 250);
+			addAnimation(Champion.FALL, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/fall.png")), 250, 100, 50);
 			
 			//Add the cast q animation to animations[]
-			addAnimation(Champion.CAST_Q, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/castQ.png")), 250);
+			addAnimation(Champion.CAST_Q, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/castQ.png")), 250, 100, 50);
 			
 			//Add the cast w animation to animations[]
-			addAnimation(Champion.CAST_W, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/castW.png")), 250);
+			addAnimation(Champion.CAST_W, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/castW.png")), 250, 100, 50);
 			
 			//Add the cast e animation to animations[]
-			addAnimation(Champion.CAST_E, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/castE.png")), 250);
+			addAnimation(Champion.CAST_E, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/castE.png")), 250, 100, 50);
 			
 			//Add the cast r animation to animations[]
-			addAnimation(Champion.CAST_R, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/castR.png")), 250);
+			addAnimation(Champion.CAST_R, ImageIO.read(cldr.getResourceAsStream("img/char/ezreal/castR.png")), 250, 100, 50);
 			
 			//Start idle animation
 			setAnimationType(Champion.IDLE);
