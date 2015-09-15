@@ -40,7 +40,7 @@ public class GameObject {
 	
 	//Animation methods
 		//Set animation type
-		public void setAnimationType(int type) {
+		public void setAnimationType(int type){
 			//We only have to change the animationtype when it is now running another type, otherwise the animation will continuously
 			//reset itself
 			if(currentAnimationType == type){
