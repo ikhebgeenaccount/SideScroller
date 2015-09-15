@@ -1,6 +1,5 @@
 package main.game.object.champion.champions.ezreal;
 
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
