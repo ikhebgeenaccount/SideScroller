@@ -269,11 +269,7 @@ public class GameObject {
 			if(allowed){
 				setCoordinates(coordinates.x + distanceX, coordinates.y);
 				return true;
-			}else{
-				//Search for first place from destination to departure point where the character can move to
-				
-				//BUT HOW???!!!!
-				
+			}else{				
 				/*
 				 * First, we start looking for the first blue pixel (this is air). For every (dx, dy) we check the topleft corner of the character 
 				 * for air. (This is character coordinate(0,0)). If this is air, we do the same check as above for the destination, but for the
@@ -283,10 +279,6 @@ public class GameObject {
 				 * So:
 				 * 
 				 */
-				
-				
-				//BUG: even when the top left pixel is red, the complete check is still executed.
-
 				i = distanceX;
 				
 				while(!allowed && i != 0){
