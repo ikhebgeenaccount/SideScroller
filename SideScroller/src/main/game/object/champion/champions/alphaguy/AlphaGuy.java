@@ -22,56 +22,56 @@ public class AlphaGuy extends Champion {
 
 			//Create spells
 			q = new Spell(600, 200, 10, 5000);
-			q.addAnimation(Spell.APPEAR, ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/qAppear.png")), 250, 70, 15);
-			q.addAnimation(Spell.TRAVEL, ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/qAppear.png")), 250, 70, 15);
-			q.addAnimation(Spell.DISAPPEAR, ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/qAppear.png")), 250, 70, 15);
-			q.addAnimation(Spell.HIT, ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/qAppear.png")), 250, 70, 15);
+			q.addAnimation(Spell.APPEAR, ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/qAppear.png")), 250, 70, 15);
+			q.addAnimation(Spell.TRAVEL, ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/qAppear.png")), 250, 70, 15);
+			q.addAnimation(Spell.DISAPPEAR, ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/qAppear.png")), 250, 70, 15);
+			q.addAnimation(Spell.HIT, ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/qAppear.png")), 250, 70, 15);
 			
 			w = new Spell(500, 100, 10, 5000);
-			w.addAnimation(Spell.APPEAR, ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/wAppear.png")), 250, 50, 30);
-			w.addAnimation(Spell.TRAVEL, ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/wAppear.png")), 250, 50, 30);
-			w.addAnimation(Spell.DISAPPEAR, ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/wAppear.png")), 250, 50, 30);
-			w.addAnimation(Spell.HIT, ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/wAppear.png")), 250, 50, 30);
+			w.addAnimation(Spell.APPEAR, ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/wAppear.png")), 250, 50, 30);
+			w.addAnimation(Spell.TRAVEL, ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/wAppear.png")), 250, 50, 30);
+			w.addAnimation(Spell.DISAPPEAR, ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/wAppear.png")), 250, 50, 30);
+			w.addAnimation(Spell.HIT, ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/wAppear.png")), 250, 50, 30);
 			
 			e = new main.game.object.champion.champions.ezreal.EzrealE();
 			
 			r = new Spell(2000, 500, 10, 10000);
-			r.addAnimation(Spell.APPEAR, ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/rAppear.png")), 250, 100, 80);
-			r.addAnimation(Spell.TRAVEL, ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/rAppear.png")), 250, 100, 80);
-			r.addAnimation(Spell.DISAPPEAR, ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/rAppear.png")), 250, 100, 80);
-			r.addAnimation(Spell.HIT, ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/rAppear.png")), 250, 100, 80);
+			r.addAnimation(Spell.APPEAR, ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/rAppear.png")), 250, 100, 80);
+			r.addAnimation(Spell.TRAVEL, ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/rAppear.png")), 250, 100, 80);
+			r.addAnimation(Spell.DISAPPEAR, ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/rAppear.png")), 250, 100, 80);
+			r.addAnimation(Spell.HIT, ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/rAppear.png")), 250, 100, 80);
 			
 			//Add the idle animation to animations[]
-			BufferedImage idleSprite = ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/idle.png"));
+			BufferedImage idleSprite = ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/idle.png"));
 			addAnimation(Champion.IDLE, idleSprite, 100, 50, 100);
 			
 			//Add the walk left animation to animations[]		
-			BufferedImage walkLeftSprite = ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/walkLeft.png"));
+			BufferedImage walkLeftSprite = ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/walkLeft.png"));
 			addAnimation(Champion.WALK_LEFT, walkLeftSprite, 250, 50, 100);
 			
 			//Add the walk right animation to animations[]
-			BufferedImage walkRightSprite = ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/walkRight.png"));
+			BufferedImage walkRightSprite = ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/walkRight.png"));
 			addAnimation(Champion.WALK_RIGHT, walkRightSprite, 250, 50, 100);
 			
 			//Add the jump animation to animations[]
-			BufferedImage jumpSprite = ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/jump.png"));
+			BufferedImage jumpSprite = ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/jump.png"));
 			addAnimation(Champion.JUMP, jumpSprite, 250, 50, 100);
 			
 			//Add the fall animation to animations[]
-			BufferedImage fallSprite = ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/fall.png"));
+			BufferedImage fallSprite = ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/fall.png"));
 			addAnimation(Champion.FALL, fallSprite, 250, 50, 100);
 			
 			//Add the cast q animation to animations[]
-			addAnimation(Champion.CAST_Q, ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/castQ.png")), 250, 50, 100);
+			addAnimation(Champion.CAST_Q, ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/castQ.png")), 250, 50, 100);
 			
 			//Add the cast w animation to animations[]
-			addAnimation(Champion.CAST_W, ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/castW.png")), 250, 50, 100);
+			addAnimation(Champion.CAST_W, ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/castW.png")), 250, 50, 100);
 			
 			//Add the cast e animation to animations[]
-			addAnimation(Champion.CAST_E, ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/castE.png")), 250, 50, 100);
+			addAnimation(Champion.CAST_E, ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/castE.png")), 250, 50, 100);
 			
 			//Add the cast r animation to animations[]
-			addAnimation(Champion.CAST_R, ImageIO.read(cldr.getResourceAsStream("img/char/alphaguy/castR.png")), 250, 50, 100);
+			addAnimation(Champion.CAST_R, ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/castR.png")), 250, 50, 100);
 			
 			//Start idle animation
 			setAnimationType(Champion.IDLE);
