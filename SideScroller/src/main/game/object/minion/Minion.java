@@ -79,12 +79,11 @@ public class Minion extends GameObject {
 		}
 		
 		NavMesh navMesh = Main.getGamePanel().getNavMesh();
-		
 		if(!activity){
 			//Check if next step can be made
 			if(moveLeft){
 				//Move left
-				moveLeft(navMesh);
+				moveLeft = moveLeft(navMesh);
 				//If this minion can fall down from this place, it needs to turn around
 				if(moveDown(navMesh)){
 					moveUp(navMesh);
@@ -93,7 +92,7 @@ public class Minion extends GameObject {
 				}
 			}else{
 				//Move right
-				moveRight(navMesh);
+				moveLeft = !moveRight(navMesh);
 				if(moveDown(navMesh)){
 					moveUp(navMesh);
 					moveLeft = true;
