@@ -21,6 +21,8 @@ PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you hav
   - Great graphics 
 
 ##Changelog
+  - *v0.5.1*
+    - Fixed a bug where casting Ezreals E to the left extended its range
   - *v0.5.0* - **current release**
     - Completely rewritten the way collisions and gravity are detected:
       - Added acceleration and deceleration when falling and jumping
@@ -30,6 +32,7 @@ PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you hav
       - Increased performance
       - Increased accuracy
 	- Added shrinking bar to display cooldowns
+	- Fixed several issues with Ezreals E
   - *v0.4.0*
     - Added statusbar with spellcooldowns
     - Added grass
