@@ -6,8 +6,6 @@ import java.awt.Graphics;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import main.Main;
-
 public class NavMeshTest extends JFrame {
 		
 	public NavMeshTest(NavMesh navMesh){

@@ -6,8 +6,6 @@ import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-
 import main.Main;
 import main.gui.Button;
 import main.gui.Label;

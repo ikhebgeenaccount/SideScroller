@@ -13,7 +13,6 @@ import javax.swing.ImageIcon;
 import main.Main;
 import main.game.coordinate.Coordinate;
 import main.game.navmesh.NavMesh;
-import main.game.navmesh.NavMeshTest;
 import main.game.object.GameObject;
 import main.game.object.champion.Champion;
 import main.game.object.minion.Minion;
