@@ -253,7 +253,11 @@ public class GameObject {
 			//Check if the place where the character is going is allowed
 			while(allowed && i < getWidth()){
 				while(allowed && j < getHeight()){
-					if(navMesh.getRGB(coordinates.x + distanceX + i, coordinates.y + j)!= Color.BLUE.getRGB()){
+					try{
+						if(navMesh.getRGB(coordinates.x + distanceX + i, coordinates.y + j)!= Color.BLUE.getRGB()){
+							allowed = false;
+						}						
+					}catch(ArrayIndexOutOfBoundsException e){
 						allowed = false;
 					}
 					j++;
@@ -286,32 +290,41 @@ public class GameObject {
 				i = distanceX;
 				
 				while(!allowed && i != 0){
-				 	if(navMesh.getRGB(coordinates.x + i, coordinates.y) == Color.BLUE.getRGB()){
-				 		//Do full check for this location
-				 		
-				 		//We assume there are no red pixels in this location (innocent until proven guilty, eh), so boolean red = false. Then, when
-				 		//we start checking the pixels, if we encounter a red one, the boolean red is set to true. This means that at the end of 
-				 		//the check, if we end up with red == true, the location is invalid. If boolean red == false, however, the location has no 
-				 		//red pixels and is therefore valid to move to.
-				 		boolean red = false;
-				 		int x = 0, y = 0;
-				 		while(!red && x < width){
-				 			y = 0;
-							while(!red && y < height){
-								//Check pixel
-								if(navMesh.getRGB(coordinates.x + i + x, coordinates.y + y) == Color.RED.getRGB()){
-									red = true;
+					try{
+					 	if(navMesh.getRGB(coordinates.x + i, coordinates.y) == Color.BLUE.getRGB()){
+					 		//Do full check for this location
+					 		
+					 		//We assume there are no red pixels in this location (innocent until proven guilty, eh), so boolean red = false. Then, when
+					 		//we start checking the pixels, if we encounter a red one, the boolean red is set to true. This means that at the end of 
+					 		//the check, if we end up with red == true, the location is invalid. If boolean red == false, however, the location has no 
+					 		//red pixels and is therefore valid to move to.
+					 		boolean red = false;
+					 		int x = 0, y = 0;
+					 		while(!red && x < width){
+					 			y = 0;
+								while(!red && y < height){
+									//Check pixel
+									try{
+										if(navMesh.getRGB(coordinates.x + i + x, coordinates.y + y) == Color.RED.getRGB()){
+											red = true;
+										}									
+									}catch(ArrayIndexOutOfBoundsException e){
+										System.out.println("out of bounds");
+										red = true;
+									}
+									y++;
 								}
-								y++;
+								x++;
 							}
-							x++;
-						}
-				 		if(!red){
-				 			//No red pixels found in this location, so the character can move here
-				 			setCoordinates(coordinates.x + i, coordinates.y);
-				 			return true;
-				 		}
-				   	}
+					 		if(!red){
+					 			//No red pixels found in this location, so the character can move here
+					 			setCoordinates(coordinates.x + i, coordinates.y);
+					 			return true;
+					 		}
+					   	}						
+					}catch(ArrayIndexOutOfBoundsException e){
+						
+					}
 				 	i = i < 0 ? i + 25 : i - 25;
 				}
 				//If you end up here, there are no valid places between int distance and the starting point. So, return false
