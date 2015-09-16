@@ -357,9 +357,9 @@ public class GameObject {
 			Graphics2D g = healthBar.createGraphics();
 			g.setColor(Color.RED);
 			g.fillRect(0, 0, width, height);
-			int widthHealth = width * (currentHealth / health);
+			double widthHealth = (double)width * ((double)currentHealth / (double)health);
 			g.setColor(Color.GREEN);
-			g.fillRect(0, 0, widthHealth, height);
+			g.fillRect(0, 0, (int)widthHealth, height);
 			return healthBar;
 		}
 		
