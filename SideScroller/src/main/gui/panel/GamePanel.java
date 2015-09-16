@@ -342,8 +342,6 @@ public class GamePanel extends Panel implements KeyListener{
 	public void update(){
 		//Check collision with navmesh instead of reading array
 		tick++;
-		
-		System.out.println(character.getCoordinates().x + " " + character.getCoordinates().y);
 
 		//Variables to check for animations
 		boolean moveLeft = false, moveRight = false, moveUp = false, moveDown = false;
@@ -509,17 +507,13 @@ public class GamePanel extends Panel implements KeyListener{
 		int i = 0;
 		onScreen = new GameObject[objectCap];
 		for(GameObject object : inLevel){
-			System.out.print("reading array |");
 			if(object != null){
-				System.out.print("checking object |");
 				if(object.getCoordinates().x >= levelIDx * 1000 && object.getCoordinates().x < (levelIDx + 1) * 1000 && object.getCoordinates().y >= levelIDy * 500 && object.getCoordinates().y < (levelIDy + 1) * 500){
 					//Is in the level currenty on screen
-					System.out.print(" onscreen");
 					onScreen[i] = object;
 					i++;
 				}
 			}
-			System.out.print("\n");
 		}
 	}
 	
