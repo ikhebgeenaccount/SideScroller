@@ -235,9 +235,11 @@ public class GamePanel extends Panel implements KeyListener{
 			}
 		}
 		
+		//No spells in onScreen (or in inLevel)
 		for(GameObject object : onScreen){
 			if(object != null){
 				g.drawImage(object.getCurrentAnimationImage(), object.getCoordinates().x - levelIDx * 1000, object.getCoordinates().y - levelIDy * 500, null);
+				g.drawImage(object.getHealthBarImage(), object.getCoordinates().x - levelIDx * 1000, object.getCoordinates().y - levelIDy * 500 - 16, null);
 				object.checkNextScene();
 			}
 		}

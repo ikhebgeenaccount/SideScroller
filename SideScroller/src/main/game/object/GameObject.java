@@ -1,6 +1,7 @@
 package main.game.object;
 
 import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 
@@ -15,6 +16,8 @@ public class GameObject {
 	private Animation currentAnimation;
 	private int currentAnimationType;
 	private int[] animationsLength;
+	
+	private BufferedImage healthBar;
 	
 	//Coordinates
 	private Coordinate coordinates;
@@ -36,6 +39,19 @@ public class GameObject {
 		currentAnimationType = -1;
 		
 		animationsLength = new int[30];
+		
+	}
+	
+	public GameObject(int width, int height){
+		coordinates = new Coordinate();
+		
+		animations = new Animation[10];
+		currentAnimation = new Animation();
+		currentAnimationType = -1;
+		
+		animationsLength = new int[30];
+		
+		healthBar = new BufferedImage(width, 8, BufferedImage.TYPE_INT_RGB);
 	}
 	
 	//Animation methods
@@ -324,17 +340,27 @@ public class GameObject {
 		
 		
 	//Combat methods		
-		public void setHealth(int health){
+		public void setMaxHealth(int health){
 			this.health = health;
 			currentHealth = health;
 		}
 		
-		public int getHealth(){
+		public int getMaxHealth(){
 			return health;
 		}
 		
 		public int getCurrentHealth(){
 			return currentHealth;
+		}
+		
+		public BufferedImage getHealthBarImage(){
+			Graphics2D g = healthBar.createGraphics();
+			g.setColor(Color.RED);
+			g.fillRect(0, 0, width, height);
+			int widthHealth = width * (currentHealth / health);
+			g.setColor(Color.GREEN);
+			g.fillRect(0, 0, widthHealth, height);
+			return healthBar;
 		}
 		
 		public void damage(int damage){

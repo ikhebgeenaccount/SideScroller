@@ -20,10 +20,12 @@ public class Minion extends GameObject {
 		
 	}
 	
-	public Minion(int speed, int range, long attackLength){
+	public Minion(int width, int height, int speed, int range, long attackLength){
+		super(width, height);
 		setSpeed(speed);
 		setRange(range);
 		setAttackLength(attackLength);
+		setMaxHealth(200);
 	}
 	
 	public void setRange(int range){
@@ -71,7 +73,7 @@ public class Minion extends GameObject {
 					//Target is in range: attack
 					if(System.currentTimeMillis() - attackStart >= attackLength){
 						//Attack
-						onScreen[i].damage(getDamage());
+						//onScreen[i].damage(getDamage());
 					}
 					activity = true;
 				}

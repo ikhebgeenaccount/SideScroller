@@ -15,11 +15,12 @@ public class Champion extends GameObject{
 	private int currentHealth;
 	
 	public Champion(){
+		super(50, 100);
 		
 		//Movement speed in px
 		setSpeed(8);
 		setDefaultSpeed(8);
-		
+		setMaxHealth(300);
 	}
 	
 	public boolean castQ(Coordinate startCoordinate, boolean movedLeft){
