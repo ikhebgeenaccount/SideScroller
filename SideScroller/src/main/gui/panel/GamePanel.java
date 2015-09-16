@@ -190,13 +190,8 @@ public class GamePanel extends Panel implements KeyListener{
 					}
 					
 					for(int j = 0; j < minionCoordinatesCfg.length; j++){
-						System.out.println(minionCoordinatesCfg[j]);
 						String[] coordinates = minionCoordinatesCfg[j].split("\\.");
-						for(String str : coordinates){
-							System.out.println(str);
-						}
 						type[j].setCoordinates(Integer.parseInt(coordinates[0]) * 50, Integer.parseInt(coordinates[1]) * 50);
-						System.out.println(type[j].getCoordinates().x + "," + type[j].getCoordinates().y);
 						inLevel[index] = type[j];
 						index++;
 					}
