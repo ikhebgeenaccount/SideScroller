@@ -132,14 +132,14 @@ public class GamePanel extends Panel implements KeyListener{
 				endSquare.y = Integer.parseInt(endSquareCfg.split(",")[1]);
 			
 				//Read minions, fill inLevel with corresponding type
-				String minionsCfg = levelOneCfg.getProperty("minions"); //minionsCfg: "type:[x.y]/[x.y],type:[x.y]/[x.y]/[x.y]/x.y]"
-				String[] minionTypeCfg = minionsCfg.split(","); //minionTypeCfg: {"type:[x.y]/[x.y]", "type:[x.y]/[x.y]/[x.y]/x.y]"}
+				String minionsCfg = levelOneCfg.getProperty("minions"); //minionsCfg: "type:x.y/x.y,type:x.y/x.y/x.y/x.y"
+				String[] minionTypeCfg = minionsCfg.split(","); //minionTypeCfg: {"type:x.y/x.y", "type:x.y/x.y/x.y/x.y"}
 				
 				int index = 1;
 				
 				for(int i = 0; i < minionTypeCfg.length; i++){					
-					String[] typeCfg = minionTypeCfg[i].split(":"); //typeCfg: {"type", "[x.y]/[x.y]"} (next iteration: {"type", "[x.y]/[x.y]/[x.y]/x.y]"})
-					String[] minionCoordinatesCfg = typeCfg[1].split("/");// minionCoordinatesCfg: {"[x.y]", "[x.y]"}
+					String[] typeCfg = minionTypeCfg[i].split(":"); //typeCfg: {"type", "x.y/x.y"} (next iteration: {"type", "x.y/x.y/x.y/x.y"})
+					String[] minionCoordinatesCfg = typeCfg[1].split("/");// minionCoordinatesCfg: {"x.y", "x.y"}
 					Minion[] type = new Minion[minionCoordinatesCfg.length];
 					
 					switch(Integer.parseInt(typeCfg[0])){
