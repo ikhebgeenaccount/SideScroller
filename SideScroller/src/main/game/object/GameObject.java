@@ -245,7 +245,6 @@ public class GameObject {
 		}
 		
 		public boolean blink(NavMesh navMesh, boolean movedLeft, int distanceX){
-			long start = System.currentTimeMillis();
 			int i = 0;
 			int j = 0;
 			boolean allowed = true;
@@ -301,7 +300,6 @@ public class GameObject {
 											red = true;
 										}									
 									}catch(ArrayIndexOutOfBoundsException e){
-										System.out.println("out of bounds");
 										red = true;
 									}
 									y++;
