@@ -68,7 +68,7 @@ public class GamePanel extends Panel implements KeyListener{
 	private Coordinate endSquare;
 	private String theme;
 	
-	private boolean initializeLevelsWithProperties = false;	
+	private boolean initializeLevelsWithProperties = true;	
 	
 	//Test minion
 	private MeleeMinion meleeMinion;
@@ -109,11 +109,6 @@ public class GamePanel extends Panel implements KeyListener{
 		inLevel = new GameObject[objectCap];
 		onScreen = new GameObject[objectCap];//Since inLevel has a cap of 50, onScreen doesn't need more than that
 		
-		//Create test minion
-		meleeMinion = new MeleeMinion();
-		meleeMinion.setCoordinates(0, 50);
-		inLevel[1] = meleeMinion;
-		
 		inLevel[0] = character;
 		
 		//Read level
@@ -126,54 +121,83 @@ public class GamePanel extends Panel implements KeyListener{
 				theme = levelOneCfg.getProperty("theme");
 			
 				//Read properties of startSquare and endSquare, start and end of level
-				String startSquareCfg = levelOneCfg.getProperty("startSquare");
+				String startSquareCfg = levelOneCfg.getProperty("startsquare");
+				startSquare = new Coordinate();
 				startSquare.x = Integer.parseInt(startSquareCfg.split(",")[0]);
 				startSquare.y = Integer.parseInt(startSquareCfg.split(",")[1]);
-			
-				String endSquareCfg = levelOneCfg.getProperty("startSquare");
+				
+				endSquare = new Coordinate();
+				String endSquareCfg = levelOneCfg.getProperty("endsquare");
 				endSquare.x = Integer.parseInt(endSquareCfg.split(",")[0]);
 				endSquare.y = Integer.parseInt(endSquareCfg.split(",")[1]);
 			
 				//Read minions, fill inLevel with corresponding type
-				String minionsCfg = levelOneCfg.getProperty("minions");
-				String[] minionTypeCfg = minionsCfg.split(",");
+				String minionsCfg = levelOneCfg.getProperty("minions"); //minionsCfg: "type:[x.y]/[x.y],type:[x.y]/[x.y]/[x.y]/x.y]"
+				String[] minionTypeCfg = minionsCfg.split(","); //minionTypeCfg: {"type:[x.y]/[x.y]", "type:[x.y]/[x.y]/[x.y]/x.y]"}
 				
 				int index = 1;
 				
-				for(int i = 0; i < minionTypeCfg.length; i++){
-					String[] typeCfg = minionTypeCfg[i].split(":");
-					Minion type;
+				for(int i = 0; i < minionTypeCfg.length; i++){					
+					String[] typeCfg = minionTypeCfg[i].split(":"); //typeCfg: {"type", "[x.y]/[x.y]"} (next iteration: {"type", "[x.y]/[x.y]/[x.y]/x.y]"})
+					String[] minionCoordinatesCfg = typeCfg[1].split("/");// minionCoordinatesCfg: {"[x.y]", "[x.y]"}
+					Minion[] type = new Minion[minionCoordinatesCfg.length];
+					
 					switch(Integer.parseInt(typeCfg[0])){
-						case 0: type = new MeleeMinion(); System.out.println(0);
+						case 0:	for(int j = 0; j < type.length; j++){
+									type[j] = new MeleeMinion();
+								}
 							break;
-						case 1: type = new CasterMinion(); System.out.println(1);
+						case 1:	for(int j = 0; j < type.length; j++){
+									type[j] = new CasterMinion();
+								}
 							break;
-						case 2: type = new SiegeMinion(); System.out.println(2);
+						case 2:	for(int j = 0; j < type.length; j++){
+									type[j] = new SiegeMinion();
+								}
 							break;
-						case 3: type = new SuperMinion(); System.out.println(3);
+						case 3:	for(int j = 0; j < type.length; j++){
+									type[j] = new SuperMinion();
+								}
 							break;
-						case 4: type = new MiniLizard(); System.out.println(4);
+						case 4:	for(int j = 0; j < type.length; j++){
+									type[j] = new MiniLizard();
+								}
 							break;
-						case 5: type = new LargeWolf(); System.out.println(5);
+						case 5:	for(int j = 0; j < type.length; j++){
+									type[j] = new LargeWolf();
+								}
 							break;
-						case 6: type = new RedLizard(); System.out.println(6);
+						case 6:	for(int j = 0; j < type.length; j++){
+									type[j] = new RedLizard();
+								}
 							break;
-						case 7: type = new BlueGolem(); System.out.println(7);
+						case 7:	for(int j = 0; j < type.length; j++){
+									type[j] = new BlueGolem();
+								}
 							break;
-						case 8: type = new Dragon(); System.out.println(8);
+						case 8:	for(int j = 0; j < type.length; j++){
+									type[j] = new Dragon();
+								}
 							break;
-						case 9: type = new Baron(); System.out.println(9);
+						case 9:	for(int j = 0; j < type.length; j++){
+									type[j] = new Baron();
+								}
 							break;
-						default: type = new MeleeMinion(); System.out.println(0);
+						default:for(int j = 0; j < type.length; j++){
+									type[j] = new MeleeMinion();
+								}
 							break;
 					}
-					//[0]  [1] 		(split(":"))
-					//type:[x.y]|[x.y]|[x.y]|x.y]
-					String[] minionCoordinatesCfg = typeCfg[1].split("|");
 					
-					for(i = 0; i < minionCoordinatesCfg.length; i++){
-						inLevel[index] = type;
-						type.setCoordinates(Integer.parseInt(minionCoordinatesCfg[i].substring(1,1)), Integer.parseInt(minionCoordinatesCfg[i].substring(3,1)));
+					for(int j = 0; j < minionCoordinatesCfg.length; j++){
+						System.out.println(minionCoordinatesCfg[j]);
+						String[] coordinates = minionCoordinatesCfg[j].split("\\.");
+						for(String str : coordinates){
+							System.out.println(str);
+						}
+						type[j].setCoordinates(Integer.parseInt(coordinates[0]) * 50, Integer.parseInt(coordinates[1]) * 50);
+						System.out.println(type[j].getCoordinates().x + "," + type[j].getCoordinates().y);
+						inLevel[index] = type[j];
 						index++;
 					}
 				}
@@ -462,7 +486,7 @@ public class GamePanel extends Panel implements KeyListener{
 			isFlyingR = character.r.move();
 		}
 		
-		//updateGameObjects();
+		updateGameObjects();
 		
 		//Determine which animation should run
 		if(moveUp){
