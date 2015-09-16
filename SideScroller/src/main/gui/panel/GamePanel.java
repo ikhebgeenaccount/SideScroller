@@ -61,14 +61,14 @@ public class GamePanel extends Panel implements KeyListener{
 	
 	//The GameObject[]s that are in this level and those that are onscreen. For checks we will only check onscreen.
 	private GameObject[] inLevel, onScreen;
+	private final int objectCap = 50; //Maximum number of objects in one level
 	
 	//Level properties
 	private Coordinate startSquare;
 	private Coordinate endSquare;
 	private String theme;
 	
-	private boolean initializeLevelsWithProperties = false;
-	
+	private boolean initializeLevelsWithProperties = false;	
 	
 	//Test minion
 	private MeleeMinion meleeMinion;
@@ -106,11 +106,8 @@ public class GamePanel extends Panel implements KeyListener{
 		isFlyingR = false;
 		
 		//Create GameObject[]s
-		int objectCap = 50;//Max 50 GameObject in one level!
 		inLevel = new GameObject[objectCap];
 		onScreen = new GameObject[objectCap];//Since inLevel has a cap of 50, onScreen doesn't need more than that
-		
-
 		
 		//Create test minion
 		meleeMinion = new MeleeMinion();
@@ -199,8 +196,9 @@ public class GamePanel extends Panel implements KeyListener{
 		//Load environment images
 		loadPics();
 		
-		onScreen[0] = character;
-		onScreen[1] = meleeMinion;
+		updateGameObjects();
+		//onScreen[0] = character;
+		//onScreen[1] = meleeMinion;
 	}
 	
 	/* Fill the panel with landscape
@@ -234,7 +232,7 @@ public class GamePanel extends Panel implements KeyListener{
 		
 		for(GameObject object : onScreen){
 			if(object != null){
-				g.drawImage(object.getCurrentAnimationImage(), object.getCoordinates().x, object.getCoordinates().y, null);
+				g.drawImage(object.getCurrentAnimationImage(), object.getCoordinates().x - levelIDx * 1000, object.getCoordinates().y - levelIDy * 500, null);
 				object.checkNextScene();
 			}
 		}
@@ -344,6 +342,8 @@ public class GamePanel extends Panel implements KeyListener{
 	public void update(){
 		//Check collision with navmesh instead of reading array
 		tick++;
+		
+		System.out.println(character.getCoordinates().x + " " + character.getCoordinates().y);
 
 		//Variables to check for animations
 		boolean moveLeft = false, moveRight = false, moveUp = false, moveDown = false;
@@ -464,6 +464,8 @@ public class GamePanel extends Panel implements KeyListener{
 			isFlyingR = character.r.move();
 		}
 		
+		//updateGameObjects();
+		
 		//Determine which animation should run
 		if(moveUp){
 			character.setAnimationType(Champion.JUMP);
@@ -504,20 +506,20 @@ public class GamePanel extends Panel implements KeyListener{
 	
 	//Update GameObject[] onScreen;
 	public void updateGameObjects(){
-		int maxX = levelIDx * 50 * 20;
-		int minX = (levelIDx - 1) * 50 * 20;
-		int maxY = levelIDy * 50 * 10;
-		int minY = (levelIDy - 1) * 50 * 10;
-		
-		onScreen = new GameObject[50];
-		for(int i = 0; i < inLevel.length; i++){
-			if(inLevel[i] != null){
-				Coordinate coordinate = inLevel[i].getCoordinates();
-				if(coordinate.x < maxX && coordinate.x > minX && coordinate.y < maxY && coordinate.y > minY){
-					onScreen[i] = inLevel[i];
+		int i = 0;
+		onScreen = new GameObject[objectCap];
+		for(GameObject object : inLevel){
+			System.out.print("reading array |");
+			if(object != null){
+				System.out.print("checking object |");
+				if(object.getCoordinates().x >= levelIDx * 1000 && object.getCoordinates().x < (levelIDx + 1) * 1000 && object.getCoordinates().y >= levelIDy * 500 && object.getCoordinates().y < (levelIDy + 1) * 500){
+					//Is in the level currenty on screen
+					System.out.print(" onscreen");
+					onScreen[i] = object;
+					i++;
 				}
-				
 			}
+			System.out.print("\n");
 		}
 	}
 	
