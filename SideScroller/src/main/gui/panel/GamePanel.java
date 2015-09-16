@@ -6,6 +6,7 @@ import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 import javax.swing.ImageIcon;
@@ -108,7 +109,9 @@ public class GamePanel extends Panel implements KeyListener{
 		//Read level
 		try{
 			Properties levelOneCfg = new Properties();
-			levelOneCfg.load(getClass().getClassLoader().getResourceAsStream("levels/one.properties"));
+			InputStream stream = getClass().getClassLoader().getResourceAsStream("levels/one.properties");
+			levelOneCfg.load(stream);
+			stream.close();
 			
 			theme = levelOneCfg.getProperty("theme");
 		
