@@ -115,14 +115,14 @@ public class GamePanel extends Panel implements KeyListener{
 			//Read properties of startSquare and endSquare, start and end of level
 			String startSquareCfg = levelOneCfg.getProperty("startsquare");
 			startSquare = new Coordinate();
-			startSquare.x = Integer.parseInt(startSquareCfg.split(",")[0]);
-			startSquare.y = Integer.parseInt(startSquareCfg.split(",")[1]);
+			startSquare.x = Integer.parseInt(startSquareCfg.split(",")[0]) * 50;
+			startSquare.y = Integer.parseInt(startSquareCfg.split(",")[1]) * 50;
 			character.setCoordinates(startSquare);
 			
 			endSquare = new Coordinate();
 			String endSquareCfg = levelOneCfg.getProperty("endsquare");
-			endSquare.x = Integer.parseInt(endSquareCfg.split(",")[0]);
-			endSquare.y = Integer.parseInt(endSquareCfg.split(",")[1]);
+			endSquare.x = Integer.parseInt(endSquareCfg.split(",")[0]) * 50;
+			endSquare.y = Integer.parseInt(endSquareCfg.split(",")[1]) * 50;
 		
 			//Read minions, fill inLevel with corresponding type
 			String minionsCfg = levelOneCfg.getProperty("minions"); //minionsCfg: "type:x.y/x.y,type:x.y/x.y/x.y/x.y"
@@ -222,7 +222,10 @@ public class GamePanel extends Panel implements KeyListener{
 		//j is y
 		for(int x = 0; x < 20; x++){
 			for(int y = 0; y < 10; y++){
-                		//Decide which landscape-img should be used
+                //Decide which landscape-img should be used
+				int xCoord = x + (levelIDx * 20);
+				int yCoord = y + (levelIDy * 10);
+				try{
 				switch(currentLevel[y + (levelIDy * 10)][x + (levelIDx * 20)]){
 					case 0:g.drawImage(air, 50 * x, 50 * y, null);
 						break;
@@ -232,6 +235,20 @@ public class GamePanel extends Panel implements KeyListener{
 						break;
 					default:g.drawImage(air, 50 * x, 50 * y, null);
 						break;
+				}
+					
+				}catch(ArrayIndexOutOfBoundsException e){
+					e.printStackTrace();
+					System.out.println(e.getMessage());
+					System.out.println("x : " + x + "| y : " + y + "| levelIDx : " + levelIDx + "| levelIDy : " + levelIDy);
+					System.out.println(xCoord + " " + yCoord);
+					Main.freezeGame();
+					System.out.println(currentLevel[0].length + " " + currentLevel.length);
+					for(GameObject object : onScreen){
+						if(object != null){
+							System.out.println(object.getClass().getName());							
+						}
+					}
 				}
 			}
 		}
@@ -416,11 +433,15 @@ public class GamePanel extends Panel implements KeyListener{
 		if(characterCoordinate.x < 1000 * levelIDx){
 			levelIDx--;
 		}
-		if(characterCoordinate.y + character.getHeight()/2 > 500 * levelIDy){
+		if(characterCoordinate.y  + character.getHeight()/2 > 500 * levelIDy){
+			System.out.println(characterCoordinate.y + " " + character.getHeight()/2 +  ">" + 500 * levelIDy);
+			System.out.println("levelIDy++");
 			levelIDy++;
 		}
 		if(characterCoordinate.y < 500 * levelIDy){
+			System.out.println(characterCoordinate.y + "<" + 500 * levelIDy);
 			levelIDy--;
+			System.out.println("levelIDy--");
 		}
 		
 		//Pause game on escape
