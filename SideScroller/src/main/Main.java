@@ -68,8 +68,7 @@ public class Main extends JFrame{
 	}
 	
 	//Method to start game, creates character and game loop thread
-	public static void startGame(){		
-		ticksPS = 45;
+	public static void startGame(){
 		
 		//Create character
 		character = new AlphaGuy();
@@ -159,6 +158,7 @@ public class Main extends JFrame{
 			
 			//Get properties from config.properties file
 			maxFPS = Integer.parseInt(properties.getProperty("FPS"));
+			ticksPS = Integer.parseInt(properties.getProperty("TPS"));
 			fpsCap = Boolean.parseBoolean(properties.getProperty("fpsCap"));
 			
 			propertiesFile.close();
