@@ -1,3 +1,8 @@
+/**Class containing the game- and paintloop. This class also handles the frame and its displaying panel. Game properties are also read in this class.
+ * @author ikhebgeenaccount
+ * @version 17 september 2015
+ */
+
 package main;
 
 import java.awt.Font;
@@ -18,7 +23,7 @@ import main.gui.panel.MenuPanel;
 import main.gui.panel.OptionPanel;
 import main.gui.panel.SelectPanel;
 
-public class Main extends JFrame{
+public class Main{
 	
 	//Version
 	private static final String VERSION = "v0.5.1";
@@ -67,7 +72,8 @@ public class Main extends JFrame{
 		frame.setVisible(true);
 	}
 	
-	//Method to start game, creates character and game loop thread
+	/**Initializes the character, creates the GamePanel and starts the game- and paintloop in seperate Threads
+	 */
 	public static void startGame(){
 		
 		//Create character
@@ -89,7 +95,8 @@ public class Main extends JFrame{
 		gameLoop.start();
 	}
 	
-	//Method to unpause game
+	/**Starts the game after a pause
+	 */
 	public static void unpauseGame(){
 		//Set running to true
 		running = true;
@@ -102,18 +109,21 @@ public class Main extends JFrame{
 		gameLoop.start();
 	}
 	
-	//Pause the game without returning to menu, only for testing purposes
+	/**Pauses the game without exiting it, for testing purposes only
+	 */
 	public static void freezeGame(){
 		running = false;
 	}
 	
-	//Method to pause game
+	/**Pauses the game and returns to the main menu
+	 */
 	public static void pauseGame(){
 		running = false;
 		setPanel(menuPanel);
 	}
 	
-	//Method to quit game
+	/**Stops the game and exits the virtual machine
+	 */
 	public static void quitGame(){
 		running = false;
 		
@@ -122,14 +132,14 @@ public class Main extends JFrame{
 		System.exit(0);
 	}
 	
-	//Frame is created and set in the middle of the screen
-	//<---! NOT YET VISIBLE !--->
+	/**In this method the JFrame that contains everything is created.
+	 */
 	private static void createFrame(){
 		
 		//Create frame with menuPanel
 		frame = new JFrame("SideScroller");
 		frame.setResizable(false);
-		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.addWindowListener(new WindowAdapter(){
 			public void windowClosing(WindowEvent e){
 				quitGame();
@@ -145,7 +155,9 @@ public class Main extends JFrame{
 
 	}
 	
-	//Method to change panel
+	/**This method changes the displayed Panel in the JFrame
+	 * @param panel - Panel panel is set as the visible Panel in the JFrame
+	 */
 	public static void setPanel(Panel panel){
 		frame.getContentPane().removeAll();
 		frame.getContentPane().add(panel);
@@ -154,7 +166,9 @@ public class Main extends JFrame{
 		frame.repaint();
 	}
 	
-	//Read config/config.properties
+	/**Reads game properties from /resources/config/config.properties
+	 * 
+	 */
 	public static void loadProperties(){
 		try {
 			Properties properties = new Properties();
@@ -182,7 +196,11 @@ public class Main extends JFrame{
 		}
 	}
 	
-	//Thread for repaint(), graphics
+	/**This private class contains the PaintLoop that calles repaint() on GamePanel
+	 * 
+	 * @author ikhebgeenaccount
+	 *
+	 */
 	private static class PaintLoop extends Thread{
 		
 		private PaintLoop(){
@@ -229,7 +247,11 @@ public class Main extends JFrame{
 		}
 	}
 	
-	//Thread for update(), gameloop
+	/**This private class contains the GameLoop that calls update() on the GamePanel
+	 * 
+	 * @author ikhebgeenaccount
+	 *
+	 */
 	private static class GameLoop extends Thread{
 		
 		public GameLoop(){
@@ -270,51 +292,83 @@ public class Main extends JFrame{
 		}
 	}
 	
+	/**Returns MenuPanel
+	 * 
+	 * @return MenuPanel
+	 */
 	public static MenuPanel getMenu(){
 		return menuPanel;
 	}
-
+	
+	/**Returns OptionPanel
+	 * 
+	 * @return OptionPanel
+	 */
 	public static OptionPanel getOptionPanel() {
 		return optionPanel;
 	}
 	
+	
+	/**Returns GamePanel
+	 * @return GamePanel
+	 */
 	public static GamePanel getGamePanel(){
 		return gamePanel;
 	}
 	
-	//Method to return font
+	/**Returns the used Font with size size
+	 * @param size - Font is returned with this size
+	 * @return Font with size size
+	 */
 	public static Font getFont(int size){
 		return font.deriveFont(Font.PLAIN, size);
 	}
 	
-	//Method to return Version string
+	/**Returns "v" + version number in String
+	 * @return String "v" + version number
+	 */
 	public static String getVersion(){
 		return VERSION;
 	}
 	
-	//Methods to get game properties
+	/**Returns true if fps cap is set, otherwise false
+	 * @return boolean
+	 */
 	public static boolean getFPSCap(){
 		return fpsCap;
 	}
 	
+	/**Returns the fps cap
+	 * @return Max fps
+	 */
 	public static int getMaxFPS(){
 		return maxFPS;
 	}
 	
-	//Methods to set game properties
+	/**Enables or disables the fps cap
+	 * @param cap - true to enable fps cap, false to disable
+	 */
 	public static void setFPSCap(boolean cap){
 		fpsCap = cap;
 	}
 	
+	/**Sets the fps cap
+	 * @param fps - Maximum fps
+	 */
 	public static void setMaxFPS(int fps){
 		maxFPS = fps;
 	}
 	
-	//Methods to get current speed
+	/**Returns the current fps
+	 * @return current fps
+	 */
 	public static String getCurrentFPS(){
 		return String.valueOf(currentFPS);
 	}
 	
+	/**Returns the current ticks per second
+	 * @return current ticks per second
+	 */
 	public static String getCurrentTPS(){
 		return String.valueOf(currentTPS);
 	}
