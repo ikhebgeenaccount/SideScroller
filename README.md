@@ -26,6 +26,7 @@ PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you hav
 	- Added healthbars
 	- Fixed a bug where casting Ezreal's E to the left extended its range
 	- Fixed a bug where trying to teleport out of the level with Ezreal's E caused the game to crash
+	- Fixed a rare bug where moving between levels caused the game to crash
   - *v0.5.0* - **current release**
     - Completely rewritten the way collisions and gravity are detected:
       - Added acceleration and deceleration when falling and jumping

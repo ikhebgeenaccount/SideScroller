@@ -427,21 +427,16 @@ public class GamePanel extends Panel implements KeyListener{
 		
 		//Check if levelID should change
 		Coordinate characterCoordinate = character.getCoordinates();
-		if(characterCoordinate.x + character.getWidth()/2 > 1000 * levelIDx){
-			levelIDx++;
-		}
-		if(characterCoordinate.x < 1000 * levelIDx){
-			levelIDx--;
-		}
-		if(characterCoordinate.y  + character.getHeight()/2 > 500 * levelIDy){
-			System.out.println(characterCoordinate.y + " " + character.getHeight()/2 +  ">" + 500 * levelIDy);
-			System.out.println("levelIDy++");
+		if(characterCoordinate.y + character.getHeight()/2 < levelIDy * 500){
+			levelIDy--;
+		}else if(characterCoordinate.y - character.getHeight()/2 > (levelIDy + 1) * 500){
 			levelIDy++;
 		}
-		if(characterCoordinate.y < 500 * levelIDy){
-			System.out.println(characterCoordinate.y + "<" + 500 * levelIDy);
-			levelIDy--;
-			System.out.println("levelIDy--");
+		
+		if(characterCoordinate.x + character.getWidth()/2 < levelIDx * 1000){
+			levelIDx--;
+		}else if(characterCoordinate.x - character.getWidth()/2 > (levelIDx + 1) * 1000){
+			levelIDx++;
 		}
 		
 		//Pause game on escape
@@ -533,8 +528,9 @@ public class GamePanel extends Panel implements KeyListener{
 	
 	//Update GameObject[] onScreen;
 	public void updateGameObjects(){
-		int i = 0;
+		int i = 1;
 		onScreen = new GameObject[objectCap];
+		onScreen[0] = character;
 		for(GameObject object : inLevel){
 			if(object != null){
 				if(object.getCoordinates().x >= levelIDx * 1000 && object.getCoordinates().x < (levelIDx + 1) * 1000 && object.getCoordinates().y >= levelIDy * 500 && object.getCoordinates().y < (levelIDy + 1) * 500){
