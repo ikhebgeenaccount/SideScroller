@@ -102,6 +102,11 @@ public class Main extends JFrame{
 		gameLoop.start();
 	}
 	
+	//Pause the game without returning to menu, only for testing purposes
+	public static void freezeGame(){
+		running = false;
+	}
+	
 	//Method to pause game
 	public static void pauseGame(){
 		running = false;
