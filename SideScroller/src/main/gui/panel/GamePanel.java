@@ -80,9 +80,6 @@ public class GamePanel extends Panel implements KeyListener{
 		//Create array for keys
 		keys = new boolean[1000];
 		
-		//Set character coordinates to 0
-		character.setCoordinates(0, 0);
-		
 		//Set first level and create levels
 		createLevels();
 		navMesh = new NavMesh(levelOne);
@@ -120,6 +117,7 @@ public class GamePanel extends Panel implements KeyListener{
 			startSquare = new Coordinate();
 			startSquare.x = Integer.parseInt(startSquareCfg.split(",")[0]);
 			startSquare.y = Integer.parseInt(startSquareCfg.split(",")[1]);
+			character.setCoordinates(startSquare);
 			
 			endSquare = new Coordinate();
 			String endSquareCfg = levelOneCfg.getProperty("endsquare");
