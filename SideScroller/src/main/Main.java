@@ -1,9 +1,7 @@
-/**Class containing the game- and paintloop. This class also handles the frame and its displaying panel. Game properties are also read in this class.
+/**
  * @author ikhebgeenaccount
  * @version 17 september 2015
- */
-
-package main;
+ */package main;
 
 import java.awt.Font;
 import java.awt.FontFormatException;
@@ -23,6 +21,10 @@ import main.gui.panel.MenuPanel;
 import main.gui.panel.OptionPanel;
 import main.gui.panel.SelectPanel;
 
+/**Class containing the game- and paintloop. This class also handles the frame and its displaying panel. Game properties are also read in this class.
+ * @author ikhebgeenaccount
+ * @version 17 september 2015
+ */
 public class Main{
 	
 	//Version
@@ -72,7 +74,7 @@ public class Main{
 		frame.setVisible(true);
 	}
 	
-	/**Initializes the character, creates the GamePanel and starts the game- and paintloop in seperate Threads
+	/**Initializes the character, creates the GamePanel and starts the game- and paintloop in seperate Threads.
 	 */
 	public static void startGame(){
 		
@@ -95,7 +97,7 @@ public class Main{
 		gameLoop.start();
 	}
 	
-	/**Starts the game after a pause
+	/**Starts the game after a pause.
 	 */
 	public static void unpauseGame(){
 		//Set running to true
@@ -109,20 +111,20 @@ public class Main{
 		gameLoop.start();
 	}
 	
-	/**Pauses the game without exiting it, for testing purposes only
+	/**Pauses the game without exiting it, for testing purposes only.
 	 */
 	public static void freezeGame(){
 		running = false;
 	}
 	
-	/**Pauses the game and returns to the main menu
+	/**Pauses the game and returns to the main menu.
 	 */
 	public static void pauseGame(){
 		running = false;
 		setPanel(menuPanel);
 	}
 	
-	/**Stops the game and exits the virtual machine
+	/**Stops the game and exits the virtual machine.
 	 */
 	public static void quitGame(){
 		running = false;
@@ -155,8 +157,8 @@ public class Main{
 
 	}
 	
-	/**This method changes the displayed Panel in the JFrame
-	 * @param panel - Panel panel is set as the visible Panel in the JFrame
+	/**This method changes the displayed Panel in the JFrame.
+	 * @param panel Panel panel is set as the visible Panel in the JFrame.
 	 */
 	public static void setPanel(Panel panel){
 		frame.getContentPane().removeAll();
@@ -166,7 +168,7 @@ public class Main{
 		frame.repaint();
 	}
 	
-	/**Reads game properties from /resources/config/config.properties
+	/**Reads game properties from /resources/config/config.properties.
 	 * 
 	 */
 	public static void loadProperties(){
@@ -196,7 +198,7 @@ public class Main{
 		}
 	}
 	
-	/**This private class contains the PaintLoop that calles repaint() on GamePanel
+	/**This private class contains the PaintLoop that calles repaint() on GamePanel.
 	 * 
 	 * @author ikhebgeenaccount
 	 *
@@ -247,7 +249,7 @@ public class Main{
 		}
 	}
 	
-	/**This private class contains the GameLoop that calls update() on the GamePanel
+	/**This private class contains the GameLoop that calls update() on the GamePanel.
 	 * 
 	 * @author ikhebgeenaccount
 	 *
@@ -292,82 +294,82 @@ public class Main{
 		}
 	}
 	
-	/**Returns MenuPanel
+	/**Returns MenuPanel.
 	 * 
-	 * @return MenuPanel
+	 * @return MenuPanel menuPanel
 	 */
 	public static MenuPanel getMenu(){
 		return menuPanel;
 	}
 	
-	/**Returns OptionPanel
+	/**Returns OptionPanel.
 	 * 
-	 * @return OptionPanel
+	 * @return OptionPanel optionPanel
 	 */
 	public static OptionPanel getOptionPanel() {
 		return optionPanel;
 	}
 	
 	
-	/**Returns GamePanel
-	 * @return GamePanel
+	/**Returns GamePanel.
+	 * @return GamePanel gamePanel
 	 */
 	public static GamePanel getGamePanel(){
 		return gamePanel;
 	}
 	
-	/**Returns the used Font with size size
-	 * @param size - Font is returned with this size
-	 * @return Font with size size
+	/**Returns the used Font with size size.
+	 * @param size Font is returned with this size.
+	 * @return Font font
 	 */
 	public static Font getFont(int size){
 		return font.deriveFont(Font.PLAIN, size);
 	}
 	
-	/**Returns "v" + version number in String
-	 * @return String "v" + version number
+	/**Returns "v" + version number in String.
+	 * @return String VERSION
 	 */
 	public static String getVersion(){
 		return VERSION;
 	}
 	
-	/**Returns true if fps cap is set, otherwise false
-	 * @return boolean
+	/**Returns true if fps cap is set, otherwise false.
+	 * @return boolean fpsCap
 	 */
 	public static boolean getFPSCap(){
 		return fpsCap;
 	}
 	
-	/**Returns the fps cap
-	 * @return Max fps
+	/**Returns the fps cap.
+	 * @return int maxFPS
 	 */
 	public static int getMaxFPS(){
 		return maxFPS;
 	}
 	
-	/**Enables or disables the fps cap
-	 * @param cap - true to enable fps cap, false to disable
+	/**Enables or disables the fps cap.
+	 * @param cap True to enable fps cap, false to disable.
 	 */
 	public static void setFPSCap(boolean cap){
 		fpsCap = cap;
 	}
 	
-	/**Sets the fps cap
-	 * @param fps - Maximum fps
+	/**Sets the fps cap.
+	 * @param fps Maximum fps.
 	 */
 	public static void setMaxFPS(int fps){
 		maxFPS = fps;
 	}
 	
-	/**Returns the current fps
-	 * @return current fps
+	/**Returns the current fps.
+	 * @return String currentFPS
 	 */
 	public static String getCurrentFPS(){
 		return String.valueOf(currentFPS);
 	}
 	
-	/**Returns the current ticks per second
-	 * @return current ticks per second
+	/**Returns the current ticks per second.
+	 * @return String currentTPS
 	 */
 	public static String getCurrentTPS(){
 		return String.valueOf(currentTPS);

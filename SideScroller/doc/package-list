@@ -1,0 +1,13 @@
+main
+main.game.animation
+main.game.coordinate
+main.game.navmesh
+main.game.object
+main.game.object.champion
+main.game.object.champion.champions.alphaguy
+main.game.object.champion.champions.ezreal
+main.game.object.minion
+main.game.object.minion.minions
+main.game.object.spell
+main.gui
+main.gui.panel

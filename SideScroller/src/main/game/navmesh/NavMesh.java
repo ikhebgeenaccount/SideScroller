@@ -7,12 +7,19 @@ import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
+/**Collision is detected via a NavMesh. A NavMesh is an image containing the level, blue pixels for places where the player is allowed to move to, red where the player is not allowed to move to. In this class are all methods regarding a NavMesh. 
+ * @author ikhebgeenaccount
+ * 17 sep. 2015
+ */
 public class NavMesh extends BufferedImage{
 	
 	private Graphics2D graphics;
 	private Shape shapes[];
 	private int numberOfShapes;
 	
+	/**Creates a NavMesh corresponding to int[][] level
+	 * @param level The int[][] where the NavMesh is based on.
+	 */
 	public NavMesh(int[][] level){
 		super(level[0].length * 50, level.length * 50, BufferedImage.TYPE_INT_RGB);
 		
@@ -31,7 +38,7 @@ public class NavMesh extends BufferedImage{
 		}
 	}
 	
-	public void drawRectangle(int x, int y, int width, int height, Paint color){
+	private void drawRectangle(int x, int y, int width, int height, Paint color){
 		graphics.setPaint(color);
 		graphics.fill(new Rectangle(x, y, width, height));
 		shapes[numberOfShapes] = new Rectangle(x, y, width, height);

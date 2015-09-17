@@ -9,8 +9,15 @@ import main.Main;
 import main.game.object.champion.Champion;
 import main.game.object.spell.Spell;
 
+/**This Class contains all information about AlphaGuy.
+ * @author ikhebgeenaccount
+ * 17 sep. 2015
+ */
 public class AlphaGuy extends Champion {
 	
+	/**Creates Champion AlphaGuy with animations and spells.
+	 * 
+	 */
 	public AlphaGuy(){
 		ClassLoader cldr = this.getClass().getClassLoader();		
 		

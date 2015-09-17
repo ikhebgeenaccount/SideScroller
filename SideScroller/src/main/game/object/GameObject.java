@@ -9,13 +9,16 @@ import main.game.animation.Animation;
 import main.game.coordinate.Coordinate;
 import main.game.navmesh.NavMesh;
 
+/**GameObject is the basis for every entity in the game that has to move, or has animations, or has health. 
+ * @author ikhebgeenaccount
+ * 17 sep. 2015
+ */
 public class GameObject {
 	
 	//Animations
 	private Animation[] animations;
 	private Animation currentAnimation;
 	private int currentAnimationType;
-	private int[] animationsLength;
 	
 	private BufferedImage healthBar;
 	
@@ -31,50 +34,66 @@ public class GameObject {
 	private int health;
 	private int currentHealth;
 	
+	/**Creates a GameObject with default values and Coordinate (0,0)
+	 * 
+	 */
 	public GameObject(){
-		coordinates = new Coordinate();
+		coordinates = new Coordinate(0, 0);
 		
 		animations = new Animation[10];
 		currentAnimation = new Animation();
 		currentAnimationType = -1;
-		
-		animationsLength = new int[30];
 		
 	}
 	
+	/**Creates a GameObject with specified width and height, and Coordinate (0,0)
+	 * @param width Width of the to be created GameObject
+	 * @param height Height of the to be created GameObject
+	 */
 	public GameObject(int width, int height){
-		coordinates = new Coordinate();
+		coordinates = new Coordinate(0, 0);
 		
 		animations = new Animation[10];
 		currentAnimation = new Animation();
 		currentAnimationType = -1;
-		
-		animationsLength = new int[30];
 		
 		healthBar = new BufferedImage(width, 8, BufferedImage.TYPE_INT_RGB);
 	}
 	
 	//Animation methods
 		//Set animation type
+		/**Sets the animation type, which decided what animation is played. Depending on what type of GameObject this is, (Minion, Champion, etc...) the animation that will be played depends on the constants in the class of the extension of GameObject (Minion, etc...).
+		 * @param type The type of animation that needs to be played.
+		 */
 		public void setAnimationType(int type){
 			//We only have to change the animationtype when it is now running another type, otherwise the animation will continuously
 			//reset itself
 			if(currentAnimationType == type){
 					
 			}else{
-			  currentAnimationType = type;
-			  currentAnimation = animations[type];
+				currentAnimationType = type;
+				currentAnimation = animations[type];
 			}
 		}
 		
 		//Add an animation with default frame size: 50 x 100 (for characters)
-		//Waarom deze als depricated aangeven?
-		@Deprecated
+		/**Adds an animation with default width of 50 pixels and default height of 100 pixels
+		 * @param type The type of animation this is, corresponds to a constant in a subclass of GameObject, such as Minion.
+		 * @param animationSprite The image containing all frames of the animation.
+		 * @param sceneLength The length of one scene in milliseconds.
+		 */
 		public void addAnimation(int type, BufferedImage animationSprite, int sceneLength){
 			addAnimation(type, animationSprite, sceneLength, 50, 100);
 		}
 		
 		//Add an animation with different frame size: frameWidth x frameHeight
+		/**Adds an animation
+		 * @param type The type of animation this is, corresponds to a constant in a subclass of GameObject, such as Minion.
+		 * @param animationSprite The image containing all frames of the animation.
+		 * @param sceneLength The length of one scene in milliseconds.
+		 * @param frameWidth The width of one frame.
+		 * @param frameHeight The height of one frame.
+		 */
 		public void addAnimation(int type, BufferedImage animationSprite, int sceneLength, int frameWidth, int frameHeight){
 			animations[type] = new Animation(frameWidth, frameHeight);
 			width = frameWidth;
@@ -83,31 +102,41 @@ public class GameObject {
 			for(int i = 0; i < scenes; i++){
 				animations[type].addScene(animationSprite.getSubimage(frameWidth * i, 0, frameWidth, frameHeight), sceneLength);
 			}
-			animationsLength[type] = scenes * sceneLength;
 		}
 		
 		//Check if the next scene should start playing
+		/**Checks if the next scene should be played.
+		 * 
+		 */
 		public void checkNextScene(){
 			currentAnimation.nextScene();
 		}
 		
 		//Return the image of the current scene
+		/** Returns the image of the animation that currently plays.
+		 * @return The image of the current scene of the current animation.
+		 */
 		public Image getCurrentAnimationImage(){
 			return currentAnimation.getCurrentSceneImage();
 		}
 		
-		public int getCurrentAnimationLength(){
-			return animationsLength[currentAnimationType];
-		}
-		
+		/**Returns the size of this GameObject.
+		 * @return int[]{width, height}.
+		 */
 		public int[] getSize(){
 			return new int[]{width, height};
 		}
 		
+		/**Returns the width of this GameObject.
+		 * @return int width
+		 */
 		public int getWidth(){
 			return width;
 		}
 		
+		/**Returns the height of this GameObject.
+		 * @return int height
+		 */
 		public int getHeight(){
 			return height;
 		}
@@ -116,56 +145,73 @@ public class GameObject {
 		
 	//Coordinate methods
 		//Return the current coordinates for this GameObject
+		/**Returns the current Coordinate of this GameObject
+		 * @return Coordinate coordinate
+		 */
 		public Coordinate getCoordinates(){
 			return coordinates;
-		}
-		
-		//Set the coordinates for this GameObject
-		public void setCoordinates(int x, int y){
-			this.coordinates.x = x;
-			this.coordinates.y = y;
-		}
-		
-		public void setCoordinates(Coordinate coordinates){
-			this.coordinates.x = coordinates.x;
-			this.coordinates.y = coordinates.y;
 		}
 		
 		
 	
 	//Movement methods
 	
+		/**Returns the current speed in x-axis.
+		 * @return int speed
+		 */
 		public int getSpeed(){
 			return speed;
 		}
 		
+		/**Returns the default speed in x-axis.
+		 * @return int defaultSpeed
+		 */
 		public int getDefaultSpeed(){
 			return defaultSpeed;
 		}
 		
+		/**Sets the default speed.
+		 * @param defaultSpeed The new value for default speed
+		 */
 		public void setDefaultSpeed(int defaultSpeed){
 			this.defaultSpeed = defaultSpeed;
 		}
 		
+		/**Returns the speed in y-axis.
+		 * @return int yspeed
+		 */
 		public int getYSpeed(){
 			return yspeed;
 		}
 		
+		/**Sets the speed in x-axis.
+		 * @param speed The new speed in x-axis
+		 */
 		public void setSpeed(int speed){
 			this.startSpeed = speed;
 			this.speed = speed;
 		}
 		
+		/**Accelerate speed with acceleration. This accelerates the speed in y-axis.
+		 * @param acceleration Acceleration
+		 */
 		public void accelerate(int acceleration){
 			if(yspeed + acceleration > 0){
 				yspeed += acceleration;
 			}
 		}
 		
+		/**Resets the speed in y-axis to zero.
+		 * 
+		 */
 		public void resetSpeed(){
 			this.yspeed = 0;
 		}
 		
+		/**Checks if this GameObject can move up in NavMesh navMesh. Returns true if it has moved, otherwise false
+		 * @param navMesh The NavMesh in which the movement happens
+		 * @return boolean moved
+		 */
 		public boolean moveUp(NavMesh navMesh){
 			boolean move = true;
 			for(int i = 0; i <= yspeed; i++){
@@ -183,12 +229,16 @@ public class GameObject {
 				}
 				if(move){
 					//Move
-					setCoordinates(coordinates.x, coordinates.y - 1);
+					getCoordinates().setCoordinates(coordinates.x, coordinates.y - 1);
 				}
 			}
 			return true;		
 		}
 		
+		/**Checks if this GameObject can move down in NavMesh navMesh. Returns true if it has moved, otherwise false
+		 * @param navMesh The NavMesh in which the movement happens
+		 * @return boolean moved
+		 */
 		public boolean moveDown(NavMesh navMesh){
 			boolean move = true;
 			for(int i = 0; i <= yspeed; i++){
@@ -206,12 +256,17 @@ public class GameObject {
 				}
 				if(move){
 					//Move
-					setCoordinates(coordinates.x, coordinates.y + 1);
+					getCoordinates().setCoordinates(coordinates.x, coordinates.y + 1);
 				}
 			}
 			return true;
 		}
+
 		
+		/**Checks if this GameObject can move left in NavMesh navMesh. Returns true if it has moved, otherwise false
+		 * @param navMesh The NavMesh in which the movement happens
+		 * @return boolean moved
+		 */
 		public boolean moveLeft(NavMesh navMesh){
 			boolean move = true;
 			for(int i = 0; i <= speed; i++){
@@ -230,12 +285,17 @@ public class GameObject {
 				
 				if(move){
 					//Move
-					setCoordinates(coordinates.x - 1, coordinates.y);
+					getCoordinates().setCoordinates(coordinates.x - 1, coordinates.y);
 				}
 			}
 			return true;
 		}
+
 		
+		/**Checks if this GameObject can move right in NavMesh navMesh. Returns true if it has moved, otherwise false
+		 * @param navMesh The NavMesh in which the movement happens
+		 * @return boolean moved
+		 */
 		public boolean moveRight(NavMesh navMesh){
 			boolean move = true;
 			for(int i = 0; i <= speed; i++){
@@ -254,12 +314,18 @@ public class GameObject {
 				
 				if(move){
 					//Move
-					setCoordinates(coordinates.x + 1, coordinates.y);
+					getCoordinates().setCoordinates(coordinates.x + 1, coordinates.y);
 				}				
 			}
 			return true;
 		}
 		
+		/**Checks if this GameObject can teleport specified distance in specified direction. If moving to the destination is not allowed, it checks for valid locations between destination and departure point with an interval of 25 pixels. If it finds a valid place, the GameObject moves there. Returns true if it moved, otherwise false.
+		 * @param navMesh NavMesh on which the blinking happens.
+		 * @param movedLeft Decides the direction in which the blinking happens, false for right, true for left.
+		 * @param distanceX The distance that has to be traveled.
+		 * @return boolean moved
+		 */
 		public boolean blink(NavMesh navMesh, boolean movedLeft, int distanceX){
 			int i = 0;
 			int j = 0;
@@ -282,7 +348,7 @@ public class GameObject {
 			
 			
 			if(allowed){
-				setCoordinates(coordinates.x + distanceX, coordinates.y);
+				getCoordinates().setCoordinates(coordinates.x + distanceX, coordinates.y);
 				return true;
 			}else{				
 				/*
@@ -324,7 +390,7 @@ public class GameObject {
 							}
 					 		if(!red){
 					 			//No red pixels found in this location, so the character can move here
-					 			setCoordinates(coordinates.x + i, coordinates.y);
+					 			getCoordinates().setCoordinates(coordinates.x + i, coordinates.y);
 					 			return true;
 					 		}
 					   	}						
@@ -340,19 +406,31 @@ public class GameObject {
 		
 		
 	//Combat methods		
+		/**Sets the maximum health for this GameObject.
+		 * @param health The maximum health.
+		 */
 		public void setMaxHealth(int health){
 			this.health = health;
 			currentHealth = health;
 		}
 		
+		/**Returns the maximum health of this GameObject.
+		 * @return int maxhealth
+		 */
 		public int getMaxHealth(){
 			return health;
 		}
 		
+		/**Returns the current health.
+		 * @return int currentHealth
+		 */
 		public int getCurrentHealth(){
 			return currentHealth;
 		}
 		
+		/**Returns the healthbar image with the current health displayed.
+		 * @return BufferedImage healthBar
+		 */
 		public BufferedImage getHealthBarImage(){
 			Graphics2D g = healthBar.createGraphics();
 			g.setColor(Color.RED);
@@ -363,6 +441,9 @@ public class GameObject {
 			return healthBar;
 		}
 		
+		/**Decreases this GameObject's health with damage
+		 * @param damage The damage that is dealed
+		 */
 		public void damage(int damage){
 			currentHealth -= damage;
 		}

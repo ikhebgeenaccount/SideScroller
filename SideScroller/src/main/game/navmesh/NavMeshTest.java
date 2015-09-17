@@ -6,8 +6,15 @@ import java.awt.Graphics;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+/**This class contains a test for NavMesh. It creates a separate JFrame with the complete NavMesh in it for testing and debugging purposes.
+ * @author ikhebgeenaccount
+ * 17 sep. 2015
+ */
 public class NavMeshTest extends JFrame {
 		
+	/**Creates a JFrame with a NavMesh
+	 * @param navMesh The NavMesh that is shown in the JFrame
+	 */
 	public NavMeshTest(NavMesh navMesh){
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setContentPane(new ContentPanel(navMesh));

@@ -117,7 +117,7 @@ public class GamePanel extends Panel implements KeyListener{
 			startSquare = new Coordinate();
 			startSquare.x = Integer.parseInt(startSquareCfg.split(",")[0]) * 50;
 			startSquare.y = Integer.parseInt(startSquareCfg.split(",")[1]) * 50;
-			character.setCoordinates(startSquare);
+			character.getCoordinates().setCoordinates(startSquare);
 			
 			endSquare = new Coordinate();
 			String endSquareCfg = levelOneCfg.getProperty("endsquare");
@@ -184,7 +184,7 @@ public class GamePanel extends Panel implements KeyListener{
 				
 				for(int j = 0; j < minionCoordinatesCfg.length; j++){
 					String[] coordinates = minionCoordinatesCfg[j].split("\\.");
-					type[j].setCoordinates(Integer.parseInt(coordinates[0]) * 50, Integer.parseInt(coordinates[1]) * 50);
+					type[j].getCoordinates().setCoordinates(Integer.parseInt(coordinates[0]) * 50, Integer.parseInt(coordinates[1]) * 50);
 					inLevel[index] = type[j];
 					index++;
 				}

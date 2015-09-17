@@ -8,10 +8,15 @@ import main.Main;
 import main.game.object.champion.Champion;
 import main.game.object.spell.Spell;
 
+/**This class contains all information about Ezreal.
+ * @author ikhebgeenaccount
+ * 17 sep. 2015
+ */
 public class Ezreal extends Champion{
 	
-	private Spell q, w, e, r;
-	
+	/**Creates Ezreal with animations and spells.
+	 * 
+	 */
 	public Ezreal(){
 		//Create spells
 		q = new Spell(600, 200, 10, 5000);

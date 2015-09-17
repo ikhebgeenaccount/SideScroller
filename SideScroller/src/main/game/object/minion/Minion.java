@@ -5,8 +5,15 @@ import main.game.navmesh.NavMesh;
 import main.game.object.GameObject;
 import main.game.object.champion.Champion;
 
+/**This class contains all methods regarding Minions.
+ * @author ikhebgeenaccount
+ * 17 sep. 2015
+ */
 public class Minion extends GameObject {
 	
+	/**The public constants for animations types.
+	 * 
+	 */
 	public static final int WALK_RIGHT = 0, WALK_LEFT = 1, ATTACK = 2, DIE = 3, BE_DEAD = 4; 
 	
 	private int range;
@@ -16,10 +23,20 @@ public class Minion extends GameObject {
 	
 	private boolean moveLeft;
 	
+	/**Default constructor. Not recommended to use.
+	 * 
+	 */
 	public Minion(){
 		
 	}
 	
+	/**Create Minion with specified properties.
+	 * @param width The width of the Minion in pixels.
+	 * @param height The height of the Minion in pixels.
+	 * @param speed The speed of the Minion in pixels.
+	 * @param range The range of the Minion in pixels.
+	 * @param attackLength The length of an attack in milliseconds.
+	 */
 	public Minion(int width, int height, int speed, int range, long attackLength){
 		super(width, height);
 		setSpeed(speed);
@@ -28,19 +45,31 @@ public class Minion extends GameObject {
 		setMaxHealth(200);
 	}
 	
+	/**Sets the range.
+	 * @param range The new range in pixels.
+	 */
 	public void setRange(int range){
 		this.range = range;
 	}
 	
+	/**Sets the damage.
+	 * @param damage The new damage per attack.
+	 */
 	public void setDamage(int damage){
 		this.damage = damage;
 	}
 	
+	/**Sets the attack length.
+	 * @param attackLength The length of one attack in milliseconds.
+	 */
 	public void setAttackLength(long attackLength){
 		this.attackLength = attackLength;
 		attackStart = 0;
 	}
 	
+	/**Decides what this Minion should do. It first searches for targets within it's range. If those are not found, it moves along the same way as it was moving, when it has to move on air, it turns around.
+	 * 
+	 */
 	public void move(){
 		boolean activity = false;
 		/* For move():
@@ -114,10 +143,16 @@ public class Minion extends GameObject {
 		}
 	}
 	
+	/**Returns damage from one attack.
+	 * @return int damage
+	 */
 	public int getDamage(){
 		return damage;
 	}
 	
+	/**Return the range of this Minion.
+	 * @return int range
+	 */
 	public int getRange(){
 		return range;
 	}
