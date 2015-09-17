@@ -225,7 +225,6 @@ public class GamePanel extends Panel implements KeyListener{
                 //Decide which landscape-img should be used
 				int xCoord = x + (levelIDx * 20);
 				int yCoord = y + (levelIDy * 10);
-				try{
 				switch(currentLevel[y + (levelIDy * 10)][x + (levelIDx * 20)]){
 					case 0:g.drawImage(air, 50 * x, 50 * y, null);
 						break;
@@ -235,20 +234,6 @@ public class GamePanel extends Panel implements KeyListener{
 						break;
 					default:g.drawImage(air, 50 * x, 50 * y, null);
 						break;
-				}
-					
-				}catch(ArrayIndexOutOfBoundsException e){
-					e.printStackTrace();
-					System.out.println(e.getMessage());
-					System.out.println("x : " + x + "| y : " + y + "| levelIDx : " + levelIDx + "| levelIDy : " + levelIDy);
-					System.out.println(xCoord + " " + yCoord);
-					Main.freezeGame();
-					System.out.println(currentLevel[0].length + " " + currentLevel.length);
-					for(GameObject object : onScreen){
-						if(object != null){
-							System.out.println(object.getClass().getName());							
-						}
-					}
 				}
 			}
 		}
@@ -435,7 +420,7 @@ public class GamePanel extends Panel implements KeyListener{
 		
 		if(characterCoordinate.x + character.getWidth()/2 < levelIDx * 1000){
 			levelIDx--;
-		}else if(characterCoordinate.x - character.getWidth()/2 > (levelIDx + 1) * 1000){
+		}else if(characterCoordinate.x + character.getWidth()/2 > (levelIDx + 1) * 1000){
 			levelIDx++;
 		}
 		
