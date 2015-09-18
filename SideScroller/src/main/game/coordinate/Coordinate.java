@@ -55,4 +55,12 @@ public class Coordinate{
     public void setY(int y){
         this.y = y;
     }
+    
+    public boolean equals(Object other){
+    	if(other instanceof Coordinate){
+    		Coordinate coord = (Coordinate) other;
+    		return (coord.x == this.x) && (coord.y == this.y);
+    	}
+    	return false;
+    }
 }
