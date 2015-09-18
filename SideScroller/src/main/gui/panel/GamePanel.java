@@ -414,7 +414,7 @@ public class GamePanel extends Panel implements KeyListener{
 		Coordinate characterCoordinate = character.getCoordinates();
 		if(characterCoordinate.y + character.getHeight()/2 < levelIDy * 500){
 			levelIDy--;
-		}else if(characterCoordinate.y - character.getHeight()/2 > (levelIDy + 1) * 500){
+		}else if(characterCoordinate.y + character.getHeight()/2 > (levelIDy + 1) * 500){
 			levelIDy++;
 		}
 		
