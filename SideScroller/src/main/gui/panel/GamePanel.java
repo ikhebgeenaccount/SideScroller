@@ -30,6 +30,10 @@ import main.game.object.minion.minions.SuperMinion;
 import main.game.object.spell.Spell;
 import main.gui.Panel;
 
+/**The class GamePanel contains the gameloop and paintloop.
+ * @author ikhebgeenaccount
+ * @version 18 sep. 2015
+ */
 public class GamePanel extends Panel implements KeyListener{
 	
 	//Levels
@@ -68,6 +72,10 @@ public class GamePanel extends Panel implements KeyListener{
 	private Coordinate endSquare;
 	private String theme;
 	
+	/**Creates a new GamePanel with specified Champion. Initiziales the level by reading the config file.
+	 * @param character The Champion which will be played.
+	 * @param characterName The name of the Champion.
+	 */
 	public GamePanel(Champion character, String characterName){
 		tick = 0;
 		
@@ -215,6 +223,9 @@ public class GamePanel extends Panel implements KeyListener{
 	 * 
 	 * This method is called every frame
 	 */
+	/**Paints the level and all GameObject that are within the boundaries of the screen. Also paints cooldowns.
+	 * 
+	 */
 	@Override
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
@@ -284,7 +295,7 @@ public class GamePanel extends Panel implements KeyListener{
 	//return: void; arg1: Graphic g;
 	//argument g als workaround:
 	//Zou g een private member mogen worden van GamePanel?
-	public void drawCooldowns(Graphics g){
+	private void drawCooldowns(Graphics g){
 		final int SPELL_BOX_X = 375;
 		final int SPELL_BOX_Y = 465;
 		final int SPELL_BOX_W = 250;
@@ -317,7 +328,7 @@ public class GamePanel extends Panel implements KeyListener{
 		}
 	}
 	//Images are loaded
-	public void loadPics(){
+	private void loadPics(){
 		ClassLoader cldr = this.getClass().getClassLoader();
 		air = new ImageIcon(cldr.getResource("img/landscape/" + theme + "/air.png")).getImage();
 		ground = new ImageIcon(cldr.getResource("img/landscape/" + theme + "/ground.png")).getImage();
@@ -349,6 +360,9 @@ public class GamePanel extends Panel implements KeyListener{
 	private int jumpStartTick;
 	private final int JUMP_LENGTH_TICK = 20;
 	
+	/**update() is the gameloop. In update() the game checks for collision, gravity and what GameObjects should be moved. The animation type of the character are also handled in update().
+	 * 
+	 */
 	public void update(){
 		//Check collision with navmesh instead of reading array
 		tick++;
@@ -512,7 +526,7 @@ public class GamePanel extends Panel implements KeyListener{
 	}
 	
 	//Update GameObject[] onScreen;
-	public void updateGameObjects(){
+	private void updateGameObjects(){
 		int i = 1;
 		onScreen = new GameObject[objectCap];
 		onScreen[0] = character;
@@ -533,7 +547,7 @@ public class GamePanel extends Panel implements KeyListener{
 	 * 2. Grass
 	 */
 	//Create levels
-	public void createLevels(){
+	private void createLevels(){
 		levelOne = new int[][]{	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 								{2,2,2,0,0,0,0,0,0,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -567,27 +581,45 @@ public class GamePanel extends Panel implements KeyListener{
 	}
 	
 	//Getter for String characterName
+	/**Returns the name of the Champion that is being played.
+	 * @return String characterName
+	 */
 	public String getCharacterName(){
 		return characterName;
 	}
 	
 	//Getter for character
+	/**Returns the Champion instance of the Champion that is being played.
+	 * @return Champion character
+	 */
 	public Champion getCharacter(){
 		return character;
 	}
 	
+	/**Returns the level that is currently played.
+	 * @return int[][] currentLevel
+	 */
 	public int[][] getCurrentLevel(){
 		return currentLevel;
 	}
 	
+	/**Returns the levelID in x- and y-axis. With levelID is determined in which part of the level the character is.
+	 * @return int[][]{levelIDx, levelIDy}
+	 */
 	public int[] getLevelIDs(){
 		return new int[]{levelIDx, levelIDy};
 	}
 	
+	/**Returns an array with all GameObjects that are on the screen, which means they are visible in the window.
+	 * @return GameObject[] onScreen
+	 */
 	public GameObject[] getOnScreenObjects(){
 		return onScreen;
 	}
 
+	/**Returns the NavMesh of the current level.
+	 * @return NavMesh navMesh
+	 */
 	public NavMesh getNavMesh() {
 		return navMesh;
 	}

@@ -11,7 +11,7 @@ import main.game.object.spell.Spell;
 
 /**This Class contains all information about AlphaGuy.
  * @author ikhebgeenaccount
- * 17 sep. 2015
+ * @version 17 sep. 2015
  */
 public class AlphaGuy extends Champion {
 	

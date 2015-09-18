@@ -23,7 +23,7 @@ import main.gui.panel.SelectPanel;
 
 /**Class containing the game- and paintloop. This class also handles the frame and its displaying panel. Game properties are also read in this class.
  * @author ikhebgeenaccount
- * @version 17 september 2015
+ * @version 17 sep. 2015
  */
 public class Main{
 	

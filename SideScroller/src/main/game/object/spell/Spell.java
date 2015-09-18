@@ -3,6 +3,10 @@ package main.game.object.spell;
 import main.game.coordinate.Coordinate;
 import main.game.object.GameObject;
 
+/**This class contains all methods and variables regardins spells.
+ * @author ikhebgeenaccount
+ * @version 18 sep. 2015
+ */
 public class Spell extends GameObject{
 
 	/**Public constants for animation types.

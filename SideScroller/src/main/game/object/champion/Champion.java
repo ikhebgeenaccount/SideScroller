@@ -6,7 +6,7 @@ import main.game.object.spell.Spell;
 
 /**Class that represents a Champion.
  * @author ikhebgeenaccount
- * 17 sep. 2015
+ * @version 17 sep. 2015
  */
 public class Champion extends GameObject{
 	

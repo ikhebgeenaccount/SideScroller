@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 
 /**Collision is detected via a NavMesh. A NavMesh is an image containing the level, blue pixels for places where the player is allowed to move to, red where the player is not allowed to move to. In this class are all methods regarding a NavMesh. 
  * @author ikhebgeenaccount
- * 17 sep. 2015
+ * @version 17 sep. 2015
  */
 public class NavMesh extends BufferedImage{
 	

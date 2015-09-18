@@ -10,6 +10,10 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+/**
+ * @author ikhebgeenaccount
+ * @version 18 sep. 2015
+ */
 public class Panel extends JPanel{
 	
 	public GridBagConstraints c;

@@ -10,7 +10,7 @@ import main.game.object.spell.Spell;
 
 /**This class contains all information about Ezreal.
  * @author ikhebgeenaccount
- * 17 sep. 2015
+ * @version 17 sep. 2015
  */
 public class Ezreal extends Champion{
 	

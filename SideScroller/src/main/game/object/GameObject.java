@@ -11,7 +11,7 @@ import main.game.navmesh.NavMesh;
 
 /**GameObject is the basis for every entity in the game that has to move, or has animations, or has health. 
  * @author ikhebgeenaccount
- * 17 sep. 2015
+ * @version 17 sep. 2015
  */
 public class GameObject {
 	

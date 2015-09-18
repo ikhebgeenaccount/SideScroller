@@ -7,7 +7,7 @@ import main.game.object.champion.Champion;
 
 /**This class contains all methods regarding Minions.
  * @author ikhebgeenaccount
- * 17 sep. 2015
+ * @version 17 sep. 2015
  */
 public class Minion extends GameObject {
 	

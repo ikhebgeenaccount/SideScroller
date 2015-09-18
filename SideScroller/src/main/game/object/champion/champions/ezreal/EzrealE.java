@@ -6,7 +6,7 @@ import main.game.object.spell.Spell;
 
 /**This class contains the methods for Ezreal's Spell E, since this is a special case. It is not just a Spell that should be fired; nothing is fired, but the character is teleported.
  * @author ikhebgeenaccount
- * 17 sep. 2015
+ * @version 17 sep. 2015
  */
 public class EzrealE extends Spell{
 	

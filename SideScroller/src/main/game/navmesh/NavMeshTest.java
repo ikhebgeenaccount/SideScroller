@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 
 /**This class contains a test for NavMesh. It creates a separate JFrame with the complete NavMesh in it for testing and debugging purposes.
  * @author ikhebgeenaccount
- * 17 sep. 2015
+ * @version 17 sep. 2015
  */
 public class NavMeshTest extends JFrame {
 		

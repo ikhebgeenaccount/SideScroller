@@ -2,7 +2,7 @@ package main.game.coordinate;
 
 /**This class contains all methods and variables to use Coordinates. Coordinates are Objects that hold the coordinates of a GameObject. Coordinates are stored in pixel units.
  * @author ikhebgeenaccount
- * 17 sep. 2015
+ * @version 17 sep. 2015
  */
 public class Coordinate{
     
