@@ -360,15 +360,13 @@ public class GamePanel extends Panel implements KeyListener{
 	private int jumpStartTick;
 	private final int JUMP_LENGTH_TICK = 20;
 	
-	/**update() is the gameloop. In update() the game checks for collision, gravity and what GameObjects should be moved. The animation type of the character are also handled in update().
+	/**update() is the gameloop. In update() the game checks for collision, gravity and what GameObjects should be moved. The animation type of the character are also handled in update(). update() also checks if the win-condition is met.
 	 * 
 	 */
 	public void update(){
 		//Check collision with navmesh instead of reading array
 		tick++;
 		
-		System.out.println(endSquare.x + " " + endSquare.y);
-		System.out.println(character.getCoordinates().x + " " + character.getCoordinates().y);
 		if(endSquare.equals(new Coordinate(character.getCoordinates().x, character.getCoordinates().y + 50))){
 			System.out.println("Victory");
 			Main.pauseGame();
