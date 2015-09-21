@@ -21,9 +21,6 @@ public class Champion extends GameObject{
 	
 	public Spell q, w, e, r;
 	
-	private int health;
-	private int currentHealth;
-	
 	/**Default constructor, creates a GameObject with size (50, 100) and sets the following default value:
 	 * - speed : 8
 	 * - defaultSpeed : 8

@@ -4,7 +4,6 @@ import main.Main;
 import main.game.coordinate.Coordinate;
 import main.game.navmesh.NavMesh;
 import main.game.object.GameObject;
-import main.game.object.champion.Champion;
 
 /**This class contains all methods regarding Minions.
  * @author ikhebgeenaccount
@@ -83,13 +82,8 @@ public class Minion extends GameObject {
 		 */
 		
 		GameObject[] onScreen = Main.getGamePanel().getOnScreenObjects();
-		int coordx = getCoordinates().x;
 		int coordy = getCoordinates().y;
 		
-		int newcoordx = coordx;
-		int newcoordy = coordy;
-		
-		int[] champSize = onScreen[0].getSize();
 		Coordinate champCoordinate = onScreen[0].getCoordinates();
 		
 		boolean sameHeight = false;

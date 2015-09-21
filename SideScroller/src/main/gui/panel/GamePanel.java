@@ -234,8 +234,6 @@ public class GamePanel extends Panel implements KeyListener{
 		for(int x = 0; x < 20; x++){
 			for(int y = 0; y < 10; y++){
                 //Decide which landscape-img should be used
-				int xCoord = x + (levelIDx * 20);
-				int yCoord = y + (levelIDy * 10);
 				switch(currentLevel[y + (levelIDy * 10)][x + (levelIDx * 20)]){
 					case 0:g.drawImage(air, 50 * x, 50 * y, null);
 						break;
