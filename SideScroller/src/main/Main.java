@@ -118,8 +118,17 @@ public class Main{
 	}
 	
 	/**Pauses the game and returns to the main menu.
+	 * TODO: add pause menu, with resume option
 	 */
 	public static void pauseGame(){
+		running = false;
+		setPanel(menuPanel);
+	}
+	
+	/**Stops the game and returns to main menu.
+	 * 
+	 */
+	public static void returnToMainMenu(){
 		running = false;
 		setPanel(menuPanel);
 	}
