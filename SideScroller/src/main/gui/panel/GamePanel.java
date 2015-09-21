@@ -367,6 +367,11 @@ public class GamePanel extends Panel implements KeyListener{
 		//Check collision with navmesh instead of reading array
 		tick++;
 		
+		//Check if character is still alive
+		if(character.getCurrentHealth() == 0){
+			Main.returnToMainMenu();
+		}
+		
 		if(endSquare.equals(new Coordinate(character.getCoordinates().x, character.getCoordinates().y + 50))){
 			System.out.println("Victory");
 			Main.pauseGame();
