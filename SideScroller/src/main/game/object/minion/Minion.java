@@ -1,6 +1,7 @@
 package main.game.object.minion;
 
 import main.Main;
+import main.game.coordinate.Coordinate;
 import main.game.navmesh.NavMesh;
 import main.game.object.GameObject;
 import main.game.object.champion.Champion;
@@ -14,11 +15,11 @@ public class Minion extends GameObject {
 	/**The public constants for animations types.
 	 * 
 	 */
-	public static final int WALK_RIGHT = 0, WALK_LEFT = 1, ATTACK = 2, DIE = 3, BE_DEAD = 4; 
+	public static final int WALK_RIGHT = 0, WALK_LEFT = 1, ATTACK_RIGHT = 2, ATTACK_LEFT = 3, DIE = 4, BE_DEAD = 5; 
 	
 	private int range;
 	private int damage;
-	private long attackLength; //In seconds
+	private long attackLength;
 	private long attackStart;
 	
 	private boolean moveLeft;
@@ -34,15 +35,16 @@ public class Minion extends GameObject {
 	 * @param width The width of the Minion in pixels.
 	 * @param height The height of the Minion in pixels.
 	 * @param speed The speed of the Minion in pixels.
-	 * @param range The range of the Minion in pixels.
+	 * @param range The range of the Minion in pixels. Range is calculated from the sides of the minion.
 	 * @param attackLength The length of an attack in milliseconds.
 	 */
-	public Minion(int width, int height, int speed, int range, long attackLength){
+	public Minion(int width, int height, int speed, int range, int damage, long attackLength){
 		super(width, height);
 		setSpeed(speed);
 		setRange(range);
 		setAttackLength(attackLength);
 		setMaxHealth(200);
+		setDamage(damage);
 	}
 	
 	/**Sets the range.
@@ -86,32 +88,57 @@ public class Minion extends GameObject {
 		
 		int newcoordx = coordx;
 		int newcoordy = coordy;
-		 
-		 //Check if this should attack 
-		for(int i = 0; i < onScreen.length; i++){
-			//We should only consider attacking if this GameObject is a Champion
-			if(onScreen[i] instanceof Champion){
-
-				int width = onScreen[i].getSize()[0];
-				int height = onScreen[i].getSize()[1];
-				
-				int targetcoordx = onScreen[i].getCoordinates().x;
-				int targetcoordy = onScreen[i].getCoordinates().y;
-				
-				if(coordy >= targetcoordy + height && coordy + getSize()[1] <= targetcoordy && coordx >= targetcoordx + width && coordx + getSize()[1] <= targetcoordx){
-					//Target is in range: attack
+		
+		int[] champSize = onScreen[0].getSize();
+		Coordinate champCoordinate = onScreen[0].getCoordinates();
+		
+		boolean sameHeight = false;
+		boolean attackLeft = true;
+		
+		//Check if the minion and the champion are on the same height 
+		for(int i = coordy; i <= coordy + this.getHeight(); i++){
+			if(i >= champCoordinate.y && i <= champCoordinate.y + onScreen[0].getHeight()){
+				//When they overlap in height, they are on the same height and valid to attack if x is within range.
+				sameHeight = true;
+			}
+		}
+		
+		//The range of the minion is the radius from the minion.
+		if(sameHeight){
+			//Same height
+			if(champCoordinate.x > this.getCoordinates().x){
+				//Champion is to the right of this Minion
+				int xend = this.getCoordinates().x + this.getWidth() + this.range; //and extends all the way from the left side to the right side plus the range
+				//Start of the range does not have to be checked, because that is the x coordinate of the Minion, and that coordinate is smaller than the x coordinate of the character. 
+				if(champCoordinate.x < xend){
+					//Within range
 					if(System.currentTimeMillis() - attackStart >= attackLength){
-						//Attack
-						//onScreen[i].damage(getDamage());
+						attackStart = System.currentTimeMillis();
+						onScreen[0].damage(damage);
+						attackLeft = false;						
+					}
+					activity = true;
+				}
+			}else{
+				//Champion is to the left of this Minion
+				int xend = this.getCoordinates().x - this.range;
+				
+				if(champCoordinate.x + onScreen[0].getWidth() > xend){
+					//Within range
+					if(System.currentTimeMillis() - attackStart >= attackLength){
+						attackStart = System.currentTimeMillis();
+						onScreen[0].damage(damage);
+						attackLeft = false;						
 					}
 					activity = true;
 				}
 			}
 		}
 		
-		NavMesh navMesh = Main.getGamePanel().getNavMesh();
+		//Other activity is only necessary when the Minion should not attack
 		if(!activity){
 			//Check if next step can be made
+			NavMesh navMesh = Main.getGamePanel().getNavMesh();
 			if(moveLeft){
 				//Move left
 				moveLeft = moveLeft(navMesh);
@@ -133,7 +160,11 @@ public class Minion extends GameObject {
 		}
 		
 		if(activity){
-			setAnimationType(Minion.ATTACK);
+			if(attackLeft){
+				this.setAnimationType(ATTACK_LEFT);
+			}else{
+				this.setAnimationType(ATTACK_RIGHT);
+			}
 		}else{
 			if(moveLeft){
 				setAnimationType(Minion.WALK_LEFT);
