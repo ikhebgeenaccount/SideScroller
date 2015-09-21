@@ -445,6 +445,8 @@ public class GameObject {
 		 * @param damage The damage that is dealed
 		 */
 		public void damage(int damage){
-			currentHealth -= damage;
+			if(currentHealth >= 0){
+				currentHealth -= damage;				
+			}
 		}
 }
