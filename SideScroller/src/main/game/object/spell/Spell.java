@@ -13,7 +13,7 @@ public class Spell extends GameObject{
 	/**Public constants for animation types.
 	 * 
 	 */
-	public static final int APPEAR = 0, TRAVEL = 1, DISAPPEAR = 2, HIT = 3;
+	public static final int APPEAR = 0, TRAVEL_LEFT = 1, TRAVEL_RIGHT = 2, DISAPPEAR = 3, HIT = 4;
 	private int[] animationsLength;
 	
 	//Spell properties
@@ -86,7 +86,11 @@ public class Spell extends GameObject{
 			this.startCoordinates.setCoordinates(startCoordinates);
 			getCoordinates().setCoordinates(this.startCoordinates);
 			isFired = true;
-			setAnimationType(Spell.TRAVEL);
+			if(moveLeft){
+				setAnimationType(Spell.TRAVEL_LEFT);
+			}else{
+				setAnimationType(Spell.TRAVEL_RIGHT);				
+			}
 			currentCooldown = cooldown;
 		}else{
 			isFired = false;
@@ -140,7 +144,6 @@ public class Spell extends GameObject{
 				}
 			}
 			j++;
-			System.out.println("hiero\n" + id);
 		}
 		
 		//Check if x coordinates are the same
@@ -152,7 +155,6 @@ public class Spell extends GameObject{
 				hit = true;
 			}
 		}else if(id != -1){
-			System.out.println(this.getCoordinates().x + "+" + this.getWidth() + "==" + onScreen[id].getCoordinates().x);
 			if(this.getCoordinates().x + this.getWidth() >= onScreen[id].getCoordinates().x && this.getCoordinates().x <= onScreen[id].getCoordinates().x){
 				//Hit!!
 				onScreen[id].damage(this.damage);
@@ -160,20 +162,6 @@ public class Spell extends GameObject{
 				hit = true;
 			}			
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		//Move the spell
 		if(!hit && moveLeft){

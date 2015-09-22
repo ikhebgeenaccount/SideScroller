@@ -30,13 +30,15 @@ public class AlphaGuy extends Champion {
 			//Create spells
 			q = new Spell(600, 200, 10, 5000);
 			q.addAnimation(Spell.APPEAR, ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/qAppear.png")), 250, 70, 15);
-			q.addAnimation(Spell.TRAVEL, ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/qAppear.png")), 250, 70, 15);
+			q.addAnimation(Spell.TRAVEL_LEFT, ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/qAppear.png")), 250, 70, 15);
+			q.addAnimation(Spell.TRAVEL_RIGHT, ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/qAppear.png")), 250, 70, 15);
 			q.addAnimation(Spell.DISAPPEAR, ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/qAppear.png")), 250, 70, 15);
 			q.addAnimation(Spell.HIT, ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/qAppear.png")), 250, 70, 15);
 			
 			w = new Spell(500, 100, 10, 5000);
 			w.addAnimation(Spell.APPEAR, ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/wAppear.png")), 250, 50, 30);
-			w.addAnimation(Spell.TRAVEL, ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/wAppear.png")), 250, 50, 30);
+			w.addAnimation(Spell.TRAVEL_LEFT, ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/wAppear.png")), 250, 50, 30);
+			w.addAnimation(Spell.TRAVEL_RIGHT, ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/wAppear.png")), 250, 50, 30);
 			w.addAnimation(Spell.DISAPPEAR, ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/wAppear.png")), 250, 50, 30);
 			w.addAnimation(Spell.HIT, ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/wAppear.png")), 250, 50, 30);
 			
@@ -44,7 +46,8 @@ public class AlphaGuy extends Champion {
 			
 			r = new Spell(2000, 500, 10, 10000);
 			r.addAnimation(Spell.APPEAR, ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/rAppear.png")), 250, 100, 80);
-			r.addAnimation(Spell.TRAVEL, ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/rAppear.png")), 250, 100, 80);
+			r.addAnimation(Spell.TRAVEL_LEFT, ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/r_travel_left.png")), 250, 100, 80);
+			r.addAnimation(Spell.TRAVEL_RIGHT, ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/r_travel_right.png")), 250, 100, 80);
 			r.addAnimation(Spell.DISAPPEAR, ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/rAppear.png")), 250, 100, 80);
 			r.addAnimation(Spell.HIT, ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/rAppear.png")), 250, 100, 80);
 			

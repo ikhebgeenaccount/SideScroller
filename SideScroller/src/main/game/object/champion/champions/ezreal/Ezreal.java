@@ -36,7 +36,8 @@ public class Ezreal extends Champion{
 			int width = 70;
 			int height = 15;
 			q.addAnimation(Spell.APPEAR, ImageIO.read(cldr.getResourceAsStream("img/champs/ezreal/qAppear.png")), 250, width, height);
-			q.addAnimation(Spell.TRAVEL, ImageIO.read(cldr.getResourceAsStream("img/champs/ezreal/qTravel.png")), 250, width, height);
+			q.addAnimation(Spell.TRAVEL_LEFT, ImageIO.read(cldr.getResourceAsStream("img/champs/ezreal/qTravel.png")), 250, width, height);
+			q.addAnimation(Spell.TRAVEL_RIGHT, ImageIO.read(cldr.getResourceAsStream("img/champs/ezreal/qTravel.png")), 250, width, height);
 			q.addAnimation(Spell.DISAPPEAR, ImageIO.read(cldr.getResourceAsStream("img/champs/ezreal/qDisappear.png")), 250, width, height);
 			q.addAnimation(Spell.HIT, ImageIO.read(cldr.getResourceAsStream("img/champs/ezreal/qHit.png")), 250, width, height);
 			
@@ -44,7 +45,8 @@ public class Ezreal extends Champion{
 			width = 50;
 			height = 30;
 			w.addAnimation(Spell.APPEAR, ImageIO.read(cldr.getResourceAsStream("img/champs/ezreal/wAppear.png")), 250, width, height);
-			w.addAnimation(Spell.TRAVEL, ImageIO.read(cldr.getResourceAsStream("img/champs/ezreal/wTravel.png")), 250, width, height);
+			w.addAnimation(Spell.TRAVEL_LEFT, ImageIO.read(cldr.getResourceAsStream("img/champs/ezreal/wTravel.png")), 250, width, height);
+			w.addAnimation(Spell.TRAVEL_RIGHT, ImageIO.read(cldr.getResourceAsStream("img/champs/ezreal/wTravel.png")), 250, width, height);
 			w.addAnimation(Spell.DISAPPEAR, ImageIO.read(cldr.getResourceAsStream("img/champs/ezreal/wDisappear.png")), 250, width, height);
 			w.addAnimation(Spell.HIT, ImageIO.read(cldr.getResourceAsStream("img/champs/ezreal/wHit.png")), 250, width, height);
 			
@@ -54,7 +56,8 @@ public class Ezreal extends Champion{
 			width = 100;
 			height = 80;
 			r.addAnimation(Spell.APPEAR, ImageIO.read(cldr.getResourceAsStream("img/champs/ezreal/rAppear.png")), 250, width, height);
-			r.addAnimation(Spell.TRAVEL, ImageIO.read(cldr.getResourceAsStream("img/champs/ezreal/rTravel.png")), 250, width, height);
+			r.addAnimation(Spell.TRAVEL_LEFT, ImageIO.read(cldr.getResourceAsStream("img/champs/ezreal/rTravel.png")), 250, width, height);
+			r.addAnimation(Spell.TRAVEL_RIGHT, ImageIO.read(cldr.getResourceAsStream("img/champs/ezreal/rTravel.png")), 250, width, height);
 			r.addAnimation(Spell.DISAPPEAR, ImageIO.read(cldr.getResourceAsStream("img/champs/ezreal/rDisappear.png")), 250, width, height);
 			r.addAnimation(Spell.HIT, ImageIO.read(cldr.getResourceAsStream("img/champs/ezreal/rHit.png")), 250, width, height);
 			

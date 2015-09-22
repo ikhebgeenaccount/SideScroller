@@ -117,7 +117,12 @@ public class GameObject {
 		 * @return The image of the current scene of the current animation.
 		 */
 		public Image getCurrentAnimationImage(){
-			return currentAnimation.getCurrentSceneImage();
+			try{
+				return currentAnimation.getCurrentSceneImage();				
+			}catch(NullPointerException e){
+				System.out.println(this.currentAnimationType);
+				return null;
+			}
 		}
 		
 		/**Returns the size of this GameObject.
