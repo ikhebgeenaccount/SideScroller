@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import main.Main;
+import main.game.coordinate.Coordinate;
 import main.game.object.champion.Champion;
 import main.game.object.spell.Spell;
 
@@ -89,6 +90,8 @@ public class AlphaGuy extends Champion {
 			System.err.println(e.getMessage());
 			Main.quitGame();
 		}
+		
+		this.setCastOffSet(new Coordinate(25, 30));
 	}
 
 }

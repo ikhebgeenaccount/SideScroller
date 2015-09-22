@@ -21,6 +21,8 @@ public class Champion extends GameObject{
 	
 	public Spell q, w, e, r;
 	
+	private Coordinate spellCastOffSet;
+	
 	/**Default constructor, creates a GameObject with size (50, 100) and sets the following default value:
 	 * - speed : 8
 	 * - defaultSpeed : 8
@@ -34,6 +36,8 @@ public class Champion extends GameObject{
 		setSpeed(8);
 		setDefaultSpeed(8);
 		setMaxHealth(300);
+		
+		spellCastOffSet = new Coordinate(0, 0);
 	}
 	
 	/**This method is used to fire this Champion's Q spell. Returns true if firing is succesfull, otherwise false. False means the spell is still on cooldown.
@@ -42,7 +46,7 @@ public class Champion extends GameObject{
 	 * @return boolean fired
 	 */
 	public boolean castQ(Coordinate startCoordinate, boolean movedLeft){
-		return q.fire(startCoordinate, movedLeft);
+		return q.fire(new Coordinate(startCoordinate.x + spellCastOffSet.x, startCoordinate.y + spellCastOffSet.y - q.getHeight()/2), movedLeft);
 	}
 	
 	/**This method is used to fire this Champion's W spell. Returns true if firing is succesfull, otherwise false. False means the spell is still on cooldown.
@@ -51,7 +55,7 @@ public class Champion extends GameObject{
 	 * @return boolean fired
 	 */
 	public boolean castW(Coordinate startCoordinate, boolean movedLeft){
-		return w.fire(startCoordinate, movedLeft);
+		return w.fire(new Coordinate(startCoordinate.x + spellCastOffSet.x, startCoordinate.y + spellCastOffSet.y - w.getHeight()/2), movedLeft);
 	}
 	
 	/**This method is used to fire this Champion's E spell. Returns true if firing is succesfull, otherwise false. False means the spell is still on cooldown.
@@ -60,7 +64,7 @@ public class Champion extends GameObject{
 	 * @return boolean fired
 	 */
 	public boolean castE(Coordinate startCoordinate, boolean movedLeft){
-		return e.fire(startCoordinate, movedLeft);
+		return e.fire(new Coordinate(startCoordinate.x + spellCastOffSet.x, startCoordinate.y + spellCastOffSet.y - e.getHeight()/2), movedLeft);
 	}
 	
 	/**This method is used to fire this Champion's R spell. Returns true if firing is succesfull, otherwise false. False means the spell is still on cooldown.
@@ -69,7 +73,7 @@ public class Champion extends GameObject{
 	 * @return boolean fired
 	 */
 	public boolean castR(Coordinate startCoordinate, boolean movedLeft){
-		return r.fire(startCoordinate, movedLeft);
+		return r.fire(new Coordinate(startCoordinate.x + spellCastOffSet.x, startCoordinate.y + spellCastOffSet.y - r.getHeight()/2), movedLeft);
 	}
 	
 	/**This method returns the remaining cooldown of specified spell.
@@ -88,6 +92,10 @@ public class Champion extends GameObject{
 		}else{
 			return 0;
 		}
+	}
+	
+	public void setCastOffSet(Coordinate offSet){
+		spellCastOffSet.setCoordinates(offSet);
 	}
 
 }
