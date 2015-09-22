@@ -30,6 +30,7 @@ PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you hav
 	- Fixed a bug where trying to teleport out of the level with Ezreal's E caused the game to crash
 	- Fixed a rare bug where moving between levels caused the game to crash
 	- Fixed a bug where spells were cast from the top left of the character, instead from the middle
+	- Fixed a bug where Ezreal's R displayed the wrong animation when fired to the left
   - *v0.5.0* - **current release**
     - Completely rewritten the way collisions and gravity are detected:
       - Added acceleration and deceleration when falling and jumping
