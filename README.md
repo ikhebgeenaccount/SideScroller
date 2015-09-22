@@ -25,6 +25,7 @@ PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you hav
     - Added minions
 	- Added healthbars
 	- Added a way to win
+	- Added popups that display win condition, when you, etc
 	- Fixed a bug where casting Ezreal's E to the left extended its range
 	- Fixed a bug where trying to teleport out of the level with Ezreal's E caused the game to crash
 	- Fixed a rare bug where moving between levels caused the game to crash
