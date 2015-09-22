@@ -533,20 +533,21 @@ public class GamePanel extends Panel implements KeyListener{
 		return num-mod;    
 	}
 	
-	//Update GameObject[] onScreen;
+	//Update GameObject[] onScreen
 	private void updateGameObjects(){
 		int i = 1;
 		onScreen = new GameObject[objectCap];
 		onScreen[0] = character;
 		for(GameObject object : inLevel){
-			if(object != null){
+			if(object != null && !(object instanceof Champion)){
 				if(object.getCoordinates().x >= levelIDx * 1000 && object.getCoordinates().x < (levelIDx + 1) * 1000 && object.getCoordinates().y >= levelIDy * 500 && object.getCoordinates().y < (levelIDy + 1) * 500){
-					//Is in the level currenty on screen
+					//Is in the level currently on screen
 					onScreen[i] = object;
 					i++;
 				}
 			}
 		}
+		
 	}
 	
 	/*Levels:
@@ -630,5 +631,9 @@ public class GamePanel extends Panel implements KeyListener{
 	 */
 	public NavMesh getNavMesh() {
 		return navMesh;
+	}
+
+	public int getObjectCap() {
+		return objectCap;
 	}
 }
