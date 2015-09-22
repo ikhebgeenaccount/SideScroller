@@ -91,7 +91,7 @@ public class AlphaGuy extends Champion {
 			Main.quitGame();
 		}
 		
-		this.setCastOffSet(new Coordinate(25, 30));
+		this.setCastOffSet(30);
 	}
 
 }
