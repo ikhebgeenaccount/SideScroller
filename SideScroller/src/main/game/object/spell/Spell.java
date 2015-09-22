@@ -145,7 +145,6 @@ public class Spell extends GameObject{
 		
 		//Check if x coordinates are the same
 		if(moveLeft && id != -1){
-			System.out.println("check hit on minion : " + id);
 			if(this.getCoordinates().x <= onScreen[id].getCoordinates().x + onScreen[id].getWidth() && this.getCoordinates().x + this.getWidth() >= onScreen[id].getCoordinates().x + onScreen[id].getWidth()){
 				//Hit!!
 				onScreen[id].damage(this.damage);
@@ -153,11 +152,9 @@ public class Spell extends GameObject{
 				hit = true;
 			}
 		}else if(id != -1){
-			System.out.println("check hit on minion : " + id);
 			System.out.println(this.getCoordinates().x + "+" + this.getWidth() + "==" + onScreen[id].getCoordinates().x);
 			if(this.getCoordinates().x + this.getWidth() >= onScreen[id].getCoordinates().x && this.getCoordinates().x <= onScreen[id].getCoordinates().x){
 				//Hit!!
-				System.out.println("hit");
 				onScreen[id].damage(this.damage);
 				isFired = false;
 				hit = true;
