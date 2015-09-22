@@ -94,8 +94,8 @@ public class Champion extends GameObject{
 		}
 	}
 	
-	public void setCastOffSet(Coordinate offSet){
-		spellCastOffSet.setCoordinates(offSet);
+	public void setCastOffSet(int offSet){
+		spellCastOffSet.setCoordinates(new Coordinate(this.getWidth()/2, offSet));
 	}
 
 }
