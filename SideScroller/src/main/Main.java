@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 
 import main.game.object.champion.Champion;
 import main.game.object.champion.champions.alphaguy.AlphaGuy;
+import main.gui.MessageBox;
 import main.gui.Panel;
 import main.gui.panel.GamePanel;
 import main.gui.panel.MenuPanel;
@@ -105,10 +106,6 @@ public class Main{
 		
 		//Set panel gamepanel in frame
 		setPanel(gamePanel);
-		
-		//Start both threads for update() and repaint()
-		paintLoop.start();
-		gameLoop.start();
 	}
 	
 	/**Pauses the game without exiting it, for testing purposes only.
@@ -141,6 +138,13 @@ public class Main{
 		System.out.println("Exiting");
 		
 		System.exit(0);
+	}
+	
+	public static void setMessageBox(MessageBox box){
+		frame.getContentPane().removeAll();
+		frame.getContentPane().add(box);
+		frame.revalidate();
+		frame.repaint();
 	}
 	
 	/**In this method the JFrame that contains everything is created.

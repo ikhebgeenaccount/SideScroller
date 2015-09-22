@@ -28,6 +28,7 @@ import main.game.object.minion.minions.RedLizard;
 import main.game.object.minion.minions.SiegeMinion;
 import main.game.object.minion.minions.SuperMinion;
 import main.game.object.spell.Spell;
+import main.gui.MessageBox;
 import main.gui.Panel;
 
 /**The class GamePanel contains the gameloop and paintloop.
@@ -367,7 +368,9 @@ public class GamePanel extends Panel implements KeyListener{
 		
 		//Check if character is still alive
 		if(character.getCurrentHealth() == 0){
-			Main.returnToMainMenu();
+			MessageBox diedBox = new MessageBox("kek, u ded", MessageBox.RETURN_TO_MAIN_MENU);
+			Main.setMessageBox(diedBox);
+			Main.freezeGame();
 		}
 		
 		if(endSquare.equals(new Coordinate(character.getCoordinates().x, character.getCoordinates().y + 50))){

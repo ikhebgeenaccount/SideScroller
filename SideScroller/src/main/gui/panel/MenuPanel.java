@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import main.Main;
 import main.gui.Button;
 import main.gui.Label;
+import main.gui.MessageBox;
 import main.gui.Panel;
 
 public class MenuPanel extends Panel{
@@ -50,8 +51,9 @@ public class MenuPanel extends Panel{
 		//Create button to start game
 		startGame = new Button("Start game");
 		startGame.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				Main.startGame();
+			public void actionPerformed(ActionEvent e){				
+				MessageBox startOfGame = new MessageBox("Go to the end of the level to win!", MessageBox.START_GAME);
+				Main.setMessageBox(startOfGame);
 			}
 		});
 		contentPanel.add(startGame, c);
