@@ -1,5 +1,6 @@
 package main.game.object.spell;
 
+import main.Main;
 import main.game.coordinate.Coordinate;
 import main.game.object.GameObject;
 
@@ -97,8 +98,88 @@ public class Spell extends GameObject{
 	 * @return boolean moved
 	 */
 	public boolean move(){ //moveLeft = true, if moving left, false when moving right
-		boolean move;
-		if(moveLeft){
+		boolean move =  false;
+		boolean hit = false;
+		
+		int coordy;
+		GameObject[] onScreen = Main.getGamePanel().getOnScreenObjects();
+		boolean[] onSameHeight = new boolean[Main.getGamePanel().getObjectCap()];
+		
+		for(int i = 0; i < onSameHeight.length; i++){
+			onSameHeight[i] = false;
+		}
+		
+		for(int j = 1; j < onScreen.length; j++){
+			if(onScreen[j] != null){
+				coordy = onScreen[j].getCoordinates().y;
+				for(int i = coordy; i <= coordy + onScreen[j].getHeight(); i++){
+					if(i >= this.getCoordinates().y && i <= this.getCoordinates().y + this.getHeight()){
+						//When they overlap in height, they are on the same height and valid to attack if x is within range.
+						onSameHeight[j] = true;
+					}
+				}
+			}else{
+				j = onScreen.length;
+			}
+		}
+		
+		//Get Minion with closest x coordinate
+		int j = 1;
+		int min_difference = 1000;
+		int id = -1;
+		while(j < onSameHeight.length && onSameHeight[j] == true){
+			if(moveLeft){
+				if(this.getCoordinates().x - onScreen[j].getCoordinates().x + onScreen[j].getWidth() < min_difference){
+					id = j;
+					min_difference = this.getCoordinates().x - onScreen[j].getCoordinates().x + onScreen[j].getWidth();
+				}
+			}else{
+				if(onScreen[j].getCoordinates().x + onScreen[j].getWidth() - this.getCoordinates().x < min_difference){
+					id = j;
+					min_difference = onScreen[j].getCoordinates().x + onScreen[j].getWidth() - this.getCoordinates().x;
+				}
+			}
+			j++;
+			System.out.println("hiero\n" + id);
+		}
+		
+		//Check if x coordinates are the same
+		if(moveLeft && id != -1){
+			System.out.println("check hit on minion : " + id);
+			if(this.getCoordinates().x <= onScreen[id].getCoordinates().x + onScreen[id].getWidth() && this.getCoordinates().x + this.getWidth() >= onScreen[id].getCoordinates().x + onScreen[id].getWidth()){
+				//Hit!!
+				onScreen[id].damage(this.damage);
+				isFired = false;
+				hit = true;
+			}
+		}else if(id != -1){
+			System.out.println("check hit on minion : " + id);
+			System.out.println(this.getCoordinates().x + "+" + this.getWidth() + "==" + onScreen[id].getCoordinates().x);
+			if(this.getCoordinates().x + this.getWidth() >= onScreen[id].getCoordinates().x && this.getCoordinates().x <= onScreen[id].getCoordinates().x){
+				//Hit!!
+				System.out.println("hit");
+				onScreen[id].damage(this.damage);
+				isFired = false;
+				hit = true;
+			}			
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		//Move the spell
+		if(!hit && moveLeft){
 			//Spell is moving to the left
 			if(startCoordinates.x - getCoordinates().x < range){
 				//Move
@@ -110,7 +191,7 @@ public class Spell extends GameObject{
 				isFired = false;
 				setAnimationType(Spell.DISAPPEAR); //Won't play since isFired is already false, needs fixing.
 			}
-		}else{
+		}else if(!hit){
 			//Spell is moving to the right
 			if(getCoordinates().x - startCoordinates.x < range){
 				//Move
@@ -122,7 +203,8 @@ public class Spell extends GameObject{
 				isFired = false;
 				setAnimationType(Spell.DISAPPEAR);
 			}
-		}
+		}		
+		
 		return move;
 	}
 	
