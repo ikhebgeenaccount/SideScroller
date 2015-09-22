@@ -37,6 +37,10 @@ public class MessageBox extends Panel{
 	 */
 	
 	
+	/**Creates a MessageBox inside a Panel.
+	 * @param message The message to be displayed.
+	 * @param action The action to be executed after the button is pressed.
+	 */
 	public MessageBox(String message, int action){		
 		this.action = action;
 		

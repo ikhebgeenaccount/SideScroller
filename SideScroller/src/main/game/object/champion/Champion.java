@@ -94,6 +94,9 @@ public class Champion extends GameObject{
 		}
 	}
 	
+	/**The cast offset is a Coordinate that gets added to the startCoordinate of every spell. This means that the offset is basicly from where the spell gets fired relative to the character. The x offset is default to half of the character's width, the y coordinate is customizable per Champion.
+	 * @param offSet The off set for the y coordinate.
+	 */
 	public void setCastOffSet(int offSet){
 		spellCastOffSet.setCoordinates(new Coordinate(this.getWidth()/2, offSet));
 	}

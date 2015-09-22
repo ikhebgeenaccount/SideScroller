@@ -140,6 +140,9 @@ public class Main{
 		System.exit(0);
 	}
 	
+	/**Displays the specified MessageBox.
+	 * @param box The MessageBox to be displayed.
+	 */
 	public static void setMessageBox(MessageBox box){
 		frame.getContentPane().removeAll();
 		frame.getContentPane().add(box);
