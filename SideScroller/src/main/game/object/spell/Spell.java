@@ -14,7 +14,6 @@ public class Spell extends GameObject{
 	 * 
 	 */
 	public static final int APPEAR = 0, TRAVEL_LEFT = 1, TRAVEL_RIGHT = 2, DISAPPEAR = 3, HIT = 4;
-	private int[] animationsLength;
 	
 	//Spell properties
 	private int range;
@@ -37,7 +36,6 @@ public class Spell extends GameObject{
 	 * @param cooldowninms The cooldown in milliseconds.
 	 */
 	public Spell(int range, int damage, int speed, long cooldowninms){
-		animationsLength = new int[4];
 		setRange(range);
 		setDamage(damage);
 		setSpeed(speed);
@@ -49,7 +47,7 @@ public class Spell extends GameObject{
 	 * 
 	 */
 	public Spell(){
-		animationsLength = new int[4];
+		
 	}
 
 	/**Sets the damage.
@@ -129,16 +127,16 @@ public class Spell extends GameObject{
 		
 		//Get Minion with closest x coordinate
 		int j = 1;
-		int min_difference = 1000;
+		int min_difference = Integer.MAX_VALUE;
 		int id = -1;
-		while(j < onSameHeight.length && onSameHeight[j] == true){
+		while((j < onSameHeight.length && onScreen[j] != null) || onSameHeight[j] == true){
 			if(moveLeft){
 				if(this.getCoordinates().x - onScreen[j].getCoordinates().x + onScreen[j].getWidth() < min_difference){
 					id = j;
 					min_difference = this.getCoordinates().x - onScreen[j].getCoordinates().x + onScreen[j].getWidth();
 				}
 			}else{
-				if(onScreen[j].getCoordinates().x + onScreen[j].getWidth() - this.getCoordinates().x < min_difference){
+				if(onScreen[j].getCoordinates().x - this.getCoordinates().x < min_difference){
 					id = j;
 					min_difference = onScreen[j].getCoordinates().x + onScreen[j].getWidth() - this.getCoordinates().x;
 				}
