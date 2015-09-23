@@ -24,6 +24,7 @@ import main.game.object.minion.minions.Dragon;
 import main.game.object.minion.minions.LargeWolf;
 import main.game.object.minion.minions.MeleeMinion;
 import main.game.object.minion.minions.MiniLizard;
+import main.game.object.minion.minions.MinionMinion;
 import main.game.object.minion.minions.RedLizard;
 import main.game.object.minion.minions.SiegeMinion;
 import main.game.object.minion.minions.SuperMinion;
@@ -183,6 +184,10 @@ public class GamePanel extends Panel implements KeyListener{
 						break;
 					case 9:	for(int j = 0; j < type.length; j++){
 								type[j] = new Baron();
+							}
+						break;
+					case 10:for(int j = 0; j < type.length; j++){
+								type[j] = new MinionMinion();
 							}
 						break;
 					default:for(int j = 0; j < type.length; j++){
