@@ -28,7 +28,6 @@ public class GameObject {
 	private int width, height;
 	
 	//Speed in px
-	private int startSpeed;
 	private int speed, yspeed, defaultSpeed;
 	
 	private int health;
@@ -193,7 +192,6 @@ public class GameObject {
 		 * @param speed The new speed in x-axis
 		 */
 		public void setSpeed(int speed){
-			this.startSpeed = speed;
 			this.speed = speed;
 		}
 		

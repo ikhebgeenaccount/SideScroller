@@ -6,7 +6,6 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import main.Main;
-import main.game.coordinate.Coordinate;
 import main.game.object.champion.Champion;
 import main.game.object.spell.Spell;
 
