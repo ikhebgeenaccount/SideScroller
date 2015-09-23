@@ -21,6 +21,8 @@ PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you hav
   - Great graphics 
 
 ##Changelog
+  - *v0.5.2* - **current release**
+    - Fixed a bug that caused the game to crash
   - *v0.5.1*
     - Added minions
 	- Added healthbars
@@ -31,7 +33,7 @@ PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you hav
 	- Fixed a rare bug where moving between levels caused the game to crash
 	- Fixed a bug where spells were cast from the top left of the character, instead from the middle
 	- Fixed a bug where Ezreal's R displayed the wrong animation when fired to the left
-  - *v0.5.0* - **current release**
+  - *v0.5.0*
     - Completely rewritten the way collisions and gravity are detected:
       - Added acceleration and deceleration when falling and jumping
       - Fixed a bug where you could move out of the level
