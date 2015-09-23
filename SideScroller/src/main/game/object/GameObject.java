@@ -119,7 +119,6 @@ public class GameObject {
 			try{
 				return currentAnimation.getCurrentSceneImage();				
 			}catch(NullPointerException e){
-				System.out.println(this.currentAnimationType);
 				return null;
 			}
 		}
