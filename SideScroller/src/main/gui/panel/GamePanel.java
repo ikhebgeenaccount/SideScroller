@@ -374,8 +374,8 @@ public class GamePanel extends Panel implements KeyListener{
 		}
 		
 		if(endSquare.equals(new Coordinate(character.getCoordinates().x, character.getCoordinates().y + 50))){
-			System.out.println("Victory");
-			Main.pauseGame();
+			MessageBox victoryBox = new MessageBox("Victory!", MessageBox.RETURN_TO_MAIN_MENU);
+			Main.setMessageBox(victoryBox);
 		}
 
 		//Variables to check for animations
