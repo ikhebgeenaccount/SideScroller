@@ -129,17 +129,19 @@ public class Spell extends GameObject{
 		int j = 1;
 		int min_difference = Integer.MAX_VALUE;
 		int id = -1;
-		while((j < onSameHeight.length && onScreen[j] != null) || onSameHeight[j] == true){
-			if(moveLeft){
-				if(this.getCoordinates().x - onScreen[j].getCoordinates().x + onScreen[j].getWidth() < min_difference){
-					id = j;
-					min_difference = this.getCoordinates().x - onScreen[j].getCoordinates().x + onScreen[j].getWidth();
-				}
-			}else{
-				if(onScreen[j].getCoordinates().x - this.getCoordinates().x < min_difference){
-					id = j;
-					min_difference = onScreen[j].getCoordinates().x + onScreen[j].getWidth() - this.getCoordinates().x;
-				}
+		while(j < onSameHeight.length && onScreen[j] != null){
+			if(onSameHeight[j]){
+				if(moveLeft){
+					if(this.getCoordinates().x - onScreen[j].getCoordinates().x + onScreen[j].getWidth() < min_difference){
+						id = j;
+						min_difference = this.getCoordinates().x - onScreen[j].getCoordinates().x + onScreen[j].getWidth();
+					}
+				}else{
+					if(onScreen[j].getCoordinates().x - this.getCoordinates().x < min_difference){
+						id = j;
+						min_difference = onScreen[j].getCoordinates().x + onScreen[j].getWidth() - this.getCoordinates().x;
+					}
+				}				
 			}
 			j++;
 		}
