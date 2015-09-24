@@ -35,12 +35,13 @@ public class AlphaGuy extends Champion {
 			q.addAnimation(Spell.DISAPPEAR, ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/qAppear.png")), 250, 70, 15);
 			q.addAnimation(Spell.HIT, ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/qAppear.png")), 250, 70, 15);
 			
-			w = new Spell(500, 100, 10, 5000);
+			w = new Spell(500, 0, 10, 5000);
 			w.addAnimation(Spell.APPEAR, ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/wAppear.png")), 250, 50, 30);
 			w.addAnimation(Spell.TRAVEL_LEFT, ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/wAppear.png")), 250, 50, 30);
 			w.addAnimation(Spell.TRAVEL_RIGHT, ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/wAppear.png")), 250, 50, 30);
 			w.addAnimation(Spell.DISAPPEAR, ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/wAppear.png")), 250, 50, 30);
 			w.addAnimation(Spell.HIT, ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/wAppear.png")), 250, 50, 30);
+			w.setDisappearOnHit(false);
 			
 			e = new main.game.object.champion.champions.ezreal.EzrealE();
 			
