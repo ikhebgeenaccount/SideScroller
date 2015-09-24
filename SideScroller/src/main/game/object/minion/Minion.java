@@ -153,7 +153,6 @@ public class Minion extends GameObject {
 			}
 		}
 		
-		System.out.println(attackLeft);
 		if(activity){
 			if(attackLeft){
 				this.setAnimationType(ATTACK_LEFT);

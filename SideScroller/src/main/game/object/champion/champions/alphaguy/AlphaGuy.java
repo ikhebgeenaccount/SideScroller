@@ -50,6 +50,7 @@ public class AlphaGuy extends Champion {
 			r.addAnimation(Spell.TRAVEL_RIGHT, ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/r_travel_right.png")), 250, 100, 80);
 			r.addAnimation(Spell.DISAPPEAR, ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/rAppear.png")), 250, 100, 80);
 			r.addAnimation(Spell.HIT, ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/rAppear.png")), 250, 100, 80);
+			r.setDisappearOnHit(false);
 			
 			//Add the idle animation to animations[]
 			BufferedImage idleSprite = ImageIO.read(cldr.getResourceAsStream("img/champs/alphaguy/idle.png"));

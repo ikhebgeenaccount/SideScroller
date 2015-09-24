@@ -29,6 +29,8 @@ public class Spell extends GameObject{
 	private long currentCooldown;
 	private boolean moveLeft;
 	
+	private boolean disappearOnHit;
+	
 	/**Creates a new Spell with specified properties.
 	 * @param range The range in pixels.
 	 * @param damage The damage.
@@ -41,6 +43,7 @@ public class Spell extends GameObject{
 		setSpeed(speed);
 		setCooldown(cooldowninms);
 		currentCooldown = 0;
+		disappearOnHit = true;
 	}
 	
 	/**Default constructor. Not recommended for use.
@@ -69,6 +72,10 @@ public class Spell extends GameObject{
 	 */
 	public void setCooldown(long cooldowninms){
 		this.cooldown = cooldowninms;
+	}
+	
+	public void setDisappearOnHit(boolean disappear){
+		this.disappearOnHit = disappear;
 	}
 
 	/**Fires the spell if cooldown is zero. Returns true when fired, otherwise false.
@@ -100,7 +107,7 @@ public class Spell extends GameObject{
 	 * @return boolean moved
 	 */
 	public boolean move(){ //moveLeft = true, if moving left, false when moving right
-		boolean move =  false;
+		boolean move = false;
 		boolean hit = false;
 		
 		int coordy;
@@ -151,14 +158,16 @@ public class Spell extends GameObject{
 			if(this.getCoordinates().x <= onScreen[id].getCoordinates().x + onScreen[id].getWidth() && this.getCoordinates().x + this.getWidth() >= onScreen[id].getCoordinates().x + onScreen[id].getWidth()){
 				//Hit!!
 				onScreen[id].damage(this.damage);
-				isFired = false;
+				isFired = !disappearOnHit;
+				move = !disappearOnHit;
 				hit = true;
 			}
 		}else if(id != -1){
 			if(this.getCoordinates().x + this.getWidth() >= onScreen[id].getCoordinates().x && this.getCoordinates().x <= onScreen[id].getCoordinates().x){
 				//Hit!!
 				onScreen[id].damage(this.damage);
-				isFired = false;
+				isFired = !disappearOnHit;
+				move = !disappearOnHit;
 				hit = true;
 			}			
 		}
