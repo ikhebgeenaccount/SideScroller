@@ -160,7 +160,7 @@ public class Spell extends GameObject{
 				onScreen[id].damage(this.damage);
 				isFired = !disappearOnHit;
 				move = !disappearOnHit;
-				hit = true;
+				hit = disappearOnHit;
 			}
 		}else if(id != -1){
 			if(this.getCoordinates().x + this.getWidth() >= onScreen[id].getCoordinates().x && this.getCoordinates().x <= onScreen[id].getCoordinates().x){
@@ -168,7 +168,7 @@ public class Spell extends GameObject{
 				onScreen[id].damage(this.damage);
 				isFired = !disappearOnHit;
 				move = !disappearOnHit;
-				hit = true;
+				hit = disappearOnHit;
 			}			
 		}
 		
