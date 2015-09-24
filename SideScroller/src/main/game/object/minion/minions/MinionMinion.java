@@ -29,6 +29,6 @@ public class MinionMinion extends Minion {
 		}
 		
 		this.setAnimationType(Minion.WALK_LEFT);	
-		
+		 
 	}
 }
