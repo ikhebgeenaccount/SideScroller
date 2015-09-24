@@ -9,7 +9,7 @@ import main.game.object.minion.Minion;
 public class MinionMinion extends Minion {
 	
 	public MinionMinion(){
-		super(50, 50, 3, 5, 42, 800);
+		super(50, 50, 3, 5, 21, 400);
 		
 		ClassLoader cldr = this.getClass().getClassLoader();
 		
