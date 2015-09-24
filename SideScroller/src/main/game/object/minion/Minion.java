@@ -20,6 +20,7 @@ public class Minion extends GameObject {
 	private int damage;
 	private long attackLength;
 	private long attackStart;
+	private boolean attackLeft;
 	
 	private boolean moveLeft;
 	
@@ -87,7 +88,6 @@ public class Minion extends GameObject {
 		Coordinate champCoordinate = onScreen[0].getCoordinates();
 		
 		boolean sameHeight = false;
-		boolean attackLeft = true;
 		
 		//Check if the minion and the champion are on the same height 
 		for(int i = coordy; i <= coordy + this.getHeight(); i++){
@@ -109,7 +109,8 @@ public class Minion extends GameObject {
 					if(System.currentTimeMillis() - attackStart >= attackLength){
 						attackStart = System.currentTimeMillis();
 						onScreen[0].damage(damage);
-						attackLeft = false;						
+						attackLeft = false;
+						System.out.println("attack right");
 					}
 					activity = true;
 				}
@@ -122,7 +123,8 @@ public class Minion extends GameObject {
 					if(System.currentTimeMillis() - attackStart >= attackLength){
 						attackStart = System.currentTimeMillis();
 						onScreen[0].damage(damage);
-						attackLeft = false;						
+						attackLeft = true;
+						System.out.println("attack left");
 					}
 					activity = true;
 				}
@@ -153,11 +155,14 @@ public class Minion extends GameObject {
 			}
 		}
 		
+		System.out.println(attackLeft);
 		if(activity){
 			if(attackLeft){
 				this.setAnimationType(ATTACK_LEFT);
+				System.out.println("attack left animation");
 			}else{
 				this.setAnimationType(ATTACK_RIGHT);
+				System.out.println("attack right animation");
 			}
 		}else{
 			if(moveLeft){
