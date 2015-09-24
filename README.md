@@ -21,6 +21,8 @@ PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you hav
   - Great graphics 
 
 ##Changelog
+  - *v0.5.3*
+    - Ezreal R and W now move through minions
   - *v0.5.2* - **current release**
     - Fixed a bug that caused the game to crash
   - *v0.5.1*
