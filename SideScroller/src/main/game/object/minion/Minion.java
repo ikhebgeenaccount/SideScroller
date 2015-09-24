@@ -110,7 +110,6 @@ public class Minion extends GameObject {
 						attackStart = System.currentTimeMillis();
 						onScreen[0].damage(damage);
 						attackLeft = false;
-						System.out.println("attack right");
 					}
 					activity = true;
 				}
@@ -124,7 +123,6 @@ public class Minion extends GameObject {
 						attackStart = System.currentTimeMillis();
 						onScreen[0].damage(damage);
 						attackLeft = true;
-						System.out.println("attack left");
 					}
 					activity = true;
 				}
@@ -159,10 +157,8 @@ public class Minion extends GameObject {
 		if(activity){
 			if(attackLeft){
 				this.setAnimationType(ATTACK_LEFT);
-				System.out.println("attack left animation");
 			}else{
 				this.setAnimationType(ATTACK_RIGHT);
-				System.out.println("attack right animation");
 			}
 		}else{
 			if(moveLeft){
