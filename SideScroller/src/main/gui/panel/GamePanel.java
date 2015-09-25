@@ -13,6 +13,8 @@ import javax.swing.ImageIcon;
 
 import main.Main;
 import main.game.coordinate.Coordinate;
+import main.game.levelimage.LevelImage;
+import main.game.levelimage.LevelImageTest;
 import main.game.navmesh.NavMesh;
 import main.game.object.GameObject;
 import main.game.object.champion.Champion;
@@ -39,11 +41,13 @@ import main.gui.Panel;
 public class GamePanel extends Panel implements KeyListener{
 	
 	//Levels
-	private int levelIDx;
-	private int levelIDy;
 	private int[][] currentLevel;
 	private int[][] levelOne;
 	private NavMesh navMesh;
+	private LevelImage levelImage;
+	
+	private int offSetX, offSetY;
+	private int maxOffSetX, maxOffSetY;
 	
 	//Array for keys
 	private boolean[] keys;
@@ -94,9 +98,13 @@ public class GamePanel extends Panel implements KeyListener{
 		createLevels();
 		navMesh = new NavMesh(levelOne);
 		//NavMeshTest navFrame = new NavMeshTest(navMesh);
+		
 		currentLevel = levelOne;
-		levelIDx = 0;
-		levelIDy = 0;
+		
+		offSetX = 0;
+		offSetY = 0;
+		maxOffSetX = (currentLevel[0].length - 20) * 50;
+		maxOffSetY = (currentLevel.length - 10) * 50;
 		
 		//First spell will be fired to the right
 		movedLeft = false;
@@ -204,6 +212,9 @@ public class GamePanel extends Panel implements KeyListener{
 				}
 			}
 			
+			levelImage = new LevelImage(levelOne, theme);
+			//LevelImageTest test = new LevelImageTest(levelImage);
+			
 			updateGameObjects();
 		}catch(NullPointerException e){
 			e.printStackTrace();
@@ -237,7 +248,7 @@ public class GamePanel extends Panel implements KeyListener{
 		super.paintComponent(g);
 		//i is x
 		//j is y
-		for(int x = 0; x < 20; x++){
+		/*for(int x = 0; x < 20; x++){
 			for(int y = 0; y < 10; y++){
                 //Decide which landscape-img should be used
 				switch(currentLevel[y + (levelIDy * 10)][x + (levelIDx * 20)]){
@@ -251,34 +262,36 @@ public class GamePanel extends Panel implements KeyListener{
 						break;
 				}
 			}
-		}
+		}*/
+		
+		g.drawImage(levelImage.getSubimage(offSetX, offSetY, 1000, 500), 0, 0, null);
 		
 		//No spells in onScreen (or in inLevel)
 		int i = 0;
 		for(GameObject object : onScreen){
 			if(object != null){
 				i++;
-				g.drawImage(object.getCurrentAnimationImage(), object.getCoordinates().x - levelIDx * 1000, object.getCoordinates().y - levelIDy * 500, null);
-				g.drawImage(object.getHealthBarImage(), object.getCoordinates().x - levelIDx * 1000, object.getCoordinates().y - levelIDy * 500 - 16, null);
+				g.drawImage(object.getCurrentAnimationImage(), object.getCoordinates().x - offSetX, object.getCoordinates().y - offSetY, null);
+				g.drawImage(object.getHealthBarImage(), object.getCoordinates().x - offSetX, object.getCoordinates().y - offSetY - 16, null);
 				object.checkNextScene();
 			}
 		}
 		
 		//Draw spells if fired
 		if(isFlyingQ){
-			g.drawImage(character.q.getCurrentAnimationImage(), character.q.getCoordinates().x - levelIDx * 1000, character.q.getCoordinates().y - levelIDy * 500, null);
+			g.drawImage(character.q.getCurrentAnimationImage(), character.q.getCoordinates().x - offSetX, character.q.getCoordinates().y - offSetY, null);
 			character.q.checkNextScene();
 		}
 		if(isFlyingW){
-			g.drawImage(character.w.getCurrentAnimationImage(), character.w.getCoordinates().x - levelIDx * 1000, character.w.getCoordinates().y - levelIDy * 500, null);
+			g.drawImage(character.w.getCurrentAnimationImage(), character.w.getCoordinates().x - offSetX, character.w.getCoordinates().y - offSetY, null);
 			character.w.checkNextScene();
 		}
 		if(isFlyingE){
-			g.drawImage(character.e.getCurrentAnimationImage(), character.e.getCoordinates().x - levelIDx * 1000, character.e.getCoordinates().y - levelIDy * 500, null);
+			g.drawImage(character.e.getCurrentAnimationImage(), character.e.getCoordinates().x - offSetX, character.e.getCoordinates().y - offSetY, null);
 			character.e.checkNextScene();
 		}
 		if(isFlyingR){
-			g.drawImage(character.r.getCurrentAnimationImage(), character.r.getCoordinates().x - levelIDx * 1000, character.r.getCoordinates().y - levelIDy * 500, null);
+			g.drawImage(character.r.getCurrentAnimationImage(), character.r.getCoordinates().x - offSetX, character.r.getCoordinates().y - offSetY, null);
 			character.r.checkNextScene();
 		}
 		
@@ -373,6 +386,9 @@ public class GamePanel extends Panel implements KeyListener{
 		//Check collision with navmesh instead of reading array
 		tick++;
 		
+		int oldX = character.getCoordinates().x;
+		int oldY = character.getCoordinates().y;
+		
 		//Check if character is still alive
 		if(character.getCurrentHealth() == 0){
 			MessageBox diedBox = new MessageBox("kek, u ded", MessageBox.RETURN_TO_MAIN_MENU);
@@ -442,18 +458,33 @@ public class GamePanel extends Panel implements KeyListener{
 			}
 		}
 		
-		//Check if levelID should change
-		Coordinate characterCoordinate = character.getCoordinates();
-		if(characterCoordinate.y + character.getHeight()/2 < levelIDy * 500){
-			levelIDy--;
-		}else if(characterCoordinate.y + character.getHeight()/2 > (levelIDy + 1) * 500){
-			levelIDy++;
+		//Update the screen offset
+		if(character.getCoordinates().x - offSetX >= 600 && offSetX < maxOffSetX){
+			if(offSetX + Math.abs(character.getCoordinates().x - oldX) > maxOffSetX){
+				offSetX = maxOffSetX;
+			}else{
+				offSetX += Math.abs(character.getCoordinates().x - oldX);				
+			}
+		}else if(Math.abs(character.getCoordinates().x - oldX) - offSetX <= 400 && offSetX > 0){
+			if(offSetX - Math.abs(character.getCoordinates().x - oldX) < 0){
+				offSetX = 0;
+			}else{
+				offSetX -= Math.abs(character.getCoordinates().x - oldX);
+			}
 		}
 		
-		if(characterCoordinate.x + character.getWidth()/2 < levelIDx * 1000){
-			levelIDx--;
-		}else if(characterCoordinate.x + character.getWidth()/2 > (levelIDx + 1) * 1000){
-			levelIDx++;
+		if(character.getCoordinates().y - offSetY >= 250 && offSetY < maxOffSetY){
+			if(offSetY + Math.abs(character.getCoordinates().y - oldY) > maxOffSetY){
+				offSetY = maxOffSetY;
+			}else{
+				offSetY += Math.abs(character.getCoordinates().y - oldY);				
+			}
+		}else if(Math.abs(character.getCoordinates().y - oldY) - offSetY <= 250 && offSetY > 0){
+			if(offSetY - Math.abs(character.getCoordinates().y - oldY) < 0){
+				offSetY = 0;
+			}else{
+				offSetY -= Math.abs(character.getCoordinates().y - oldY);
+			}
 		}
 		
 		//Pause game on escape
@@ -550,7 +581,7 @@ public class GamePanel extends Panel implements KeyListener{
 		onScreen[0] = character;
 		for(GameObject object : inLevel){
 			if(object != null && !(object instanceof Champion)){
-				if(object.getCurrentHealth() != 0 && object.getCoordinates().x >= levelIDx * 1000 && object.getCoordinates().x < (levelIDx + 1) * 1000 && object.getCoordinates().y >= levelIDy * 500 && object.getCoordinates().y < (levelIDy + 1) * 500){
+				if(object.getCurrentHealth() != 0 && object.getCoordinates().x >= offSetX && object.getCoordinates().x < offSetX + 1000 && object.getCoordinates().y >= offSetY && object.getCoordinates().y < offSetY + 500){
 					//Is in the level currently on screen
 					onScreen[i] = object;
 					i++;
@@ -614,18 +645,8 @@ public class GamePanel extends Panel implements KeyListener{
 		return character;
 	}
 	
-	/**Returns the level that is currently played.
-	 * @return int[][] currentLevel
-	 */
-	public int[][] getCurrentLevel(){
-		return currentLevel;
-	}
-	
-	/**Returns the levelID in x- and y-axis. With levelID is determined in which part of the level the character is.
-	 * @return int[][]{levelIDx, levelIDy}
-	 */
-	public int[] getLevelIDs(){
-		return new int[]{levelIDx, levelIDy};
+	public String getTheme(){
+		return theme;
 	}
 	
 	/**Returns an array with all GameObjects that are on the screen, which means they are visible in the window.
