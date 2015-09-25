@@ -29,7 +29,7 @@ import main.gui.panel.SelectPanel;
 public class Main{
 	
 	//Version
-	private static final String VERSION = "v0.5.2";
+	private static final String VERSION = "v0.5.3";
 	
 	//Game properties
 	private static int maxFPS;
