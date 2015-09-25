@@ -14,8 +14,6 @@ import java.awt.image.BufferedImage;
 public class NavMesh extends BufferedImage{
 	
 	private Graphics2D graphics;
-	private Shape shapes[];
-	private int numberOfShapes;
 	
 	/**Creates a NavMesh corresponding to int[][] level
 	 * @param level The int[][] where the NavMesh is based on.
@@ -23,8 +21,6 @@ public class NavMesh extends BufferedImage{
 	public NavMesh(int[][] level){
 		super(level[0].length * 50, level.length * 50, BufferedImage.TYPE_INT_RGB);
 		
-		shapes = new Shape[1000];
-		numberOfShapes = 0;
 		graphics = createGraphics();
 		
 		drawRectangle(0, 0, level[0].length * 50, level.length * 50, Color.BLUE);
@@ -41,8 +37,6 @@ public class NavMesh extends BufferedImage{
 	private void drawRectangle(int x, int y, int width, int height, Paint color){
 		graphics.setPaint(color);
 		graphics.fill(new Rectangle(x, y, width, height));
-		shapes[numberOfShapes] = new Rectangle(x, y, width, height);
-		numberOfShapes++;
 	}
 	
 	private class Rectangle extends Rectangle2D.Double{
