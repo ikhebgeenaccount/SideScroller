@@ -465,7 +465,7 @@ public class GamePanel extends Panel implements KeyListener{
 			}else{
 				offSetX += Math.abs(character.getCoordinates().x - oldX);				
 			}
-		}else if(Math.abs(character.getCoordinates().x - oldX) - offSetX <= 400 && offSetX > 0){
+		}else if(character.getCoordinates().x - offSetX <= 400 && offSetX > 0){
 			if(offSetX - Math.abs(character.getCoordinates().x - oldX) < 0){
 				offSetX = 0;
 			}else{
@@ -479,7 +479,7 @@ public class GamePanel extends Panel implements KeyListener{
 			}else{
 				offSetY += Math.abs(character.getCoordinates().y - oldY);				
 			}
-		}else if(Math.abs(character.getCoordinates().y - oldY) - offSetY <= 250 && offSetY > 0){
+		}else if(character.getCoordinates().y - offSetY <= 250 && offSetY > 0){
 			if(offSetY - Math.abs(character.getCoordinates().y - oldY) < 0){
 				offSetY = 0;
 			}else{
