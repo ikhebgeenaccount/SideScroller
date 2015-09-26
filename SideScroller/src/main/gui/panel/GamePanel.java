@@ -269,7 +269,7 @@ public class GamePanel extends Panel implements KeyListener{
 		//No spells in onScreen (or in inLevel)
 		int i = 0;
 		for(GameObject object : onScreen){
-			if(object != null){
+			if(object != null && object.getCurrentHealth() != 0){
 				i++;
 				g.drawImage(object.getCurrentAnimationImage(), object.getCoordinates().x - offSetX, object.getCoordinates().y - offSetY, null);
 				g.drawImage(object.getHealthBarImage(), object.getCoordinates().x - offSetX, object.getCoordinates().y - offSetY - 16, null);
@@ -587,7 +587,8 @@ public class GamePanel extends Panel implements KeyListener{
 					i++;
 				}
 			}
-		}		
+		}
+		onScreen = inLevel;
 	}
 	
 	/*Levels:
