@@ -581,14 +581,13 @@ public class GamePanel extends Panel implements KeyListener{
 		onScreen[0] = character;
 		for(GameObject object : inLevel){
 			if(object != null && !(object instanceof Champion)){
-				if(object.getCurrentHealth() != 0 && object.getCoordinates().x >= offSetX && object.getCoordinates().x < offSetX + 1000 && object.getCoordinates().y >= offSetY && object.getCoordinates().y < offSetY + 500){
+				if(object.getCurrentHealth() != 0/* && object.getCoordinates().x >= offSetX && object.getCoordinates().x < offSetX + 1000 && object.getCoordinates().y >= offSetY && object.getCoordinates().y < offSetY + 500*/){
 					//Is in the level currently on screen
 					onScreen[i] = object;
 					i++;
 				}
 			}
 		}
-		onScreen = inLevel;
 	}
 	
 	/*Levels:
