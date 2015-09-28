@@ -14,7 +14,7 @@ import main.gui.Panel;
 
 public class MenuPanel extends Panel{
 	
-	private Button startGame, options, quit;
+	private Button startGame, levelEditor, options, quit;
 	private Label createdBy, ownedBy, title, version;
 	
 	public MenuPanel(){
@@ -60,7 +60,23 @@ public class MenuPanel extends Panel{
 		
 		c.gridy++;
 		
-		xy = addFillerLabelsY(3, c.gridx, c.gridy);
+		xy = addFillerLabelsY(2, c.gridx, c.gridy);
+		c.gridx = xy[0];
+		c.gridy = xy[1];
+		
+		c.gridy++;
+		
+		levelEditor = new Button("Level editor");
+		levelEditor.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				//Main.setPanel(Main.getLevelEditorPanel());			
+			}			
+		});
+		contentPanel.add(levelEditor, c);
+		
+		c.gridy++;
+		
+		xy = addFillerLabelsY(2, c.gridx, c.gridy);
 		c.gridx = xy[0];
 		c.gridy = xy[1];
 		
@@ -77,7 +93,7 @@ public class MenuPanel extends Panel{
 		
 		c.gridy++;
 		
-		xy = addFillerLabelsY(3, c.gridx, c.gridy);
+		xy = addFillerLabelsY(2, c.gridx, c.gridy);
 		
 		c.gridx = xy[0];
 		c.gridy = xy[1];
@@ -95,7 +111,7 @@ public class MenuPanel extends Panel{
 		
 		c.gridy++;
 		
-		xy = addFillerLabelsY(7, c.gridx, c.gridy);
+		xy = addFillerLabelsY(5, c.gridx, c.gridy);
 		c.gridx = xy[0];
 		c.gridy = xy[1];
 		
