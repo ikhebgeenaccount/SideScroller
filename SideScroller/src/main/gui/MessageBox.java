@@ -8,8 +8,6 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import main.Main;
@@ -53,10 +51,9 @@ public class MessageBox extends Panel{
 		
 		JPanel innerPanel = new JPanel();
 		innerPanel.setLayout(new BorderLayout());
-		innerPanel.setPreferredSize(new Dimension(200, 150));
 		
-		innerPanel.add(new JLabel(message), BorderLayout.CENTER);
-		JButton okButton = new JButton("Ok");
+		innerPanel.add(new Label(message, 18), BorderLayout.CENTER);
+		Button okButton = new Button("Ok");
 		okButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				executeAction();
