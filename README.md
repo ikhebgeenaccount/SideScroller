@@ -25,6 +25,7 @@ PM [/u/ikhebgeenaccount](http://www.reddit.com/u/ikhebgeenaccount) or if you hav
     - The screen now moves with the character instead of changing to the next screen when the character moves offscreen
     - Ezreal R and W now move through minions
 	- Fixed a bug where an attacking minion was always visually attacking to the left
+	- Changed the color of buttons
   - *v0.5.2* - **current release**
     - Fixed a bug that caused the game to crash
   - *v0.5.1*
