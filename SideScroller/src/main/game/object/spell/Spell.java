@@ -88,7 +88,12 @@ public class Spell extends GameObject{
 			this.moveLeft = movedLeft;
 			this.startTime = System.currentTimeMillis();
 			this.startCoordinates = new Coordinate();
-			this.startCoordinates.setCoordinates(startCoordinates);
+			if(movedLeft){
+				//Move left
+				this.startCoordinates.setCoordinates(new Coordinate(startCoordinates.x - this.getWidth(), startCoordinates.y));
+			}else{
+				this.startCoordinates.setCoordinates(startCoordinates);
+			}
 			getCoordinates().setCoordinates(this.startCoordinates);
 			isFired = true;
 			if(moveLeft){
