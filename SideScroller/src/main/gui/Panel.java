@@ -10,6 +10,8 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import main.Main;
+
 /**
  * @author ikhebgeenaccount
  * @version 18 sep. 2015
@@ -35,7 +37,7 @@ public class Panel extends JPanel{
 		Dimension dim = new Dimension(1000, 500);
 		setPreferredSize(dim);
 		
-		background = new ImageIcon(this.getClass().getClassLoader().getResource("img/background/background.png")).getImage();
+		background = new ImageIcon(this.getClass().getClassLoader().getResource("img/background/" + Main.getGamePanel().getTheme() + "background.png")).getImage();
 	}
 	
 	//Add amount FillerLabels from start in y
