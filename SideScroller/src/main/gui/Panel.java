@@ -37,7 +37,7 @@ public class Panel extends JPanel{
 		Dimension dim = new Dimension(1000, 500);
 		setPreferredSize(dim);
 		
-		background = new ImageIcon(this.getClass().getClassLoader().getResource("img/background/" + Main.getGamePanel().getTheme() + "background.png")).getImage();
+		background = new ImageIcon(this.getClass().getClassLoader().getResource("img/background/" + Main.getMenuTheme() + "/background.png")).getImage();
 	}
 	
 	//Add amount FillerLabels from start in y
