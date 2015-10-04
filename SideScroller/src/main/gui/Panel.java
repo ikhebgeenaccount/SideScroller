@@ -70,5 +70,10 @@ public class Panel extends JPanel{
 		//Draw default background image
 		g.drawImage(background, 0, 0, null);
 	}
+	
+	public void reloadBackground(){
+		background = new ImageIcon(this.getClass().getClassLoader().getResource("img/background/" + Main.getMenuTheme() + "/background.png")).getImage();
+		repaint();
+	}
 
 }

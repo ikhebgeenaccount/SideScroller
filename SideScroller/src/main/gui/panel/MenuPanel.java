@@ -5,6 +5,8 @@ import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import main.Main;
 import main.gui.Button;
@@ -12,13 +14,15 @@ import main.gui.Label;
 import main.gui.MessageBox;
 import main.gui.Panel;
 
-public class MenuPanel extends Panel{
+public class MenuPanel extends Panel implements KeyListener{
 	
 	private Button startGame, levelEditor, options, quit;
 	private Label createdBy, ownedBy, title, version;
 	
+	private boolean[] keys;
+	
 	public MenuPanel(){
-		
+		keys = new boolean[1000];
 		//Set c properties
 		c.anchor = GridBagConstraints.NORTHWEST;
 		
@@ -128,12 +132,36 @@ public class MenuPanel extends Panel{
 		ownedBy = new Label("League of Legends is owned by Riot Games", 20);
 		ownedBy.setForeground(Color.WHITE);
 		contentPanel.add(ownedBy, c);
+		
+		//Set this as keylistener and make it focusable so the keylistener works
+		addKeyListener(this);
+		setFocusable(true);
 	}
 	
 	@Override
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		//Draw background image
+	}
+
+	public void keyPressed(KeyEvent arg0) {
+		keys[arg0.getKeyCode()] = true;
+		
+		if(keys[KeyEvent.VK_M] && keys[KeyEvent.VK_L] && keys[KeyEvent.VK_G]){
+			Main.setMenuTheme("mlg");
+			this.reloadBackground();
+		}
+		
+	}
+
+	public void keyReleased(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

@@ -30,6 +30,7 @@ public class Main{
 	
 	//Version
 	private static final String VERSION = "v0.5.3";
+	private static String menuTheme;
 	
 	//Game properties
 	private static int maxFPS;
@@ -197,6 +198,7 @@ public class Main{
 			maxFPS = Integer.parseInt(properties.getProperty("FPS"));
 			ticksPS = Integer.parseInt(properties.getProperty("TPS"));
 			fpsCap = Boolean.parseBoolean(properties.getProperty("fpsCap"));
+			menuTheme = properties.getProperty("menuTheme");
 			
 			propertiesFile.close();
 		}catch(IOException e){
@@ -205,12 +207,16 @@ public class Main{
 			//Manual
 			maxFPS = 45;
 			fpsCap = true;
+			menuTheme = "default";
+			ticksPS = 45;
 		}catch(NullPointerException e){
 			e.printStackTrace();
 			
 			//Manual
 			maxFPS = 45;
 			fpsCap = true;
+			menuTheme = "default";
+			ticksPS = 45;
 		}
 	}
 	
@@ -389,5 +395,16 @@ public class Main{
 	 */
 	public static String getCurrentTPS(){
 		return String.valueOf(currentTPS);
+	}
+	
+	/**Returns the current menu theme.
+	 * @return String
+	 */
+	public static String getMenuTheme(){
+		return menuTheme;
+	}
+	
+	public static void setMenuTheme(String theme){
+		menuTheme = theme;
 	}
 }
