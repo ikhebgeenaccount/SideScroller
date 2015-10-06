@@ -73,10 +73,14 @@ public class MenuPanel extends Panel implements KeyListener{
 		levelEditor = new Button("Level editor");
 		levelEditor.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				MessageBox levelEditorScum = new MessageBox("This feature is 2 sp00ky 4 you!", MessageBox.RETURN_TO_MAIN_MENU);
-				Main.setMessageBox(levelEditorScum);
+				String savetheme = Main.getMenuTheme();
 				Main.setMenuTheme("spooky");
 				reloadBackground();
+				MessageBox levelEditorScum = new MessageBox("This feature is 2 sp00ky 4 you!", MessageBox.RETURN_TO_MAIN_MENU);
+				Main.setMessageBox(levelEditorScum);
+				Main.setMenuTheme(savetheme);
+				reloadBackground();
+				
 				//Main.setPanel(Main.getLevelEditorPanel());			
 			}			
 		});
@@ -155,11 +159,6 @@ public class MenuPanel extends Panel implements KeyListener{
 			Main.setMenuTheme("mlg");
 			this.reloadBackground();
 		}
-		else if(keys[KeyEvent.VK_S] && keys[KeyEvent.VK_P] && keys[KeyEvent.VK_0] && keys[KeyEvent.VK_0] && keys[KeyEvent.VK_K] && keys[KeyEvent.VK_Y]){
-			Main.setMenuTheme("spooky");
-			this.reloadBackground();
-		}
-		
 	}
 
 	public void keyReleased(KeyEvent arg0) {
