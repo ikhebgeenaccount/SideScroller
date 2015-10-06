@@ -128,8 +128,12 @@ public class GamePanel extends Panel implements KeyListener{
 			levelOneCfg.load(stream);
 			stream.close();
 			
-			theme = levelOneCfg.getProperty("theme");
-		
+			if(Main.getMenuTheme().equals("mlg")){
+				theme = "mlg";
+			}else{
+				theme = levelOneCfg.getProperty("theme");			
+			}
+			
 			//Read properties of startSquare and endSquare, start and end of level
 			String startSquareCfg = levelOneCfg.getProperty("startsquare");
 			startSquare = new Coordinate();
