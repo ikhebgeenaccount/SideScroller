@@ -98,6 +98,8 @@ public class MenuPanel extends Panel implements KeyListener{
 		options = new Button("Options");
 		options.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
+				Main.getOptionPanel().reloadBackground();
+				Main.getOptionPanel().repaint();
 				Main.setPanel(Main.getOptionPanel());
 			}
 		});
