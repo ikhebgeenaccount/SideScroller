@@ -13,23 +13,12 @@ import javax.swing.ImageIcon;
 
 import main.Main;
 import main.game.coordinate.Coordinate;
-import main.game.levelimage.LevelImage;
-import main.game.levelimage.LevelImageTest;
+import main.game.level.Level;
+import main.game.level.levelimage.LevelImage;
 import main.game.navmesh.NavMesh;
 import main.game.object.GameObject;
 import main.game.object.champion.Champion;
 import main.game.object.minion.Minion;
-import main.game.object.minion.minions.Baron;
-import main.game.object.minion.minions.BlueGolem;
-import main.game.object.minion.minions.CasterMinion;
-import main.game.object.minion.minions.Dragon;
-import main.game.object.minion.minions.LargeWolf;
-import main.game.object.minion.minions.MeleeMinion;
-import main.game.object.minion.minions.MiniLizard;
-import main.game.object.minion.minions.MinionMinion;
-import main.game.object.minion.minions.RedLizard;
-import main.game.object.minion.minions.SiegeMinion;
-import main.game.object.minion.minions.SuperMinion;
 import main.game.object.spell.Spell;
 import main.gui.MessageBox;
 import main.gui.Panel;
@@ -40,14 +29,8 @@ import main.gui.Panel;
  */
 public class GamePanel extends Panel implements KeyListener{
 	
-	//Levels
-	private int[][] currentLevel;
-	private int[][] levelOne;
-	private NavMesh navMesh;
-	private LevelImage levelImage;
-	
-	private int offSetX, offSetY;
-	private int maxOffSetX, maxOffSetY;
+	private Level[] levels;
+	private int currentLevel;
 	
 	//Array for keys
 	private boolean[] keys;
@@ -67,16 +50,7 @@ public class GamePanel extends Panel implements KeyListener{
 	//isFired is for animations, only gets true for the duration of the animation (not yet implemented)
 	//isFlying is for the spells itself, to check if a spell is currently on screen and needs to be drawed and moved
 	private boolean isFiredQ, isFiredW, isFiredE, isFiredR;
-	private boolean isFlyingQ, isFlyingW, isFlyingE, isFlyingR;
-	
-	//The GameObject[]s that are in this level and those that are onscreen. For checks we will only check onscreen.
-	private GameObject[] inLevel, onScreen;
-	private final int objectCap = 50; //Maximum number of objects in one level
-	
-	//Level properties
-	private Coordinate startSquare;
-	private Coordinate endSquare;
-	private String theme;
+	private boolean isFlyingQ, isFlyingW, isFlyingE, isFlyingR;	
 	
 	/**Creates a new GamePanel with specified Champion. Initiziales the level by reading the config file.
 	 * @param character The Champion which will be played.
@@ -94,18 +68,6 @@ public class GamePanel extends Panel implements KeyListener{
 		//Create array for keys
 		keys = new boolean[1000];
 		
-		//Set first level and create levels
-		createLevels();
-		navMesh = new NavMesh(levelOne);
-		//NavMeshTest navFrame = new NavMeshTest(navMesh);
-		
-		currentLevel = levelOne;
-		
-		offSetX = 0;
-		offSetY = 0;
-		maxOffSetX = (currentLevel[0].length - 20) * 50;
-		maxOffSetY = (currentLevel.length - 10) * 50;
-		
 		//First spell will be fired to the right
 		movedLeft = false;
 		
@@ -113,13 +75,7 @@ public class GamePanel extends Panel implements KeyListener{
 		isFlyingQ = false;
 		isFlyingW = false;
 		isFlyingE = false;
-		isFlyingR = false;
-		
-		//Create GameObject[]s
-		inLevel = new GameObject[objectCap];
-		onScreen = new GameObject[objectCap];//Since inLevel has a cap of 50, onScreen doesn't need more than that
-		
-		inLevel[0] = character;
+		isFlyingR = false;		
 		
 		//Read level
 		try{
@@ -128,98 +84,13 @@ public class GamePanel extends Panel implements KeyListener{
 			levelOneCfg.load(stream);
 			stream.close();
 			
-			if(Main.getMenuTheme().equals("mlg")){
-				theme = "mlg";
-			}else{
-				theme = levelOneCfg.getProperty("theme");			
-			}
+			Level levelOne = new Level(levelOneCfg);
 			
-			//Read properties of startSquare and endSquare, start and end of level
-			String startSquareCfg = levelOneCfg.getProperty("startsquare");
-			startSquare = new Coordinate();
-			startSquare.x = Integer.parseInt(startSquareCfg.split(",")[0]) * 50;
-			startSquare.y = Integer.parseInt(startSquareCfg.split(",")[1]) * 50;
-			character.getCoordinates().setCoordinates(startSquare);
+			levels = new Level[10];
+			levels[0] = levelOne;
+			currentLevel = 0;
 			
-			endSquare = new Coordinate();
-			String endSquareCfg = levelOneCfg.getProperty("endsquare");
-			endSquare.x = Integer.parseInt(endSquareCfg.split(",")[0]) * 50;
-			endSquare.y = Integer.parseInt(endSquareCfg.split(",")[1]) * 50;
-		
-			//Read minions, fill inLevel with corresponding type
-			String minionsCfg = levelOneCfg.getProperty("minions"); //minionsCfg: "type:x.y/x.y,type:x.y/x.y/x.y/x.y"
-			String[] minionTypeCfg = minionsCfg.split(","); //minionTypeCfg: {"type:x.y/x.y", "type:x.y/x.y/x.y/x.y"}
-			
-			int index = 1;
-			
-			for(int i = 0; i < minionTypeCfg.length; i++){					
-				String[] typeCfg = minionTypeCfg[i].split(":"); //typeCfg: {"type", "x.y/x.y"} (next iteration: {"type", "x.y/x.y/x.y/x.y"})
-				String[] minionCoordinatesCfg = typeCfg[1].split("/");// minionCoordinatesCfg: {"x.y", "x.y"}
-				Minion[] type = new Minion[minionCoordinatesCfg.length];
-				
-				switch(Integer.parseInt(typeCfg[0])){
-					case 0:	for(int j = 0; j < type.length; j++){
-								type[j] = new MeleeMinion();
-							}
-						break;
-					case 1:	for(int j = 0; j < type.length; j++){
-								type[j] = new CasterMinion();
-							}
-						break;
-					case 2:	for(int j = 0; j < type.length; j++){
-								type[j] = new SiegeMinion();
-							}
-						break;
-					case 3:	for(int j = 0; j < type.length; j++){
-								type[j] = new SuperMinion();
-							}
-						break;
-					case 4:	for(int j = 0; j < type.length; j++){
-								type[j] = new MiniLizard();
-							}
-						break;
-					case 5:	for(int j = 0; j < type.length; j++){
-								type[j] = new LargeWolf();
-							}
-						break;
-					case 6:	for(int j = 0; j < type.length; j++){
-								type[j] = new RedLizard();
-							}
-						break;
-					case 7:	for(int j = 0; j < type.length; j++){
-								type[j] = new BlueGolem();
-							}
-						break;
-					case 8:	for(int j = 0; j < type.length; j++){
-								type[j] = new Dragon();
-							}
-						break;
-					case 9:	for(int j = 0; j < type.length; j++){
-								type[j] = new Baron();
-							}
-						break;
-					case 10:for(int j = 0; j < type.length; j++){
-								type[j] = new MinionMinion();
-							}
-						break;
-					default:for(int j = 0; j < type.length; j++){
-								type[j] = new MeleeMinion();
-							}
-						break;
-				}
-				
-				for(int j = 0; j < minionCoordinatesCfg.length; j++){
-					String[] coordinates = minionCoordinatesCfg[j].split("\\.");
-					type[j].getCoordinates().setCoordinates(Integer.parseInt(coordinates[0]) * 50, Integer.parseInt(coordinates[1]) * 50);
-					inLevel[index] = type[j];
-					index++;
-				}
-			}
-			
-			levelImage = new LevelImage(levelOne, theme);
-			//LevelImageTest test = new LevelImageTest(levelImage);
-			
-			updateGameObjects();
+			levels[currentLevel].updateGameObjects();
 		}catch(NullPointerException e){
 			e.printStackTrace();
 		}catch(IOException e){
@@ -232,8 +103,6 @@ public class GamePanel extends Panel implements KeyListener{
 		
 		//Load environment images
 		loadPics();
-		
-		updateGameObjects();
 	}
 	
 	/* Fill the panel with landscape
@@ -250,52 +119,35 @@ public class GamePanel extends Panel implements KeyListener{
 	@Override
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		//i is x
-		//j is y
-		/*for(int x = 0; x < 20; x++){
-			for(int y = 0; y < 10; y++){
-                //Decide which landscape-img should be used
-				switch(currentLevel[y + (levelIDy * 10)][x + (levelIDx * 20)]){
-					case 0:g.drawImage(air, 50 * x, 50 * y, null);
-						break;
-					case 1:g.drawImage(ground, 50 * x, 50 * y, null);
-						break;	
-					case 2:g.drawImage(grass_ground, 50 * x, 50 * y, null);
-						break;
-					default:g.drawImage(air, 50 * x, 50 * y, null);
-						break;
-				}
-			}
-		}*/
 		
-		g.drawImage(levelImage.getSubimage(offSetX, offSetY, 1000, 500), 0, 0, null);
+		g.drawImage(levels[currentLevel].getLevelImage().getSubimage(levels[currentLevel].getOffSetX(), levels[currentLevel].getOffSetY(), 1000, 500), 0, 0, null);
 		
 		//No spells in onScreen (or in inLevel)
 		int i = 0;
-		for(GameObject object : onScreen){
+		for(GameObject object : levels[currentLevel].getOnScreenObjects()){
 			if(object != null && object.getCurrentHealth() != 0){
 				i++;
-				g.drawImage(object.getCurrentAnimationImage(), object.getCoordinates().x - offSetX, object.getCoordinates().y - offSetY, null);
-				g.drawImage(object.getHealthBarImage(), object.getCoordinates().x - offSetX, object.getCoordinates().y - offSetY - 16, null);
+				g.drawImage(object.getCurrentAnimationImage(), object.getCoordinates().x - levels[currentLevel].getOffSetX(), object.getCoordinates().y - levels[currentLevel].getOffSetY(), null);
+				g.drawImage(object.getHealthBarImage(), object.getCoordinates().x - levels[currentLevel].getOffSetX(), object.getCoordinates().y - levels[currentLevel].getOffSetY() - 16, null);
 				object.checkNextScene();
 			}
 		}
 		
 		//Draw spells if fired
 		if(isFlyingQ){
-			g.drawImage(character.q.getCurrentAnimationImage(), character.q.getCoordinates().x - offSetX, character.q.getCoordinates().y - offSetY, null);
+			g.drawImage(character.q.getCurrentAnimationImage(), character.q.getCoordinates().x - levels[currentLevel].getOffSetX(), character.q.getCoordinates().y - levels[currentLevel].getOffSetY(), null);
 			character.q.checkNextScene();
 		}
 		if(isFlyingW){
-			g.drawImage(character.w.getCurrentAnimationImage(), character.w.getCoordinates().x - offSetX, character.w.getCoordinates().y - offSetY, null);
+			g.drawImage(character.w.getCurrentAnimationImage(), character.w.getCoordinates().x - levels[currentLevel].getOffSetX(), character.w.getCoordinates().y - levels[currentLevel].getOffSetY(), null);
 			character.w.checkNextScene();
 		}
 		if(isFlyingE){
-			g.drawImage(character.e.getCurrentAnimationImage(), character.e.getCoordinates().x - offSetX, character.e.getCoordinates().y - offSetY, null);
+			g.drawImage(character.e.getCurrentAnimationImage(), character.e.getCoordinates().x - levels[currentLevel].getOffSetX(), character.e.getCoordinates().y - levels[currentLevel].getOffSetY(), null);
 			character.e.checkNextScene();
 		}
 		if(isFlyingR){
-			g.drawImage(character.r.getCurrentAnimationImage(), character.r.getCoordinates().x - offSetX, character.r.getCoordinates().y - offSetY, null);
+			g.drawImage(character.r.getCurrentAnimationImage(), character.r.getCoordinates().x - levels[currentLevel].getOffSetX(), character.r.getCoordinates().y - levels[currentLevel].getOffSetY(), null);
 			character.r.checkNextScene();
 		}
 		
@@ -353,9 +205,9 @@ public class GamePanel extends Panel implements KeyListener{
 	//Images are loaded
 	private void loadPics(){
 		ClassLoader cldr = this.getClass().getClassLoader();
-		air = new ImageIcon(cldr.getResource("img/landscape/" + theme + "/air.png")).getImage();
-		ground = new ImageIcon(cldr.getResource("img/landscape/" + theme + "/ground.png")).getImage();
-		grass_ground = new ImageIcon(cldr.getResource("img/landscape/" + theme + "/grass-ground.png")).getImage();
+		air = new ImageIcon(cldr.getResource("img/landscape/" + levels[currentLevel].getTheme() + "/air.png")).getImage();
+		ground = new ImageIcon(cldr.getResource("img/landscape/" + levels[currentLevel].getTheme() + "/ground.png")).getImage();
+		grass_ground = new ImageIcon(cldr.getResource("img/landscape/" + levels[currentLevel].getTheme() + "/grass-ground.png")).getImage();
 	}
 	
 	//Called when a key is pressed
@@ -400,7 +252,7 @@ public class GamePanel extends Panel implements KeyListener{
 			Main.freezeGame();
 		}
 		
-		if(endSquare.equals(new Coordinate(character.getCoordinates().x, character.getCoordinates().y + 50))){
+		if(levels[currentLevel].getEndCoordinates().equals(new Coordinate(character.getCoordinates().x, character.getCoordinates().y + 50))){
 			MessageBox victoryBox = new MessageBox("Victory!", MessageBox.RETURN_TO_MAIN_MENU);
 			Main.setMessageBox(victoryBox);
 		}
@@ -410,23 +262,23 @@ public class GamePanel extends Panel implements KeyListener{
 		
 		//Check left and right movement
 		if(keys[KeyEvent.VK_LEFT]){
-			moveLeft = character.moveLeft(navMesh);
+			moveLeft = character.moveLeft(levels[currentLevel].getNavMesh());
 			movedLeft = true;
 		}
 		if(keys[KeyEvent.VK_RIGHT]){
-			moveRight = character.moveRight(navMesh);
+			moveRight = character.moveRight(levels[currentLevel].getNavMesh());
 			movedLeft = false;
 		}
 
 		if(keys[KeyEvent.VK_UP]){
 			if(!jumping){
 				//If character can move down, it is not possible to jump, and vice versa
-				jumping = !character.moveDown(navMesh);
+				jumping = !character.moveDown(levels[currentLevel].getNavMesh());
 				
 				//If jumping = false, the character moved down, so we need to move him up again
 				//Otherwise, we start the jump by setting jumpStartTick and setting initial yspeed
 				if(!jumping){
-					character.moveUp(navMesh);
+					character.moveUp(levels[currentLevel].getNavMesh());
 				}else{
 					jumpStartTick = tick;
 					character.resetSpeed();
@@ -438,7 +290,7 @@ public class GamePanel extends Panel implements KeyListener{
 		if(jumping){
 			if(tick - jumpStartTick <= JUMP_LENGTH_TICK){
 				//Still jumping
-				moveUp = character.moveUp(navMesh);
+				moveUp = character.moveUp(levels[currentLevel].getNavMesh());
 			}else{
 				//Not jumping anymore
 				jumping = false;
@@ -454,7 +306,7 @@ public class GamePanel extends Panel implements KeyListener{
 			}
 		}else{
 			//Not jumping, check if character should fall
-			moveDown = character.moveDown(navMesh);
+			moveDown = character.moveDown(levels[currentLevel].getNavMesh());
 			if(moveDown){
 				character.accelerate(1);
 			}else{
@@ -463,31 +315,31 @@ public class GamePanel extends Panel implements KeyListener{
 		}
 		
 		//Update the screen offset
-		if(character.getCoordinates().x - offSetX >= 600 && offSetX < maxOffSetX){
-			if(offSetX + Math.abs(character.getCoordinates().x - oldX) > maxOffSetX){
-				offSetX = maxOffSetX;
+		if(character.getCoordinates().x - levels[currentLevel].getOffSetX() >= 600 && levels[currentLevel].getOffSetX() < levels[currentLevel].getMaxOffSetX()){
+			if(levels[currentLevel].getOffSetX() + Math.abs(character.getCoordinates().x - oldX) > levels[currentLevel].getMaxOffSetX()){
+				levels[currentLevel].setOffSetX(levels[currentLevel].getMaxOffSetX());
 			}else{
-				offSetX += Math.abs(character.getCoordinates().x - oldX);				
+				levels[currentLevel].setOffSetX(levels[currentLevel].getOffSetX() + Math.abs(character.getCoordinates().x - oldX));				
 			}
-		}else if(character.getCoordinates().x - offSetX <= 400 && offSetX > 0){
-			if(offSetX - Math.abs(character.getCoordinates().x - oldX) < 0){
-				offSetX = 0;
+		}else if(character.getCoordinates().x - levels[currentLevel].getOffSetX() <= 400 && levels[currentLevel].getOffSetX() > 0){
+			if(levels[currentLevel].getOffSetX() - Math.abs(character.getCoordinates().x - oldX) < 0){
+				levels[currentLevel].setOffSetX(0);
 			}else{
-				offSetX -= Math.abs(character.getCoordinates().x - oldX);
+				levels[currentLevel].setOffSetX(levels[currentLevel].getOffSetX() - Math.abs(character.getCoordinates().x - oldX));
 			}
 		}
 		
-		if(character.getCoordinates().y - offSetY >= 250 && offSetY < maxOffSetY){
-			if(offSetY + Math.abs(character.getCoordinates().y - oldY) > maxOffSetY){
-				offSetY = maxOffSetY;
+		if(character.getCoordinates().y - levels[currentLevel].getOffSetY() >= 250 && levels[currentLevel].getOffSetY() < levels[currentLevel].getMaxOffSetY()){
+			if(levels[currentLevel].getOffSetY() + Math.abs(character.getCoordinates().y - oldY) > levels[currentLevel].getMaxOffSetY()){
+				levels[currentLevel].setOffSetY(levels[currentLevel].getMaxOffSetY());
 			}else{
-				offSetY += Math.abs(character.getCoordinates().y - oldY);				
+				levels[currentLevel].setOffSetY(levels[currentLevel].getOffSetY() + Math.abs(character.getCoordinates().y - oldY));
 			}
-		}else if(character.getCoordinates().y - offSetY <= 250 && offSetY > 0){
-			if(offSetY - Math.abs(character.getCoordinates().y - oldY) < 0){
-				offSetY = 0;
+		}else if(character.getCoordinates().y - levels[currentLevel].getOffSetY() <= 250 && levels[currentLevel].getOffSetY() > 0){
+			if(levels[currentLevel].getOffSetY() - Math.abs(character.getCoordinates().y - oldY) < 0){
+				levels[currentLevel].setOffSetY(0);
 			}else{
-				offSetY -= Math.abs(character.getCoordinates().y - oldY);
+				levels[currentLevel].setOffSetY(levels[currentLevel].getOffSetY() - Math.abs(character.getCoordinates().y - oldY));
 			}
 		}
 		
@@ -538,7 +390,7 @@ public class GamePanel extends Panel implements KeyListener{
 			isFlyingR = character.r.move();
 		}
 		
-		updateGameObjects();
+		levels[currentLevel].updateGameObjects();
 		
 		//Determine which animation should run
 		if(moveUp){
@@ -565,7 +417,7 @@ public class GamePanel extends Panel implements KeyListener{
 			character.setAnimationType(Champion.IDLE);
 		}
 		
-		for(GameObject object : onScreen){
+		for(GameObject object : levels[currentLevel].getOnScreenObjects()){
 			if(object != null && object instanceof Minion){
 				Minion minion = (Minion) object;
 				minion.move();
@@ -576,61 +428,6 @@ public class GamePanel extends Panel implements KeyListener{
 	public static int roundDownToClosestMultipleOfFifty(int num){
 		int mod = num % 50;
 		return num-mod;    
-	}
-	
-	//Update GameObject[] onScreen
-	private void updateGameObjects(){
-		int i = 1;
-		onScreen = new GameObject[objectCap];
-		onScreen[0] = character;
-		for(GameObject object : inLevel){
-			if(object != null && !(object instanceof Champion)){
-				if(object.getCurrentHealth() != 0/* && object.getCoordinates().x >= offSetX && object.getCoordinates().x < offSetX + 1000 && object.getCoordinates().y >= offSetY && object.getCoordinates().y < offSetY + 500*/){
-					//Is in the level currently on screen
-					onScreen[i] = object;
-					i++;
-				}
-			}
-		}
-	}
-	
-	/*Levels:
-	 * 0. Air
-	 * 1. Ground
-	 * 2. Grass
-	 */
-	//Create levels
-	private void createLevels(){
-		levelOne = new int[][]{	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{2,2,2,0,0,0,0,0,0,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{1,1,1,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,0,0,0,0,0,0,0,0,0,0,0,0,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{0,1,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,2,2,1,1,0,0,0,0,0,0,0,0,0,0,0,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{0,0,0,0,0,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{0,0,0,2,2,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,2,2,2,2,2,2,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,1,2,2,2,2,2,2,2,2,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,0,0,0,0,0,0,0,0,0,1,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{1,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,1,1,0,0,2,2,0,0,0,0,0,0,0,0,0,0,0,0,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,2,2,2,2,2,2,2,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{1,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{0,0,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-								{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2}};		
 	}
 	
 	//Getter for String characterName
@@ -650,24 +447,24 @@ public class GamePanel extends Panel implements KeyListener{
 	}
 	
 	public String getTheme(){
-		return theme;
+		return levels[currentLevel].getTheme();
 	}
 	
 	/**Returns an array with all GameObjects that are on the screen, which means they are visible in the window.
 	 * @return GameObject[] onScreen
 	 */
 	public GameObject[] getOnScreenObjects(){
-		return onScreen;
+		return levels[currentLevel].getOnScreenObjects();
 	}
 
 	/**Returns the NavMesh of the current level.
 	 * @return NavMesh navMesh
 	 */
 	public NavMesh getNavMesh() {
-		return navMesh;
+		return levels[currentLevel].getNavMesh();
 	}
 
 	public int getObjectCap() {
-		return objectCap;
+		return levels[currentLevel].getObjectCap();
 	}
 }

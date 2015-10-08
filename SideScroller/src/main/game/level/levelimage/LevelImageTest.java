@@ -1,4 +1,4 @@
-package main.game.levelimage;
+package main.game.level.levelimage;
 
 import java.awt.Dimension;
 import java.awt.Graphics;

@@ -407,4 +407,8 @@ public class Main{
 	public static void setMenuTheme(String theme){
 		menuTheme = theme;
 	}
+	
+	public static Champion getCharacter(){
+		return character;
+	}
 }

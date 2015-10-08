@@ -1,7 +1,7 @@
 /**
  * 
  */
-package main.game.levelimage;
+package main.game.level.levelimage;
 
 import java.awt.Graphics2D;
 import java.awt.Image;
