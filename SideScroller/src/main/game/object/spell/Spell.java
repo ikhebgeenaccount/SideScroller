@@ -41,6 +41,7 @@ public class Spell extends GameObject{
 		setRange(range);
 		setDamage(damage);
 		setSpeed(speed);
+		setDefaultSpeed(speed);
 		setCooldown(cooldowninms);
 		currentCooldown = 0;
 		disappearOnHit = true;
@@ -125,12 +126,49 @@ public class Spell extends GameObject{
 		
 		for(int j = 1; j < onScreen.length; j++){
 			if(onScreen[j] != null){
-				coordy = onScreen[j].getCoordinates().y;
-				for(int i = coordy; i <= coordy + onScreen[j].getHeight(); i++){
-					if(i >= this.getCoordinates().y && i <= this.getCoordinates().y + this.getHeight()){
-						//When they overlap in height, they are on the same height and valid to attack if x is within range.
-						onSameHeight[j] = true;
-					}
+				/*
+				 * Case 1: spell is smaller than this Minion
+				 * 
+				 * 	Y     Spell		Minion
+				 *  0				*
+				 *  1     ***       *
+				 *  2	  ***		*
+				 *  3				*
+				 * 
+				 * Hits when:
+				 * 		1. Spell.getCoordinates().y >= Minion.getCoordinates.y && Spell.getCoordinates().y <= Minion.getCoordinates().y + Minion.getHeight()
+				 * 		2. Spell.getCoordinates().y + Spell.getHeight() >= Minion.getCoordinates().y 
+				 * 							&& Spell.getCoordinates().y + Spell.getHeight() <= Minion.getCoordinates().y + Minion.getHeight()
+				 * 
+				 * Test:
+				 * 		1. 1 >= 0 && 1 <= 0 + 4
+				 * 		2. 1 + 2 >= 0 && 1 + 2 <= 0 + 4
+				 * 
+				 * Case 2: spell is bigger than this Minion
+				 * 
+				 * Y Spell		Minion
+				 * 0 **
+				 * 1 **			**
+				 * 2 **			**
+				 * 3 **
+				 * 
+				 * Hits when:
+				 * 		1. Minion.getCoordinates().y >= Spell.getCoordinates().y && Minion.getCoordinates().y <= Spell.getCoordinates().y + Spell.getHeight()
+				 * 		2. Minion.getCoordinates().y + Minion.getHeight() >= Spell.getCoordinates().y 
+				 * 							&& Minion.getCoordinates().y + Minion.getHeight() <= Spell.getCoordinates().y + Spell.getHeight()
+				 * 
+				 * Test:
+				 * 		1. 1 >= 0 && 1 <= 0 + 4
+				 * 		2. 1 + 2 >= 0 && 1 + 2 <= 0 + 4
+				 * 
+				 */	
+				
+				if(		(this.getCoordinates().y >= onScreen[j].getCoordinates().y && this.getCoordinates().y <= onScreen[j].getCoordinates().y + onScreen[j].getHeight())
+					||	(this.getCoordinates().y + this.getHeight() >= onScreen[j].getCoordinates().y && this.getCoordinates().y + this.getHeight() <= onScreen[j].getCoordinates().y + onScreen[j].getHeight())
+					||	(onScreen[j].getCoordinates().y >= this.getCoordinates().y && onScreen[j].getCoordinates().y <= this.getCoordinates().y + this.getHeight())
+					||	(onScreen[j].getCoordinates().y + onScreen[j].getHeight() >= this.getCoordinates().y && onScreen[j].getCoordinates().y + onScreen[j].getHeight() <= this.getCoordinates().y + this.getHeight())
+					){
+					onSameHeight[j] = true;
 				}
 			}else{
 				j = onScreen.length;
@@ -138,25 +176,62 @@ public class Spell extends GameObject{
 		}
 		
 		//Get Minion with closest x coordinate
+		
+		/*
+		 * Scenario:
+		 * 
+		 * 
+		 * * Minion
+		 * c Character
+		 * s Spell
+		 * < Direction of spell
+		 * 
+		 * 
+		 *     * *   s<c     *
+		 * x 0 1 2 3 4 5 6 7 8 9
+		 * 
+		 * 
+		 */
+		
 		int j = 1;
 		int min_difference = Integer.MAX_VALUE;
 		int id = -1;
 		while(j < onSameHeight.length && onScreen[j] != null){
 			if(onSameHeight[j]){
 				if(moveLeft){
-					if(this.getCoordinates().x - onScreen[j].getCoordinates().x + onScreen[j].getWidth() < min_difference){
-						id = j;
-						min_difference = this.getCoordinates().x - onScreen[j].getCoordinates().x + onScreen[j].getWidth();
+					if(this.getCoordinates().x > onScreen[j].getCoordinates().x){
+						// this - that
+						if(this.getCoordinates().x - (onScreen[j].getCoordinates().x + onScreen[j].getWidth()) < min_difference){
+							id = j;
+							min_difference = this.getCoordinates().x - onScreen[j].getCoordinates().x + onScreen[j].getWidth();
+						}
+					}else{
+						// that - this
+						if((onScreen[j].getCoordinates().x + onScreen[j].getWidth()) - this.getCoordinates().x < min_difference){
+							id = j;
+							min_difference = this.getCoordinates().x - onScreen[j].getCoordinates().x + onScreen[j].getWidth();
+						}
 					}
 				}else{
-					if(onScreen[j].getCoordinates().x - this.getCoordinates().x < min_difference){
-						id = j;
-						min_difference = onScreen[j].getCoordinates().x + onScreen[j].getWidth() - this.getCoordinates().x;
+					if(this.getCoordinates().x > onScreen[j].getCoordinates().x){
+						// this - that
+						if(this.getCoordinates().x - onScreen[j].getCoordinates().x < min_difference){
+							id = j;
+							min_difference = this.getCoordinates().x - onScreen[j].getCoordinates().x + onScreen[j].getWidth();
+						}
+					}else{
+						// that - this
+						if(onScreen[j].getCoordinates().x - this.getCoordinates().x < min_difference){
+							id = j;
+							min_difference = this.getCoordinates().x - onScreen[j].getCoordinates().x + onScreen[j].getWidth();
+						}
 					}
 				}				
 			}
 			j++;
 		}
+		
+		System.out.println(id);//4??? Goes wrong above here I think, with finding correct id
 		
 		//Check if x coordinates are the same
 		if(moveLeft && id != -1){
@@ -166,6 +241,7 @@ public class Spell extends GameObject{
 				isFired = !disappearOnHit;
 				move = !disappearOnHit;
 				hit = disappearOnHit;
+				System.out.println("hit");
 			}
 		}else if(id != -1){
 			if(this.getCoordinates().x + this.getWidth() >= onScreen[id].getCoordinates().x && this.getCoordinates().x <= onScreen[id].getCoordinates().x){
@@ -174,6 +250,7 @@ public class Spell extends GameObject{
 				isFired = !disappearOnHit;
 				move = !disappearOnHit;
 				hit = disappearOnHit;
+				System.out.println("hit");
 			}			
 		}
 		
@@ -202,7 +279,8 @@ public class Spell extends GameObject{
 				isFired = false;
 				setAnimationType(Spell.DISAPPEAR);
 			}
-		}		
+		}	
+		
 		
 		return move;
 	}
