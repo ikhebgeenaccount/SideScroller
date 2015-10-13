@@ -39,14 +39,14 @@ public class LevelImage extends BufferedImage {
 			for(int x = 0; x < level[0].length; x++){
 				for(int y = 0; y < level.length; y++){
 					switch(level[y][x]){
-					case 0:g.drawImage(air, 50 * x, 50 * y, null);
-						break;
-					case 1:g.drawImage(ground, 50 * x, 50 * y, null);
-						break;	
-					case 2:g.drawImage(grass_ground, 50 * x, 50 * y, null);
-						break;
-					default:g.drawImage(air, 50 * x, 50 * y, null);
-						break;
+						case 0:g.drawImage(air, 50 * x, 50 * y, null);
+							break;
+						case 1:g.drawImage(ground, 50 * x, 50 * y, null);
+							break;	
+						case 2:g.drawImage(grass_ground, 50 * x, 50 * y, null);
+							break;
+						default:g.drawImage(air, 50 * x, 50 * y, null);
+							break;
 					}
 				}
 			}
