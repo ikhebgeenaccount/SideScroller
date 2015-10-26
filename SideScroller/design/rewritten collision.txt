@@ -1,0 +1,91 @@
+//Here we calculate the new x and y coordinates in the matrix
+	    int matrix_x_new = roundDownToClosestMultipleOfFifty(newcharx)/50;
+	    int matrix_y_new = roundDownToClosestMultipleOfFifty(newchary)/50;
+	    
+	    matrix_y_old = roundDownToClosestMultipleOfFifty(chary)/50;
+	    matrix_x_old = roundDownToClosestMultipleOfFifty(charx)/50;
+	    
+	    System.out.println("Old: \n x: " + matrix_x_old + " y: " + matrix_y_old);
+	    System.out.println("New: \n x: " + matrix_x_new + " y: " + matrix_y_new);
+	    
+    	/*Here we check if the character is allowed to move to the newcharx, newchary. We check the x- and y-axis independently
+    	 *because we can move in two directions: if the character is falling down, but the right-arrow-key is also pressed, but 
+    	 *he can't move to the right because of a solid block, he still needs to fall down. If we check x and y at the same time
+    	 *the character will get stuck and won't fall down even though that should happen.
+    	 *This is also the reason why we use old coordinates, from before this update(). When we check the y-axis, we check the
+    	 *newchary but the charx (old), because the old coordinate is always valid, but we need to check the newchary. Vice versa
+    	 *for the x-axis.
+    	*/
+	    //Check x-axis
+	    //Check if array is not out of bounds
+	    if(matrix_x_new + (levelIDx * 20) < 0 || matrix_x_new + 1 + (levelIDx * 20) > levelLengthX){
+	    	xmoved = false;
+	    }else{
+	    	//Check if the coordinates where the character is moving are valid
+	    	if(newcharx > charx){
+	    		//Moving right
+	    		if(currentLevel[matrix_y_old + (levelIDy * 10)][matrix_x_new + 1 + (levelIDx * 20)] != 0 || currentLevel[matrix_y_old + 1 + (levelIDy * 10)][matrix_x_new + 1 + (levelIDx * 20)] != 0 || currentLevel[matrix_y_old + 2 + (levelIDy * 10)][matrix_x_new + 1 + (levelIDx * 20)] != 0){
+	    			//Can't move there!
+	    			System.out.println("cant");
+	    			xmoved = false;
+	    		}else{
+	    			//Can move there
+	    			charx = newcharx;
+	    		}
+	    	}else if(newcharx < charx){
+	    		//Moving left
+	    		if(currentLevel[matrix_y_old + (levelIDy * 10)][matrix_x_new + (levelIDx * 20)] != 0 || currentLevel[matrix_y_old + 1 + (levelIDy * 10)][matrix_x_new + (levelIDx * 20)] != 0 || currentLevel[matrix_y_old + 2 + (levelIDy * 10)][matrix_x_new + (levelIDx * 20)] != 0){
+	    			//Can't move there!
+	    			xmoved = false;
+	    		}else{
+	    			//Can move there
+	    			charx = newcharx;
+	    		}
+	    	}	    	
+	    }
+	    //Check y-axis
+	    if(matrix_y_new + (levelIDy * 10) < 0 || matrix_y_new + 1 + (levelIDy * 10) > levelLengthY){
+	    	ymoved = false;
+	    }else{
+	    	if(newchary > chary){
+	    		//Is falling down
+	    		if(currentLevel[matrix_y_new + 2 + (levelIDy * 10)][matrix_x_old + (levelIDx * 20)] != 0 || currentLevel[matrix_y_new + 2 + (levelIDy * 10)][matrix_x_old + 1 + (levelIDx * 20)] != 0){
+	    			//Can't move there
+	    			ymoved = false;
+	    		}else{
+	    			//Can move there
+	    			chary = newchary;
+	    		}	    			    		
+	    	}else if(newchary < chary){
+	    		//Is jumping
+	    		if(currentLevel[matrix_y_new + (levelIDy * 10)][matrix_x_old + (levelIDx * 20)] != 0 || currentLevel[matrix_y_new + (levelIDy * 10)][matrix_x_old + 1 + (levelIDx * 20)] != 0){
+	    			//Can't move there
+	    			ymoved = false;
+	    		}else{
+	    			//Can move there
+	    			chary = newchary;
+	    		}
+	    	}
+	    }
+	    
+	    if(!xmoved){
+	    	character.setAnimationType(Champion.IDLE);
+	    }
+	    
+	    //Check if character should go to next level in x-axis
+	    if((matrix_x_new + 1  + (levelIDx * 20))/(levelIDx + 1) > ((levelIDx + 1) * 20) - 1){
+	    	levelIDx++;
+	    	charx = 0;
+	    }else if(matrix_x_new < 0 && levelIDx > 0){
+	    	levelIDx--;
+	    	charx = 950;
+	    }
+	    
+	    //Check if character should go to next level in y-axis
+	    if((matrix_y_new + 2 + (levelIDy * 10))/(levelIDy + 1) > ((levelIDy + 1) * 10) - 1 && (matrix_y_new + 1 + (levelIDy * 10))/(levelIDy + 1) > ((levelIDy + 1) * 10) - 1 && (matrix_y_new + (levelIDy * 10))/(levelIDy + 1) > ((levelIDy + 1) * 10) - 1){
+	    	levelIDy++;
+	    	chary = -50;
+	    }else if(matrix_y_new < 0 && levelIDy > 0 && matrix_y_new + 1 < 0){
+	    	levelIDy--;
+	    	chary = 500;
+	    }
