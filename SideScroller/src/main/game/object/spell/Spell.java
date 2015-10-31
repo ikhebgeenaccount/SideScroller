@@ -231,8 +231,6 @@ public class Spell extends GameObject{
 			j++;
 		}
 		
-		System.out.println(id);//4??? Goes wrong above here I think, with finding correct id
-		
 		//Check if x coordinates are the same
 		if(moveLeft && id != -1){
 			if(this.getCoordinates().x <= onScreen[id].getCoordinates().x + onScreen[id].getWidth() && this.getCoordinates().x + this.getWidth() >= onScreen[id].getCoordinates().x + onScreen[id].getWidth()){
@@ -241,7 +239,6 @@ public class Spell extends GameObject{
 				isFired = !disappearOnHit;
 				move = !disappearOnHit;
 				hit = disappearOnHit;
-				System.out.println("hit");
 			}
 		}else if(id != -1){
 			if(this.getCoordinates().x + this.getWidth() >= onScreen[id].getCoordinates().x && this.getCoordinates().x <= onScreen[id].getCoordinates().x){
@@ -250,7 +247,6 @@ public class Spell extends GameObject{
 				isFired = !disappearOnHit;
 				move = !disappearOnHit;
 				hit = disappearOnHit;
-				System.out.println("hit");
 			}			
 		}
 		
