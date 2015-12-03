@@ -13,6 +13,7 @@ import java.util.Properties;
 
 import javax.swing.JFrame;
 
+import main.game.Game;
 import main.game.object.champion.Champion;
 import main.game.object.champion.champions.alphaguy.AlphaGuy;
 import main.gui.MessageBox;
@@ -45,6 +46,8 @@ public class Main{
 	
 	//Character
 	private static Champion character;
+	
+	private static Game game;
 	
 	//Panels
 	private static MenuPanel menuPanel;
@@ -83,8 +86,10 @@ public class Main{
 		//Create character
 		character = new AlphaGuy();
 		
+		game = new Game(character, "alphaguy");
+		
 		//Create gamepanel
-		gamePanel = new GamePanel(character, "alphaguy");
+		gamePanel = new GamePanel(game);
 		setPanel(gamePanel);
 		
 		//Start game
@@ -157,7 +162,7 @@ public class Main{
 		
 		//Create frame with menuPanel
 		frame = new JFrame("SideScroller");
-		frame.setResizable(false);
+		frame.setResizable(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.addWindowListener(new WindowAdapter(){
 			public void windowClosing(WindowEvent e){
@@ -289,7 +294,7 @@ public class Main{
 			long startTimeTPS = System.currentTimeMillis();
 			while(running){
 				startTime = System.currentTimeMillis();
-				gamePanel.update();
+				game.update();
 				endTime = System.currentTimeMillis();
 				try {
 					if(endTime - startTime > tickTime){
@@ -338,6 +343,10 @@ public class Main{
 	 */
 	public static GamePanel getGamePanel(){
 		return gamePanel;
+	}
+	
+	public static Game getGame(){
+		return game;
 	}
 	
 	/**Returns the used Font with size size.

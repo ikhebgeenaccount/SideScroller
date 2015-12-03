@@ -34,7 +34,7 @@ public class EzrealE extends Spell{
 	@Override
 	public boolean fire(Coordinate startCoordinates, boolean movedLeft){
 		int travelDistance = movedLeft ? -distance : distance;
-		if(Main.getGamePanel().getCharacter().blink(Main.getGamePanel().getNavMesh(), movedLeft, travelDistance)){
+		if(Main.getGame().getCharacter().blink(Main.getGame().getNavMesh(), movedLeft, travelDistance)){
 			startCooldown();
 		}
 		//We have to return false no matter what, since no projectile is fired.

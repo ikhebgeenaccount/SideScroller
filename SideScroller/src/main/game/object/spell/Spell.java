@@ -117,8 +117,8 @@ public class Spell extends GameObject{
 		boolean hit = false;
 		
 		int coordy;
-		GameObject[] onScreen = Main.getGamePanel().getOnScreenObjects();
-		boolean[] onSameHeight = new boolean[Main.getGamePanel().getObjectCap()];
+		GameObject[] onScreen = Main.getGame().getOnScreenObjects();
+		boolean[] onSameHeight = new boolean[Main.getGame().getObjectCap()];
 		
 		for(int i = 0; i < onSameHeight.length; i++){
 			onSameHeight[i] = false;
