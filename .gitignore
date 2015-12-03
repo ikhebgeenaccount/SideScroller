@@ -3,6 +3,7 @@
 #################
 
 *.pydevproject
+SideScroller/.project
 .project
 .metadata
 bin/
@@ -214,3 +215,5 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+*.project
+SideScroller/.project
