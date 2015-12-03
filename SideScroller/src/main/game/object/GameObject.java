@@ -211,7 +211,6 @@ public class GameObject {
 		 * @return boolean moved
 		 */
 		public boolean moveUp(NavMesh navMesh){
-			boolean move = true;
 			for(int i = 0; i <= yspeed; i++){
 				for(int j = 0; j < width; j++){
 					if(coordinates.y - 1 >= 0){
@@ -225,10 +224,8 @@ public class GameObject {
 						return false;
 					}
 				}
-				if(move){
-					//Move
-					getCoordinates().setCoordinates(coordinates.x, coordinates.y - 1);
-				}
+				//Move
+				getCoordinates().setCoordinates(coordinates.x, coordinates.y - 1);
 			}
 			return true;		
 		}
@@ -238,7 +235,6 @@ public class GameObject {
 		 * @return boolean moved
 		 */
 		public boolean moveDown(NavMesh navMesh){
-			boolean move = true;
 			for(int i = 0; i <= yspeed; i++){
 				for(int j = 0; j < width; j++){
 					if(coordinates.y + height + 1 <= navMesh.getHeight()){
@@ -252,10 +248,8 @@ public class GameObject {
 						return false;
 					}
 				}
-				if(move){
-					//Move
-					getCoordinates().setCoordinates(coordinates.x, coordinates.y + 1);
-				}
+				//Move
+				getCoordinates().setCoordinates(coordinates.x, coordinates.y + 1);
 			}
 			return true;
 		}
@@ -266,7 +260,6 @@ public class GameObject {
 		 * @return boolean moved
 		 */
 		public boolean moveLeft(NavMesh navMesh){
-			boolean move = true;
 			for(int i = 0; i <= speed; i++){
 				for(int j = 0; j < height; j++){
 					if(coordinates.x - 1 >= 0){
@@ -280,11 +273,8 @@ public class GameObject {
 						return false;
 					}
 				}
-				
-				if(move){
-					//Move
-					getCoordinates().setCoordinates(coordinates.x - 1, coordinates.y);
-				}
+				//Move
+				getCoordinates().setCoordinates(coordinates.x - 1, coordinates.y);
 			}
 			return true;
 		}
@@ -295,7 +285,6 @@ public class GameObject {
 		 * @return boolean moved
 		 */
 		public boolean moveRight(NavMesh navMesh){
-			boolean move = true;
 			for(int i = 0; i <= speed; i++){
 				for(int j = 0; j < height; j++){
 					if(coordinates.x + width + 1 <= navMesh.getWidth()){
@@ -309,11 +298,8 @@ public class GameObject {
 						return false;
 					}
 				}
-				
-				if(move){
-					//Move
-					getCoordinates().setCoordinates(coordinates.x + 1, coordinates.y);
-				}				
+				//Move
+				getCoordinates().setCoordinates(coordinates.x + 1, coordinates.y);				
 			}
 			return true;
 		}
