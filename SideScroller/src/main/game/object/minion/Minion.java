@@ -82,7 +82,7 @@ public class Minion extends GameObject {
 		 * 	5. If not valid, turn around and change moveLeft
 		 */
 		
-		GameObject[] onScreen = Main.getGame().getOnScreenObjects();
+		GameObject[] onScreen = Main.getGameEngine().getOnScreenObjects();
 		int coordy = getCoordinates().y;
 		
 		Coordinate champCoordinate = onScreen[0].getCoordinates();
@@ -132,7 +132,7 @@ public class Minion extends GameObject {
 		//Other activity is only necessary when the Minion should not attack
 		if(!activity){
 			//Check if next step can be made
-			NavMesh navMesh = Main.getGame().getNavMesh();
+			NavMesh navMesh = Main.getGameEngine().getNavMesh();
 			if(moveLeft){
 				//Move left
 				moveLeft = moveLeft(navMesh);

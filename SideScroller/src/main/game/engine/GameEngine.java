@@ -1,4 +1,4 @@
-package main.game;
+package main.game.engine;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -23,7 +23,7 @@ import main.game.object.minion.Minion;
 import main.game.object.spell.Spell;
 import main.gui.MessageBox;
 
-public class Game implements KeyListener{
+public class GameEngine implements KeyListener{
 	
 	private Level[] levels;
 	private int currentLevel;
@@ -45,7 +45,7 @@ public class Game implements KeyListener{
 	private boolean isFiredQ, isFiredW, isFiredE, isFiredR;
 	private boolean isFlyingQ, isFlyingW, isFlyingE, isFlyingR;	
 	
-	public Game(Champion character, String characterName){
+	public GameEngine(Champion character, String characterName){
 		tick = 0;
 		
 		//Get character

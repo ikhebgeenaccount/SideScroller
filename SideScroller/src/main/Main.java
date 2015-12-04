@@ -13,7 +13,7 @@ import java.util.Properties;
 
 import javax.swing.JFrame;
 
-import main.game.Game;
+import main.game.engine.GameEngine;
 import main.game.object.champion.Champion;
 import main.game.object.champion.champions.alphaguy.AlphaGuy;
 import main.gui.MessageBox;
@@ -47,7 +47,7 @@ public class Main{
 	//Character
 	private static Champion character;
 	
-	private static Game game;
+	private static GameEngine gameEngine;
 	
 	//Panels
 	private static MenuPanel menuPanel;
@@ -86,10 +86,10 @@ public class Main{
 		//Create character
 		character = new AlphaGuy();
 		
-		game = new Game(character, "alphaguy");
+		gameEngine = new GameEngine(character, "alphaguy");
 		
 		//Create gamepanel
-		gamePanel = new GamePanel(game);
+		gamePanel = new GamePanel(gameEngine);
 		setPanel(gamePanel);
 		
 		//Start game
@@ -294,7 +294,7 @@ public class Main{
 			long startTimeTPS = System.currentTimeMillis();
 			while(running){
 				startTime = System.currentTimeMillis();
-				game.update();
+				gameEngine.update();
 				endTime = System.currentTimeMillis();
 				try {
 					if(endTime - startTime > tickTime){
@@ -345,8 +345,8 @@ public class Main{
 		return gamePanel;
 	}
 	
-	public static Game getGame(){
-		return game;
+	public static GameEngine getGameEngine(){
+		return gameEngine;
 	}
 	
 	/**Returns the used Font with size size.

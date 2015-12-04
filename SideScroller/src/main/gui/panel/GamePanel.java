@@ -1,10 +1,8 @@
 package main.gui.panel;
 
 import java.awt.Graphics;
-import java.awt.event.KeyListener;
 
-import main.game.Game;
-import main.game.object.champion.Champion;
+import main.game.engine.GameEngine;
 import main.gui.Panel;
 
 /**The class GamePanel contains the gameloop and paintloop.
@@ -13,14 +11,14 @@ import main.gui.Panel;
  */
 public class GamePanel extends Panel{
 	
-	private Game game;
+	private GameEngine gameEngine;
 	
 	/**Creates a new GamePanel with specified Champion. Initiziales the level by reading the config file.
 	 * @param character The Champion which will be played.
 	 * @param characterName The name of the Champion.
 	 */
-	public GamePanel(Game game){
-		this.game = game;
+	public GamePanel(GameEngine game){
+		this.gameEngine = game;
 		
 		setLayout(null);		
 		
@@ -44,7 +42,7 @@ public class GamePanel extends Panel{
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		
-		g.drawImage(game.getCurrentFrame(), 0, 0, null);
+		g.drawImage(gameEngine.getCurrentFrame(), 0, 0, null);
 		
 	}
 }
