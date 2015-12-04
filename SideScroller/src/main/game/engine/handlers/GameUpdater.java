@@ -1,6 +1,7 @@
 package main.game.engine.handlers;
 
 import main.game.engine.GameEngine;
+import main.game.properties.GameProperties;
 
 public class GameUpdater implements Runnable, Handler{
 	
@@ -15,6 +16,9 @@ public class GameUpdater implements Runnable, Handler{
 	public GameUpdater(GameEngine game){
 		this.game = game;
 		this.thread = new Thread(this);
+		
+		this.maxTPS = GameProperties.getTicksPS();
+		this.tpsCap = true;
 	}
 	
 	public void run(){

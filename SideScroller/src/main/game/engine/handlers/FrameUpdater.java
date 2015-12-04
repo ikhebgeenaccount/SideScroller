@@ -1,12 +1,9 @@
 package main.game.engine.handlers;
 
-import javax.imageio.ImageIO;
-import javax.imageio.stream.ImageInputStream;
-
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.image.Image;
 import main.game.engine.GameEngine;
+import main.game.properties.GameProperties;
 
 public class FrameUpdater implements Runnable, Handler{
 	
@@ -22,7 +19,10 @@ public class FrameUpdater implements Runnable, Handler{
 	public FrameUpdater(GameEngine game, Canvas canvas){
 		this.game = game;
 		this.canvas = canvas;
-		thread = new Thread(this);
+		this.thread = new Thread(this);
+		
+		maxFPS = GameProperties.getMaxFPS();
+		fpsCap = GameProperties.hasFpsCap();
 	}
 	
 	public void run(){
@@ -67,10 +67,12 @@ public class FrameUpdater implements Runnable, Handler{
 	}
 	
 	public void start(){
+		running = true;
 		thread.start();
 	}
 	
 	public void stop(){
+		running = false;
 		thread.interrupt();
 		thread = new Thread(this);
 	}

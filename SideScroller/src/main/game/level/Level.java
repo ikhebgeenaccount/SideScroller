@@ -20,6 +20,7 @@ import main.game.object.minion.minions.MinionMinion;
 import main.game.object.minion.minions.RedLizard;
 import main.game.object.minion.minions.SiegeMinion;
 import main.game.object.minion.minions.SuperMinion;
+import main.game.properties.GameProperties;
 
 public class Level {
 	
@@ -70,11 +71,7 @@ public class Level {
 												{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2}};
 	
 	public Level(Properties properties){		
-		if(Main.getMenuTheme().equals("mlg")){
-			theme = "mlg";
-		}else{
-			theme = properties.getProperty("theme");			
-		}
+		theme = GameProperties.getMenuTheme();
 		
 		offSetX = 0;
 		offSetY = 0;
