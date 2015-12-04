@@ -25,6 +25,8 @@ import main.gui.MessageBox;
 
 public class GameEngine implements KeyListener{
 	
+	private int FPS, TPS;
+	
 	private Level[] levels;
 	private int currentLevel;
 	
@@ -44,6 +46,10 @@ public class GameEngine implements KeyListener{
 	//isFlying is for the spells itself, to check if a spell is currently on screen and needs to be drawed and moved
 	private boolean isFiredQ, isFiredW, isFiredE, isFiredR;
 	private boolean isFlyingQ, isFlyingW, isFlyingE, isFlyingR;	
+
+	private boolean jumping;
+	private int jumpStartTick;
+	private static final int JUMP_LENGTH_TICK = 20;
 	
 	public GameEngine(Champion character, String characterName){
 		tick = 0;
@@ -85,17 +91,15 @@ public class GameEngine implements KeyListener{
 		}
 	}
 	
-	public Image getCurrentFrame(){
-		BufferedImage frame = new BufferedImage(1000, 500, BufferedImage.TYPE_INT_RGB);
+	public BufferedImage getCurrentFrame(int width, int height){
+		BufferedImage frame = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		Graphics g = frame.getGraphics();
 		
-		g.drawImage(levels[currentLevel].getLevelImage().getSubimage(levels[currentLevel].getOffSetX(), levels[currentLevel].getOffSetY(), 1000, 500), 0, 0, null);
+		g.drawImage(levels[currentLevel].getLevelImage().getSubimage(levels[currentLevel].getOffSetX(), levels[currentLevel].getOffSetY(), width, height), 0, 0, null);
 		
-		//No spells in onScreen (or in inLevel)
-		int i = 0;
+		//No spells in onScreen (or in inLevel)		
 		for(GameObject object : levels[currentLevel].getOnScreenObjects()){
 			if(object != null && object.getCurrentHealth() != 0){
-				i++;
 				g.drawImage(object.getCurrentAnimationImage(), object.getCoordinates().x - levels[currentLevel].getOffSetX(), object.getCoordinates().y - levels[currentLevel].getOffSetY(), null);
 				g.drawImage(object.getHealthBarImage(), object.getCoordinates().x - levels[currentLevel].getOffSetX(), object.getCoordinates().y - levels[currentLevel].getOffSetY() - 16, null);
 				object.checkNextScene();
@@ -194,9 +198,6 @@ public class GameEngine implements KeyListener{
 	 * 		- Checking if the location where the character is travelling is valid
 	 * 	
 	 */
-	private boolean jumping;
-	private int jumpStartTick;
-	private final int JUMP_LENGTH_TICK = 20;
 	
 	/**update() is the gameloop. In update() the game checks for collision, gravity and what GameObjects should be moved. The animation type of the character are also handled in update(). update() also checks if the win-condition is met.
 	 * 
