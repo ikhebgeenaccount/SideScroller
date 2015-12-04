@@ -217,3 +217,5 @@ pip-log.txt
 .mr.developer.cfg
 *.project
 SideScroller/.project
+*.project
+SideScroller/.project
