@@ -4,6 +4,8 @@
 
 *.pydevproject
 SideScroller/.project
+SideScroller/.settings/
+SideScroller/.classpath
 .project
 .metadata
 bin/
