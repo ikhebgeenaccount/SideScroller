@@ -4,12 +4,12 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import main.game.engine.GameEngine;
 import main.game.engine.handlers.FrameUpdater;
 import main.game.engine.handlers.GameUpdater;
 import main.game.object.champion.champions.alphaguy.AlphaGuy;
+import main.game.properties.GameProperties;
 import main.gui.panes.GamePane;
 import main.gui.panes.MenuPane;
 
@@ -22,6 +22,7 @@ public class GUIEngine extends Application {
 	
 	private MenuPane menuPane;
 	//private OptionsPane optionsPane;
+	
 	private GamePane gamePane;
 	private Canvas canvas;
 	
@@ -31,7 +32,7 @@ public class GUIEngine extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		//this.invokeEngine();
+		this.invokeEngine();
 		this.invokeScene();
 		
 		this.window = stage;
@@ -45,6 +46,7 @@ public class GUIEngine extends Application {
 	}
 	
 	private void invokeEngine(){
+		GameProperties.loadProperties();
 		engine = new GameEngine(new AlphaGuy(), "alphaguy");
 		frameUpdater = new FrameUpdater(engine, canvas);
 		gameUpdater = new GameUpdater(engine);
@@ -57,11 +59,21 @@ public class GUIEngine extends Application {
 		//mainPane.setTop(new Text("Hier komt een menubar"));
 		
 		//Set MenuPane as starting Pane in center
-		menuPane = new MenuPane();
+		menuPane = new MenuPane(this);
+		
+		gamePane = new GamePane(this, canvas);
 		
 		mainPane.setCenter(menuPane);		
 		
 		scene = new Scene(mainPane);
+	}
+	
+	public void showGame(){
+		mainPane.setCenter(gamePane);
+	}
+	
+	public void showMenu(){
+		
 	}
 	
 	public static void main(String[] args){

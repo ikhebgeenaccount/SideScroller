@@ -2,24 +2,28 @@ package main.gui.panes;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import main.GUIEngine;
 
 public class MenuPane extends GridPane {
 	
 	private Text title, disclaimer;
 	private Button startButton, optionsButton, creditsButton, quitButton;
 	
-	public MenuPane(){
-		this.setAlignment(Pos.CENTER);
+	private GUIEngine gui;
+	
+	public MenuPane(GUIEngine gui){
+		this.gui = gui;
+		//this.setAlignment(Pos.CENTER);
 		this.setGridLinesVisible(true);
 		this.setStyle("-fx-background-color:red");
 		
 		startButton = new Button("Start " /*this motherfucking*/ + "game");
 		startButton.setOnAction(e -> {
-			
+			gui.showGame();
 		});
+		startButton.setAlignment(Pos.TOP_CENTER);
 		
 		optionsButton = new Button("Options");
 		optionsButton.setOnAction(e -> {
