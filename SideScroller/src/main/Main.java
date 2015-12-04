@@ -190,137 +190,6 @@ public class Main{
 		frame.repaint();
 	}
 	
-	/**Reads game properties from /resources/config/config.properties.
-	 * 
-	 */
-	public static void loadProperties(){
-		try {
-			Properties properties = new Properties();
-			InputStream propertiesFile = Main.class.getClassLoader().getResourceAsStream("config/config.properties");
-			properties.load(propertiesFile);
-			
-			//Get properties from config.properties file
-			maxFPS = Integer.parseInt(properties.getProperty("FPS"));
-			ticksPS = Integer.parseInt(properties.getProperty("TPS"));
-			fpsCap = Boolean.parseBoolean(properties.getProperty("fpsCap"));
-			menuTheme = properties.getProperty("menuTheme");
-			
-			propertiesFile.close();
-		}catch(IOException e){
-			e.printStackTrace();
-			
-			//Manual
-			maxFPS = 45;
-			fpsCap = true;
-			menuTheme = "default";
-			ticksPS = 45;
-		}catch(NullPointerException e){
-			e.printStackTrace();
-			
-			//Manual
-			maxFPS = 45;
-			fpsCap = true;
-			menuTheme = "default";
-			ticksPS = 45;
-		}
-	}
-	
-	/**This private class contains the PaintLoop that calles repaint() on GamePanel.
-	 * 
-	 * @author ikhebgeenaccount
-	 *
-	 */
-	private static class PaintLoop extends Thread{
-		
-		private PaintLoop(){
-			
-		}
-		
-		public void run(){
-			long startTime;
-			long frameTime = 1000/maxFPS;
-			long startTimeFPS = System.currentTimeMillis();
-			long endTime;
-			while(running){
-				//The startTime of this loop
-				startTime = System.currentTimeMillis();
-				gamePanel.repaint();
-				endTime = System.currentTimeMillis();
-				try{
-					//If the time it took to paint this frame is bigger than the time set for one frame, it needs to instantly
-					//repaint(), since it is behind on schedule
-					if(endTime - startTime > frameTime){
-						
-					 //If the time it took to paint this frame is equal to the time set to paint one frame, it needs to 
-					 //instantly repaint(), since it is perfect on schedule
-					}else if(endTime - startTime == frameTime){
-						
-					 //If it took less time, we need to sleep the remaining millis of the loop time	
-					}else if(fpsCap){
-						Thread.sleep(frameTime - (endTime - startTime));
-					}
-					if(System.currentTimeMillis() - startTimeFPS >= 500){
-						if(System.currentTimeMillis() - startTime == 0){
-							currentFPS = maxFPS;
-							startTimeFPS = System.currentTimeMillis();
-						}else{
-							currentFPS = 1000 / (System.currentTimeMillis() - startTime);
-							startTimeFPS = System.currentTimeMillis();
-						}
-					}
-										
-				}catch(InterruptedException e){
-					e.printStackTrace();
-				}
-			}
-		}
-	}
-	
-	/**This private class contains the GameLoop that calls update() on the GamePanel.
-	 * 
-	 * @author ikhebgeenaccount
-	 *
-	 */
-	private static class GameLoop extends Thread{
-		
-		public GameLoop(){
-			
-		}
-		
-		public void run(){
-			long startTime;
-			long tickTime = 1000/ticksPS;
-			long endTime;
-			long startTimeTPS = System.currentTimeMillis();
-			while(running){
-				startTime = System.currentTimeMillis();
-				gameEngine.update();
-				endTime = System.currentTimeMillis();
-				try {
-					if(endTime - startTime > tickTime){
-						
-					}else if(endTime - startTime == tickTime){
-						
-					}else{
-						Thread.sleep(tickTime - (endTime - startTime));
-					}
-					
-					if(System.currentTimeMillis() - startTimeTPS >= 500){
-						if(System.currentTimeMillis() - startTime == 0){
-							currentTPS = ticksPS;;
-							startTimeTPS = System.currentTimeMillis();
-						}else{
-							currentTPS = 1000 / (System.currentTimeMillis() - startTime);
-							startTimeTPS = System.currentTimeMillis();
-						}
-					}
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
-	
 	/**Returns MenuPanel.
 	 * 
 	 * @return MenuPanel menuPanel
@@ -335,8 +204,7 @@ public class Main{
 	 */
 	public static OptionPanel getOptionPanel() {
 		return optionPanel;
-	}
-	
+	}	
 	
 	/**Returns GamePanel.
 	 * @return GamePanel gamePanel
