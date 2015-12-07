@@ -18,7 +18,6 @@ public class GUIEngine extends Application {
 	private Stage window;
 	
 	private Scene scene;
-	private BorderPane mainPane;
 	
 	private MenuPane menuPane;
 	//private OptionsPane optionsPane;
@@ -26,12 +25,13 @@ public class GUIEngine extends Application {
 	private GamePane gamePane;
 	private Canvas canvas;
 	
-	private GameEngine engine;
+	private static GameEngine engine;
 	private FrameUpdater frameUpdater;
 	private GameUpdater gameUpdater;
 
 	@Override
-	public void start(Stage stage) throws Exception {
+	public void start(Stage stage) throws Exception {		
+		canvas = new Canvas();
 		this.invokeEngine();
 		this.invokeScene();
 		
@@ -39,6 +39,9 @@ public class GUIEngine extends Application {
 		this.window.setMinHeight(500);
 		this.window.setMinWidth(1000);
 		
+		this.window.setOnCloseRequest(e ->{
+			System.exit(0);
+		});
 		this.window.setTitle("League of Legends SideScroller");
 		this.window.setScene(scene);
 		this.window.show();
@@ -52,24 +55,18 @@ public class GUIEngine extends Application {
 		gameUpdater = new GameUpdater(engine);
 	}
 	
-	private void invokeScene(){
-		mainPane = new BorderPane();
-		
-		//MenuBar
-		//mainPane.setTop(new Text("Hier komt een menubar"));
-		
+	private void invokeScene(){		
 		//Set MenuPane as starting Pane in center
 		menuPane = new MenuPane(this);
+		gamePane = new GamePane(this, canvas);	
 		
-		gamePane = new GamePane(this, canvas);
-		
-		mainPane.setCenter(menuPane);		
-		
-		scene = new Scene(mainPane);
+		scene = new Scene(menuPane);
 	}
 	
 	public void showGame(){
-		mainPane.setCenter(gamePane);
+		scene.setRoot(gamePane);
+		frameUpdater.start();
+		gameUpdater.start();
 	}
 	
 	public void showMenu(){
@@ -78,6 +75,10 @@ public class GUIEngine extends Application {
 	
 	public static void main(String[] args){
 		launch(args);
+	}
+	
+	public static GameEngine getGameEngine(){
+		return engine;
 	}
 
 }
