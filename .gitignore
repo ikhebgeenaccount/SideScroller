@@ -221,3 +221,5 @@ pip-log.txt
 SideScroller/.project
 *.project
 SideScroller/.project
+SideScroller/.classpath
+*.classpath
