@@ -2,8 +2,8 @@ package main.game.level;
 
 import java.util.Properties;
 
-import main.Main;
 import main.game.coordinate.Coordinate;
+import main.game.engine.GameEngine;
 import main.game.level.levelimage.LevelImage;
 import main.game.navmesh.NavMesh;
 import main.game.object.GameObject;
@@ -23,6 +23,8 @@ import main.game.object.minion.minions.SuperMinion;
 import main.game.properties.GameProperties;
 
 public class Level {
+	
+	private GameEngine engine;
 	
 	//The GameObject[]s that are in this level and those that are onscreen. For checks we will only check onscreen.
 	private GameObject[] inLevel, onScreen;
@@ -70,7 +72,8 @@ public class Level {
 												{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 												{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2}};
 	
-	public Level(Properties properties){		
+	public Level(GameEngine engine, Properties properties){	
+		this.engine = engine;
 		theme = GameProperties.getMenuTheme();
 		
 		offSetX = 0;
@@ -82,7 +85,7 @@ public class Level {
 		inLevel = new GameObject[objectCap];
 		onScreen = new GameObject[objectCap];//Since inLevel has a cap of 50, onScreen doesn't need more than that
 		
-		inLevel[0] = Main.getCharacter();
+		inLevel[0] = engine.getCharacter();
 		
 		readProperties(properties);		
 		
@@ -201,7 +204,7 @@ public class Level {
 	public void updateGameObjects(){
 		int i = 1;
 		onScreen = new GameObject[objectCap];
-		onScreen[0] = Main.getCharacter();
+		onScreen[0] = engine.getCharacter();
 		for(GameObject object : inLevel){
 			if(object != null && !(object instanceof Champion)){
 				if(object.getCurrentHealth() != 0/* && object.getCoordinates().x >= offSetX && object.getCoordinates().x < offSetX + 1000 && object.getCoordinates().y >= offSetY && object.getCoordinates().y < offSetY + 500*/){

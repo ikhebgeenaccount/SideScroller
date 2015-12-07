@@ -77,7 +77,7 @@ public class GameEngine implements KeyListener{
 			levelOneCfg.load(stream);
 			stream.close();
 			
-			Level levelOne = new Level(levelOneCfg);
+			Level levelOne = new Level(this, levelOneCfg);
 			
 			levels = new Level[10];
 			levels[0] = levelOne;
@@ -128,13 +128,13 @@ public class GameEngine implements KeyListener{
 		
 		g.setColor(Color.BLACK);
 		//Draw current FPS
-		int length = String.valueOf(Main.getCurrentFPS()).length();
-		length *= 8;
-		g.drawString(Main.getCurrentFPS(), 1000 - length, 12);
+		//int length = String.valueOf(Main.getCurrentFPS()).length();
+		//length *= 8;
+		//g.drawString(Main.getCurrentFPS(), 1000 - length, 12);
 		
-		length = String.valueOf(Main.getCurrentTPS()).length();
-		length *= 8;
-		g.drawString(Main.getCurrentTPS(), 1000 - length, 24);
+		//length = String.valueOf(Main.getCurrentTPS()).length();
+		//length *= 8;
+		//g.drawString(Main.getCurrentTPS(), 1000 - length, 24);
 		g.dispose();
 		
 		return frame;
