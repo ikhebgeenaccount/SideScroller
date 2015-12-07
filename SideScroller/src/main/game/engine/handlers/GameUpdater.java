@@ -61,6 +61,7 @@ public class GameUpdater implements Runnable, Handler{
 	}
 	
 	public void start(){
+		running = true;
 		thread.start();
 	}
 	
