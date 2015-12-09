@@ -26,12 +26,12 @@ public class GUIEngine extends Application {
 	private Canvas canvas;
 	
 	private static GameEngine engine;
-	private FrameUpdater frameUpdater;
-	private GameUpdater gameUpdater;
+	private static FrameUpdater frameUpdater;
+	private static GameUpdater gameUpdater;
 
 	@Override
 	public void start(Stage stage) throws Exception {		
-		canvas = new Canvas();
+		this.canvas = new Canvas();
 		this.invokeEngine();
 		this.invokeScene();
 		
@@ -57,23 +57,40 @@ public class GUIEngine extends Application {
 	
 	private void invokeScene(){		
 		//Set MenuPane as starting Pane in center
-		menuPane = new MenuPane(this);
-		menuPane.setPrefSize(1000, 500);
-		gamePane = new GamePane(this, canvas);
-		gamePane.setPrefSize(1000, 500);
+		this.menuPane = new MenuPane(this);
+		this.menuPane.setPrefSize(1000, 500);
+		this.gamePane = new GamePane(this, canvas);
+		this.gamePane.setPrefSize(1000, 500);
 		
-		scene = new Scene(menuPane);
+		this.scene = new Scene(menuPane);
 	}
 	
 	public void showGame(){
-		scene.setRoot(gamePane);
+		this.scene.setRoot(gamePane);
 		this.window.sizeToScene();
 		frameUpdater.start();
 		gameUpdater.start();
 	}
 	
+	public void startGame(){
+		frameUpdater.start();
+		gameUpdater.start();
+	}
+	
+	public void pauseGame(){
+		frameUpdater.stop();
+		gameUpdater.stop();
+	}
+	
+	public void startNewGame(){
+		engine = new GameEngine(new AlphaGuy(), "alphaguy");
+		frameUpdater.start();
+		gameUpdater.start();
+	}
+	
 	public void showMenu(){
-		
+		this.scene.setRoot(menuPane);
+		this.window.sizeToScene();
 	}
 	
 	public static void main(String[] args){
