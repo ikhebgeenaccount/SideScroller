@@ -58,13 +58,16 @@ public class GUIEngine extends Application {
 	private void invokeScene(){		
 		//Set MenuPane as starting Pane in center
 		menuPane = new MenuPane(this);
-		gamePane = new GamePane(this, canvas);	
+		menuPane.setPrefSize(1000, 500);
+		gamePane = new GamePane(this, canvas);
+		gamePane.setPrefSize(1000, 500);
 		
 		scene = new Scene(menuPane);
 	}
 	
 	public void showGame(){
 		scene.setRoot(gamePane);
+		this.window.sizeToScene();
 		frameUpdater.start();
 		gameUpdater.start();
 	}
