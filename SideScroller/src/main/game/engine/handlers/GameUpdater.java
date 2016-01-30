@@ -31,6 +31,7 @@ public class GameUpdater implements Runnable, Handler{
 			startTime = System.currentTimeMillis();
 			game.update();
 			endTime = System.currentTimeMillis();
+			System.out.println("Update time:" + (endTime - startTime));
 			try{
 				//If the time it took to paint this frame is bigger than the time set for one frame, it needs to instantly
 				//repaint(), since it is behind on schedule
@@ -41,7 +42,7 @@ public class GameUpdater implements Runnable, Handler{
 				}else if(endTime - startTime == frameTime){
 					
 				 //If it took less time, we need to sleep the remaining millis of the loop time	
-				}else if(tpsCap){
+				}else if(!tpsCap){
 					Thread.sleep(frameTime - (endTime - startTime));
 				}
 				if(System.currentTimeMillis() - startTimeFPS >= 500){

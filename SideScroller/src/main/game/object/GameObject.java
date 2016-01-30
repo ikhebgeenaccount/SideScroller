@@ -2,9 +2,11 @@ package main.game.object;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.PixelReader;
+import javafx.scene.image.WritableImage;
 import main.game.animation.Animation;
 import main.game.coordinate.Coordinate;
 import main.game.navmesh.NavMesh;
@@ -81,7 +83,7 @@ public class GameObject {
 		 * @param animationSprite The image containing all frames of the animation.
 		 * @param sceneLength The length of one scene in milliseconds.
 		 */
-		public void addAnimation(int type, BufferedImage animationSprite, int sceneLength){
+		public void addAnimation(int type, Image animationSprite, int sceneLength){
 			addAnimation(type, animationSprite, sceneLength, 50, 100);
 		}
 		
@@ -93,13 +95,14 @@ public class GameObject {
 		 * @param frameWidth The width of one frame.
 		 * @param frameHeight The height of one frame.
 		 */
-		public void addAnimation(int type, BufferedImage animationSprite, int sceneLength, int frameWidth, int frameHeight){
+		public void addAnimation(int type, Image animationSprite, int sceneLength, int frameWidth, int frameHeight){
 			animations[type] = new Animation(frameWidth, frameHeight);
 			width = frameWidth;
 			height = frameHeight;
-			int scenes = animationSprite.getWidth() / frameWidth;
+			int scenes = animationSprite.widthProperty().intValue() / frameWidth;
+			PixelReader reader = animationSprite.getPixelReader();
 			for(int i = 0; i < scenes; i++){
-				animations[type].addScene(animationSprite.getSubimage(frameWidth * i, 0, frameWidth, frameHeight), sceneLength);
+				animations[type].addScene(new WritableImage(reader, frameWidth * i, 0, frameWidth, frameHeight), sceneLength);
 			}
 		}
 		

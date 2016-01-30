@@ -3,7 +3,6 @@ package main;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import main.game.engine.GameEngine;
 import main.game.engine.handlers.FrameUpdater;
@@ -45,6 +44,7 @@ public class GUIEngine extends Application {
 		this.window.setTitle("League of Legends SideScroller");
 		this.window.setScene(scene);
 		this.window.show();
+		//this.window.setFullScreen(true);
 		
 	}
 	
@@ -58,9 +58,7 @@ public class GUIEngine extends Application {
 	private void invokeScene(){		
 		//Set MenuPane as starting Pane in center
 		this.menuPane = new MenuPane(this);
-		this.menuPane.setPrefSize(1000, 500);
 		this.gamePane = new GamePane(this, canvas);
-		this.gamePane.setPrefSize(1000, 500);
 		
 		this.scene = new Scene(menuPane);
 	}

@@ -2,17 +2,13 @@ package main.game.engine;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.Serializable;
 import java.util.Properties;
 
-import javax.swing.ImageIcon;
-
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import main.Main;
 import main.game.coordinate.Coordinate;
 import main.game.level.Level;
@@ -23,7 +19,7 @@ import main.game.object.minion.Minion;
 import main.game.object.spell.Spell;
 import main.gui.MessageBox;
 
-public class GameEngine implements KeyListener{
+public class GameEngine{
 	
 	private int FPS, TPS;
 	
@@ -50,6 +46,8 @@ public class GameEngine implements KeyListener{
 	private boolean jumping;
 	private int jumpStartTick;
 	private static final int JUMP_LENGTH_TICK = 20;
+	
+	private int xOffSetStart = 400, xOffSetEnd = 600, yOffSetStart = 250, yOffSetEnd = 250;
 	
 	public GameEngine(Champion character, String characterName){
 		tick = 0;
@@ -91,42 +89,48 @@ public class GameEngine implements KeyListener{
 		}
 	}
 	
-	public BufferedImage getCurrentFrame(int width, int height){
-		BufferedImage frame = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-		Graphics g = frame.getGraphics();
+	public void drawCurrentFrame(GraphicsContext g, int width, int height){
+		g.clearRect(0, 0, (double)width, (double)height);
+		//g.drawImage(levels[currentLevel].getLevelImage().getSubimage(levels[currentLevel].getOffSetX(), levels[currentLevel].getOffSetY(), width, height), (double)0, (double)0);
 		
-		g.drawImage(levels[currentLevel].getLevelImage().getSubimage(levels[currentLevel].getOffSetX(), levels[currentLevel].getOffSetY(), width, height), 0, 0, null);
+		int[][] level = levels[currentLevel].getLevelArray();
+		for(int x = 0; x < level[0].length; x++){
+			for(int y = 0; y < level.length; y++){
+				g.drawImage(levels[currentLevel].getImageById(level[y][x]), (double)x * 50, (double)y * 50);
+			}
+		}
+		
 		
 		//No spells in onScreen (or in inLevel)		
 		for(GameObject object : levels[currentLevel].getOnScreenObjects()){
 			if(object != null && object.getCurrentHealth() != 0){
-				g.drawImage(object.getCurrentAnimationImage(), object.getCoordinates().x - levels[currentLevel].getOffSetX(), object.getCoordinates().y - levels[currentLevel].getOffSetY(), null);
-				g.drawImage(object.getHealthBarImage(), object.getCoordinates().x - levels[currentLevel].getOffSetX(), object.getCoordinates().y - levels[currentLevel].getOffSetY() - 16, null);
+				g.drawImage(object.getCurrentAnimationImage(), (double)(object.getCoordinates().x - levels[currentLevel].getOffSetX()), (double)(object.getCoordinates().y - levels[currentLevel].getOffSetY()));
+				//g.drawImage(object.getHealthBarImage(), (double)(object.getCoordinates().x - levels[currentLevel].getOffSetX()), (double)(object.getCoordinates().y - levels[currentLevel].getOffSetY() - 16));
 				object.checkNextScene();
 			}
 		}
 		
 		//Draw spells if fired
 		if(isFlyingQ){
-			g.drawImage(character.q.getCurrentAnimationImage(), character.q.getCoordinates().x - levels[currentLevel].getOffSetX(), character.q.getCoordinates().y - levels[currentLevel].getOffSetY(), null);
+			g.drawImage(character.q.getCurrentAnimationImage(), (double)(character.q.getCoordinates().x - levels[currentLevel].getOffSetX()), (double)(character.q.getCoordinates().y - levels[currentLevel].getOffSetY()));
 			character.q.checkNextScene();
 		}
 		if(isFlyingW){
-			g.drawImage(character.w.getCurrentAnimationImage(), character.w.getCoordinates().x - levels[currentLevel].getOffSetX(), character.w.getCoordinates().y - levels[currentLevel].getOffSetY(), null);
+			g.drawImage(character.w.getCurrentAnimationImage(), (double)(character.w.getCoordinates().x - levels[currentLevel].getOffSetX()), (double)(character.w.getCoordinates().y - levels[currentLevel].getOffSetY()));
 			character.w.checkNextScene();
 		}
 		if(isFlyingE){
-			g.drawImage(character.e.getCurrentAnimationImage(), character.e.getCoordinates().x - levels[currentLevel].getOffSetX(), character.e.getCoordinates().y - levels[currentLevel].getOffSetY(), null);
+			g.drawImage(character.e.getCurrentAnimationImage(), (double)(character.e.getCoordinates().x - levels[currentLevel].getOffSetX()), (double)(character.e.getCoordinates().y - levels[currentLevel].getOffSetY()));
 			character.e.checkNextScene();
 		}
 		if(isFlyingR){
-			g.drawImage(character.r.getCurrentAnimationImage(), character.r.getCoordinates().x - levels[currentLevel].getOffSetX(), character.r.getCoordinates().y - levels[currentLevel].getOffSetY(), null);
+			g.drawImage(character.r.getCurrentAnimationImage(), (double)(character.r.getCoordinates().x - levels[currentLevel].getOffSetX()), (double)(character.r.getCoordinates().y - levels[currentLevel].getOffSetY()));
 			character.r.checkNextScene();
 		}		
 		
-		drawCooldowns(g);
+		//drawCooldowns(g, width, height);
 		
-		g.setColor(Color.BLACK);
+		//g.setColor(Color.BLACK);
 		//Draw current FPS
 		//int length = String.valueOf(Main.getCurrentFPS()).length();
 		//length *= 8;
@@ -135,18 +139,17 @@ public class GameEngine implements KeyListener{
 		//length = String.valueOf(Main.getCurrentTPS()).length();
 		//length *= 8;
 		//g.drawString(Main.getCurrentTPS(), 1000 - length, 24);
-		g.dispose();
-		
-		return frame;
+
+		//g.dispose();
 	}
 	
 	//Cooldown: Tekent de cooldowns op het scherm.
 	//return: void; arg1: Graphic g;
 	//argument g als workaround:
 	//Zou g een private member mogen worden van GamePanel?
-	private void drawCooldowns(Graphics g){
-		final int SPELL_BOX_X = 375;
-		final int SPELL_BOX_Y = 465;
+	private void drawCooldowns(Graphics g, int width, int height){
+		final int SPELL_BOX_X = (width - 250)/2;
+		final int SPELL_BOX_Y = height - 35;
 		final int SPELL_BOX_W = 250;
 		final int SPELL_BOX_H = 35;
 		
@@ -154,7 +157,7 @@ public class GameEngine implements KeyListener{
 		g.setColor(Color.GREEN);
 		g.fillRect(SPELL_BOX_X, SPELL_BOX_Y, SPELL_BOX_W, SPELL_BOX_H);
 				
-		Spell spells[] = {character.q , character.w, character.e, character.r};
+		Spell[] spells = {character.q , character.w, character.e, character.r};
 		//spell_index is voor q = 0; w=1;e=2;r=3;
 		int spell_index =0;
 		for( Spell spl : spells){	
@@ -175,21 +178,6 @@ public class GameEngine implements KeyListener{
 			}
 			spell_index++;
 		}
-	}
-	
-	//Called when a key is pressed
-	public void keyPressed(KeyEvent e){
-		keys[e.getKeyCode()] = true;	
-	}
-	
-	//Called when a key is released 
-	public void keyReleased(KeyEvent e){
-		keys[e.getKeyCode()] = false;
-	}
-	
-	//Is called when the ASCII-character for that particular button is send to the computer
-	public void keyTyped(KeyEvent e){
-		
 	}
 	
 	/*	The update method contains:
@@ -279,13 +267,13 @@ public class GameEngine implements KeyListener{
 		}
 		
 		//Update the screen offset
-		if(character.getCoordinates().x - levels[currentLevel].getOffSetX() >= 600 && levels[currentLevel].getOffSetX() < levels[currentLevel].getMaxOffSetX()){
+		if(character.getCoordinates().x - levels[currentLevel].getOffSetX() >= xOffSetEnd && levels[currentLevel].getOffSetX() < levels[currentLevel].getMaxOffSetX()){
 			if(levels[currentLevel].getOffSetX() + Math.abs(character.getCoordinates().x - oldX) > levels[currentLevel].getMaxOffSetX()){
 				levels[currentLevel].setOffSetX(levels[currentLevel].getMaxOffSetX());
 			}else{
 				levels[currentLevel].setOffSetX(levels[currentLevel].getOffSetX() + Math.abs(character.getCoordinates().x - oldX));				
 			}
-		}else if(character.getCoordinates().x - levels[currentLevel].getOffSetX() <= 400 && levels[currentLevel].getOffSetX() > 0){
+		}else if(character.getCoordinates().x - levels[currentLevel].getOffSetX() <= xOffSetStart && levels[currentLevel].getOffSetX() > 0){
 			if(levels[currentLevel].getOffSetX() - Math.abs(character.getCoordinates().x - oldX) < 0){
 				levels[currentLevel].setOffSetX(0);
 			}else{
@@ -293,13 +281,13 @@ public class GameEngine implements KeyListener{
 			}
 		}
 		
-		if(character.getCoordinates().y - levels[currentLevel].getOffSetY() >= 250 && levels[currentLevel].getOffSetY() < levels[currentLevel].getMaxOffSetY()){
+		if(character.getCoordinates().y - levels[currentLevel].getOffSetY() >= yOffSetStart && levels[currentLevel].getOffSetY() < levels[currentLevel].getMaxOffSetY()){
 			if(levels[currentLevel].getOffSetY() + Math.abs(character.getCoordinates().y - oldY) > levels[currentLevel].getMaxOffSetY()){
 				levels[currentLevel].setOffSetY(levels[currentLevel].getMaxOffSetY());
 			}else{
 				levels[currentLevel].setOffSetY(levels[currentLevel].getOffSetY() + Math.abs(character.getCoordinates().y - oldY));
 			}
-		}else if(character.getCoordinates().y - levels[currentLevel].getOffSetY() <= 250 && levels[currentLevel].getOffSetY() > 0){
+		}else if(character.getCoordinates().y - levels[currentLevel].getOffSetY() <= yOffSetEnd && levels[currentLevel].getOffSetY() > 0){
 			if(levels[currentLevel].getOffSetY() - Math.abs(character.getCoordinates().y - oldY) < 0){
 				levels[currentLevel].setOffSetY(0);
 			}else{

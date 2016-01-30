@@ -2,6 +2,9 @@ package main.game.level;
 
 import java.util.Properties;
 
+import javax.swing.ImageIcon;
+
+import javafx.scene.image.Image;
 import main.game.coordinate.Coordinate;
 import main.game.engine.GameEngine;
 import main.game.level.levelimage.LevelImage;
@@ -24,6 +27,8 @@ import main.game.properties.GameProperties;
 
 public class Level {
 	
+	public static final int AIR_ID = 0, GROUND_ID = 1, GRASS_GROUND_ID = 2;
+	
 	private GameEngine engine;
 	
 	//The GameObject[]s that are in this level and those that are onscreen. For checks we will only check onscreen.
@@ -36,6 +41,8 @@ public class Level {
 	private String theme;
 	
 	private LevelImage levelImage;
+	//Images
+	private Image ground, air, grass_ground;
 	
 	private int offSetX, offSetY;
 	private int maxOffSetX, maxOffSetY;
@@ -75,6 +82,8 @@ public class Level {
 	public Level(GameEngine engine, Properties properties){	
 		this.engine = engine;
 		theme = GameProperties.getMenuTheme();
+
+		loadImages();
 		
 		offSetX = 0;
 		offSetY = 0;
@@ -180,6 +189,10 @@ public class Level {
 		}		
 	}
 	
+	public int[][] getLevelArray(){
+		return levelMatrix;
+	}
+	
 	public Coordinate getStartCoordinates(){
 		return startSquare;
 	}
@@ -250,6 +263,22 @@ public class Level {
 	
 	public int getObjectCap(){
 		return objectCap;
+	}
+	
+	private void loadImages(){
+		ClassLoader cldr = this.getClass().getClassLoader();
+		air = new Image(cldr.getResourceAsStream("img/landscape/" + theme + "/air.png"));
+		ground = new Image(cldr.getResourceAsStream("img/landscape/" + theme + "/ground.png"));
+		grass_ground = new Image(cldr.getResourceAsStream("img/landscape/" + theme + "/grass-ground.png"));
+	}
+	
+	public Image getImageById(int id){
+		switch(id){
+			case AIR_ID: return air;
+			case GROUND_ID: return ground;
+			case GRASS_GROUND_ID: return grass_ground;
+			default: return air;
+		}
 	}
 
 }

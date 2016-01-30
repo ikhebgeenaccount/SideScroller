@@ -1,6 +1,6 @@
 package main.game.animation;
 
-import java.awt.Image;
+import javafx.scene.image.Image;
 
 /**This class contains all methods and variables to create animations. This class only supports animations with frames that all have the same size.
  * @author ikhebgeenaccount

@@ -1,7 +1,5 @@
 package main.gui.panes;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.Pane;
 import main.GUIEngine;

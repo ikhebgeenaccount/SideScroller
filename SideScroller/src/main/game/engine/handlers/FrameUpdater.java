@@ -2,6 +2,8 @@ package main.game.engine.handlers;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.WritableImage;
 import main.game.engine.GameEngine;
 import main.game.properties.GameProperties;
 
@@ -33,10 +35,9 @@ public class FrameUpdater implements Runnable, Handler{
 		while(running){
 			//The startTime of this loop
 			startTime = System.currentTimeMillis();
-			java.awt.image.BufferedImage bufferedImage = game.getCurrentFrame((int)canvas.getWidth(), (int)canvas.getHeight());
-			javafx.scene.image.Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-			canvas.getGraphicsContext2D().drawImage(image, (double)0, (double)0);
+			game.drawCurrentFrame(canvas.getGraphicsContext2D(), (int)canvas.getWidth(), (int)canvas.getHeight());
 			endTime = System.currentTimeMillis();
+			System.out.println("Paint time:" + (endTime	 - startTime));
 			try{
 				//If the time it took to paint this frame is bigger than the time set for one frame, it needs to instantly
 				//repaint(), since it is behind on schedule
@@ -47,7 +48,7 @@ public class FrameUpdater implements Runnable, Handler{
 				}else if(endTime - startTime == frameTime){
 					
 				 //If it took less time, we need to sleep the remaining millis of the loop time	
-				}else if(fpsCap){
+				}else if(!fpsCap){
 					Thread.sleep(frameTime - (endTime - startTime));
 				}
 				if(System.currentTimeMillis() - startTimeFPS >= 500){
